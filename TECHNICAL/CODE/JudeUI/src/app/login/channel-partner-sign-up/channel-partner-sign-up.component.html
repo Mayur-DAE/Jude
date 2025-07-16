@@ -1,0 +1,392 @@
+
+  <div class="container my-lg-14 my-8" *ngIf="!showOtp">
+      <div class="row justify-content-evenly align-items-center" *ngIf="!showOtp">
+
+    <!-- <div class="row justify-content-center align-items-center"> -->
+  <div class="col-12 col-md-6 col-lg-4 order-lg-1 order-2   d-md-none d-lg-block d-none d-sm-block" *ngIf="!IsAccountCreated">
+    <img src="assets/images/svg-graphics/signup-g.svg" alt="Signup Illustration" class="img-fluid" />
+  </div>
+  <div class="col-12 col-md-12 col-md-6 offset-lg-1 col-lg-6 order-lg-2 order-1" *ngIf="!IsAccountCreated">
+     <div class="mb-lg-4 mb-5">
+      <p class="mb-1 h2 fw-bold">{{ 'New Shop Registration' | translate}}</p>
+      </div>
+      <!-- <form class="needs-validation" novalidate> -->
+      <div class="row g-3">
+        <!-- <div class="ChannelSignupDataEntry"> -->
+            <div class="col-lg-4 col-md-4 col-sm-12">
+            <!-- <div>
+              <div class="form-floating"> -->
+                <label for="fname" class="mb-1" style="color:  #3d4f58;">
+                  {{ 'First Name' | translate}} <span class="text-danger">*</span>
+                </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="fname"
+                  placeholder="{{ 'First Name' | translate}}"
+                  [(ngModel)]="FirstName"
+                />                
+              <!-- </div>
+            </div> -->
+            <div class="error">{{ FirstName_errormessage | translate }}</div>
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-12">
+            <!-- <div>
+              <div class="form-floating"> -->
+                <label for="fname" class="mb-1" style="color:  #3d4f58;">
+                  {{ 'Middle Name' | translate}}
+                </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="fname"
+                  placeholder="{{ 'Middle Name' | translate}}"
+                  [(ngModel)]="MiddleName"
+                />               
+              <!-- </div>
+            </div> -->
+            <div class="error">{{ MiddleName_errormessage }}</div>
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-12">
+            <!-- <div>
+              <div class="form-floating"> -->
+                <label for="lname" class="mb-1" style="color:  #3d4f58;">
+                  {{ 'Last Name' | translate}} <span class="text-danger">*</span>
+                </label>                
+                <input
+                  type="text"
+                  class="form-control"
+                  id="lname"
+                  placeholder="{{ 'Last Name' | translate}}"
+                  [(ngModel)]="LastName"
+                />
+
+              <!-- </div>
+            </div> -->
+            <div class="error">{{ LastName_errormessage | translate }}</div>
+          </div>
+
+
+          <div class="col-lg-6 col-md-6 col-sm-12">
+            <!-- <div class="form-floating"> -->
+              <label for="exampleInputUsername1" class="mb-1" style="color:  #3d4f58;">
+                {{ 'Business Type' | translate}} <span class="text-danger">*</span>
+              </label>
+              <select class="form-select" [(ngModel)]="BusinessTypeID">
+                <option value="0" selected>{{ 'Select' | translate}} {{ 'Business Type' | translate}}</option>
+                <option
+                  *ngFor="let x of BusinessTypeList"
+                  [value]="x.BusinessTypeID"
+                >
+                  {{ x.BusinessTypeName }}
+                </option>
+              </select>
+
+            <!-- </div> -->
+            <div class="error">
+              {{ BusinessType_errormessage | translate }}
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-12">
+            <!-- <div>
+              <div class="form-floating"> -->
+                <label for="companyname" class="mb-1" style="color:  #3d4f58;">
+                  {{ 'Shop Name' | translate}} <span class="text-danger">*</span>
+                  </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="companyname"
+                  placeholder="{{ 'Shop Name' | translate}}"
+                  [(ngModel)]="Companyname"
+                  required
+                />              
+              <!-- </div>
+            </div> -->
+            <div class="error">{{ Companyname_errormessage | translate }}</div>
+          </div>
+        
+          <div class="col-12">
+            <!-- <div>
+              <div class="form-floating"> -->
+                <label for="Email" class="mb-1" style="color:  #3d4f58;">
+                  {{ 'Email Address' | translate}} ({{ 'This will be the Login Id' | translate}}) <span class="text-danger">*</span>
+                </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="Email"
+                  placeholder="{{ 'Email Address' | translate}}"
+                  [(ngModel)]="EmailID"
+                />
+               
+              <!-- </div>
+            </div> -->
+            <div class="error">
+              {{ emailaddress_errormessage | translate }}
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-12">
+            <!-- <div>
+              <div class="form-floating"> -->
+                <label for="mnumber" class="mb-1" style="color:  #3d4f58;">
+                  {{ 'Mobile Number' | translate}} <span class="text-danger">*</span>
+                </label>
+
+                <input
+                  type="tel"
+                  class="form-control"
+                  id="mnumber"
+                  placeholder="{{ 'Mobile Number' | translate}}"
+                  [(ngModel)]="MobileNumber"
+                  maxlength="10"
+                />
+              <!-- </div>
+            </div> -->
+            <div class="error">
+              {{ mobilenumber_errormessage | translate }}
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-12">
+            <!-- <div>
+              <div class="form-floating"> -->
+                <label for="mnumber2" class="mb-1" style="color:  #3d4f58;">
+                  {{ 'Whatsapp Mobile Number' | translate}}
+                </label>
+                <input
+                  type="tel"
+                  class="form-control"
+                  id="mnumber2"
+                  placeholder="{{ 'Whatsapp Mobile Number' | translate}}"
+                  [(ngModel)]="mobilenumber2"
+                  maxlength="10"
+                />
+              <!-- </div>
+            </div> -->
+            <div class="error">{{ mobilenumber2_errormessage | translate }}</div>
+          </div>
+          <!-- <div class="col-lg-6 col-md-6 col-sm-12">
+                <label for="GSTNumber" class="mb-1">
+                  {{ 'GST Number' | translate}}
+                </label>                
+                <input
+                  type="text"
+                  class="form-control"
+                  id="GSTNumber"
+                  placeholder="{{ 'GST Number' | translate}}"
+                  [(ngModel)]="GSTNumber"
+                />
+              </div> -->
+          <!-- <div class="col-lg-6 col-md-6 col-sm-12">
+                <label for="PanNumber" class="mb-1">
+                  {{ 'Pan Number' | translate}}
+                </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="PanNumber"
+                  placeholder="{{ 'Pan Number' | translate}}"
+                  [(ngModel)]="PanNumber"
+                  maxlength="10"
+                />
+            <div class="error">{{ PanNumber_errormessage }}</div>
+          </div> -->
+          <div class="col-lg-6 col-md-6 col-sm-12 position-relative">
+            <!-- <div>
+              <div class="form-floating"> -->
+                <label for="pssword" class="mb-1" style="color:  #3d4f58;">
+                  {{ 'Password' | translate}} <span class="text-danger">*</span>
+                </label>
+                <div  class="password-field position-relative">
+                <input
+                [type]="passwordVisible ? 'text' : 'password'"
+                  class="form-control"
+                  id="pssword"
+                  placeholder="{{ 'Password' | translate}}"
+                  [(ngModel)]="Password"
+                />
+                <span class="password-toggle"(click)="viewpassword('password')">
+                  <i [ngClass]="passwordVisible ? 'bi bi-eye' : 'bi bi-eye-slash'"></i>
+                </span>
+              <!-- </div>
+            </div> -->
+            <div class="error d-block position-absolute">{{ password_errormessage | translate }}</div>
+          </div></div>
+          <div class="col-lg-6 col-md-6 col-sm-12 position-relative">
+            <!-- <div>
+              <div class="form-floating"> -->
+                <label for="cpssword" class="mb-1" style="color:  #3d4f58;">  
+                  {{ 'Confirm Password' | translate}} <span class="text-danger">*</span>
+                </label>
+                <div  class="password-field position-relative">
+                  <input
+                  [type]="confirmPasswordVisible ? 'text' : 'password'"  
+                  class="form-control"
+                  id="cpssword"
+                  placeholder="{{ 'Confirm Password' | translate}}"
+                  [(ngModel)]="confirmpassword"
+                />
+
+                <span class="password-toggle" (click)="viewpassword('confirmPassword')">
+                  <i [ngClass]="confirmPasswordVisible ? 'bi bi-eye' : 'bi bi-eye-slash'"></i>
+                </span>
+              <!-- </div>
+            </div> -->
+            <div class="error d-block position-absolute">
+              {{ confirmpassword_errormessage | translate }}
+            </div>
+            </div>
+          </div>
+          <!-- <div class="agreeButton">
+            <div class="agreeButtonMain">
+              <input type="checkbox" class="checkBox1" [(ngModel)]="agree" />
+              <label for="Terms" class="terms"
+                >I agree with
+                <a routerLink="/TermsAndConditions" class="blue-text"
+                  >Terms & Conditions</a
+                ></label
+              >
+            </div>
+          </div> -->
+          <div class="col-12" style="margin-top: 33px;">
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="Terms" [(ngModel)]="agree" />
+              <label for="Terms" class="form-check-label">
+                {{ 'I agree with' | translate}} <a [routerLink]="['/TermsAndConditions']">{{ 'Terms & Conditions' | translate}}</a>
+              </label>
+            </div>
+          </div>
+          <div >
+            <div class="col-lg-6 col-sm-12">
+              <button
+                type="submitbutton"
+                value="Signup"
+                class="bttnpadding"
+                (click)="Signup()"
+              >
+              {{ 'Register' | translate}}
+              </button>
+            </div>
+            <!-- <div>
+              <div class="Alreadyaccount">
+                Already have an account?
+                <a routerLink="/Login/Home">
+                  Log in</a>
+              </div>
+            </div> -->
+           <!-- </div> -->
+        </div>
+      </div>
+      <!-- </form> -->
+    </div>
+  </div>
+
+  <div class="row justify-content-center align-items-center" *ngIf="IsAccountCreated" >
+    >
+    <!-- <div class="ChannelSignupLayout"> -->
+      <img src="assets\svg\Frame528.svg" alt="img" style=" width: auto;"/>
+      <p class="GeneratedText">
+        {{ 'Account creation success message' | translate}}
+      </p>
+      <a
+        class="btn-dashboard"
+        (click)="OpenDashboard()"
+        target="_blank"
+        >{{ 'Proceed to Login' | translate}}</a
+      >
+    <!-- </div> -->
+  </div>
+      <!-- </div> -->
+  
+</div>
+
+<div class="container my-lg-6 my-2" *ngIf="showOtp">
+  <div class="row justify-content-md-center">
+    <div class="col-md-6 col-lg-4 text-center otp-section">
+      <div class="row">
+        <div class="col-sm-12 mt-5 mb-5 bgWhite">
+          <div class="title">
+            {{ 'Please enter the one time password to verify your account' | translate}}
+          </div>
+          <div class="title-2">
+            {{ 'A code has been sent to' | translate}} *******<span>{{
+              MobileNumber.slice(MobileNumber.length - 4)
+            }}</span>
+          </div>
+
+          <form action="" class="mt-4 otp-form">
+            <input
+              class="otp"
+              type="text"
+              oninput="this.value && this.nextElementSibling.focus()"
+              onkeydown="if(event.key === 'Backspace' && !this.value) this.previousElementSibling?.focus()"
+              maxlength="1"
+              name="FirstOtp"
+              [(ngModel)]="FirstOtp"
+            />
+            <input
+              class="otp"
+              type="text"
+              oninput="this.value && this.nextElementSibling.focus()"
+              onkeydown="if(event.key === 'Backspace' && !this.value) this.previousElementSibling?.focus()"
+              maxlength="1"
+              name="SecondOtp"
+              [(ngModel)]="SecondOtp"
+            />
+            <input
+              class="otp"
+              type="text"
+              oninput="this.value && this.nextElementSibling.focus()"
+              onkeydown="if(event.key === 'Backspace' && !this.value) this.previousElementSibling?.focus()"
+              maxlength="1"
+              name="Third"
+              [(ngModel)]="Third"
+            />
+            <input
+              class="otp"
+              type="text"
+              oninput="this.value && this.nextElementSibling.focus()"
+              onkeydown="if(event.key === 'Backspace' && !this.value) this.previousElementSibling?.focus()"
+              maxlength="1"
+              name="Four"
+              [(ngModel)]="Four"
+            />
+            <input
+              class="otp"
+              type="text"
+              oninput="this.value && this.nextElementSibling.focus()"
+              onkeydown="if(event.key === 'Backspace' && !this.value) this.previousElementSibling?.focus()"
+              maxlength="1"
+              name="Five"
+              [(ngModel)]="Five"
+            />
+            <input
+              class="otp"
+              type="text"
+              onkeydown="if(event.key === 'Backspace' && !this.value) this.previousElementSibling?.focus()"
+              maxlength="1"
+              name="Six"
+              [(ngModel)]="Six"
+            />
+          </form>
+          <hr class="mt-4" />
+          <p *ngIf="errorMessage" class="error">{{ errorMessage | translate }}</p>
+          <button class="bttnpadding btn-block mt-4 mb-4" (click)="verifyOtop()">
+            {{ 'Validate' | translate}}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  // $('.alert').alert();
+  function isValid(array) {
+    for (var x = 0; x < array.length; x++) {
+      if (array[x].value.trim() == "") {
+        $(array[x]).css("border-color", "#FF0000");
+        return false;
+      }
+    }
+  }
+</script>

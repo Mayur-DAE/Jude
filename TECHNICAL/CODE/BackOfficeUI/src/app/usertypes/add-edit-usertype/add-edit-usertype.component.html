@@ -1,0 +1,40 @@
+<div class="modal-body">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">User Type <span class="text-danger">*</span></label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" 
+                  [(ngModel)]="UserType" placeholder="Enter Usertype" [ngClass]="errormsg?'error-input':'form-control'" maxlength="50"/>
+                <div class="error">{{User_errormsg}}</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" name="IsActive" checked [(ngModel)]="IsActive" />
+                  Active
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button (click)="addUsertype()" type="submit" *ngIf="utype.UserTypeID==0" class="btn btn-primary">
+      Add
+    </button>
+
+    <button (click)="updateUsertype()" *ngIf="utype.UserTypeID!=0" class="btn btn-primary">
+      Update
+    </button>
+  </div>

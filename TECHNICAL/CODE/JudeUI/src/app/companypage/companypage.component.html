@@ -1,0 +1,171 @@
+<!-- <div class="companymainlayout"> -->
+<!-- <div class="companylayout1" *ngFor="let dataItem of companydata">
+    <div class="companylayout2">
+      <img src="{{
+          CompanyLogoImageNamePath + 'cover_img/' + dataItem.CompanyBannerPath
+        }}" class="companyimage1" />
+
+      <div class="bottomleft">
+        <img src="{{
+            CompanyLogoImageNamePath + 'listing/' + dataItem.CompanyLogoPath
+          }}" class="companyimage2" />
+      </div> -->
+<!-- Rating temp disable -->
+<!-- <div class="companylayout3">
+        <div class="companylayout4">
+          <img
+            src="assets\images\6ad179658b35cde38e4958c5543c2d3e.png"
+            class="companyimage3"
+          />
+          <div class="companylayout5">5+</div>
+          <div class="companylayout6">
+            <img
+              src="assets\images\7ef04e341bd980435c60987a48e454a4.png"
+              class="companyimage4"
+            />
+          </div>
+          <img
+            src="assets\images\3ffc90190b870bc6641644a3bfbdaab4.png"
+            class="companyimage5"
+          />
+        </div>
+      </div> -->
+<!-- </div>
+    <div class="companylayout7">
+      <div class="companylayout8">
+        <div class="companytext02">{{ dataItem.CompanyName }}</div>
+        <div class="companytext03">
+          <span class="companytext04">
+            {{ dataItem.Address1 }} {{ " " + dataItem.Address2 }}
+            {{ "" + dataItem.Zip }} <br />
+            {{ dataItem.CityName }} {{ ", " + dataItem.StateName }}
+            {{ ", " + dataItem.CountryName }}
+          </span>
+        </div>
+      </div>
+      <div class="companylayout9">
+        <div class="col-lg-12 Contact"> -->
+<!-- <a
+            href="https://wa.me/{{ dataItem.CompanyMobileNo1 }}"
+            target="_blank"
+          > -->
+<!-- <a href="https://api.whatsapp.com/send?phone=91{{
+              dataItem.CompanyMobileNo2
+            }}&text=Hello! {{
+              dataItem.CompanyName
+            }} , I found you on Area Online" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon">
+              <path
+                d="M20.6607 6.83829C17.7807 2.39829 11.9007 1.07829 7.34071 3.83829C2.90071 6.59829 1.46071 12.5983 4.34071 17.0383L4.58071 17.3983L3.62071 20.9983L7.22071 20.0383L7.58071 20.2783C9.14071 21.1183 10.8207 21.5983 12.5007 21.5983C14.3007 21.5983 16.1007 21.1183 17.6607 20.1583C22.1007 17.2783 23.4207 11.3983 20.6607 6.83829ZM18.1407 16.0783C17.6607 16.7983 17.0607 17.2783 16.2207 17.3983C15.7407 17.3983 15.1407 17.6383 12.7407 16.6783C10.7007 15.7183 9.02071 14.1583 7.82071 12.3583C7.10071 11.5183 6.74071 10.4383 6.62071 9.35829C6.62071 8.39829 6.98071 7.55829 7.58071 6.95829C7.82071 6.71829 8.06071 6.59829 8.30071 6.59829H8.90071C9.14071 6.59829 9.38071 6.59829 9.50071 7.07829C9.74071 7.67829 10.3407 9.11829 10.3407 9.23829C10.4607 9.35829 10.4607 9.59829 10.3407 9.71829C10.4607 9.95829 10.3407 10.1983 10.2207 10.3183C10.1007 10.4383 9.98071 10.6783 9.86071 10.7983C9.62071 10.9183 9.50071 11.1583 9.62071 11.3983C10.1007 12.1183 10.7007 12.8383 11.3007 13.4383C12.0207 14.0383 12.7407 14.5183 13.5807 14.8783C13.8207 14.9983 14.0607 14.9983 14.1807 14.7583C14.3007 14.5183 14.9007 13.9183 15.1407 13.6783C15.3807 13.4383 15.5007 13.4383 15.7407 13.5583L17.6607 14.5183C17.9007 14.6383 18.1407 14.7583 18.2607 14.8783C18.3807 15.2383 18.3807 15.7183 18.1407 16.0783Z"
+                fill="#000014" />
+            </svg>
+          </a>
+          <a href="tel:{{ dataItem.CompanyMobileNo1 }}">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon">
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M12.0317 12.4724C16.0208 16.4604 16.9258 11.8467 19.4656 14.3848C21.9143 16.8328 23.3216 17.3232 20.2192 20.4247C19.8306 20.737 17.3616 24.4943 8.6846 15.8197C0.0065217 7.144 3.76158 4.67244 4.07397 4.28395C7.18387 1.17385 7.66586 2.58938 10.1145 5.03733C12.6544 7.5765 8.04266 8.48441 12.0317 12.4724Z"
+                fill="#000014" />
+            </svg>
+          </a>
+          <a href="mailto:{{ dataItem.CompanyEmailid }}">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon">
+              <path
+                d="M17.439 3C18.78 3 20.07 3.53 21.019 4.481C21.969 5.43 22.5 6.71 22.5 8.05V15.95C22.5 18.74 20.23 21 17.439 21H7.56C4.769 21 2.5 18.74 2.5 15.95V8.05C2.5 5.26 4.759 3 7.56 3H17.439ZM18.57 8.2C18.36 8.189 18.16 8.26 18.009 8.4L13.5 12C12.92 12.481 12.089 12.481 11.5 12L7 8.4C6.689 8.17 6.259 8.2 6 8.47C5.73 8.74 5.7 9.17 5.929 9.47L6.06 9.6L10.61 13.15C11.17 13.59 11.849 13.83 12.56 13.83C13.269 13.83 13.96 13.59 14.519 13.15L19.03 9.54L19.11 9.46C19.349 9.17 19.349 8.75 19.099 8.46C18.96 8.311 18.769 8.22 18.57 8.2Z"
+                fill="#000014" />
+            </svg>
+          </a>
+
+          <a href="{{
+              dataItem.WebsiteURL == ''
+                ? '/#/shop/' + dataItem.CompanyID
+                : dataItem.WebsiteURL
+            }} " target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon">
+              <g filter="url(#filter0_d_1124_32052)">
+                <path
+                  d="M0.5 12C0.5 8.8174 1.76428 5.76516 4.01472 3.51472C6.26516 1.26428 9.3174 0 12.5 0C15.6826 0 18.7348 1.26428 20.9853 3.51472C23.2357 5.76516 24.5 8.8174 24.5 12C24.5 15.1826 23.2357 18.2348 20.9853 20.4853C18.7348 22.7357 15.6826 24 12.5 24C9.3174 24 6.26516 22.7357 4.01472 20.4853C1.76428 18.2348 0.5 15.1826 0.5 12V12ZM11.75 1.6155C10.745 1.9215 9.7475 2.8455 8.9195 4.398C8.6467 4.91414 8.41207 5.44958 8.2175 6H11.75V1.6155ZM6.635 6C6.88501 5.20323 7.20631 4.4306 7.595 3.6915C7.85436 3.20108 8.15388 2.73298 8.4905 2.292C6.63201 3.06274 5.03301 4.34943 3.8825 6H6.635ZM5.762 11.25C5.807 9.9345 5.969 8.673 6.23 7.5H3.011C2.45168 8.67758 2.11792 9.94952 2.027 11.25H5.762ZM7.7705 7.5C7.47547 8.7297 7.30561 9.9861 7.2635 11.25H11.75V7.5H7.7705ZM13.25 7.5V11.25H17.735C17.6934 9.98615 17.5241 8.72975 17.2295 7.5H13.25ZM7.265 12.75C7.30662 14.0138 7.47598 15.2702 7.7705 16.5H11.75V12.75H7.265ZM13.25 12.75V16.5H17.2295C17.51 15.3525 17.6885 14.088 17.7365 12.75H13.25ZM8.2175 18C8.4245 18.579 8.66 19.116 8.9195 19.602C9.7475 21.1545 10.7465 22.077 11.75 22.3845V18H8.2175ZM8.4905 21.708C8.15386 21.267 7.85434 20.7989 7.595 20.3085C7.20632 19.5694 6.88502 18.7968 6.635 18H3.8825C5.03295 19.6506 6.63196 20.9373 8.4905 21.708V21.708ZM6.23 16.5C5.95875 15.2671 5.80208 14.0118 5.762 12.75H2.027C2.12 14.085 2.4635 15.3495 3.011 16.5H6.23ZM16.5095 21.708C18.368 20.9373 19.9671 19.6506 21.1175 18H18.365C18.115 18.7968 17.7937 19.5694 17.405 20.3085C17.1457 20.799 16.8462 21.2671 16.5095 21.708V21.708ZM13.25 18V22.3845C14.255 22.0785 15.2525 21.1545 16.0805 19.602C16.34 19.116 16.5755 18.579 16.7825 18H13.25ZM18.77 16.5H21.989C22.5365 15.3495 22.88 14.085 22.973 12.75H19.238C19.1979 14.0118 19.0413 15.2671 18.77 16.5ZM22.973 11.25C22.882 9.94952 22.5483 8.67759 21.989 7.5H18.77C19.031 8.673 19.193 9.9345 19.238 11.25H22.973ZM17.405 3.6915C17.7755 4.3875 18.098 5.1615 18.365 6H21.1175C19.9671 4.34937 18.368 3.06267 16.5095 2.292C16.8365 2.718 17.1365 3.189 17.405 3.6915V3.6915ZM16.7825 6C16.5879 5.44957 16.3533 4.91413 16.0805 4.398C15.2525 2.8455 14.255 1.923 13.25 1.6155V6H16.7825Z"
+                  fill="#000014" />
+              </g>
+              <defs>
+                <filter id="filter0_d_1124_32052" x="-3.5" y="0" width="32" height="32" filterUnits="userSpaceOnUse"
+                  color-interpolation-filters="sRGB">
+                  <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                  <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                    result="hardAlpha" />
+                  <feOffset dy="4" />
+                  <feGaussianBlur stdDeviation="2" />
+                  <feComposite in2="hardAlpha" operator="out" />
+                  <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+                  <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1124_32052" />
+                  <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1124_32052" result="shape" />
+                </filter>
+              </defs>
+            </svg>
+          </a>
+          <a href="https://www.google.com/maps/search/?api=1&query={{
+              dataItem.CompanyName
+            }} " target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon">
+              <g clip-path="url(#clip0_424_31956)">
+                <path
+                  d="M9.23047 17.2959C9.86674 18.1068 10.4458 18.9609 10.9636 19.8521C11.4056 20.6903 11.5899 21.2586 11.9129 22.2685C12.111 22.8265 12.2901 22.993 12.6751 22.993C13.0946 22.993 13.2849 22.7097 13.4319 22.2716C13.7373 21.3178 13.9769 20.59 14.3549 19.9022C15.0967 18.5744 16.0184 17.3945 16.9241 16.2605C17.1692 15.9396 18.7544 14.0698 19.4681 12.5945C19.4681 12.5945 20.3452 10.9739 20.3452 8.71052C20.3452 6.59337 19.4802 5.125 19.4802 5.125L16.9898 5.79195L15.4773 9.77539L15.1031 10.3247L15.0283 10.4242L14.9288 10.5487L14.7541 10.7477L14.5045 10.9973L13.1577 12.0945L9.7906 14.0387L9.23047 17.2959Z"
+                  fill="#000014" />
+                <path
+                  d="M5.75586 12.3218C6.57765 14.1989 8.16237 15.8489 9.23456 17.297L14.9294 10.5511C14.9294 10.5511 14.1271 11.6003 12.6718 11.6003C11.0507 11.6003 9.74104 10.3058 9.74104 8.6735C9.74104 7.55414 10.4145 6.78516 10.4145 6.78516L6.54864 7.82101L5.75586 12.3217V12.3218Z"
+                  fill="#000014" />
+                <path
+                  d="M14.9924 1.34772C16.8838 1.95754 18.5027 3.2378 19.4819 5.12566L14.9306 10.5494C14.9306 10.5494 15.604 9.76652 15.604 8.65411C15.604 6.98379 14.1975 5.73597 12.6781 5.73597C11.2412 5.73597 10.416 6.78351 10.416 6.78351V3.36662L14.9924 1.34766V1.34772Z"
+                  fill="#000014" />
+                <path
+                  d="M6.79883 3.74341C7.9285 2.39181 9.91629 1 12.6568 1C13.9864 1 14.988 1.34906 14.988 1.34906L10.412 6.7857H7.16989L6.79883 3.74347V3.74341Z"
+                  fill="#000014" />
+                <path
+                  d="M5.75603 12.322C5.75603 12.322 5 10.8415 5 8.69662C5 6.66945 5.78804 4.89746 6.79926 3.74219L10.4151 6.78496L5.75603 12.322Z"
+                  fill="#000014" />
+              </g>
+              <defs>
+                <clipPath id="clip0_424_31956">
+                  <rect width="15.346" height="22" fill="white" transform="translate(5 1)" />
+                </clipPath>
+              </defs>
+            </svg>
+          </a>
+          <a href="{{ dataItem.FacbookID }}" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon">
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M1.5 12.0614C1.5 17.5303 5.47192 22.0778 10.6667 23V15.0553H7.91667V12H10.6667V9.55525C10.6667 6.80525 12.4386 5.27808 14.9447 5.27808C15.7386 5.27808 16.5948 5.4 17.3886 5.52192V8.33333H15.9833C14.6386 8.33333 14.3333 9.00525 14.3333 9.86142V12H17.2667L16.7781 15.0553H14.3333V23C19.5281 22.0778 23.5 17.5312 23.5 12.0614C23.5 5.9775 18.55 1 12.5 1C6.45 1 1.5 5.9775 1.5 12.0614Z"
+                fill="#000014" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div> -->
+<!-- </div> -->
+<div>
+  <!-- <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+          aria-selected="true">Products & Services</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+          aria-selected="false">Ratings & Reviews</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
+          aria-selected="false">About Us</a>
+      </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab"> -->
+  <app-companyproduct [someInput]="CompanyID"></app-companyproduct>
+  <!-- </div>
+      <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        <app-reviewanrating [CompanyID]="CompanyID"></app-reviewanrating>
+      </div>
+      <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+        <app-aboutus [companydata]="companydata"></app-aboutus>
+      </div>
+    </div>
+  </div> -->
+</div>

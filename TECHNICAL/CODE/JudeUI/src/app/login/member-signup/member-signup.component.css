@@ -1,0 +1,373 @@
+.error {
+    color: red;
+    font-size: 1.0em;
+  margin-top: 0.25rem;
+    min-height: 3px; 
+}
+
+.password-toggle {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+
+
+.eyeiconchannel1{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    opacity: 0.4;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+  }
+
+  .eyeiconchannel2{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    opacity: 0.4;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+  }
+
+.NewMemberSignupLayout{
+    justify-content: center;
+    align-items: flex-start;
+    padding: 60px 180px;
+    gap: 120px;
+    /* height: 915px;  */
+    background: #FFFFFF;
+}
+.HeadingMemberSignup{
+    width: 360px;
+    height: 32px;
+    /* font-family: 'Satoshi-medium'; */
+    font-style: normal;
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 32px;
+    color: #000000;
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+.MemberSignupDataEntry{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 25px;
+    width: 389px;
+
+    
+}
+.DataEntry1{
+    width: 360px;
+    height: 52px;
+}
+
+.form-label{
+    width: 368px;
+    height: 24px;
+    /* font-family: 'Satoshi-medium'; */
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: #000000;
+    opacity: 0.5;
+}
+
+.agreeButton_member_signup{
+    gap: 16px;
+    width: 357px;
+    height: 20px;
+}
+.membersignupcheckBox1{
+    width: 20px;
+    padding: 0px;
+    height: 20px;
+    margin-right: auto;
+}
+.terms{
+    width: 323px;
+    height: 19px;
+    /* font-family: 'Satoshi-medium'; */
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 19px;
+    color: #000000;
+}
+.agreeButtonMain_member_signup{
+    --bs-gutter-x: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+
+.SubmitButton{
+    margin-top: 55px;
+}
+.bttnpadding{
+    border: 0;
+    width: 390px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 13px 44px;
+    gap: 4px;
+    height: 48px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    /* font-family: 'Satoshi-medium'; */
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.35);
+}
+.bttnpadding:hover{
+    background-color: black;
+    color: white;
+}
+
+
+.Alreadyaccount{
+    margin-top: 16px;
+    width: 355px;
+    height: 19px;
+    /* font-family: 'Satoshi-medium'; */
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 19px;
+    text-align: center;
+    color: #1E1E1E;
+}
+.NewChannelPartnerimage_1{
+    width: 100%;
+    height: 100%;
+}
+@media (min-width: 576px){
+    .col-sm-6{
+        flex: 0 0 auto;
+        width: 50%;
+    }
+}
+@media(max-width:767px){
+    .NewChannelPartnerimage_1{
+        width: 100%;
+        height: 100vh;
+        display: none;
+    }
+}
+@media(max-width:1366px){
+    .NewChannelPartnerimage_1{
+        width: 100%;
+        height: 100vh;
+        display: none;
+    }
+}
+@media(max-width:500px){
+    .NewMemberSignupLayout{
+        padding: 96px 60px;
+        gap: 120px;
+        /* height: 915px; */
+        background: #FFFFFF;
+        }
+}
+
+.row-main-membersignup{ 
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    /* height: 915px; */
+}
+
+.Signupfixing
+{
+    width: 388.5px;
+    height: 58px;
+    margin-top: 20px;
+}
+.Signupfixing1{
+    width: 388.5px;
+    height: 58px;
+    
+}
+
+/* .error{
+    position: absolute;
+    color: red;
+    margin: 2px;
+    font-size: 14px;
+    font-family: 'Satoshi-medium';
+}
+.error-input{
+    border: 1px red solid;
+  } */
+.eyeicon{
+    position: absolute;
+    right: 10px;
+    top: 18px;
+    opacity: 0.4;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+}
+
+
+.pw-strength{
+    position:relative;
+    width: 100%;
+    height: 20px;
+    margin-top: 10px;
+    text-align: center;
+    background: #f2f2f2;
+    display: none ;
+}
+.pw-strength span:nth-child(1){
+    position: relative;
+    font-size: 13px;
+    color: #111;
+    z-index: 2;
+    font-weight: 500;
+}
+.pw-strength span:nth-child(2){
+    position: absolute;
+    top:0px;
+    left:0px;
+    width: 0%;
+    height: 100%;
+    border-radius:5px;
+    z-index:1;
+    transition:all 300ms ease-in-out ;
+}
+
+
+.form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #8bbafe;
+    outline: 0;
+    box-shadow: none;
+}
+/* .input:not(:placeholder-shown){
+    border-color:green;
+}
+.input:placeholder-shown{
+    border-color: red;
+} */
+.terms_login_ref{
+    color: #0aad0a;
+    text-decoration: none;
+}
+
+@media(max-width:480px){
+    .NewMemberSignupLayout{
+        padding: 45px 30px;
+        gap: 120px;
+        
+        background: #FFFFFF;
+        width: 320px !important;
+        }
+        .MemberSignupDataEntry{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0px;
+            gap: 32px !important;
+            width: 320px;
+            
+            
+        }
+
+        .Signupfixing1{
+            width: 320px !important;
+            height: 45px!important;
+            
+        }
+        .HeadingMemberSignup{
+            width: 320px !important;
+            height: 32px;
+            /* font-family: 'Satoshi-medium'; */
+            font-style: normal;
+            font-weight: 700;
+            font-size: 26px;
+            line-height: 32px;
+            color: #000000;
+            flex: none;
+            order: 0;
+            align-self: stretch;
+            flex-grow: 0;
+        }
+
+        .bttnpadding{
+            border: 0;
+            width: 320px !important;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            padding: 13px 44px;
+            gap: 4px;
+            height: 48px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            /* font-family: 'Satoshi-medium'; */
+            font-style: normal;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 22px;
+            text-align: center;
+            color: rgba(0, 0, 0, 0.35);
+        }
+
+        .Alreadyaccount{
+            margin-top: 16px;
+            width: 320px;
+            height: 19px;
+            /* font-family: 'Satoshi-medium'; */
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 19px;
+            text-align: center;
+            color: #1E1E1E;
+        }
+
+        .terms{
+            width: 290px !important;
+            height: 19px;
+            /* font-family: 'Satoshi-medium'; */
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 19px;
+            color: #000000;
+        }
+        .agreeButton_member_signup{
+            gap: 15px;
+            width: 340px !important;
+            height: 20px;
+        }
+        .error{
+            position: absolute;
+            color: red;
+            margin: 0px !important;
+            font-size: 12px !important;
+            /* font-family: 'Satoshi-medium'; */
+        }
+
+       
+}

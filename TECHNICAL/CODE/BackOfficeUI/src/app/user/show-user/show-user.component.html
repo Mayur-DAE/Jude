@@ -1,0 +1,363 @@
+<!-- Modal starts -->
+<div
+  class="modal fade"
+  id="userModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="userModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="userModalLabel">{{ ModalTitle }}</h5>
+        <button
+          type="button"
+          class="btn btn-primary btn-rounded btn-icon  d-flex align-items-center justify-content-cente "
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          (click)="closeClick()"
+        >
+          <i class="ti-close " style="margin-left: 12px;"></i>
+        </button>
+      </div>
+      <app-add-edit-user
+        [user]="user"
+        *ngIf="ActivateAddEditfaq"
+        (emitData)="emittedDataByChild($event)"
+      >
+      </app-add-edit-user>
+    </div>
+  </div>
+</div>
+<!-- Modal Ends -->
+<div
+  class="modal fade"
+  id="userModal1"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel-2"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel-2">{{ ModalTitle }}</h5>
+
+        <button
+  type="button"
+  class="btn btn-primary btn-rounded btn-icon d-flex justify-content-center align-items-center"
+  data-bs-dismiss="modal"
+  aria-label="Close"
+  (click)="closeClick1()"
+  style="width: 40px; height: 40px; padding: 0;"
+>
+  <i class="ti-close"></i>
+</button>
+
+      </div>
+      <div class="modal-body">
+        <form #passwordForm="ngForm">
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">New Password:</label>
+            <div class="password-wrapper">
+              <input 
+                [type]="newPasswordVisible ? 'text' : 'password'" 
+                class="form-control" 
+                id="new-password" 
+                name="newPassword" 
+                [(ngModel)]="NewPassword"
+                required
+                minlength="6"
+                #newPass="ngModel"
+                (input)="validatePasswords()"
+              />
+              <span class="password-toggle-icon" (click)="toggleNewPasswordVisibility()">
+                <i class="fas" [ngClass]="newPasswordVisible ? 'fa-eye-slash' : 'fa-eye'"></i>
+              </span>
+            </div>
+            <p *ngIf="User_password_errormsg" class="text-danger" class="text-danger">{{ User_password_errormsg }}</p>
+          </div>
+      
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Confirm Password:</label>
+            <div class="password-wrapper">
+              <input 
+                [type]="confirmPasswordVisible ? 'text' : 'password'" 
+                class="form-control" 
+                id="confirm-password" 
+                name="confirmPassword" 
+                [(ngModel)]="ConfirmPassword"
+                required
+                #confirmPass="ngModel"
+                (input)="validatePasswords()"
+              />
+              <span class="password-toggle-icon" (click)="toggleConfirmPasswordVisibility()">
+                <i class="fas" [ngClass]="confirmPasswordVisible ? 'fa-eye-slash' : 'fa-eye'"></i>
+              </span>
+            </div>
+            <p *ngIf="User_confirmPassword_errormsg" class="text-danger">{{User_confirmPassword_errormsg}}</p>
+          </div>
+        </form>
+      </div>
+      
+     
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="savePassword()" [disabled]="passwordMismatch || passwordForm.invalid">
+          Save
+        </button>
+        <!-- <button type="button" class="btn btn-light" data-bs-dismiss="userModal1">Close</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">Users List</h4>
+    <div class="row">
+      <div class="col-12">
+        <div class="text-left">
+          <button
+            type="button"
+            class="btn btn-primary btn-icon-text"
+            (click)="addClick()"
+            data-bs-toggle="modal"
+            data-bs-target="#userModal"
+          >
+            <i class="ti-plus"></i> Add
+          </button>
+        </div>
+        <br />
+
+        <form class="forms-sample">
+          <div class="row">
+            <div class="col-2">
+              <div class="form-group">
+                <label for="exampleInputUsername1">First Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="exampleInputUsername1"
+                  placeholder="First Name"
+                  name="firstName"
+                  [(ngModel)]="FirstName"
+                />
+              </div>
+              <p *ngIf="firstNameError" style="color:red;">{{ firstNameError }}</p>
+            </div>
+
+            <div class="col-2">
+              <div class="form-group">
+                <label for="exampleInputEmail1">Last Name</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="exampleInputEmail1"
+                  placeholder="Last Name"
+                  name="lastName"
+                  [(ngModel)]="LastName"
+                />
+              </div>
+              <p *ngIf="lastNameError" style="color:red;">{{ lastNameError }}</p>
+            </div>
+
+            <div class="col-3">
+              <div class="form-group">
+                <label for="exampleInputEmail1">Email</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="exampleInputEmail1"
+                  placeholder="Email Address"
+                  name="email"
+                  [(ngModel)]="Email"
+                />
+              </div>
+            </div>
+
+            <div class="col-5">
+              <div class="row">
+                <div class=" active col-3 abc">
+                  <!-- <p>&nbsp;</p> -->
+                  <label class="form-check-label">
+                    <input
+                      type="checkbox"
+                      class="form-check-input "
+                      name="IsActive"
+                      checked
+                      [(ngModel)]="IsActive"
+                    />
+                    Active
+                  </label>
+                </div>
+
+                <div class="col-9  btn pqr">
+                  <!-- <p>&nbsp;</p> -->
+                  <button type="submit" class="btn btn-primary me-2" (click)="search()">
+                    Search
+                  </button>
+                  <button type="button" class="btn btn-secondary" style="margin-right: 40%;" (click)="clearFilters()">
+                    Clear
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <div class="row mb-4 mt-2">
+          <div class="col-md-6 col-sm-12 d-flex align-items-center ">
+            <label for="itemsPerPage" class="mr-2">Items per page:&nbsp;</label>
+            <select id="itemsPerPage" class="border rounded px-2 py-1" (change)="onItemsPerPageChange($event)">
+              <option value="5" [selected]="itemsPerPage === 5">5</option>
+              <option value="10" [selected]="itemsPerPage === 10">10</option>
+              <option value="20" [selected]="itemsPerPage === 20">20</option>
+              <option value="30" [selected]="itemsPerPage === 30">30</option>
+            </select>
+          </div>
+          <div class="col-md-6 col-sm-12 d-flex justify-content-end">
+            <button type="button" class="export-btn btn fa fa-file-excel-o excelbutton mt-2 md:mt-0" (click)="exportToExcel()" style="padding: 0px !important;">
+              <i class="ti-file me-1"></i>Export to Excel
+            </button>
+          </div>
+        </div> 
+
+        <div class="table-responsive">
+          <table id="show-user" class="table">
+            <thead>
+              <tr class="bg-primary text-white">
+                <!-- <th>#</th> -->
+                <th>Name</th>
+                <th>Type</th>
+                <th class="email">Email</th>
+                <th>Mobile Number</th>
+                <th style="text-align: center;">Status</th>
+                <th style="text-align: center;">Action</th>
+                <th>Change Password</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngIf="memberList.length == 0">
+                <td colspan="7" class="text-center">No records found</td>
+              </tr>
+              <tr
+                *ngFor="
+                  let dataItem of paginatedMember;
+                  let i = index;
+                  let last = last
+                "
+              >
+                <!-- <td>{{ i + 1 }}</td> -->
+                <td class="name">
+                  {{ dataItem.FirstName + " " + dataItem.LastName }}
+                </td>
+                <td class="usertype">{{ dataItem.UserType }}</td>
+                <td class="email">{{ dataItem.EmaiID }}</td>
+                <td style="width: 70px;">{{ dataItem.MobileNumber }}</td>
+                <td style="width: 70px;">
+                  <button
+                    type="button"
+                    class="btn btn-outline-info btn-fw p-2"
+                    *ngIf="dataItem.IsActive"
+                    (click)="activeClick(dataItem)"
+                  >
+                    Active
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-outline-danger btn-fw p-2"
+                    *ngIf="!dataItem.IsActive"
+                    (click)="inactiveClick(dataItem)"
+                  >
+                    Inactive
+                  </button>
+                </td>
+                <td style="width: 70px;">
+                  <button
+                    class="btn btn-light"
+                    data-bs-toggle="modal"
+                    data-bs-target="#userModal"
+                    data-backdrop="static"
+                    data-keyboard="false"
+                    (click)="editClick(dataItem)"
+                  >
+                    <i class="ti-pencil"></i>Edit
+                  </button>
+                </td>
+                <td style="width: 70px; text-align: center;">
+                  <button
+                    class="btn btn-light"
+                    data-bs-toggle="modal"
+                    data-bs-target="#userModal1"
+                    data-backdrop="static"
+                    data-keyboard="false"
+                    (click)="changepassword(dataItem)"
+                  >
+                    <i class="ti-key"></i>
+                  </button>
+                </td>
+                <!-- {{
+                  last ? bindDataTable() : ""
+                }} -->
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mt-3  px-md-4"><!-- px-3 -->
+          <span class="text-muted mb-2 mb-md-0">
+            Showing 
+            {{ (currentPage - 1) * itemsPerPage + 1 }} 
+            to 
+            {{ min(currentPage * itemsPerPage, memberList.length) }} 
+            of 
+            {{ memberList.length }} entries
+          </span>
+        
+          <nav>
+            <ul class="pagination mb-0">
+              <!-- Previous Button -->
+              <li class="page-item" [class.disabled]="currentPage === 1">
+                <a class="page-link" (click)="changePage(currentPage - 1)"><<</a>
+              </li>
+          
+              <!-- Page 1 -->
+              <li class="page-item" [class.active]="currentPage === 1">
+                <a class="page-link" (click)="changePage(1)">1</a>
+              </li>
+          
+              <!-- Ellipsis before middle pages -->
+              <li class="page-item disabled" *ngIf="getMiddlePages()[0] > 2">
+                <span class="page-link">...</span>
+              </li>
+          
+              <!-- Middle Pages -->
+              <ng-container *ngFor="let page of getMiddlePages()">
+                <li class="page-item" [class.active]="currentPage === page">
+                  <a class="page-link" (click)="changePage(page)">{{ page }}</a>
+                </li>
+              </ng-container>
+          
+              <!-- Ellipsis after middle pages -->
+              <li class="page-item disabled" *ngIf="getMiddlePages().includes(totalPages - 1) === false && totalPages > 5">
+                <span class="page-link">...</span>
+              </li>
+          
+              <!-- Last Page -->
+              <li class="page-item" *ngIf="totalPages > 1" [class.active]="currentPage === totalPages">
+                <a class="page-link" (click)="changePage(totalPages)">{{ totalPages }}</a>
+              </li>
+          
+              <!-- Next Button -->
+              <li class="page-item" [class.disabled]="currentPage === totalPages">
+                <a class="page-link" (click)="changePage(currentPage + 1)">>></a>
+              </li>
+            </ul>
+          </nav>
+          
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

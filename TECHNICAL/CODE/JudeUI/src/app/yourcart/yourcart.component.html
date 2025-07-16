@@ -1,0 +1,446 @@
+<main>
+  <div class="mt-4">
+    <div class="container">
+      <!-- row -->
+      <div class="row">
+        <!-- col -->
+        <div class="col-12">
+          <!-- breadcrumb -->
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0">
+              <li class="breadcrumb-item"><a [routerLink]="['/Home']">{{ 'Home' | translate }}</a></li>
+              <li class="breadcrumb-item"><a [routerLink]="['/Shops']">{{ 'Shop' | translate }}</a></li>
+              <li class="breadcrumb-item active" aria-current="page">{{ 'Shop Cart' | translate }}</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- section -->
+  <section class="mb-lg-2 mb-8 mt-8">
+    <div class="container">
+      <!-- row -->
+      <div class="row">
+        <div class="col-12">
+          <!-- card -->
+          <div class="card py-1 border-0 mb-4">
+            <div>
+              <h1 class="fw-bold">{{ 'Shop Cart' | translate }}</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- row -->
+      <div class="row" *ngIf="!isCartEmpty">
+        <div class="col-lg-8 col-md-7">
+          <div class="py-3">
+            <!-- alert -->
+            <!-- <div class="alert alert-danger p-2" role="alert">
+                         You’ve got FREE delivery. Start
+                         <a href="#!" class="alert-link">checkout now!</a>
+                      </div> -->
+            <ul class="list-group list-group-flush" *ngFor="let dataItem of CartProductsList">
+              <!-- list group -->
+              <li class="list-group-item py-3 ps-0 border-top">
+                <!-- row -->
+                <div class="row align-items-center">
+                  <div class="col-6 col-md-6 col-lg-7">
+                    <div class="d-flex">
+                      <img [src]="ProductImageNamePath + dataItem.MasterProductImageThumbnailImagePath"
+                        [alt]="'Product Image: ' + dataItem.MasterProductImageThumbnailImagePath"
+                        class="icon-shape icon-xxl" />
+                      <div class="ms-3">
+                        <!-- title -->
+                         <!-- href="shop-single.html" -->
+                        <a  class="text-inherit">
+                          <!-- <h1 class="mb-0">{{ dataItem.ProductName }}</h1> -->
+                          <h6 class="mb-0">{{ dataItem.MasterProductName }}</h6>
+                        </a>
+                        <span><small class="text-muted"> {{ dataItem.MasterProductUnit }}
+                          </small></span>
+                        <!-- text -->
+                        <!-- <div class="mt-2 small lh-1">
+                                           <a href="#!" class="text-decoration-none text-inherit">
+                                              <span class="me-1 align-text-bottom">
+                                                 <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    width="14"
+                                                    height="14"
+                                                    viewBox="0 0 24 24"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    stroke-width="2"
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    class="feather feather-trash-2 text-success">
+                                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                                    <line x1="10" y1="11" x2="10" y2="17"></line>
+                                                    <line x1="14" y1="11" x2="14" y2="17"></line>
+                                                 </svg>
+                                              </span>
+                                              <span class="text-muted">Remove</span>
+                                           </a>
+                                        </div> -->
+                      </div>
+                    </div>
+                  </div>
+                  <!-- input group -->
+                  <div class="col-4 col-md-4 col-lg-3">
+                    <!-- input -->
+                    <!-- input -->
+                    <div class="input-group1 input-spinner ">
+                      <div style="width: 25px;  min-width: 22px; min-height: 22px;align-content: center;margin-right: 1%;">
+                        <svg (click)="deleteproduct(dataItem.CartProductID)" style="cursor: pointer" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 text-danger">
+                          <polyline points="3 6 5 6 21 6"></polyline>
+                          <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                          <line x1="10" y1="11" x2="10" y2="17"></line>
+                          <line x1="14" y1="11" x2="14" y2="17"></line>
+                       </svg>
+                      </div>
+                      
+                  
+                      <!-- <i class="bi bi-trash3" (click)="deleteproduct(dataItem.CartProductID)" style="cursor: pointer;font-size: 1.2rem;padding-right: 4%;"></i> -->
+                      <input type="button" value="-" class="button-minus btn btn-sm" data-field="quantity"
+                        (click)="decreaseNumber(dataItem)" />
+                      <input type="number" step="1" max="10" [(ngModel)]="dataItem.Quantity" name="quantity"
+                        class="quantity-field form-control-sm form-input" disabled />
+                      <input type="button" value="+" class="button-plus btn btn-sm" data-field="quantity"
+                      [ngClass]="{ 'opacity-50 cursor-not-allowed': dataItem.Quantity >= 10 }"  
+                      (click)="increaseNumber(dataItem)" />
+                      <!-- <ul >
+                                      <li >
+                                        <button
+                                          class="button-minus btn btn-sm"
+                                          (click)="decreaseNumber(dataItem)"
+                                        >
+                                          -
+                                        </button>
+                                      </li>
+                                      <li>
+                                        <div >{{ dataItem.Quantity }}</div>
+                                      </li>
+                                      <li>
+                                        <button
+                                          class="button-plus btn btn-sm"
+                                          (click)="increaseNumber(dataItem)"
+                                        >
+                                          +
+                                        </button>
+                                      </li>
+                                    </ul> -->
+                    </div>
+                  </div>
+                  <!-- price -->
+                  <div class="col-2 text-lg-end text-start text-md-end col-md-2">
+                    <!-- <span class="fw-bold">{{currency}} {{ dataItem.FinalPrice  | number:'1.2-2'}}</span> -->
+                    <span class="fw-bold" style="margin-right: 4.5px;">{{ currency }} {{ dataItem.FinalPrice * dataItem.Quantity | number:'1.2-2' }}</span>
+
+                    <div *ngIf="dataItem.DiscountPrice>0" class="text-decoration-line-through text-muted small">{{currency}} {{ dataItem.ProductPrice * dataItem.Quantity | number:'1.2-2'}}
+                    </div>
+                  </div>
+                </div>
+              </li>
+
+
+            </ul>
+            <!-- btn -->
+            <!-- <div class="d-flex justify-content-between mt-4">
+                         <a href="#!" class="btn btn-primary">Continue Shopping</a>
+                         <a href="#!" class="btn btn-dark">Update Cart</a>
+                      </div> -->
+          </div>
+        </div>
+
+        <!-- sidebar -->
+        <div class="col-12 col-lg col-md-5">
+          <!-- card -->
+          <div class="mb-5 card mt-2">
+            <div class="card-body p-6">
+              <!-- heading -->
+              <h2 class="h5 mb-4">{{ 'Summary' | translate }}</h2>
+              <div class="card mb-2">
+                <!-- <div class="OrderMain">
+                            <div class="amount">
+                              <div class="price_indiv d-flex justify-content-between">
+                                <p>Cart Total</p>
+                                <p>
+                                  <span>{{ carttotalamt | currency: "INR" }}</span>
+                                </p>
+                              </div>
+                              <div class="price_indiv d-flex justify-content-between">
+                                <p>Cart Savings</p>
+                                <p>
+                                  <span id="product_total_amt">{{
+                                    cartsavingamt | currency: "INR"
+                                  }}</span>
+                                </p>
+                              </div>
+                              <div class="price_indiv d-flex justify-content-between">
+                                <p>Delivery Charges</p>
+                                <p>
+                                  <span id="product_total_amt">{{
+                                    0 | currency: "INR"
+                                  }}</span>
+                                </p>
+                              </div>
+                              <hr />
+                              <div class="total-amt d-flex justify-content-between"></div>
+                              <div class="total-amt d-flex justify-content-between">
+                                <p>Total Amount</p>
+                                <p>
+                                  <span id="product_total_amt">{{
+                                    finalamt | currency: "INR"
+                                  }}</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div> -->
+                <!-- list group -->
+                <ul class="list-group list-group-flush">
+                  <!-- list group item -->
+                  <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="me-auto">
+                      <div>{{ 'Cart Total' | translate }}</div>
+                    </div>
+                    <span>{{currency}} {{ carttotalamt  | number:'1.2-2'}}</span>
+                  </li>
+
+                  <!-- list group item -->
+                  <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="me-auto">
+                      <div>{{ 'Cart Savings' | translate }}</div>
+                    </div>
+                    <span>{{currency}} {{ cartsavingamt  | number:'1.2-2'}}</span>
+                  </li>
+
+                  <!-- list group item -->
+                  <!-- <li class="list-group-item d-flex justify-content-between align-items-start">
+                  <div class="me-auto">
+                    <div>{{ 'Delivery Charges' | translate }}</div>
+                  </div>
+                  <span>{{ 0 | currency: "INR" }}</span>
+                </li> -->
+
+                  <!-- list group item -->
+                  <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="me-auto">
+                      <div class="fw-bold">{{ 'Subtotal' | translate }}</div>
+                    </div>
+                    <span class="fw-bold">{{currency}} {{ finalamt  | number:'1.2-2'}}</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="d-grid mb-1 mt-4">
+                <!-- btn -->
+                <button class="btn btn-primary btn-lg d-flex justify-content-between align-items-center" type="submit"
+                  (click)="checkout()">
+                  {{ 'Go to Checkout' | translate }}
+                  <span class="fw-bold">{{currency}} {{ finalamt  | number:'1.2-2'}}</span>
+                </button>
+              </div>
+              <!-- text -->
+              <p>
+                <small>
+                  {{ 'By placing your order, you agree to be bound by the Jude' | translate }}
+                  <a [routerLink]="['/TermsAndConditions']"> {{ 'Terms & Conditions' | translate }}</a>
+                  <!--  Terms of Service</a>
+                               and
+                               <a href="#!">Privacy Policy.</a> -->
+                </small>
+              </p>
+
+              <!-- heading -->
+              <!-- <div class="mt-8">
+                            <h2 class="h5 mb-3">Add Promo or Gift Card</h2>
+                            <form>
+                               <div class="mb-2">
+                            
+                                  <label for="giftcard" class="form-label sr-only">Email address</label>
+                                  <input type="text" class="form-control" id="giftcard" placeholder="Promo or Gift Card" />
+                               </div>
+                               
+                               <div class="d-grid"><button type="submit" class="btn btn-outline-dark mb-1">Redeem</button></div>
+                               <p class="text-muted mb-0"><small>Terms & Conditions apply</small></p>
+                            </form>
+                         </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div *ngIf="isCartEmpty" class="empty-product mb-10">
+          <h4>{{ 'Your Cart is empty!' | translate }}</h4>
+          <img src="assets/svg/empty.svg" />
+          <h6>{{ 'Add items to your cart to start shopping.' | translate }}</h6>
+          <div class="mt-1">
+          <button type="submit" class="btn btn-primary" [routerLink]="['/Shops']">{{'Browse Products'|
+            translate}}</button>
+            </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<!--  -->
+
+
+<!-- OLD CODE -->
+<!-- <div class="container-fluid mainyourcart">
+        <div class="col-11 mx-auto" *ngIf="!isCartEmpty">
+          <div class="row"> -->
+<!-- left side div -->
+<!-- <div class="col-md-12 col-lg-8 col-11 mx-auto">
+              <h2 class="cart">Your Cart</h2>
+              <div class="card" *ngFor="let dataItem of CartProductsList"> -->
+<!-- <pre>{{dataItem | json}}</pre> -->
+<!-- <pre>{{CartProductsList | json}} </pre>                                            -->
+<!-- 1st cart product -->
+<!-- <div class="card p-4 First_productmain">
+                  <div class="row">
+                    <div
+                      class="col-md-5 col-11 mx-auto d-flex justify-content-center align-items-center product_img"
+                    >
+                      <img
+                        src="{{
+                          ProductImageNamePath +
+                            dataItem.ProductImageThumbnailImagePath
+                        }}"
+                        class="product-img"
+                      />
+                    </div>
+                    <div class="col-md-7 col-11 mx-auto px-4 mt-2">
+                      <div class="row">
+                        <div class="col-6 card-title"> -->
+<!-- <h1 class="product_name">{{ dataItem.ProductName }}</h1> -->
+<!-- <h1 class="product_name">{{ dataItem.MasterProductName }}</h1>
+      
+                          <p>
+                            Weight:
+                            {{ dataItem.ProductWeight ? dataItem.ProductWeight : 0 }}
+                            gm
+                          </p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div
+                          class="price d-flex flex-row align-items-center price-top"
+                        >
+                          <div
+                            class="col-sm-3 price"
+                            *ngIf="dataItem.ProductDiscount !== 0"
+                          >
+                            <span style="text-decoration: line-through">
+                              {{ dataItem.ProductPrice | currency: "INR" }}</span
+                            >
+                          </div>
+                          <div class="col-sm-3 price2">
+                            {{ dataItem.ProductDiscountPrice | currency: "INR" }}
+                          </div>
+                          <div
+                            class="col-sm-3 off"
+                            *ngIf="dataItem.ProductDiscount !== 0"
+                          >
+                            {{ dataItem.ProductDiscount }} % off
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-12 col-sm-6">
+                        <ul class="pagination justify-content-end set_quantity">
+                          <li class="page-item">
+                            <button
+                              class="page-link"
+                              (click)="decreaseNumber(dataItem)"
+                            >
+                              -
+                            </button>
+                          </li>
+                          <li class="page-item">
+                            <div class="page-link">{{ dataItem.Quantity }}</div>
+                          </li>
+                          <li class="page-item">
+                            <button
+                              class="page-link"
+                              (click)="increaseNumber(dataItem)"
+                            >
+                              +
+                            </button>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <button type="button" class="more_product" (click)="goToComapny()">
+                  Add More Products
+                </button>
+              </div>
+            </div>
+      
+            <div class="col-lg-4 order_details">
+              <div class="order_image_mainlayout">
+                <div class="container">
+                  <img src="assets\images\Subtract.png" class="cart-img" />
+                  <div class="centered">
+                    <h4 class="orderdetails">Order Details</h4>
+                    <div class="OrderMain">
+                      <div class="amount">
+                        <div class="price_indiv d-flex justify-content-between">
+                          <p>Cart Total</p>
+                          <p>
+                            <span>{{ carttotalamt | currency: "INR" }}</span>
+                          </p>
+                        </div>
+                        <div class="price_indiv d-flex justify-content-between">
+                          <p>Cart Savings</p>
+                          <p>
+                            <span id="product_total_amt">{{
+                              cartsavingamt | currency: "INR"
+                            }}</span>
+                          </p>
+                        </div>
+                        <div class="price_indiv d-flex justify-content-between">
+                          <p>Delivery Charges</p>
+                          <p>
+                            <span id="product_total_amt">{{
+                              0 | currency: "INR"
+                            }}</span>
+                          </p>
+                        </div>
+                        <hr />
+                        <div class="total-amt d-flex justify-content-between"></div>
+                        <div class="total-amt d-flex justify-content-between">
+                          <p>Total Amount</p>
+                          <p>
+                            <span id="product_total_amt">{{
+                              finalamt | currency: "INR"
+                            }}</span>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <button
+                        type="button Checkout"
+                        class="Checkout"
+                        (click)="checkout()"
+                      >
+                        Checkout
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+        <div *ngIf="isCartEmpty" class="empty-cart">
+          <img src="assets/svg/yourCartEmpty.svg" />
+        </div>
+      </div>
+       -->

@@ -1,0 +1,174 @@
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">Shiprocket statement</h4>
+
+    <div class="row">
+      <div class="col-12">
+        <br />
+
+        <div class="col-sm-12 row">
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="FromDate">FromDate</label>
+              <div class="col-sm-9">
+                <input autofocus type="date" class="form-control" [(ngModel)]="FromDate" FormControlName="FromDate"
+                  placeholder="dd/mm/yyyy" maxlength="10" />
+                <div class="error">
+                  {{ FromDate_errormsg }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="To Date">To Date</label>
+              <div class="col-sm-9">
+                <input autofocus type="date" class="form-control" [(ngModel)]="ToDate" FormControlName="CreditDate"
+                  placeholder="dd/mm/yyyy" maxlength="10" />
+                <div class="error">
+                  {{ ToDate_errormsg }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-3">
+            <p>&nbsp;</p>
+
+            <button type="submit" class="btn btn-primary me-2" (click)="search()">
+              Search
+            </button>
+          </div>
+        </div>
+
+        <!-- <div class="col-sm-12 row">
+          <div class="col-md-3">
+            <span class="d-block m-1"
+              >POD Orders : {{ PODOrders | currency: "INR" }}</span
+            >
+          </div>
+          <div class="col-md-3"></div>
+          <div class="col-md-3"></div>
+          <div class="col-md-3">
+            <span class="d-block m-1"
+              >COD Orders: {{ CODOrders | currency: "INR" }}</span
+            >
+            <span class="d-block m-1"
+              >COD Received: {{ CODReceived | currency: "INR" }}</span
+            >
+            <span class="d-block m-1"
+              >COD Outstanding: {{ CODOutStanding | currency: "INR" }}</span
+            >
+          </div>
+        </div> -->
+
+        <div class="row">
+          <div class="col-md-3 grid-margin">
+            <div class="card d-flex bg-twitter align-items-center">
+              <div class="card-body">
+                <div class="d-flex flex-row align-items-center">
+                  <!-- <i class="ti-facebook text-facebook icon-md"></i> -->
+                  <div class="ms-3">
+                    <h6 class="text-white">POD Orders</h6>
+                    <p class="mt-2 text-white card-text">
+                      {{currency}} {{ PODOrders }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 grid-margin">
+            <div class="card d-flex bg-linkedin align-items-center">
+              <div class="card-body">
+                <div class="d-flex flex-row align-items-center">
+                  <!-- <i class="ti-facebook text-facebook icon-md"></i> -->
+                  <div class="ms-3">
+                    <h6 class="text-white">COD Orders</h6>
+                    <p class="mt-2 text-white card-text">
+                      {{currency}} {{ CODOrders }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 grid-margin">
+            <div class="card d-flex bg-facebook align-items-center">
+              <div class="card-body">
+                <div class="d-flex flex-row align-items-center">
+                  <!-- <i class="ti-youtube text-youtube icon-md"></i> -->
+                  <div class="ms-3">
+                    <h6 class="text-white">COD Received</h6>
+                    <p class="mt-2 text-white card-text">
+                      {{currency}} {{ CODReceived }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 grid-margin">
+            <div class="card d-flex bg-youtube align-items-center">
+              <div class="card-body">
+                <div class="d-flex flex-row align-items-center">
+                  <!-- <i class="ti-twitter-alt text-twitter icon-md"></i> -->
+                  <div class="ms-3">
+                    <h6 class="text-white">COD Outstanding</h6>
+                    <p class="mt-2 card-text text-white">
+                      {{currency}} {{ CODOutStanding }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <br />
+        <div class="table-responsive">
+          <table id="order-listing" class="table">
+            <thead>
+              <tr class="bg-primary text-white">
+                <th>#</th>
+                <th>Order ID</th>
+                <th>Amount</th>
+                <th>Shipping</th>
+                <th>Order Total</th>
+                <th>Payment Ref</th>
+                <th>Order Type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="
+                  let dataItem of ShiprocketstatementList;
+                  let i = index;
+                  let last = last
+                ">
+                <td>{{ i + 1 }}</td>
+                <td>{{ dataItem.OrderID }}</td>
+                <td>
+                  {{currency}} {{ dataItem.OrderPrice }}
+                </td>
+                <td>{{currency}} {{ dataItem.ShippingPrice }}</td>
+                <td [ngClass]="
+                    dataItem.TotalOrderPrice.toString().indexOf('-') == '0'
+                      ? 'text-red'
+                      : ''
+                  ">
+                  {{currency}} {{ dataItem.TotalOrderPrice }}
+                </td>
+
+                <td>{{ dataItem["Payment Ref"] }}</td>
+                <td>{{ dataItem["Order Type"] }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <br />
+    </div>
+  </div>
+</div>

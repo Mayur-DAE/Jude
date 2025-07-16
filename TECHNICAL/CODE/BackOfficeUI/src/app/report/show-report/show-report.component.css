@@ -1,0 +1,154 @@
+.badge-danger {
+  color: #bc0000;
+  border: 1px solid #f6bcbc;
+  background-color: #f6bcbc;
+}
+
+.badge-returned {
+  color: #023679;
+  border: 1px solid #9fcdff;
+  background-color: #9fcdff !important;
+}
+
+.badge-warning {
+  color: #d66408;
+  border: 1px solid #f5dbaa;
+  background-color:#f5dbaa ;
+}
+
+.badge-info {
+  color: #bf531a;
+  border: 1px solid #f2ef9a;
+  background-color: #f2ef9a ;
+
+}
+.badge-success {
+color:  #027402;
+border: 1px #c8ffc8;
+background-color: #c8ffc8;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 7px;
+  font-size: 15px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #f9f9f9;
+  min-width: 180px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  border-radius: 5px;
+  z-index: 1;
+  text-align: left;
+}
+
+.dropdown-content div {
+  color: black;
+  /* padding: 12px 16px; */
+  text-decoration: none;
+  display: block;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  font-size: 16px;
+}
+
+.dropdown-content div:hover {
+  background-color: #ddd;
+  cursor: pointer;
+  width: 160px;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.btn-secondary{
+    color: white!important;
+  }
+
+.form-select{
+    height: 48px;
+}
+
+.Reportlayout1{
+    position: absolute;
+    z-index: 100;
+}
+.excelbutton{
+    border-radius: 16px;
+}
+
+.page-item {
+  margin-right: 4px;
+}
+
+.page-item .page-link {
+  background-color: #fff;
+  color: #6c757d;
+  border: 1px solid #dee2e6;
+  border-radius: 18px;
+  padding: 6px 12px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.page-item.disabled .page-link {
+  background-color: #f2f4f5;
+  color: #adb5bd;
+  cursor: not-allowed;
+  border-color: #f2f4f5;
+}
+
+.page-item.active .page-link {
+  background-color: #28a745 !important;
+  color: white !important;
+  border: 1px solid #28a745 !important;
+  border-radius: 18px;
+}
+
+@media (max-width: 374px) {
+  .page-item .page-link {
+    padding: 0px 6px;
+  }
+}
+
+@media (min-width: 375px) and (max-width: 425px) {
+  .page-item .page-link {
+    padding: 2px 9px;
+  }
+}
+
+@media (max-width: 576px) {
+   .f-name {
+        
+        width: 100%;
+    }
+    .l-name {
+        
+        width: 100%;
+    }
+    .me-2 {
+        margin-right: 49px !important;
+    }
+  }
+
+@media (max-width: 425px) {
+  .gap {
+    margin-top: 25px;
+  }
+}

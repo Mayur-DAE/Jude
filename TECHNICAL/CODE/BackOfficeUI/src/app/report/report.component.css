@@ -1,0 +1,23 @@
+
+.a{ height: 6vh;
+    width:2vw;
+    border: none;
+    background-color: white;
+}
+.ab{
+    height: 6vh;
+    width:2vw;
+    border: none;
+    background-color: white;
+    
+}
+.form-select{
+    height: 48px;
+}
+.abc{
+    margin-right: 6rem;
+}
+.Reportlayout1{
+    position: absolute;
+    z-index: 100;
+}

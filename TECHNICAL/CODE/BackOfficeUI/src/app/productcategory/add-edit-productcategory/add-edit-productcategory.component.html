@@ -1,0 +1,126 @@
+<div class="modal-body"> 
+  <div class="d-flex flex-row bd-highlight category-details mb-3">
+    <div class="from-froup row" style="width: 60%">
+      <label class="col-sm-3 col-form-label">Category Name <span class="text-danger">*</span></label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control category-name" [ngClass]="bln_error_user?'error-input':'form-control'"
+          [(ngModel)]="ProductCategoryShortName" placeholder="Enter Category Name" />
+        <div class="error" style="margin-top: 2px;">{{Name_errormsg}}</div>
+      </div>
+
+      <label class="col-sm-3 col-form-label">Category Description <span class="text-danger">*</span></label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control description" [ngClass]="bln_error_description?'error-input':'form-control'"
+          [(ngModel)]="ProductCategoryDescription" placeholder="Enter Description" />
+        <div class="error" style="margin-top: 2px;">{{ProductCategoryDescription_errormsg}}</div>
+      </div>
+      <div class="form-group row">
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input" name="IsActive" checked [(ngModel)]="IsActive" />
+          Active
+        </label>
+      </div>
+      
+    </div>
+    <div class="ml-3 bd-highlight" style="width: 40%;">
+      <div class="from-froup row">
+        <div class="col-sm-6">
+          <label class="img" style="margin-left:75px ;">Thumbnail Image</label>
+          <br />
+          <br />
+          <img [src]=ProductCategoryThumbNailPhotoNamePath class="img-upload"
+          (click)="triggerThumbnailFileInput()" 
+          (error)="loadDefaultImage($event)">
+          <br />
+          <input type="file" accept="image/*"  #thumbnailFileInput  (change)="uploadthumbnailphoto($any($event.target).files)" class="mt-2"
+            style="margin-left:75px ;" />
+          <p style="color: red;">{{ thumbnailErrormsg }}</p>
+        </div>
+        <div class="col-sm-6">
+          <label class="img" style="margin-left:75px ;">Large Image</label>
+          <br />
+          <br />
+          <img [src]=ProductCategoryLargePhotoNamePath class="img-upload" 
+          (click)="triggerLargePhotoFileInput()" 
+          (error)="loadDefaultImage($event)">
+          <br />
+          <input type="file" accept="image/*"   #largePhotoFileInput  (change)="uploadlargephoto($any($event.target).files)" class="mt-2"
+            style="margin-left:75px ;" />
+
+        </div>
+      </div>
+    </div>
+
+    
+
+    
+    
+  </div>
+
+   <!-- Caption Details Table -->
+   <div class="form-group mt-3">
+    <h5>Caption Details <span class="text-danger">*</span></h5>
+    <table class="table table-striped " >
+      <thead>
+        <tr>
+          <th class="border-0">Language</th>
+          <th class="border-0">Name <span class="text-danger">*</span></th>
+          <th class="border-0">Description <span class="text-danger">*</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let lang of activeLanguages; let i = index">
+          <td>{{ lang.LanguageCaption }}</td>
+  
+          <!-- Name Input -->
+          <td>
+            <input 
+              type="text" 
+              class="form-control" 
+              placeholder="Enter Name" 
+              [(ngModel)]="lang.Name" 
+              name="name{{i}}" 
+              [ngClass]="{'is-invalid': isFieldInvalid(lang.Name)}" />
+  
+            <!-- Validation Error for Name -->
+            <div class="error" *ngIf="isFieldInvalid(lang.Name)" style="margin-top: 2px;">
+              Name is required
+            </div>
+          </td>
+  
+          <!-- Description Input -->
+          <td>
+            <input 
+              type="text" 
+              class="form-control" 
+              placeholder="Enter Description" 
+              [(ngModel)]="lang.Description" 
+              name="description{{i}}" 
+              [ngClass]="{'is-invalid': isFieldInvalid(lang.Description)}" />
+  
+            <!-- Validation Error for Description -->
+            <div class="error" *ngIf="isFieldInvalid(lang.Description)" style="margin-top: 2px;">
+              Description is required
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+
+
+  </div>
+ 
+
+  <div class="modal-footer">
+    <button (click)="addProductcategory()" type="submit" *ngIf="productcategory.ProductCategoryID==0"
+      class="btn btn-primary">
+      Add
+    </button>
+
+    <button (click)="updateProductcategory()" type="submit" *ngIf="productcategory.ProductCategoryID!=0"
+      class="btn btn-primary">
+      Update
+    </button>
+  </div>
+</div>

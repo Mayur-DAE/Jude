@@ -1,0 +1,109 @@
+<div class="">
+  <div class="col-12 ">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Name <span class="text-danger">*</span></label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" 
+                [ngClass]="nameerror ? 'error-input' : 'form-control'"
+                [(ngModel)]="CompanyMemberShipName"
+                (ngModelChange)="onNameChange($event)"
+                placeholder="Enter Membership Name" />
+              
+              <div class="error">{{ MemberShipName_errormsg }}</div>
+              </div>
+              <label class="col-sm-3 col-form-label">Fees <span class="text-danger">*</span></label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" 
+                [ngClass]="feeserror ? 'error-input' : 'form-control'"
+                [(ngModel)]="CompanyMembershipFees"
+                (ngModelChange)="onFeesChange($event)"
+                placeholder="Enter Membership Fees"
+                (keypress)="allowOnlyNumbers($event)"
+                 />
+              
+              <div class="error">{{ MemberShipFees_errormsg }}</div>
+              </div>
+              <label class="col-sm-3 col-form-label">VAT <span class="text-danger">*</span></label>
+              <div class="col-sm-9">
+                <select class="form-select"
+                [(ngModel)]="TaxSlabID"
+                (ngModelChange)="onTaxChange($event)"
+                [ngClass]="taxerror ? 'error-input' : 'form-select'">
+                <option disabled selected >--Select--</option>
+                <option *ngFor="let x of TaxSlabsList" [value]="x.TaxSlabID">{{ x.TaxSlabName }}</option>
+              </select>
+              <div class="error">{{ TaxSlab_errormsg }}</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class=" row">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" name="IsActive" checked [(ngModel)]="IsActive" />
+                  Active
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button (click)="addCompanyMemberShip()" *ngIf="membership.CompanyMemberShipTypeID==0" class="btn btn-primary">
+      Add
+    </button>
+    <button (click)="updateCompanyMemberShip()" *ngIf="membership.CompanyMemberShipTypeID!=0" class="btn btn-primary">
+      Update
+    </button>
+  </div>
+
+
+
+
+  <!-- <div class="modal-body">
+    <div class="form-froup row">
+        <label class="col-sm-2 col-form-label">Membership Name</label>
+        <div class="col-sm-10">
+        <input type="text" class="form-control" [(ngModel)]="CompanyMemberShipName" 
+        placeholder="Enter Membership Name"/>
+    </div>
+    <label class="col-sm-2 col-form-label">Membership Fees</label>
+    <div class="col-sm-10">
+        <input type="text" class="form-control" [(ngModel)]="CompanyMembershipFees" 
+        placeholder="Enter Membership Fees"/>
+    </div>
+    <label class="col-sm-2 col-form-label">TaxSlab</label>
+    <div class="col-sm-10">
+        <select class="form-control" name="TaxSlabID" [(ngModel)]="TaxSlabID"  >
+            <option>--Select--</option>
+ 
+            <option *ngFor="let x of TaxSlabsList" [value]="x.TaxSlabID" >{{x.TaxSlabName}}</option>
+        </select>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+          <div class="form-group row">
+            <label class="form-check-label">
+              <input type="checkbox" class="form-check-input" name="IsActive"  checked [(ngModel)]="IsActive"/>
+              Active                    
+            </label>
+          </div> 
+        </div>                
+      </div>
+</div>
+<div class="modal-footer">
+<button (click)="AddCompanyMemberShip()" *ngIf="membership.CompanyMemberShipTypeID==0" class="btn btn-primary">
+    Add
+</button>
+
+<button (click)="UpdateCompanyMemberShip()" *ngIf="membership.CompanyMemberShipTypeID!=0" class="btn btn-primary">
+    Update
+</button>
+</div> -->

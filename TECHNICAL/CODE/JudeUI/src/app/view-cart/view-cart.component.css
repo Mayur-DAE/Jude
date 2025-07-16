@@ -1,0 +1,35 @@
+.mobile-footer {     
+    position: fixed;
+    left: 12px;
+    right: 12px;
+    display: flex
+    ;
+    z-index: 10001;    
+    bottom: 12px;
+    color: white;
+    border-radius: 12px;
+    padding: 8px 18px 8px 12px;
+    margin: 0px auto;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    transition: transform 300ms linear;
+    transform: translate(0px);
+    opacity: 1;
+}
+
+.container {
+    width: auto;
+}
+
+svg {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+}
+
+.d-flex {
+    white-space: nowrap;
+    gap: 5px;
+}
+
+

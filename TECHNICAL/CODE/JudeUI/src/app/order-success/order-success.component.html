@@ -1,0 +1,19 @@
+<div class="MainSuccessful">
+  <div class="container-fluid">
+    <div class="message">
+      <h4 class="text-center">{{ 'Your order has been successfully placed!' | translate}}</h4>
+      <h4 class="text-center">{{ 'Order' | translate }} #: {{ OrderID }}</h4>
+      <img src="assets\images\png\Order Successful.png" class="img-responsive center-block d-block mx-auto"
+        width="auto;" />
+    </div>
+    <div class="mesg-para">
+      <h4 class="text-center" style="line-height: 1.5em">
+        {{ 'You ll receive order confirmation on your' | translate }} <br />{{ 'registered email address' | translate }}.
+      </h4>
+    </div>
+    <div class="col-md-12 text-center">
+      <!-- <h3 class="text-center" style="line-height: 1.5em;">Order ID: #567877</h3> -->
+      <input type="submit" class="btn btn-primary" value="{{ 'Continue Shopping' | translate}}" routerLink="/Shops" />
+    </div>
+  </div>
+</div>

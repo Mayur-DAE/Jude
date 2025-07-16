@@ -1,0 +1,34 @@
+
+<div class="mobile-footer d-md-none d-flex justify-content-between align-items-center text-white text-decoration-none bg-primary" 
+*ngIf="CartCount > 0" (click)="yourCart()" >        
+
+    <div class="d-flex align-items-center">
+        <div class="bg-green-700 p-2 rounded-lg d-flex align-items-center justify-content-center">          
+    <svg
+       xmlns="http://www.w3.org/2000/svg"
+       width="16"
+       height="16"
+       viewBox="0 0 24 24"
+       fill="none"
+       stroke="currentColor"
+       stroke-width="2"
+       stroke-linecap="round"
+       stroke-linejoin="round"
+       class="feather feather-shopping-cart align-text-bottom">
+       <circle cx="9" cy="21" r="1"></circle>
+       <circle cx="20" cy="21" r="1"></circle>
+       <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+    </svg>
+     </div>
+        <div>
+            <p class="m-0 small"> {{ CartCount }} {{ CartCount > 1 ? ('items' | translate) : ('item' | translate) }}</p>
+        </div>
+    </div>
+    <div class="d-flex align-items-center fw-semibold gap-2 text-white">
+        {{ 'View Cart' | translate }}
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M8 5v14l11-7z" />
+        </svg>
+    </div>
+ </div>
+ 

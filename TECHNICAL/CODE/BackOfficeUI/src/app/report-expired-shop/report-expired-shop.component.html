@@ -1,0 +1,65 @@
+<div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Reports-Expired Shops</h4>
+      <div class="row">
+        <div class="col-12">
+          <div class="col-sm-12 row">
+            <div class="col-sm-3">
+              <p>From Date</p>
+              <div class="untitled-page-block2 layout">
+                <input id="FromDate" name="FromDate" [(ngModel)]="FromDate" type="date" class="form-control" />
+              </div>
+            </div>
+  
+            <div class="col-sm-3">
+              <p>To Date</p>
+              <div class="untitled-page-block2 layout">
+                <input id="ToDate" name="ToDate" [(ngModel)]="ToDate" type="date" class="form-control" />
+              </div>
+            </div>
+    
+            <div class="col-3">
+                <div class="form-group">
+                  <label for="exampleInputUsername1">Shop Name</label>
+                  <input type="text" class="form-control" id="exampleInputUsername1" placeholder="Shop Name"
+                    name="firstName" [(ngModel)]="CompanyName" />
+                </div>
+              </div>
+  
+            <div class="col-sm-3">
+              <p>&nbsp;</p>
+              <button type="button" class="btn btn-primary me-2" (click)="refreshReportsExpiredShopList()">
+                Search
+              </button>
+            </div>
+          </div>
+  
+          <div class="justify-content-end d-flex">
+            <button type="button" class="export-btn btn fa fa-file-excel-o mt-4 ms-2 excelbutton"
+              (click)="exportToExcel()">
+              <i class="ti-file me-1"></i>Export to Excel
+            </button>
+          </div>
+  
+          <div id="section">
+            <table id="reports-Expired" class="table">
+              <thead>
+                <tr class="bg-primary text-white">
+                  <td>#</td>
+                  <th>Shop Name</th>
+                  <th>Membership Expiry Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let dataItem of ReportsExpiredShopList; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td class="ReportExpiredShop">{{ dataItem.CompanyName }}</td>
+                  <td>{{ dataItem.CompanyMemberShipExpiryDate}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

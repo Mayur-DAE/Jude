@@ -1,0 +1,55 @@
+.error{
+  color: red;
+  position: absolute;
+}
+
+input.invalid {
+  border: 1px solid red;
+}
+
+.password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-wrapper input {
+  padding-right: 35px; /* Space for the eye icon */
+}
+
+.password-toggle-icon {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+}
+
+.password-toggle-icon i {
+  font-size: 18px;
+  color: #666; /* Optional: Adjust color */
+}
+
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+display: none;
+}
+
+input[type="password"]::-webkit-credentials-auto-fill-button {
+display: none !important;
+visibility: hidden;
+pointer-events: none;
+}
+.position-relative {
+  position: relative;
+}
+
+.input-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #aaa;
+}
+.isActive{
+  width:14%;
+}

@@ -1,0 +1,125 @@
+<!-- Modal starts -->
+<div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{ModalTitle}}</h5>
+        <button type="button" class="btn btn-primary btn-rounded btn-icon" data-bs-dismiss="modal" aria-label="Close"
+          (click)="closeClick()">
+          <i class="ti-close"></i>
+        </button>
+      </div>
+      <app-add-edit-user [user]="user"  (emitData)="emittedDataByChild($event)" *ngIf="ActivateAddEditfaq"></app-add-edit-user>
+    </div>
+  </div>
+</div>
+<!-- Modal Ends -->
+
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">End User List</h4>
+    <div class="row">
+      <div class="col-12">
+
+        <!-- <div class="justify-content-end d-flex">
+          <button type="button" class="export-btn btn fa fa-file-excel-o mt-4 ms-2 excelbutton" (click)="exportToExcel()">
+            <i class="ti-file me-1"></i>Export to Excel</button>
+        </div> -->
+        <div class="row mb-4 mt-2">
+          <div class="col-md-6 col-sm-12 d-flex align-items-center ">
+            <label for="itemsPerPage" class="mr-2">Items per page:&nbsp;</label>
+            <select id="itemsPerPage" class="border rounded px-2 py-1" (change)="onItemsPerPageChange($event)">
+              <option value="5" [selected]="itemsPerPage === 5">5</option>
+              <option value="10" [selected]="itemsPerPage === 10">10</option>
+              <option value="20" [selected]="itemsPerPage === 20">20</option>
+              <option value="30" [selected]="itemsPerPage === 30">30</option>
+            </select>
+          </div>
+          <div class="col-md-6 col-sm-12 d-flex justify-content-end">
+            <button type="button" class="export-btn btn fa fa-file-excel-o excelbutton mt-2 md:mt-0" (click)="exportToExcel()" style="padding: 0px !important;">
+              <i class="ti-file me-1"></i>Export to Excel
+            </button>
+          </div>
+        </div> 
+        <div class="table-responsive">
+          <table id="show-enduser" class="table">
+            <thead>
+              <tr class="bg-primary text-white">
+                <th>Sr no</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Email</th>
+                <th>Mobile Number</th>
+                <th style="text-align: center;">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let dataItem of paginatedCustomer, let i = index">
+                <td style="width: 70px;">{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+                <td>{{dataItem.FirstName + ' ' + dataItem.LastName}}</td>
+                <td>{{dataItem.UserType}}</td>
+                <td>{{dataItem.EmaiID}}</td>
+                <td style="width: 70px;">{{dataItem.MobileNumber}}</td>
+                <td style="width: 70px;">
+                  <!-- <button type="button" class="btn btn-light" (click)="viewClick(dataItem)" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal" data-backdrop="static" data-keyboard="false">
+                    <i class="ti-eye text-primary"></i>View</button> -->
+                    
+                    <button type="button" id="edit-btn" class="btn btn-light" (click)="editClick(dataItem)" 
+                    data-bs-toggle="modal" data-bs-target="#userModal"  data-backdrop="static" data-keyboard="false">
+                    <i class="ti-pencil"></i> Edit
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mt-3  px-md-4"><!-- px-3 -->
+          <span class="text-muted mb-2 mb-md-0">
+            Showing 
+            {{ (currentPage - 1) * itemsPerPage + 1 }} 
+            to 
+            {{ min(currentPage * itemsPerPage, customerList.length) }} 
+            of 
+            {{ customerList.length }} entries
+          </span>
+        
+          <nav>
+            <ul class="pagination mb-0"> <!-- flex-wrap -->
+              <li class="page-item" [class.disabled]="currentPage === 1">
+                <a class="page-link" (click)="changePage(currentPage - 1)"><<</a>
+              </li>
+        
+              <li class="page-item" [class.active]="currentPage === 1">
+                <a class="page-link" (click)="changePage(1)">1</a>
+              </li>
+        
+              <li class="page-item disabled" *ngIf="currentPage > 3">
+                <span class="page-link">...</span>
+              </li>
+        
+              <ng-container *ngFor="let page of getMiddlePages()">
+                <li class="page-item" [class.active]="currentPage === page">
+                  <a class="page-link" (click)="changePage(page)">{{ page }}</a>
+                </li>
+              </ng-container>
+        
+              <li class="page-item disabled" *ngIf="currentPage < totalPages - 2">
+                <span class="page-link">...</span>
+              </li>
+        
+              <li class="page-item" *ngIf="totalPages > 1" [class.active]="currentPage === totalPages">
+                <a class="page-link" (click)="changePage(totalPages)">{{ totalPages }}</a>
+              </li>
+        
+              <li class="page-item" [class.disabled]="currentPage === totalPages">
+                <a class="page-link" (click)="changePage(currentPage + 1)">>></a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

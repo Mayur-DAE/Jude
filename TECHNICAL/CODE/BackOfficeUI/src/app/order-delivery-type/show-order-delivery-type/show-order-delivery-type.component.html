@@ -1,0 +1,70 @@
+<!-- Modal starts -->
+<div class="modal fade" id="ordertype-Module" tabindex="-1" 
+role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+ <div class="modal-dialog modal-lg" role="document">
+   <div class="modal-content">
+     <div class="modal-header">
+       <h5 class="modal-title" id="orderType-ModalLabel">{{ModalTitle}}</h5>
+       
+       <button type="button" class="btn btn-primary btn-rounded btn-icon" data-bs-dismiss="modal" aria-label="Close"  (click)="closeClick()">
+         <i class="ti-close"></i>
+       </button>
+     </div>
+     <app-add-edit-order-delivery-type [orderdelivery]="orderdelivery" (emitData)="emittedDataByChild($event)" *ngIf="ActiveAddEditOrderDeliveryTypeComponent">
+
+      </app-add-edit-order-delivery-type>                   
+   </div>
+ </div>
+</div>
+<!-- Modal Ends --> 
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">Offers Dilivary Type</h4>
+    <div class="row">
+      <div class="col-12">
+        <div class="text-left">
+            <button type="button" class="btn btn-primary btn-icon-text"
+            (click)="addClick()" data-bs-toggle="modal" data-bs-target="#ordertype-Module"><i class="ti-plus ms-1">Add</i></button>
+ 
+        </div>
+        <br/>
+        <br/>
+        <div class="table-responsive">     
+          <table id="order-listing" class="table">
+              <thead>
+                  <tr class="bg-primary text-white">
+                      <th>OrderDelivery 
+                          Name</th>
+                      <th>IsActive</th>
+                      <th>Options</th>
+              
+                    </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let dataItem of OrderDeliveryList">
+                      <td>{{dataItem.OrderDeliveryTypeName}}</td>
+                      <td>
+                      <button (click)="Inactive(dataItem)"type="button" class="btn btn-outline-info btn-fw p-2"
+                      *ngIf =(dataItem.IsActive) >
+                      Active
+                      </button>
+                      <button (click)="Active(dataItem)" type="button" class="btn btn-outline-danger btn-fw p-2"
+                      *ngIf =(!dataItem.IsActive) >
+                      Inactive
+                      </button>
+                      </td>
+                      <td>
+                          <!-- <button type="button" class="btn btn-light"  (click)="editClick(dataItem)" 
+                          data-bs-toggle="modal" data-bs-target="#showOffersType-Module" data-whatever="@getbootstrap"><i class="ti-pencil"></i> Edit</button> -->
+
+                          <button type="button" class="btn btn-light"  (click)="editClick(dataItem)" 
+                          data-bs-toggle="modal" data-bs-target="#ordertype-Module" data-whatever="@getbootstrap"><i class="ti-pencil"></i> Edit</button> 
+                      </td>
+                    </tr>
+              </tbody>
+          </table>
+      </div>
+    </div>
+  </div>
+</div>

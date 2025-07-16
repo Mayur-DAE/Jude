@@ -1,0 +1,733 @@
+<div class="offcanvas offcanvas-start sm-show d-sm-block d-md-none" tabindex="-1" id="offcanvasAccount"
+  aria-labelledby="offcanvasAccountLabel" aria-modal="true" role="dialog">
+  <!-- offcanvas header -->
+  <div class="offcanvas-header ">
+    <h5 class="offcanvas-title" id="offcanvasAccountLabel">{{ 'Account Settings' | translate }}</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <!-- offcanvas body -->
+  <div class="offcanvas-body">
+    <ul class="nav flex-column nav-pills nav-pills-dark">
+      <li class="nav-item">
+        <a class="nav-link" id="pills-profile-tab" [class.active]="activeTab === 'pills-profile'" data-bs-toggle="pill"
+          href="#pills-profile" (click)="setActiveTab('pills-profile'); closeOffcanvas()" data-bs-dismiss="offcanvas"
+          role="tab" aria-controls="pills-profile" aria-selected="true">
+          <i class="feather-icon icon-settings me-2"></i>
+          {{ 'Profile' | translate}}
+        </a>
+      </li>
+      <!-- nav item -->
+      <li class="nav-item">
+        <a class="nav-link" id="pills-address-tab" [class.active]="activeTab === 'pills-address'" data-bs-toggle="pill"
+          href="#pills-address" (click)="setActiveTab('pills-address'); closeOffcanvas()" data-bs-dismiss="offcanvas"
+          role="tab" aria-controls="pills-address" aria-selected="false">
+          <i class="feather-icon icon-map-pin me-2"></i>
+          {{ 'Address' | translate}}
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" id="pills-orders-tab" [class.active]="activeTab === 'pills-orders'" data-bs-toggle="pill"
+          href="#pills-orders" (click)="setActiveTab('pills-orders'); closeOffcanvas()" data-bs-dismiss="offcanvas"
+          role="tab" aria-controls="pills-orders" aria-selected="false">
+          <i class="feather-icon icon-shopping-bag me-2"></i>
+          {{ 'Your Orders' | translate}}
+        </a>
+      </li>
+      <!-- nav item -->
+      <li class="nav-item">
+        <hr />
+      </li>
+      <!-- nav item -->
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pills-logout-tab" data-bs-toggle="pill" data-bs-target="#pills-logout"
+          type="button" role="tab" aria-controls="pills-logout" aria-selected="false" (click)="logOut()">
+          <i class="feather-icon icon-log-out me-2"></i>
+          {{ 'Log out' | translate}}
+        </button>
+      </li>
+    </ul>
+
+  </div>
+</div>
+<!-- Modal starts -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{ ModalTitle }}</h5>
+        <!-- <button type="button" class="btn btn-primary btn-rounded btn-icon" data-bs-dismiss="modal"
+                    aria-label="Close" (click)="closeClick()">
+                    <i class="ti-close"></i>
+                </button> -->
+        <button type="button" class="btn btn-primary btn-rounded btn-icon" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <!-- <div class="modal-body">
+          
+      </div>                   -->
+      <app-view-invoice [orderinvoice]="orderinvoice" *ngIf="ActivateAddEditorderdetails">
+      </app-view-invoice>
+    </div>
+  </div>
+</div>
+<!-- Modal Ends -->
+<section>
+  <div class="container">
+    <div class=" row">
+      <!--  -->
+      <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center d-lg-none d-md-none p-4">
+          <!-- heading -->
+          <h3 class="fs-5 mb-0">{{ 'Account Settings' | translate }}</h3>
+          <!-- button -->
+          <button class="btn btn-outline-gray-400 text-muted d-md-none btn-icon btn-sm ms-3" type="button"
+            data-bs-toggle="offcanvas" data-bs-target="#offcanvasAccount" aria-controls="offcanvasAccount">
+            <i class="bi bi-text-indent-left fs-3"></i>
+          </button>
+
+        </div>
+      </div>
+      <!-- col -->
+      <div class="col-lg-3 col-md-4 col-12 border-end d-none d-md-block d-lg-block">
+        <div class="pt-10 pe-lg-10">
+          <!-- nav -->
+          <ul class="nav flex-column nav-pills nav-pills-dark">
+
+            <li class="nav-item" role="presentation">
+              <a class="nav-link" [class.active]="activeTab === 'pills-profile'" id="pills-profile-tab"
+                data-bs-target="#pills-profile" data-bs-toggle="pill" href="#pills-profile" role="tab"
+                aria-controls="pills-profile" aria-selected="true" (click)="setActiveTab('pills-profile')">
+
+                <i class="feather-icon icon-settings me-2"></i>
+                {{ 'Profile' | translate}}
+              </a>
+            </li>
+            <!-- nav item -->
+            <li class="nav-item" role="presentation">
+              <a class="nav-link" [class.active]="activeTab === 'pills-address'" id="pills-address-tab"
+                data-bs-toggle="pill" data-bs-target="#pills-address" href="#pills-address" role="tab"
+                aria-controls="pills-address" aria-selected="false" (click)="setActiveTab('pills-address')">
+
+                <i class="feather-icon icon-map-pin me-2"></i>
+                {{ 'Address' | translate}}
+              </a>
+            </li>
+
+            <li class="nav-item" role="presentation">
+              <a class="nav-link" [class.active]="activeTab === 'pills-orders'" id="pills-orders-tab"
+                data-bs-toggle="pill" data-bs-target="#pills-orders" href="#pills-orders" role="tab"
+                aria-controls="pills-orders" aria-selected="false" (click)="setActiveTab('pills-orders')">
+                <i class="feather-icon icon-shopping-bag me-2"></i>
+                {{ 'Your Orders' | translate}}
+              </a>
+            </li>
+            <!-- nav item -->
+            <li class="nav-item">
+              <hr />
+            </li>
+            <!-- nav item -->
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="pills-logout-tab" data-bs-toggle="pill" data-bs-target="#pills-logout"
+                type="button" role="tab" aria-controls="pills-logout" aria-selected="false" (click)="logOut()">
+                <i class="feather-icon icon-log-out me-2"></i>
+                {{ 'Log out' | translate}}
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- <div class="usertab">
+    <div class="profileblock">
+      <img
+        class="rounded-circle"
+        width="150px"
+        src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
+      />
+
+      <p class="contact">
+        {{ CurrentUser.FirstName + " " + CurrentUser.LastName }}
+      </p>
+    </div>
+    <ul class="nav nav-pills" id="pills-tab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link active"
+          id="pills-profile-tab"
+          data-bs-toggle="pill"
+          data-bs-target="#pills-profile"
+          type="button"
+          role="tab"
+          aria-controls="pills-profile"
+          aria-selected="true"
+        >
+          Profile
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="pills-address-tab"
+          data-bs-toggle="pill"
+          data-bs-target="#pills-address"
+          type="button"
+          role="tab"
+          aria-controls="pills-address"
+          aria-selected="false"
+        >
+          My Addresses
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="pills-orders-tab"
+          data-bs-toggle="pill"
+          data-bs-target="#pills-orders"
+          type="button"
+          role="tab"
+          aria-controls="pills-orders"
+          aria-selected="false"
+        >
+          My Orders
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="pills-logout-tab"
+          data-bs-toggle="pill"
+          data-bs-target="#pills-logout"
+          type="button"
+          role="tab"
+          aria-controls="pills-logout"
+          aria-selected="false"
+          (click)="logOut()"
+        >
+          Logout
+        </button>
+      </li>
+    </ul>
+  </div> -->
+      <div class="col-md-8 col-lg-8">
+        <div class="tab-content" id="pills-tabContent">
+          <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+            <div class="row">
+              <!-- <div class="col-md-4 border-right">
+          
+          <div class="d-flex flex-column align-items-center text-center ">
+            <img class="rounded-circle mt-5" width="150px"
+              src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg" />
+            <span class="font-weight-bold">{{
+              CurrentUser.FirstName + " " + CurrentUser.LastName
+              }}</span>
+            <span class="text-black-50">{{ CurrentUser.EmaiID }}</span>
+            <span> </span>
+          </div>
+          </div> -->
+              <div class="col-12 border-right">
+                <!-- <div class="p-3 py-5"> -->
+                <div class="col-lg-9 col-md-12 col-md-8 col-12">
+                  <div class="p-6 p-md-6 p-lg-10">
+                    <h4 class="text-right">{{ 'Profile' | translate}} {{ 'Settings' | translate}}</h4>
+                    <!-- </div> -->
+                    <div class="row">
+                      <div class="col-md-6 Userprofile2">
+                        <div class="mb-3">
+                          <label for="fname" class="form-label">{{ 'First Name' | translate}} <span class="text-danger">*</span></label>
+                          <input type="text" class="form-control" id="fname"
+                            placeholder="{{ 'Enter' | translate}} {{ 'First Name' | translate}}"
+                            [(ngModel)]="firstName" />
+                          <!-- {{ dataItem.Username }} -->
+                        </div>
+                      </div>
+                      <div class="col-md-6 Userprofile2">
+                        <div class="mb-3">
+                          <label for="fname" class="form-label">{{ 'Middle Name' | translate}}</label>
+                          <input type="text" class="form-control" id="fname"
+                            placeholder="{{ 'Enter' | translate}} {{ 'Middle Name' | translate}}"
+                            [(ngModel)]="middleName" />
+                          <!-- {{ dataItem.Username }} -->
+                        </div>
+                      </div>
+
+                      <br />
+                      <div class="col-md-6 Userprofile2">
+                        <div class="mb-3">
+                          <!-- <div>
+                      <div class="form-floating"> -->
+                          <label for="fname" class="form-label">{{ 'Last Name' | translate}} <span class="text-danger">*</span></label>
+                          <input type="text" class="form-control" id="fname"
+                            placeholder="{{ 'Enter' | translate}} {{ 'Last Name' | translate}}"
+                            [(ngModel)]="lastName" />
+                          <!-- {{ dataItem.Username }} -->
+                          <!-- </div>
+                    </div> -->
+                        </div>
+                      </div>
+                      <div class="col-md-6 Userprofile2">
+                        <div class="mb-3">
+                          <!-- <div>
+                      <div class="form-floating"> -->
+                          <label for="mnumber" class="form-label">{{ 'Mobile Number' | translate}} <span class="text-danger">*</span></label>
+                          <input type="tel" class="form-control" id="mnumber"
+                            placeholder="{{ 'Enter' | translate}} {{ 'Mobile Number' | translate}}"
+                            [(ngModel)]="mobilenumber" (keypress)="allowOnlyNumbers($event)" disabled/>
+                          <!-- {{ dataItem.MobileNumber }} -->
+                          <!-- </div>
+                    </div> -->
+                          <div class="error">{{ errorMsg2 }}</div>
+                        </div>
+                      </div>
+                      <br />
+                      <div class="col-md-6 Userprofile2">
+                        <div class="mb-3">
+                          <!-- <div>
+                      <div class="form-floating"> -->
+                          <label for="emailadd" class="form-label">{{ 'Email Address' | translate}} <span class="text-danger">*</span></label>
+                          <input type="email" class="form-control" id="emailadd"
+                            placeholder="{{ 'Enter' | translate}} {{ 'Email Address' | translate}}"
+                            [(ngModel)]="emailaddress" value="Uneditable Text" disabled/>
+                          <!-- {{ dataItem.EmaiID }} -->
+
+                          <!-- </div>
+                    </div> -->
+                          <div class="error">{{ errorMsg1 }}</div>
+                        </div>
+                      </div>
+                      <br />
+                    </div>
+                    <div class="mb-3">
+                      <button class="btn btn-primary" (click)="updateprofile()">
+                        {{ 'Update Details' | translate}}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="tab-pane fade" id="pills-address" role="tabpanel" aria-labelledby="pills-address-tab">
+            <!-- Address -->
+
+            <div class="col-lg-10 col-md-12 col-12">
+              <div class="p-6 p-md-6 p-lg-10">
+                <h4 class="text-right">{{ 'Address' | translate}}</h4>
+                <div class="row">
+                  <div class="col-md-6 ">
+                    <div class="mb-3">
+                      <!-- <div>
+                  <div class="form-floating"> -->
+                      <label for="addrss" class="form-label">
+                        {{ 'Flat, House no, Building' | translate}} <span class="text-danger">*</span>
+                      </label>
+                      <input type="text" class="form-control" id="addrss"
+                        placeholder=" {{ 'Flat, House no, Building' | translate}}" [(ngModel)]="flathousebld" />
+                      <!-- {{ dataItem.Address1 }} -->
+                      <!-- </div>
+                </div> -->
+                      <div class="error">{{ errorMsg4 }}</div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="mb-3">
+                      <!-- <div>
+                  <div class="form-floating"> -->
+                      <!-- <input
+                      type="text"
+                      class="form-control"
+                      id="areaa"
+                      placeholder="Area,Street,Sector,Village" 
+                      [(ngModel)]="selectedAddress.formattedAddress"
+                      (keyup)="onAddressType()"
+                    /> -->
+                      <label for="areaa" class="form-label">
+                        {{ 'Area, Street, Sector, Village' | translate}} <span class="text-danger">*</span>
+                      </label>
+                      <input type="text" id="areaa" name="auto" class="form-control"
+                        placeholder="{{ 'Area, Street, Sector, Village' | translate}} " spellcheck="false"
+                        [(ngModel)]="selectedAddress.formattedAddress" (keyup)="onAreaKeyup()" />
+                      <!-- {{ dataItem.Address1 }} -->
+
+                      <!-- <div class="list-group">
+                      <a
+                        class="list-group-item list-group-item-ation"
+                        *ngFor="let dataItem of addresses"
+                        (click)="onSelectAddress(dataItem)"
+                        >{{ dataItem.formattedAddress }}</a
+                      >
+                    </div> -->
+                      <!-- </div>
+                </div> -->
+                      <div class="error">{{ errorMsg5 }}</div>
+                    </div>
+                  </div>
+
+                  <br />
+                  <div class="col-md-6 ">
+                    <div class="mb-3">
+                      <!-- <div>
+                  <div class="form-floating"> -->
+                      <label for="lmark" class="form-label">
+                        {{ 'Landmark' | translate}}
+                      </label>
+                      <input type="text" class="form-control" id="lmark" placeholder="{{ 'Landmark' | translate}}"
+                        [(ngModel)]="Landmark" />
+                      <!-- {{ dataItem.Zip }} -->
+                      <!-- </div>
+                </div> -->
+                      <div class="error">{{ errorMsg3 }}</div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 ">
+                    <div class="mb-3">
+                      <!-- <div>
+                  <div class="form-floating"> -->
+                      <label for="pcode" class="form-label"> 
+                        {{ 'Pincode' | translate}} <span class="text-danger">*</span>
+                      </label>
+                      <input type="text" class="form-control" id="pcode" placeholder="{{ 'Pincode' | translate}}"
+                        [(ngModel)]="pincode" />
+                      <!-- {{ dataItem.Zip }} -->
+                      <!-- </div>
+                </div> -->
+                      <div class="error">{{ errorMsg3 }}</div>
+                    </div>
+                  </div>
+                  <br />
+
+
+                  <!-- <div class="col-md-6">
+                    <div class="mb-3"> -->
+                      <!-- <div>
+                      <div class="form-floating"> -->
+                      <!-- <label for="state" class="form-label" placeholder="State">
+                        {{ 'State' | translate}} <span class="text-danger">*</span>
+                      </label> -->
+                      <!-- <input type="text" class="form-control" id="state" placeholder="{{ 'State' | translate}}"
+                        [(ngModel)]="state" (keyup)="onStatesType()" />
+
+                      <div class="form-group showproductlayout1 zindex">
+                        <a class="list-group-item list-group-item-ation"
+                          *ngFor="let dataItem of StatesList?.slice(0, 5)" (click)="onSelectstate(dataItem)">{{
+                          dataItem.StateName }}</a>
+                      </div> -->
+                      <!-- <div class="dropdown-container">
+                        <input type="text" class="form-control" id="state" placeholder="{{ 'State' | translate }}"
+                          [(ngModel)]="state" (keyup)="onStatesType()" 
+                          (focus)="onFocusStateInput()" 
+                          (blur)="hideStateDropdownWithDelay()" />
+                        
+                        <div class="dropdown-content" [class.show]="showStateDropdown">
+                          <a class="list-group-item list-group-item-action"
+                            *ngFor="let dataItem of StatesList?.slice(0, 5)"
+                            (click)="onSelectstate(dataItem); showStateDropdown = false">
+                            {{ dataItem.StateName }}
+                          </a>
+                        </div>
+                      </div> -->
+                      
+                      <!-- </div> -->
+                      <!-- <div class="error">{{ errorMsg7 }}</div>
+                    </div> 
+                             
+                  </div> -->
+
+                  <!-- <div class="col-md-6 ">
+                    <div class="mb-3">
+                      <div>
+                  <div class="form-floating"> 
+                      <label for="tcity" class="form-label"> 
+                        {{ 'Town/City' | translate}} <span class="text-danger">*</span>
+                      </label>
+                      <div class="dropdown-container">
+                      <input type="text" class="form-control" id="tcity" placeholder="{{ 'Town/City' | translate}}"
+                        [(ngModel)]="towncity" (keyup)="onCityType()" (focus)="onFocusCityInput()" (blur)="hideCityDropdownWithDelay()"  />
+                      {{ dataItem.City }} 
+                      <div class="dropdown-content" [class.show]="showCityDropdown">
+                        <a class="list-group-item list-group-item-action"
+                        *ngFor="let dataItem of CityList?.slice(0, 5)"
+                        (click)="onSelectcity(dataItem); showCityDropdown = false">
+                        {{ dataItem.CityName }}
+                        </a>
+                      </div>
+                      </div>
+                       </div> 
+                    
+                      </div> 
+                      <div class="error">{{ errorMsg6 }}</div>
+                    </div>
+                  </div> -->
+                  <br />
+                  <div class="row">
+                    <input type="hidden" class="form-control" id="latitude" [(ngModel)]="lat" />
+
+                    <input type="hidden" class="form-control" id="longitude" [(ngModel)]="long" />
+
+                    <input type="hidden" class="form-control" id="isMapMyIndiaSelected"
+                      [(ngModel)]="isMapMyIndiaSelected" />
+                    <!-- <button type="button" class="more_product" (click)="updateaddress()">
+            Update
+          </button> -->
+                    <button (click)="addUserAddress()" [hidden]="UserAddressID != 0" type="submitbutton" *ngIf="UserAddressID == 0"
+                      class="btn btn-primary" style="width: 100px; margin-left: 15px;">
+                      {{ 'Add' | translate}}
+                    </button>
+                    <div class="mb-3">
+                      <button *ngIf="UserAddressID != 0" class="btn btn-primary" (click)="updateaddress()">
+                        {{ 'Update' | translate}}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="tab-pane fade" id="pills-orders" role="tabpanel" aria-labelledby="pills-orders-tab">
+            <!-- Address -->
+
+            <!-- MY ORDERS -->
+            <!-- <div class="p-2 py-4">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4 class="text-right">Orders</h4>
+          </div>
+
+          <div > -->
+            <div class="col-lg-12 col-md-12 col-12">
+              <div class="p-6 p-md-6 p-lg-10">
+                <h2 class="mb-6">{{ 'Your Orders' | translate}}</h2>
+                <div class="table-responsive-xxl border-0">
+                  <table class="table mb-0 text-nowrap table-centered">
+                    <!-- Table Head -->
+                    <thead class="bg-light">
+                      <tr>
+                        <!-- <th>&nbsp;</th> -->
+                        <!-- <th>Products</th> -->
+                        <th>{{ 'Order' | translate}}</th>
+                        <th>{{ 'Date' | translate}}</th>
+                        <!-- <th>Items</th> -->
+                        <th>{{ 'Status' | translate}}</th>
+                        <th>{{ 'Amount' | translate}}</th>
+
+                        <!-- <th></th> -->
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <ng-container *ngFor="let dataItem of paginatedOrders">
+                        <!-- <tr *ngIf="dataItem.OrderStatusID != 2006"> -->
+                          <tr>
+                          <!-- <td></td>  -->
+                          <!-- Product Image -->
+                          <!-- <td class="align-middle border-top-0 w-0">
+                  <a href="#">
+                    <img
+                      src="assets/images/home/transaparent.svg"
+                      alt="Order Image"
+                      class="icon-shape icon-xl letterimage"
+                    />
+                  </a>
+                </td>  -->
+                          <!-- <td>{{ dataItem.ProductName }}</td> -->
+                          <!-- Order Details -->
+                          <td class="align-middle border-top-0">
+                            <!-- <a href="#" class="fw-semibold text-inherit">
+                    <h6 class="mb-0">Order</h6>
+                  </a> -->
+                            <span>
+                              #<a (click)="invoiceClick(dataItem)"
+                                [routerLink]="['/orderDetails/' + dataItem.OrderID + '%?n']" class="text-inherit">{{
+                                dataItem.OrderID }}</a>
+                            </span>
+
+                          </td>
+                          <td>{{ dataItem.OrderDate }}</td>
+
+                          <!-- <td>{{ dataItem.Quantity }}</td> -->
+                          <!-- Order Status -->
+                          <td class="align-middle border-top-0">
+                            <label class="badge" [ngClass]="[
+                            dataItem.OrderStatusDescription == 'Delivered'
+                            ? 'badge-success'
+                            : dataItem.OrderStatusDescription == 'Ready for Pickup'
+                            ? 'badge-warning'
+                            : dataItem.OrderStatusDescription == 'On the way'
+                            ? 'badge-info'
+                            : dataItem.OrderStatusDescription == 'Cancelled'
+                            ? 'badge-danger'
+                            : dataItem.OrderStatusDescription == 'Returned'
+                            ? 'badge-returned'
+                            : dataItem.OrderStatusDescription == 'Rejected'
+                            ? 'badge-danger'
+                            : dataItem.OrderStatusDescription == 'Placed'
+                            ? 'badge-info'
+                            : dataItem.OrderStatusDescription == 'Confirmed'
+                            ? 'badge-success'
+                            : dataItem.OrderStatusDescription == 'Initiated'
+                            ? 'badge-returned'
+                            : dataItem.OrderStatusDescription == 'Payment Success'
+                            ? 'badge-success'
+                            : dataItem.OrderStatusDescription == 'Payment Failed'
+                            ? 'badge-danger'
+                            : null
+                            ]">
+                              {{ dataItem.OrderStatusDescription }}
+                            </label>
+                          </td>
+                          <!-- Total Order Price -->
+                          <td class="align-middle border-top-0">
+                            {{currency}} {{ dataItem.TotalOrderPrice  | number:'1.2-2'}}
+                          </td>
+                          <!-- <td class="text-muted align-middle border-top-0">
+                  <a href="#" class="text-inherit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="View"><i class="feather-icon icon-eye"></i></a>
+               </td> -->
+                          <!-- Invoice Button -->
+                          <!-- <td class="align-middle border-top-0">
+                  <button
+                    type="button"
+                    *ngIf="dataItem.OrderInvoiceNumber"
+                    class="InvoiceOrder btn btn-primary"
+                    (click)="invoiceClick(dataItem)"
+                    [routerLink]="['/orderDetails/' + dataItem.OrderID + '%?y']"
+                  >
+                    Invoice
+                  </button>
+                </td> -->
+                        </tr>
+                      </ng-container>
+                      <!--               
+                <button
+                  (click)="cancelOrder(dataItem)"
+                  *ngIf="dataItem.OrderStatusID == 2004"
+                  type="submit"
+                  class="CancelOrder"
+                >
+                  Cancel Order
+                </button> -->
+                      <!-- </div> -->
+                    </tbody>
+                  </table>
+
+<nav *ngIf="totalPages > 1" class="mt-3">
+  <ul class="pagination justify-content-center">
+    <li class="page-item" [class.disabled]="currentPage === 1">
+      <a class="page-link" (click)="currentPage = currentPage - 1" href="javascript:void(0)">Previous</a>
+    </li>
+
+    <li class="page-item" *ngFor="let page of [].constructor(totalPages); let i = index"
+        [class.active]="currentPage === i + 1">
+      <a class="page-link" (click)="currentPage = i + 1" href="javascript:void(0)">{{ i + 1 }}</a>
+    </li>
+
+    <li class="page-item" [class.disabled]="currentPage === totalPages">
+      <a class="page-link" (click)="currentPage = currentPage + 1" href="javascript:void(0)">Next</a>
+    </li>
+  </ul>
+</nav>
+
+
+                  <!-- <div *ngFor="let dataItem of Order">
+                <div class="row" *ngIf="dataItem.OrderStatusID != 2006">
+                  <div class="col-md-2 inline">
+                    <img
+                      class="letterimage"
+                      src="assets/images/home/transaparent.svg"
+                    />
+                  </div>
+                  <div class="col-md-6">
+                    <div class="row ABC">
+                      <div class="col-md-4 Order_Id">
+                        <b>Order </b>#<a
+                          (click)="invoiceClick(dataItem)"
+                          [routerLink]="[
+                            '/orderDetails/' + dataItem.OrderID + '%?n'
+                          ]"
+                          >{{ dataItem.OrderID }}</a
+                        >
+                      </div>
+                      <div class="col-md-4 Order_date">
+                        {{ dataItem.TotalOrderPrice | currency: "INR" }}
+                      </div>
+                      <div class="col-md-4 Status"> -->
+                  <!-- {{ dataItem.OrderStatusDescription }} -->
+                  <!-- <label
+                          class="badge"
+                          [ngClass]="[
+                            dataItem.OrderStatusDescription == 'Delivered'
+                              ? 'badge-success'
+                              : dataItem.OrderStatusDescription ==
+                                'Ready for Pickup'
+                              ? 'badge-warning'
+                              : dataItem.OrderStatusDescription == 'On the way'
+                              ? 'badge-info'
+                              : dataItem.OrderStatusDescription == 'Cancelled'
+                              ? 'badge-danger'
+                              : dataItem.OrderStatusDescription == 'Returned'
+                              ? 'badge-secondary'
+                              : dataItem.OrderStatusDescription == 'Rejected'
+                              ? 'badge-danger'
+                              : dataItem.OrderStatusDescription == 'Placed'
+                              ? 'badge-info'
+                              : dataItem.OrderStatusDescription == 'Confirmed'
+                              ? 'badge-success'
+                              : dataItem.OrderStatusDescription == 'Initiated'
+                              ? 'badge-secondary'
+                              : null
+                          ]"
+                        >
+                          {{ dataItem.OrderStatusDescription }}</label
+                        >
+                      </div>
+                    </div>
+                    <p class="col-md-12">
+                      <b>Placed on </b>{{ dataItem.OrderDate }}
+                    </p>
+                  </div> -->
+                  <!-- <div class="col-md-2 viewsecBtn">
+                    <button
+                      type="button"
+                      class="ViewOrder"
+                      (click)="viewClick(dataItem)"
+                      [routerLink]="['/orderDetails/' + dataItem.OrderID+'%?n']"
+                    >
+                      View
+                    </button>
+                    
+                  </div> -->
+                  <!-- <div class="col-md-4">
+                    <button
+                      type="button"
+                      *ngIf="dataItem.OrderInvoiceNumber"
+                      class="InvoiceOrder"
+                      (click)="invoiceClick(dataItem)"
+                      [routerLink]="['/orderDetails/' + dataItem.OrderID + '%?y']"
+                    >
+                      Invoice
+                    </button>
+    
+                    <button
+                      (click)="cancelOrder(dataItem)"
+                      *ngIf="dataItem.OrderStatusID == 2004"
+                      type="submit"
+                      class="CancelOrder"
+                    >
+                      Cancel Order
+                    </button>
+                  </div> -->
+                  <hr />
+                </div>
+              </div>
+              <!-- logo -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- </div> -->
+</section>
+<!-- border-left:1px solid #eee; -->

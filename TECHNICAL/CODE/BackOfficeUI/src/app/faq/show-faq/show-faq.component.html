@@ -1,0 +1,168 @@
+<!-- Modal starts -->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{ ModalTitle }}</h5>
+        <button type="button" class="btn btn-primary btn-rounded btn-icon" data-bs-dismiss="modal" aria-label="Close"
+          (click)="closeClick()">
+          <i class="ti-close"></i>
+        </button>
+      </div>
+      <app-add-edit-faq [faq]="faq" (emitData)="emittedDataByChild($event)" *ngIf="ActivateAddEditfaq">
+      </app-add-edit-faq>
+    </div>
+  </div>
+</div>
+<!-- Modal Ends -->
+
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">FAQ</h4>
+    <div class="row">
+      <div class="col-12">
+        <div class="text-left">
+          <button type="button" class="btn btn-primary btn-icon-text" (click)="addClick()" data-bs-toggle="modal"
+          data-bs-target="#exampleModal">
+          <i class="ti-plus"></i> Add
+                </button>
+        </div>
+        <!-- <div class="d-flex justify-content-between align-items-center mb-4">
+          <div>
+            <label for="itemsPerPage" class="mr-2">Items per page:&nbsp; </label>
+            <select id="itemsPerPage" class="border rounded px-2 py-1" (change)="onItemsPerPageChange($event)">
+              <option value="5" [selected]="itemsPerPage === 5">5</option>
+              <option value="10" [selected]="itemsPerPage === 10">10</option>
+              <option value="20" [selected]="itemsPerPage === 20">20</option>
+              <option value="30" [selected]="itemsPerPage === 30">30</option>
+            </select>
+          </div>   
+          <button type="button" class="export-btn btn fa fa-file-excel-o excelbutton" (click)="exportToExcel()">
+            <i class="ti-file me-1"></i>Export to Excel
+          </button>
+        </div> -->
+        <div class="row mb-3 mt-2">
+          <div class="col-md-6 col-sm-12 d-flex align-items-center mt-sm-2">
+            <label for="itemsPerPage" class="mr-2">Items per page:&nbsp;</label>
+            <select id="itemsPerPage" class="border rounded px-2 py-1" (change)="onItemsPerPageChange($event)">
+              <option value="5" [selected]="itemsPerPage === 5">5</option>
+              <option value="10" [selected]="itemsPerPage === 10">10</option>
+              <option value="20" [selected]="itemsPerPage === 20">20</option>
+              <option value="30" [selected]="itemsPerPage === 30">30</option>
+            </select>
+          </div>
+          <div class="col-md-6 col-sm-12 d-flex justify-content-end mb-sm-2">
+            <button type="button" class="export-btn btn fa fa-file-excel-o excelbutton mt-3 md:mt-0" (click)="exportToExcel()" style="padding: 0px !important;">
+              <i class="ti-file me-1"></i>Export to Excel
+            </button>
+          </div>
+        </div> 
+
+        <div class="table-responsive">
+          <table id="show-faq" class="table" style="width: 100%">
+            <thead>
+              <tr class="bg-primary text-white">
+                <th style="width: 10%">Sr no</th>
+                <th style="width: 30%">FAQ Question</th>
+                <th style="width: 30%">FAQ Answer</th>
+                <th style="text-align: center;">Approval</th>
+                <th style="text-align: center;">Publish</th>
+                <th style="text-align: center;">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let dataItem of paginatedFAQ; let i = index">
+                <td style="width: 70px;">{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+                <td>{{ dataItem.FAQTitle }}</td>
+                <td class="faqanswer">{{ dataItem.FAQAnswer }}</td>
+                <td style="width: 70px;">
+                  <button (click)="Unapproved(dataItem)" type="button" class="btn btn-outline-info btn-fw p-2"
+                    *ngIf="dataItem.IsApproved">
+                    Approved
+                  </button>
+                  <button (click)="approved(dataItem)" type="button" class="btn btn-outline-danger btn-fw p-2"
+                    *ngIf="!dataItem.IsApproved">
+                    Pending
+                  </button>
+                </td>
+                <td style="width: 70px;">
+                  <button (click)="Unpublish(dataItem)" type="button" class="btn btn-outline-info btn-fw p-2"
+                    *ngIf="dataItem.IsApproved && dataItem.IsPublished">
+                    Published
+                  </button>
+                  <button (click)="Publish(dataItem)" type="button" class="btn btn-outline-danger btn-fw p-2"
+                    *ngIf="dataItem.IsApproved && !dataItem.IsPublished">
+                    UnPublished
+                  </button>
+                </td>
+                <td style="width: 70px;">
+                  <button type="button" class="btn btn-light" (click)="editClick(dataItem)" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal" data-backdrop="static" data-keyboard="false">
+                    <i class="ti-pencil"></i>
+                    Edit
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mt-3  px-md-4"><!-- px-3 -->
+          <span class="text-muted mb-2 mb-md-0">
+            Showing 
+            {{ (currentPage - 1) * itemsPerPage + 1 }} 
+            to 
+            {{ min(currentPage * itemsPerPage, FaqList.length) }} 
+            of 
+            {{ FaqList.length }} entries
+          </span>
+        
+          <nav>
+            <ul class="pagination mb-0">
+              <!-- Previous Button -->
+              <li class="page-item" [class.disabled]="currentPage === 1">
+                <a class="page-link" (click)="changePage(currentPage - 1)"><<</a>
+              </li>
+          
+              <!-- Page 1 -->
+              <li class="page-item" [class.active]="currentPage === 1">
+                <a class="page-link" (click)="changePage(1)">1</a>
+              </li>
+          
+              <!-- Ellipsis before middle pages -->
+              <li class="page-item disabled" *ngIf="getMiddlePages()[0] > 2">
+                <span class="page-link">...</span>
+              </li>
+          
+              <!-- Middle Pages -->
+              <ng-container *ngFor="let page of getMiddlePages()">
+                <li class="page-item" [class.active]="currentPage === page">
+                  <a class="page-link" (click)="changePage(page)">{{ page }}</a>
+                </li>
+              </ng-container>
+          
+              <!-- Ellipsis after middle pages -->
+              <li class="page-item disabled" *ngIf="getMiddlePages().includes(totalPages - 1) === false && totalPages > 5">
+                <span class="page-link">...</span>
+              </li>
+          
+              <!-- Last Page -->
+              <li class="page-item" *ngIf="totalPages > 1" [class.active]="currentPage === totalPages">
+                <a class="page-link" (click)="changePage(totalPages)">{{ totalPages }}</a>
+              </li>
+          
+              <!-- Next Button -->
+              <li class="page-item" [class.disabled]="currentPage === totalPages">
+                <a class="page-link" (click)="changePage(currentPage + 1)">>></a>
+              </li>
+            </ul>
+          </nav>
+          
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

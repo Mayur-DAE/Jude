@@ -1,0 +1,136 @@
+<main>
+  <div class="mt-4">
+     <div class="container">
+        <!-- row -->
+        <div class="row">
+           <!-- col -->
+           <div class="col-12">
+              <!-- breadcrumb -->
+              <nav aria-label="breadcrumb">
+                 <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a  [routerLink]="['/Home']">{{'Home'| translate}}</a></li>            
+                    <li class="breadcrumb-item active" aria-current="page">{{'Shop List' | translate}}</li>
+                 </ol>
+              </nav>
+           </div>
+        </div>
+     </div>
+  </div>
+  <!-- section -->
+  <section class="mt-8">
+     <!-- container -->
+     <div class="container">
+        <!-- row -->
+        <div class="row">
+           <div class="col-12">
+              <!-- heading -->
+              <div class="bg-light d-flex justify-content-between ps-md-10 ps-6 rounded">
+                 <div class="d-flex align-items-center">
+                    <h1 class="mb-0 fw-bold">{{'Shops'| translate}}</h1>
+                 </div>
+                 <div class="py-6">
+                    <!-- img -->
+                    <!-- img -->
+                    <img src="assets/images/svg-graphics/store-graphics.svg" alt="" class="img-fluid" />
+                 </div>
+              </div>
+           </div>
+        </div>
+     </div>
+  </section>
+  <section class="mt-6 mb-lg-14 mb-8">
+     <!-- container -->
+     <div class="container">
+        <!-- row -->
+        <div class="row">
+           <div class="col-12">
+              <div class="mb-4">
+                 <!-- title -->
+                 <h6>
+                   {{ 'We have' | translate}}
+                    <span class="text-primary">{{companyList.length}}</span>
+                    {{ 'shops now' | translate}}
+                 </h6>
+              </div>
+           </div>
+        </div>
+        <!-- row -->
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 g-lg-4">
+           <!-- col -->
+
+           <div class="col" *ngFor="let dataItem of companyList">
+              <!-- card -->
+              <div
+              class="searchflow-container"
+              *ngIf="
+                searchText == '' ||
+                dataItem.CompanyName.toLowerCase().includes(searchText)
+              "
+            >
+              <div class="card flex-row p-8 card-product" [routerLink]="['/shop/' + dataItem.CompanyID]">
+                 <div>
+                    <!-- img -->
+                    <img src="{{
+                      CompanyLogoImageNamePath + 'listing/' + dataItem.CompanyLogoPath
+                    }}" alt="" class="rounded-circle icon-shape icon-xl"  (error)="loadDefaultImage($event)"/>
+                 </div>
+                 <!-- content -->
+                 <div class="ms-6">
+                    <h5 class="mb-1"><a  class="text-inherit">{{ dataItem.CompanyName }}</a></h5>
+                    <div class="small text-muted">
+                       <span >{{dataItem.BusinessTypeName}}</span>
+                       <!-- <span class="mx-1">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" fill="#C1C7C6" class="bi bi-circle-fill align-middle" viewBox="0 0 16 16">
+                             <circle cx="8" cy="8" r="8" />
+                          </svg>
+                       </span>
+                       <span>Groceries</span>
+                       <span class="mx-1">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" fill="#C1C7C6" class="bi bi-circle-fill align-middle" viewBox="0 0 16 16">
+                             <circle cx="8" cy="8" r="8" />
+                          </svg>
+                       </span>
+                       <span>Butcher Shop</span> -->
+                    </div>
+                       <!-- Rating Section -->
+                       <div class="d-flex align-items-center">
+                        <small class="text-warning">
+                          <ng-container *ngIf="companyRatings[dataItem.CompanyID]">
+                            <i *ngFor="let starClass of companyRatings[dataItem.CompanyID].stars" [ngClass]="starClass"></i>
+                          </ng-container>
+                        </small>
+                        <span class="ms-2" *ngIf="companyRatings[dataItem.CompanyID]?.avgRating !== 0.0">
+                           {{ (companyRatings[dataItem.CompanyID]?.avgRating ?? 0).toFixed(1) }}
+                        </span>
+                      </div>
+                    <div class="py-1">
+                       <!-- <ul class="list-unstyled mb-0 small text-primary">
+                          <li [ngClass]="checkAvailability(dataItem[currentDayField]) ? 'text-primary' : 'text-danger'">
+                           {{ checkAvailability(dataItem[currentDayField]) ? 'Available' : 'Closed' }}</li>               
+                       </ul> -->
+                       <ul class="list-unstyled mb-0 small text-dark">
+                           <li>
+                              {{ checkAvailability(dataItem[currentDayField]) ? ('Available' | translate) : ('Closed'| translate) }}   
+                           </li>
+                         </ul>
+                    </div>
+                    <div>
+                      <!-- badge -->
+                      <div *ngIf="dataItem[currentDayField]" class="badge text-bg-light border">
+                        {{ dataItem[currentDayField] }}
+                      </div>
+                      
+                       <!-- badge -->
+                       <!-- <div class="badge text-bg-light border">In-store prices</div> -->
+                    </div>
+                 </div>
+              </div>
+              </div>
+
+           </div>
+        </div>
+     </div>
+  </section>
+</main>
+
+<app-view-cart></app-view-cart>

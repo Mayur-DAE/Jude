@@ -1,0 +1,33 @@
+  <div class="container">
+  <div class="mainfaqsection_header1">FAQs</div>
+  <br />
+  <!-- <br /> -->
+  <div class="accordion" *ngFor="let dataItem of FaqList; let i = index">
+    <div class="accordion-item">
+      <h1 class="accordion-header" id="headingOne">
+        <a
+          class="accordion-button collapsed link"
+          data-bs-toggle="collapse"
+          href="#a{{ dataItem.FAQID }}"
+          aria-expanded="false"
+          aria-controls="collapseOne"
+          role="button"
+          aria-pressed="true"
+          style="font-weight: 700; "
+        >
+          {{ dataItem.FAQTitle }}
+        </a>
+      </h1>
+      <div
+        id="a{{ dataItem.FAQID }}"
+        class="accordion-collapse collapse"
+        aria-labelledby="headingOne"
+        data-bs-parent="#accordionExample"
+      >
+        <div class="accordion-body">
+          {{ dataItem.FAQAnswer }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

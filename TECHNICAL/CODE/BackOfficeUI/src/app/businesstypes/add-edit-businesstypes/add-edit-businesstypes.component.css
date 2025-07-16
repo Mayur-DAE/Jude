@@ -1,0 +1,8 @@
+.error{
+    position: absolute;
+    color:red;
+}
+
+.error-input{
+  border: 1px red solid;
+}

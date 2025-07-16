@@ -1,0 +1,56 @@
+<div class="card">
+    <div class="card-body">
+        <div class="col-sm-6">
+            <div class="col-sm-12 rows">
+                <label class="col-sm-6 col-form-label"><b>Shop Name &nbsp;:</b></label>
+                <Label class="col-sm-6 col-form-label">{{CompanyName}}</Label>
+            </div>
+
+            <div class="col-sm-12 rows">
+                <label class="col-sm-6 col-form-label"><b>Memberhsip Type &nbsp;:</b></label>
+                <div class="col-sm-6">
+                    <select class="form-select" aria-label="Default select example" name="CompanyMemberShipTypeID"
+                        (click)="loadInvoicedata()" [(ngModel)]="CompanyMemberShipTypeID">
+
+                        <option *ngFor="let x of CompanymembershipnameList" [value]="x.CompanyMemberShipTypeID">
+                            {{x.CompanyMemberShipName}}</option>
+                    </select>
+                </div>
+
+
+
+
+                <div class="col-sm-12 rows">
+                    <label class="col-sm-6 col-form-label"><b>Invoice Amount &nbsp;:</b></label>
+                    <Label class="col-sm-6 col-form-label">{{currency}} {{InvoiceAmount }}</Label>
+                </div>
+
+            </div>
+
+            <div class="col-sm-12 rows">
+                <label class="col-sm-6 col-form-label"><b>Tax &nbsp;:</b></label>
+                <label class="col-sm-6 col-form-label">{{ currency }} {{ CGST + SGST }}</label>
+            </div>
+            
+
+
+
+            <div class="col-sm-12 rows">
+                <label class="col-sm-6 col-form-label"><b>Invoice Total &nbsp;:</b></label>
+                <Label class="col-sm-6 col-form-label">{{currency}} {{InvoiceTotal }}</Label>
+            </div>
+
+
+
+
+        </div>
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <button (click)="PayNow()" class="btn btn-success" [disabled]="!CompanyMemberShipTypeID">
+            Pay Now
+        </button>
+    </div>
+</div>

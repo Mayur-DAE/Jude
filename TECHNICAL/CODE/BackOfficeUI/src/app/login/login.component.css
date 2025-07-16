@@ -1,0 +1,23 @@
+.eyeiconchannel{
+    position: absolute;
+    right: 10px;
+    top: 18px;
+    opacity: 0.4;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    color: blueviolet;
+    z-index: 1000;
+}
+
+.modalscrollbar{
+    overflow-y: hidden !important;
+}
+
+.modtop{
+    margin-top:15px !important;
+}
+
+.modalpadding{
+    padding: 10px 20px !important;
+}

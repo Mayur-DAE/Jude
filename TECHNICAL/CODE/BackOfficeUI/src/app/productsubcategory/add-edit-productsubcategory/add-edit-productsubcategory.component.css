@@ -1,0 +1,37 @@
+.form-group.has-danger .form-control{
+    border-color: #FF4747;
+}
+.error{
+    position: absolute;
+    color:red;
+}
+
+.error-input{
+  border: 1px red solid;
+}
+
+.img-upload{
+  margin-left:75px ; 
+  cursor: pointer;
+  height:200px; 
+  width: 200px;
+}
+
+@media (max-width: 425px) {
+  .category-details{
+  display: inline !important;
+  }
+  .img{
+    margin-left: 0!important;
+  margin-top: 10px;
+  
+  }
+  
+  .sub-Category{
+  width: auto;
+  }
+  .description{
+  
+    width: auto;
+  }
+  }

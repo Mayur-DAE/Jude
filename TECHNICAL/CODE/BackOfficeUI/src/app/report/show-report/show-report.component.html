@@ -1,0 +1,276 @@
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title"> Order Reports</h4>
+    <div class="row">
+      <div class="col-12">
+        <div class="col-sm-12 row">
+          <!-- <div class="col-sm-2">
+            <p>From Date</p>
+            <div class="untitled-page-block2 layout">
+              <input id="FromDate" name="FromDate" [(ngModel)]="FromDate" type="date" class="form-control" />
+            </div>
+          </div>
+
+          <div class="col-sm-2">
+            <p>To Date</p>
+            <div class="untitled-page-block2 layout">
+              <input id="FromDate" name="FromDate" [(ngModel)]="ToDate" type="date" class="form-control" />
+            </div>
+          </div> -->
+          <div class="col-2 f-name gap">
+            <div class="form-group" style="margin-bottom: 0px;">
+              <label for="exampleInputFirstname1">First Name</label>
+              <input type="text" class="form-control" id="exampleInputFirstname1" placeholder="First Name"
+                name="firstName" [(ngModel)]="FirstName" />
+            </div>
+            <p *ngIf="firstNameError" style="color:red;">{{ firstNameError }}</p>
+          </div>
+
+          <div class="col-2 l-name gap">
+            <div class="form-group" style="margin-bottom: 0px;">
+              <label for="exampleInputLastname1">Last Name</label>
+              <input type="email" class="form-control" id="exampleInputLastname1" placeholder="Last Name"
+                name="lastName" [(ngModel)]="LastName" />
+            </div>
+            <p *ngIf="lastNameError" style="color:red;">{{ lastNameError }}</p>
+          </div>
+          <div class="col-sm-2 gap">
+            <p>Status</p>
+            <select class="form-select" aria-label="Default select example" [(ngModel)]="OrderStatusID">
+              <option disabled selected>--Select--</option>
+              <option *ngFor="let x of OrderStatusList" [value]="x.OrderStatusID">
+                {{ x.OrderStatusDescription }}
+              </option>
+            </select>
+          </div>
+
+
+          <div class="col-sm-3 gap">
+            <p>Shop</p>
+            <div class="untitled-page-block2 layout">
+              <input class="form-control" [(ngModel)]="CompanyNameSearch" type="text" placeholder="Shop Name"
+                (keyup)="onCompanyNameType()" />
+            </div>
+            <div class="form-group Reportlayout1">
+              <a class="list-group-item list-group-item-ation" *ngFor="let dataItem of CompanyList?.slice(0, 7)"
+                (click)="onSelectName(dataItem)">{{ dataItem.CompanyName }}</a>
+            </div>
+          </div>
+
+          <div class="col-sm-3">
+            <p>&nbsp;</p>
+            <button type="button" class="btn btn-primary me-2" (click)="refreshOrderList()">
+              Search
+            </button>
+            <button type="button" class="btn btn-secondary" (click)="clearSearchFields()">
+              Clear
+          </button>
+          </div>
+        </div>
+
+        <!-- <div class="justify-content-end d-flex">
+          <button type="button" class="export-btn btn fa fa-file-excel-o mt-4 ms-2 excelbutton"
+            (click)="exportToExcel()">
+            <i class="ti-file me-1"></i>Export to Excel
+          </button>
+          <button class="btn btn float-right mt-4 ms-2"   [printStyle]="{
+            table: {'border': '1px solid black', 'border-collapse': 'collapse', 'width': '100%'},
+            th: {'border': '1px solid black', 'padding': '8px'},
+            td: {'border': '1px solid black', 'padding': '8px'}
+          }" printSectionId="section" ngxPrint>
+            <i class="ti-printer me-1"></i>Print
+          </button>
+        </div> -->
+        <div class="row mb-2 mt-3">
+          <div class="col-md-6 col-sm-12 d-flex align-items-center ">
+            <label for="itemsPerPage" class="mr-2">Items per page:&nbsp;</label>
+            <select id="itemsPerPage" class="border rounded px-2 py-1" (change)="onItemsPerPageChange($event)">
+              <option value="5" [selected]="itemsPerPage === 5">5</option>
+              <option value="10" [selected]="itemsPerPage === 10">10</option>
+              <option value="20" [selected]="itemsPerPage === 20">20</option>
+              <option value="30" [selected]="itemsPerPage === 30">30</option>
+            </select>
+          </div>
+          <div class="col-md-6 col-sm-12 d-flex justify-content-end">
+            <button type="button" class="export-btn btn fa fa-file-excel-o excelbutton  md:mt-0" (click)="exportToExcel()" >
+              <i class="ti-file me-1"></i>Export to Excel
+            </button>
+            <div class="dropdown" style="float:right;margin-top: 6px;">
+              <button class="dropdown-button"><i class="ti-printer me-1"></i> Print </button>
+              <div class="dropdown-content">
+                <div (click)="print('printCurrent')" class="m-2"><i class="ti-printer me-1"></i> Current Page</div>
+                <div (click)="print('printAll')"  class="m-2"><i class="ti-printer me-1"></i> All Data</div>
+              </div>
+            </div>
+            <button #printCurrent class="btn btn float-right"   style="display: none" [printStyle]="{
+              table: {'border': '1px solid black', 'border-collapse': 'collapse', 'width': '100%'},
+              th: {'border': '1px solid black', 'padding': '8px'},
+              td: {'border': '1px solid black', 'padding': '8px'}
+            }" printSectionId="section" ngxPrint>
+              <i class="ti-printer me-1"></i> Current Page
+            </button>
+            
+            <button #printAll class="btn btn float-right"  style="display: none"  [printStyle]="{
+              table: {'border': '1px solid black', 'border-collapse': 'collapse', 'width': '100%'},
+              th: {'border': '1px solid black', 'padding': '8px'},
+              td: {'border': '1px solid black', 'padding': '8px'}
+            }" printSectionId="all-section" ngxPrint>
+              <i class="ti-printer me-1"></i> All Data
+            </button>
+
+          </div>
+        </div> 
+
+        <div id="section">
+          <div class="table-responsive">
+            <table id="order-listing" class="table">
+              <thead>
+                <tr class="bg-primary text-white">
+                  <th>Sr no</th>
+                  <th>Name</th>
+                  <th>Shop Name</th>
+                  <th>Order Status</th>
+                  <th>Order Date</th>
+                  <th>Order Price</th>
+                  <th>Shipping Price</th>
+                  <th>Total Price</th>
+                  <th>Reference Number</th>
+                </tr>
+              </thead>
+              <tbody>
+                 <tr *ngIf="OrderList.length == 0">
+                <td colspan="9" class="text-center">No records found</td>
+              </tr>
+                <tr *ngFor="let dataItem of paginatedOrder; let i = index">
+                  <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+                  <td>{{ dataItem.FirstName + " " + dataItem.LastName }}</td>
+                  <td class="Settlement">{{ dataItem.CompanyName }}</td>
+                  <!-- <td>{{ dataItem.OrderStatusDescription }}</td> -->
+                  <td class="text-center">   
+                    <label class="badge" [ngClass]="[
+                    dataItem.OrderStatusDescription == 'Delivered'
+                      ? 'badge-success'
+                      : dataItem.OrderStatusDescription == 'Ready for Pickup'
+                      ? 'badge-warning'
+                      : dataItem.OrderStatusDescription == 'On the way'
+                      ? 'badge-info'
+                      : dataItem.OrderStatusDescription == 'Cancelled'
+                      ? 'badge-danger'
+                      : dataItem.OrderStatusDescription == 'Returned'
+                      ? 'badge-returned'
+                      : dataItem.OrderStatusDescription == 'Rejected'
+                      ? 'badge-danger'
+                      : dataItem.OrderStatusDescription == 'Placed'
+                      ? 'badge-info'
+                      : dataItem.OrderStatusDescription == 'Confirmed'
+                      ? 'badge-success'
+                      : dataItem.OrderStatusDescription == 'Initiated'
+                      ? 'badge-returned'
+                      : dataItem.OrderStatusDescription == 'Payment Success'
+                      ? 'badge-success'
+                      : dataItem.OrderStatusDescription == 'Payment Failed'
+                      ? 'badge-danger'
+                      : null
+                  ]"> <b>{{dataItem.OrderStatusDescription}}</b></label></td>
+                  <td>{{ dataItem.OrderDate }}</td>
+                  <td>{{currency}} {{ dataItem.OrderPrice | number:'1.2-2'}}</td>
+                  <td>{{currency}} {{ dataItem.ShippingPrice | number:'1.2-2'}}</td>
+                  <td>{{currency}} {{ dataItem.TotalOrderPrice | number:'1.2-2'}}</td>
+                  <td>{{ dataItem.OrderPaymentReferenceNumber }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          </div>
+            <!-- Below table is for displaying all the data together in print sheet -->
+          <div id="all-section" style="display: none;">
+            <div class="table-responsive">
+              <table id="order-listing" class="table">
+                <thead>
+                  <tr class="bg-primary text-white">
+                    <th>Sr no</th>
+                    <th>Name</th>
+                    <th>Shop Name</th>
+                    <th>Order Status</th>
+                    <th>Order Date</th>
+                    <th>Order Price</th>
+                    <th>Shipping Price</th>
+                    <th>Total Price</th>
+                    <th>Reference Number</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let dataItem of OrderList; let i = index">
+                    <td style="width: 70px;">{{ i + 1 }}</td>
+                    <td>{{ dataItem.FirstName + " " + dataItem.LastName }}</td>
+                    <td class="Settlement">{{ dataItem.CompanyName }}</td>
+                    <td>{{ dataItem.OrderStatusDescription }}</td>
+                    <td>{{ dataItem.OrderDate }}</td>
+                    <td>{{currency}} {{ dataItem.OrderPrice | number:'1.2-2'}}</td>
+                    <td>{{currency}} {{ dataItem.ShippingPrice | number:'1.2-2'}}</td>
+                    <td>{{currency}} {{ dataItem.TotalOrderPrice | number:'1.2-2'}}</td>
+                    <td>{{ dataItem.OrderPaymentReferenceNumber }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            </div>
+              <!-- Print all data table end -->
+
+          <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mt-3  px-md-4"><!-- px-3 -->
+            <span class="text-muted mb-2 mb-md-0">
+              Showing 
+              {{ (currentPage - 1) * itemsPerPage + 1 }} 
+              to 
+              {{ min(currentPage * itemsPerPage, OrderList.length) }} 
+              of 
+              {{ OrderList.length }} entries
+            </span>
+          
+            <nav>
+              <ul class="pagination mb-0">
+                <!-- Previous Button -->
+                <li class="page-item" [class.disabled]="currentPage === 1">
+                  <a class="page-link" (click)="changePage(currentPage - 1)"><<</a>
+                </li>
+            
+                <!-- Page 1 -->
+                <li class="page-item" [class.active]="currentPage === 1">
+                  <a class="page-link" (click)="changePage(1)">1</a>
+                </li>
+            
+                <!-- Ellipsis before middle pages -->
+                <li class="page-item disabled" *ngIf="getMiddlePages()[0] > 2">
+                  <span class="page-link">...</span>
+                </li>
+            
+                <!-- Middle Pages -->
+                <ng-container *ngFor="let page of getMiddlePages()">
+                  <li class="page-item" [class.active]="currentPage === page">
+                    <a class="page-link" (click)="changePage(page)">{{ page }}</a>
+                  </li>
+                </ng-container>
+            
+                <!-- Ellipsis after middle pages -->
+                <li class="page-item disabled" *ngIf="getMiddlePages().includes(totalPages - 1) === false && totalPages > 5">
+                  <span class="page-link">...</span>
+                </li>
+            
+                <!-- Last Page -->
+                <li class="page-item" *ngIf="totalPages > 1" [class.active]="currentPage === totalPages">
+                  <a class="page-link" (click)="changePage(totalPages)">{{ totalPages }}</a>
+                </li>
+            
+                <!-- Next Button -->
+                <li class="page-item" [class.disabled]="currentPage === totalPages">
+                  <a class="page-link" (click)="changePage(currentPage + 1)">>></a>
+                </li>
+              </ul>
+            </nav>
+            
+          </div> 
+        <!-- </div> -->
+      </div>
+    </div>
+  </div>
+</div>

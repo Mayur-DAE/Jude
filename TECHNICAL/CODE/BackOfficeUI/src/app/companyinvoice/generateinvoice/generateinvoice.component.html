@@ -1,0 +1,129 @@
+<div class="modal-body">
+
+  <div id="htmlData">
+    <div class="col-12 grid-margin">
+      <div class="card maindiv">
+        <div class="">
+          <div class="col-sm-4 ">
+            <img src="assets/images/backoffice/jude-logo.png" class="log_img logoimg" />
+          </div>
+          <div class="d-flex justify-content-center">
+          <label class="tax mar"><h4><b>Membership Invoice</b></h4></label>
+          </div>
+          <div class="row">
+         <!--   <div class="col-sm-6">
+               <img src="assets/images/backoffice/logo_big.png" class="log_img"> 
+            </div>-->
+            <div class="col-sm-12 cd TopclassLeft">
+              <div class="col-sm-12 column">
+                Invoice No. : {{ InvoiceNumber }}
+              </div>
+              <div class="col-sm-12 column">
+                Invoice Date :
+                {{ InvoiceDate | date }}
+              </div>
+              <div class="col-sm-12 column">Reverse Charge: No</div>
+            </div>
+          </div>
+        </div>
+        <div class="row cd">
+          <div class="abc" >
+            <div class="col-sm-12 column">
+              <div class="textall">Jude</div>
+              <b>Address</b> Abebe Kebede,
+            </div>
+            <div class="col-sm-12 column">
+              Churchill Avenue No. 123,
+            </div>
+            <div class="col-sm-12 column">1000 Addis Ababa,</div>
+            <div class="col-sm-12 column">ETHIOPIA.</div>
+            <div class="col-sm-12 column">Email ID - info&#64;jude.com</div>
+            <div class="col-sm-12 column">Website - www.jude.in</div>
+            <!-- <div class="col-sm-12 column">Pan No. - AAGCH2906R</div> -->
+            <!-- <div class="col-sm-12 column">GSTIN - 27AAGCH2906R1Z3</div> -->
+          </div>
+          <div class="invoice">
+            <div class="col-sm-12 column">
+              <!-- <div class="textall">{{ CompanyName }}</div> -->
+              <div class="textall">{{ CompanyName }}</div>
+            </div>
+            <div class="col-sm-12 column"><b>Address</b> - {{ Address1 }}</div>
+            <div class="col-sm-12 column">{{ Address2 }},</div>
+            <!-- <div class="col-sm-12 column">{{ CityName }},</div> -->
+            <div class="col-sm-12 column">
+              <!-- {{ StateName }}, -->
+              {{ CountryName }},
+            </div>
+            <div class="col-sm-12 column">{{ Zip }}.</div>
+            <div class="col-sm-12 column">
+              <b>Mobile No.</b> - {{ CompanyMobileNo1 }}
+            </div>
+            <!-- <div class="col-sm-12 column">
+              <b>GSTIN</b> - {{ CompanyGSTNumber }}
+            </div> -->
+          </div>
+        </div>
+ 
+        <div class="container-fluid mt-4 d-flex justify-content-center w-100">
+          <div class="table-responsive w-100">
+            <table class="table">
+              <thead>
+                <tr class="bg-primary text-white">
+                  <th class="text-white">Membership Type</th>
+                  <th class="text-right text-white">Membership Duration</th>
+                  <th class="text-right text-white">Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="text-right">
+                  <td class="text-left textcolor" style="font-size: 17px;"> Jude - {{ CompanyMemberShipName }} Fees</td>
+                  <td class="text-left textcolor" style="font-size: 17px;"> ({{ CompanyMemberShipStartDate | date }}&nbsp;-&nbsp;{{
+                    CompanyMemberShipExpiryDate | date
+                    }})</td>
+                  <td class="textcolor" style="font-size: 17px;">{{currency}} {{ InvoiceAmount | number:'1.2-2'}}</td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- <hr class="w-100" /> -->
+          </div>
+        </div>
+
+        <div class="container-fluid mt-4 w-100">
+          <table class=" ms-auto float-end text-end mb-2">
+            <tr class="spaced-row">
+                <td class="text-start"><b>Sub Total:</b>&nbsp;&nbsp;</td>
+                <td class="text-start">{{currency}} {{ InvoiceAmount | number:'1.2-2'}}</td>
+            </tr>
+            <tr class="spaced-row">
+                <td class="text-start"><b>VAT ({{ TaxSlabPercentage }}%):</b>&nbsp;&nbsp;</td>
+                <td class="text-start">{{ currency }} {{ CGST + SGST | number:'1.2-2'}}</td>
+            </tr>
+            <tr class="spaced-row">
+                <td class="text-start"><b>Total Amount:</b>&nbsp;&nbsp;</td>
+                <td class="text-start"> {{ InvoiceTotal | number:'1.2-2'}}</td>
+            </tr>
+        </table>
+          <hr class="w-100" />
+        </div>
+      </div>
+      <div class="uv">
+        This is computer generated invoice and does not require sign and
+        stamp
+      </div>
+    </div>
+  <!-- </div> -->
+
+  <div class="row">
+    <div class="col-sm-10 col-md-7 col-lg-8"></div>
+    <div class="col-sm-2 col-md-5 col-lg-4 d-flex justify-content-end">
+      <!-- <div class="uv">
+        This is computer generated invoice and does not require sign and
+        stamp
+      </div> -->
+      <!-- <button class="btn btn-success btn-block al" [disabled]="isGeneratingPDF" (click)="openPDF()">
+        {{ isGeneratingPDF ? 'Generating...' : 'Download PDF' }}
+      </button> -->
+      <button class="btn btn-success text-white float-right mt-4 ms-2 order-invoice-fixing" (click)="openPDF()">Download PDF</button>
+    </div>
+  </div>
+</div>

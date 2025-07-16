@@ -1,0 +1,71 @@
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title"> Order Summary Reports</h4>
+    <div class="row">
+      <div class="col-12">
+        <div class="col-sm-12 row">
+          <div class="col-sm-2">
+            <p>From Date</p>
+            <div class="untitled-page-block2 layout">
+              <input id="FromDate" name="FromDate" [(ngModel)]="FromDate" type="date" class="form-control" />
+            </div>
+          </div>
+
+          <div class="col-sm-2">
+            <p>To Date</p>
+            <div class="untitled-page-block2 layout">
+              <input id="FromDate" name="FromDate" [(ngModel)]="ToDate" type="date" class="form-control"
+                [disabled]="!FromDate" />
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group">
+              <label for="exampleInputFirstname1">Shop Name</label>
+              <input type="text" class="form-control" id="exampleInputFirstname1" placeholder="Shop Name"
+                name="firstName" [(ngModel)]="CompanyName" />
+            </div>
+          </div>
+
+
+          <div class="col-sm-2">
+            <p>&nbsp;</p>
+            <button type="button" class="btn btn-primary me-2" (click)="refreshOrdersumaryList()">
+              Search
+            </button>
+          </div>
+        </div>
+
+        <div class="justify-content-end d-flex">
+          <button type="button" class="export-btn btn fa fa-file-excel-o mt-4 ms-2 excelbutton"
+            (click)="exportToExcel()">
+            <i class="ti-file me-1"></i>Export to Excel
+          </button>
+
+        </div>
+
+        <div id="section">
+          <table id="order-summary-report" class="table">
+            <thead>
+              <tr class="bg-primary text-white">
+                <td>#</td>
+                <th>Shop Name</th>
+                <th>GMV</th>
+                <th>Net Sales</th>
+                <th>Total Orders</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let dataItem of OrdersummaryreportList; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ dataItem.CompanyName }}</td>
+                <td>{{currency}} {{ dataItem.GMV }}</td>
+                <td>{{currency}} {{ dataItem.NetSales }}</td>
+                <td>{{ dataItem.TotalOrders }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

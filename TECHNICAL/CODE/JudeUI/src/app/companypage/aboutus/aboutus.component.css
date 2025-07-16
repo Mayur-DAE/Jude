@@ -1,0 +1,102 @@
+.row{
+    margin-top:32px;
+}
+.container{
+    gap: 32px;
+    max-width: 1200px;
+    /* height: 343px; */
+    /* height: 379px;; */
+    padding: 10px;
+    margin-bottom: 25px;
+}
+.Availability{
+    height: 22px;
+    font-family: 'Satoshi-bold';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+    color: #000000;
+}
+.Days{
+    
+    height: 19px;
+    font-family: 'Satoshi-bold';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 19px;
+    color: #000000;
+}
+.Time{
+    text-align: right;
+    height: 19px;
+    font-family: 'Satoshi-medium';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 19px;
+    color: #000000;
+}
+.line_section{
+    width: 35px;
+}
+.left_sideAboutUs_Main{
+    gap: 32px;
+    height: 206px;
+}
+.About_Us{
+    height: 22px;
+    font-family: 'Satoshi-bold';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+    color: #000000;
+}
+.About_Us1{
+    max-width: 644px;
+
+}
+p{
+    font-family: 'Satoshi-bold';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 19px;
+    color: rgba(0, 0, 0, 0.8);
+}
+@media screen and (min-device-width: 300px) and (max-device-width: 767px) {
+.about_responsive{
+    width: 90%;
+}
+.Days{
+    line-height: 50px;
+    font-size: 13px;
+}
+.Time{
+    font-size: 12px;
+    font-weight: 700;
+}
+.date_responsive{
+    margin-top: -20px;
+}
+h5.Availability{
+    margin-bottom: 20px;
+}
+.left_sideAboutUs_Main{
+    margin-bottom: 150px;
+    
+}
+.About_Us1{
+    margin-top: -20px;
+}
+.About_Us1 p{
+    font-size: 13px;
+}
+.About_U{
+    border-bottom: 1px solid red;
+}
+
+}
+

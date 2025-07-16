@@ -1,0 +1,31 @@
+{
+    "/api/security/oauth": {
+        "target": "https://outpost.mapmyindia.com",
+        "secure": false,
+        "changeOrigin": true,
+        "headers": {
+          "Connection": "keep-alive"
+      }
+      },
+      "/api/places/": {
+        "target": "https://atlas.mapmyindia.com",
+        "secure": false,
+        "changeOrigin": true      
+      },  
+      "/advancedmaps/v1/": {
+        "target": "https://apis.mapmyindia.com",
+        "secure": false,
+        "changeOrigin": true,
+        "headers": {
+          "Connection": "keep-alive"
+      }
+      },   
+      "/v1/external/": {
+        "target": "https://apiv2.shiprocket.in",
+        "secure": false,
+        "changeOrigin": true,
+        "headers": {
+          "Connection": "keep-alive"
+      }
+      }
+}

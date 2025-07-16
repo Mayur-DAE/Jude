@@ -1,0 +1,266 @@
+<div class="modal-body">
+  <div class="d-flex flex-row bd-highlight mb-3 row">
+    <div class="from-froup" class="productdividepart">
+      <div class="row">
+        <label class="col-sm-2 col-form-label">Category</label>
+        <div class="col-sm-10">
+          <select
+            class="form-select"
+            aria-label="Default select example"
+            [(ngModel)]="ProductCategoryID"
+          >
+            <option>--Select--</option>
+            <option
+              *ngFor="let x of ProductCategoryList"
+              [value]="x.ProductCategoryID"
+            >
+              {{ x.ProductCategoryShortName }}
+            </option>
+          </select>
+          <div class="error">{{ ProductCategory_errormsg }}</div>
+          <br />
+        </div>
+
+        <label class="col-sm-2 col-form-label">SubCategory</label>
+        <div class="col-sm-10">
+          <select
+            class="form-select"
+            aria-label="Default select example"
+            [(ngModel)]="ProductSubCategoryID"
+            (click)="loadProductSubCategoryList()"
+          >
+            <option>--Select--</option>
+            <option
+              *ngFor="let x of ProductSubCategoryList"
+              [value]="x.ProductSubCategoryID"
+            >
+              {{ x.ProductSubCategoryShortName }}
+            </option>
+          </select>
+          <div class="error">{{ ProductSubCategory_errormsg }}</div>
+          <br />
+        </div>
+
+        <label
+          class="col-sm-2 col-form-label"
+          *ngIf="CompanyID == 0 && UserRoleID != 2"
+          >Shop</label
+        >
+        <div class="col-sm-10" *ngIf="CompanyID == 0 && UserRoleID != 2">
+          <div class="untitled-page-block2 layout">
+            <input
+              class="form-select"
+              name="CompanyNameSearch"
+              [(ngModel)]="CompanyNameSearch"
+              type="text"
+              placeholder="Type Shop Name"
+              (keyup)="onCompanyNameType()"
+            />
+          </div>
+          <div class="form-group showproductlayout1">
+            <a
+              class="list-group-item list-group-item-ation"
+              *ngFor="let dataItem of CompanyList?.slice(0, 7)"
+              (click)="onSelectName(dataItem)"
+              >{{ dataItem.CompanyName }}</a
+            >
+          </div>
+          <div class="error">{{ ProductCompanyName_errormsg }}</div>
+          <br />
+        </div>
+
+        <label class="col-sm-2 col-form-label">Tax</label>
+        <div class="col-sm-10">
+          <select
+            class="form-select"
+            aria-label="Default select example"
+            [(ngModel)]="TaxSlabID"
+          >
+            <option>--Select--</option>
+            <option *ngFor="let x of TaxslabList" [value]="x.TaxSlabID">
+              {{ x.TaxSlabName }}
+            </option>
+          </select>
+          <div class="error">{{ ProductGST_errormsg }}</div>
+          <br />
+        </div>
+
+        <label class="col-sm-2 col-form-label"> Name</label>
+        <div class="col-sm-10">
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="ProductName"
+            placeholder="Enter Product Name"
+          />
+          <div class="error">{{ ProductName_errormsg }}</div>
+          <br />
+        </div>
+
+        <label class="col-sm-2 col-form-label"> Description</label>
+        <div class="col-sm-10">
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="ProductDescription"
+            placeholder="Enter Product Description"
+          />
+          <div class="error">{{ ProductDescription_errormsg }}</div>
+          <br />
+        </div>
+
+        <label class="col-sm-2 col-form-label"> Price</label>
+        <div class="col-sm-10">
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="ProductPrice"
+            (keyup)="pricecal()"
+            placeholder="Enter Product Price "
+          />
+          <div class="error" style="margin-top: 10px;">{{ ProductPrice_errormsg }}</div>
+          <br />
+        </div>
+
+        <label class="col-sm-2 col-form-label"> Discount</label>
+        <div class="col-sm-10">
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="ProductDiscount"
+            (keyup)="pricecal()"
+            placeholder="Enter Product Discount in %"
+          />
+          <div class="error">{{ ProductDiscount_errormsg }}</div>
+          <br />
+        </div>
+
+        <label class="col-sm-2 col-form-label"> Discount Price</label>
+        <div class="col-sm-10">
+          <!-- <label class="form-control">{{(ProductPrice)-(ProductDiscount*(ProductPrice/100))}}</label> -->
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="ProductDiscountPrice"
+            (keyup)="pricecal()"
+            placeholder="Enter Product Discount Price"
+          />
+          <div class="error">{{ ProductDiscountPrice_errormsg }}</div>
+          <br />
+        </div>
+
+        <label class="col-sm-2 col-form-label"> Weight</label>
+        <div class="col-sm-10">
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="ProductWeight"
+            (keyup)="cal()"
+            placeholder="Enter Product Weight in kgs"
+          />
+          <div class="error">{{ ProductWeight_errormsg }}</div>
+          <br />
+        </div>
+        <label class="col-sm-2 col-form-label"> Weight in grams</label>
+        <div class="col-sm-10">
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="ProductGrams"
+            (keyup)="cal()"
+          />
+          <br />
+        </div>
+      </div>
+
+      <div class="row" *ngIf="UserRoleID != 2">
+        <div class="col-md-6">
+          <div class="form-group row">
+            <label class="form-check-label">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                name="IsApproved"
+                checked
+                [(ngModel)]="IsApproved"
+              />
+              Approved
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="row" *ngIf="UserRoleID != 2">
+        <div class="col-md-6">
+          <div class="form-group row">
+            <label class="form-check-label">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                name="IsPublished"
+                checked
+                [(ngModel)]="IsPublished"
+              />
+              Publish
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ml-3 bd-highlight" class="productdividepart1">
+      <div class="from-froup row">
+        <div class="col-sm-6">
+          <label>Thumbnail Image :</label>
+          <br />
+          <br />
+          <img
+            [src]="ProductImageThumbnailImageNamePath"
+            style="height: 200px; width: 200px"
+          />
+          <br />
+          <input
+            type="file"
+            (change)="uploadthumbnailimage($any($event.target).files)"
+            class="mt-2"
+          />
+        </div>
+      </div>
+      <br />
+      <br />
+      <div class="col-sm-6">
+        <label>Large Image :</label>
+        <br />
+        <br />
+
+        <img
+          [src]="ProductImageLargeImageNamePath"
+          style="height: 200px; width: 200px"
+        />
+        <br />
+        <input
+          type="file"
+          (change)="uploadlargeimage($any($event.target).files)"
+          class="mt-2"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button
+      (click)="addproduct()"
+      *ngIf="products.ProductID == 0"
+      class="btn btn-success"
+    >
+      Add
+    </button>
+
+    <button
+      (click)="updateproduct()"
+      *ngIf="products.ProductID != 0"
+      class="btn btn-primary"
+    >
+      Update
+    </button>
+  </div>
+</div>

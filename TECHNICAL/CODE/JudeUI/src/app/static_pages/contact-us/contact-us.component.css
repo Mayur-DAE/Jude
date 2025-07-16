@@ -1,0 +1,274 @@
+
+body {
+
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.aa{
+    padding: 10px 100px;
+    font-weight: 600;
+    border-radius: 10px;
+    border: 1px solid black;
+    color: var(--fc-heading-color);
+    text-decoration: none;
+}
+
+.Contact{
+    
+/* font-family: 'Satoshi'; */
+font-style: normal;
+font-weight: 700;
+font-size: 24px;
+line-height: 32px;
+
+color: var(--fc-heading-color);
+
+}
+.error {
+    color: red;
+    font-size: 1.0em;
+    }
+.bttnpadding{
+    border: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 13px 44px;
+    gap: 4px;
+    height: 48px;
+    background: #0aad0a;
+    border-radius: 8px;
+    /* font-family: 'Satoshi-bold'; */
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+    text-align: center;
+    color:#fff;
+}
+.bttnpadding:hover{
+    background-color: #0aad0a;
+    color: white;
+}
+input[type=text],
+select,
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    /* margin-top: 6px; */
+    /* margin-bottom: 16px; */
+    resize: vertical;
+}
+.abcd{
+    padding: 100px 120px;
+}
+
+input[type=submit] {
+    background-color: #fff;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* input[type=submit]:hover {
+    background-color: black;
+} */
+
+.container {
+    border-radius: 5px;
+    background-color: #fff;
+
+
+}
+
+.contact_support1 {
+    padding-top: 30px;
+}
+
+.contact_support1 h4 {
+    /* font-weight: 600; */
+    /* font-family: 'Satoshi'; */
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    color:var(--fc-heading-color);
+}
+.efghi {
+    background-color: #fff;
+    padding: 19px 50px 30px 50px;
+    margin: 99px;
+    box-shadow: 4px 8px 50px rgb(0 0 0 / 15%);
+    border-radius: 20px;
+}
+
+.contact_support1 button {
+    padding: 13px 140px 13px 140px;
+    font-weight: 600;
+    border-radius: 10px;
+}
+
+.contact_support2 button {
+    padding: 13px 120px 13px 120px;
+    font-weight: 600;
+    border-radius: 10px;
+}
+
+.contact_support2 {
+    padding-top: 30px;
+}
+
+.contact_support2 h4 {
+    font-weight: 600;
+}
+
+.contact_summary {
+    padding-top: 30px;
+}
+
+.contact_summary h4 {
+    font-weight: 600;
+}
+.B{
+    /* font-family: 'Satoshi'; */
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 19px;
+    /* identical to box height */
+    
+    
+    color: rgba(0, 0, 0, 0.5); 
+}
+span.myicon {
+    padding: 10px 150px 10px 0px;
+    line-height: 1.4em;
+    font-size: 14px;
+}
+
+input.sub_button {
+    background-color:#0aad0a;;
+    padding: 13px 30px 13px 30px;
+}
+
+.sub_button_1 {
+    background-color:#0aad0a;;
+    padding: 13px 30px 13px 30px;
+}
+
+button {
+    background-color: #fff;
+}
+
+@media only screen and (max-width: 767px) {
+    .contact_support1 button {
+        padding: 7px 70px 7px 70px;
+        font-weight: 600;
+        border-radius: 10px;
+    }
+    /* .abcd{
+        padding: 50px 20px;
+    } */
+}
+
+@media only screen and (max-width: 768px) {
+    .contact_support2 button {
+        padding: 7px 50px 7px 50px;
+        font-weight: 600;
+        border-radius: 10px;
+    }
+    /* .abcd{
+        padding: 60px 32px;
+    }
+    .efghi {
+        background-color: #fff;
+        padding: 19px 20px 30px 20px;
+        margin: 20px;
+        box-shadow: 4px 8px 50px rgb(0 0 0 / 15%);
+        border-radius: 20px;
+    } */
+}
+
+@media only screen and (max-width: 767px) {
+    span.myicon {
+        padding: 10px 0px 10px 0px;
+    }
+}
+
+@media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+    .contact_support1 button {
+        padding: 10px 80px 10px 80px;
+        font-weight: 600;
+        border-radius: 10px;
+    }
+    .abcd{
+        padding: 60px 32px;
+    }
+    .efghi {
+        background-color: #fff;
+        padding: 19px 20px 30px 20px;
+        margin: 20px;
+        box-shadow: 4px 8px 50px rgb(0 0 0 / 15%);
+        border-radius: 20px;
+    }
+}
+
+@media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+    .contact_support2 button {
+        padding: 10px 60px 10px 60px;
+    }
+}
+
+@media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+    span.myicon {
+        padding: 10px 30px 10px 0px;
+    }
+    
+}
+
+/* .get_touch {
+    background-image: url('https://img.freepik.com/free-vector/hand-painted-watercolor-pastel-sky-background_23-2148902771.jpg?w=2000');
+
+
+} */
+
+
+@media  (max-device-width: 480px) {
+    .abcd {
+        padding: 15px;
+        margin: 0px;
+        
+    }
+    .efghi {
+        background-color: #fff;
+        padding: 30px 20px 30px 20px;
+        margin: 8px;
+        box-shadow: 4px 8px 50px rgb(0 0 0 / 15%);
+        border-radius: 20px;
+    }
+
+    .col-sm-6{
+        position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    }
+}
+
+@media  (max-device-width: 320px) {
+    .aa{
+        padding: 10px 88px;}
+}

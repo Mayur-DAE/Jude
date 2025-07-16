@@ -1,0 +1,14 @@
+.form-select{
+    height: 48px;
+}
+
+.Reportlayout1{
+    position: absolute;
+    z-index: 100;
+}
+.excelbutton{
+    border-radius: 16px;
+}
+.ReportExpiredShop{
+    white-space: normal !important;
+}

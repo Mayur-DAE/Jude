@@ -1,0 +1,869 @@
+<main>
+
+
+
+   <!-- section -->
+   <section class="py-lg-16 py-10"
+      style="background: url(assets/images/banner/banner-4.jpg) no-repeat; background-position: center; background-size: cover">
+      <div class="container">
+         <!-- row -->
+         <div class="row">
+            <div class="col-xl-5 col-lg-6 col-md-8">
+               <div class="card border-0 shadow">
+                  <div class="card-body p-6">
+                     <div class="">
+
+                        <h2 class="text-dark display-5 fw-bold mt-4">
+                           {{'Free Shipping on'| translate}}
+                           <br>
+                           {{'orders over'| translate}}
+                           <span class="text-primary">Br100</span>
+                        </h2>
+                        <p class="lead">{{'Free Shipping to First-Time Customers Only, After promotions and discounts
+                           are applied.'| translate}}</p>
+                        <div class="col-auto">
+                           <button type="submit" class="btn btn-primary mt-3" [routerLink]="['/Shops']">{{'Shop Now'|
+                              translate}}</button>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+
+
+   <!-- section category -->
+   <section class="my-lg-10 my-8">
+      <div class="container">
+         <div class="row align-items-center mb-6">
+            <div class="col-10">
+               <div>
+                  <!-- heading    -->
+                  <h3 class="align-items-center d-flex mb-0 h4">
+                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-layers text-primary">
+                        <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                        <polyline points="2 17 12 22 22 17"></polyline>
+                        <polyline points="2 12 12 17 22 12"></polyline>
+                     </svg>
+                     <span class="ms-3"> {{'Featured Categories' | translate}}</span>
+                  </h3>
+               </div>
+            </div>
+            <div class="col-2">
+               <div class="slider-arrow slider-8-columns-arrow" id="slider-8-columns-arrows"></div>
+            </div>
+         </div>
+         <div class="row g-6">
+            <div class="col-12">
+               <div class="position-relative">
+                  <div class="slider-8-columns" id="slider-8-columns">
+                     <!-- item -->
+                     <div class="item" *ngFor="let dataItem of ProductCategory; let last = last">
+
+                        <a [routerLink]="['/Products/' + dataItem.ProductCategoryID]"
+                           class="text-decoration-none text-inherit">
+
+                           <!-- <div class="card mb-3 card-lift">
+                             <div class="card-body text-center py-4 text-center">
+                                <div class="my-1">
+                                
+                                   <img  src="{{this.photoPath + dataItem.ProductCategoryThumbNailPhotoPath}}"   width="100px" height="100px" (error)="loadDefaultImage($event)" />
+                                  
+                                </div>
+                                
+                                <div [attr.title]="dataItem.ProductCategoryShortName"
+                                >
+                                
+                                {{ dataItem.ProductCategoryShortName.length > 11 ? (dataItem.ProductCategoryShortName | slice:0:11) + '...' : dataItem.ProductCategoryShortName }}</div>
+                             </div>
+                          </div> -->
+
+                           <div class="card card-product mb-lg-4">
+                              <div class="card-body text-center p-1 p-sm-4">
+                                 <img src="{{this.photoPath + dataItem.ProductCategoryThumbNailPhotoPath}}"
+                                    (error)="loadDefaultImage($event)" alt="{{dataItem.ProductCategoryShortName}}"
+                                    class="mb-3 img-fluid"  />
+                                 <div class="text-truncate" [attr.title]="dataItem.ProductCategoryShortName"> {{ dataItem.ProductCategoryShortName.length > 11 ?
+                                    (dataItem.ProductCategoryShortName | slice:0:11) + '...' :
+                                    dataItem.ProductCategoryShortName }}</div>
+                              </div>
+                           </div>
+
+
+                        </a>
+
+                        {{ last ? bindCategoryCarouselts() : "" }}
+                     </div>
+
+
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+   <!-- section category closed -->
+
+
+   <!-- section Best Selling Products -->
+
+   <section class="mb-lg-14 my-8">
+      <div class="container">
+         <!-- row -->
+         <div class="row align-items-center mb-8">
+            <div class="col-md-8 col-12">
+
+               <h3 class="align-items-center d-flex mb-0 h4">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                     class="feather feather-shopping-bag text-primary">
+                     <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                     <line x1="3" y1="6" x2="21" y2="6"></line>
+                     <path d="M16 10a4 4 0 0 1-8 0"></path>
+                  </svg>
+                  <span class="ms-3">{{'Best Selling Products' | translate}}
+                  </span>
+               </h3>
+            </div>
+
+         </div>
+         <!-- row -->
+         <div class="row g-4 row-cols-lg-5 row-cols-md-3 row-cols-3">
+            <!-- item -->
+            <div class="col" *ngFor="let dataItem of BestSellingProduct;">
+               <!-- card -->
+               <div class="card card-product h-100 d-flex flex-column text-center">
+                  <div class="card-body d-flex flex-column p-1 p-sm-4">
+                     <!-- Image container -->
+                     <div class="d-flex justify-content-center">
+                        <a href="#!">
+                           <img src="{{ this.photoPath + dataItem.MasterProductImageThumbnailImagePath }}"
+                              alt="Product Image" class="img-fluid w-100  object-cover" />
+                           <!-- class="mb-3 img-fluid object-cover" style="height: 200px;"/> -->
+
+
+                           <div class="card-product-action">
+                              <a href="#!" class="btn-action" data-bs-toggle="modal" data-bs-target="#companyModal"
+                                 (click)="openCompanyModal(dataItem)">
+                                 <i class="bi bi-shop" data-bs-toggle="tooltip" data-bs-html="true" title="Shops"></i>
+                              </a>
+
+                           </div>
+                        </a>
+                     </div>
+                     <!-- Text content -->
+                     <div class="mt-0 mt-sm-auto text-small mb-1 text-start">
+                        <p class="text-decoration-none text-muted  mb-1 px-1 px-sm-0 lh-1-1">
+                           <small>{{dataItem.ProductSubCategoryShortName}}</small>
+                        </p>
+                        <h2 class="fs-6  px-1  px-sm-0 mb-0">{{ dataItem.MasterProductName }}</h2>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+
+      </div>
+   </section>
+
+   <div class="modal fade" id="companyModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-xl modal-dialog-centered">
+         <div class="modal-content">
+            <div class="modal-body p-8">
+               <div class="position-absolute top-0 end-0 me-3 mt-3">
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal()"></button>
+               </div>
+                <h5 class="Availability">{{ 'Available in these Shops' | translate }}</h5>
+  <br>
+               <div class="row" *ngIf="ProductInCompany">
+                  <div class="scrollbar-theme overflow-auto" style="max-height: 450px;">
+                     <div class="row row-cols-1 row-cols-lg-3 row-cols-md-2 g-4 g-lg-4">
+                        <div class="col" *ngFor="let dataItem of companyList">
+                           <div class="card flex-row p-6 card-product cursor-pointer"  (click)="closeModal()">
+                              <div>
+                                 <img class="img" src="{{ CompanyImagePath + dataItem.CompanyLogoPath }}" width="66px" height="66px" class="rounded-circle icon-shape" (error)="loadDefaultImage($event)" />
+                              </div>
+                              <div class="ms-6">
+                                 <h2 class="mb-1 h5 text-inherit">{{ dataItem.CompanyName }}</h2>
+
+                                 <div class="d-flex align-items-center">
+                                    <small class="text-warning">
+                                       <ng-container *ngIf="companyRatings[dataItem.CompanyID]">
+                                          <i *ngFor="let starClass of companyRatings[dataItem.CompanyID].stars" [ngClass]="starClass"></i>
+                                       </ng-container>
+                                    </small>
+                                    <span class="ms-2" *ngIf="companyRatings[dataItem.CompanyID]?.avgRating !== 0.0">
+                                       {{ (companyRatings[dataItem.CompanyID]?.avgRating ?? 0).toFixed(1) }}
+                                    </span>
+                                 </div>
+                           
+                                 <div class=" mt-2  text-dark">
+                                    <span class="me-2"> {{ selectedMasterProductName }}</span>
+                                 </div>
+                                 <div class=" mt-1  text-dark">
+                                    <span class="me-2"> {{currency}} {{ calculateFinalPrice(dataItem)  | number:'1.2-2'}}</span>
+                                 </div>
+                                 <div class=" mt-2 ">
+                                 <a class="btn btn-primary btn-sm flex-grow-2 shopinfo1"
+                                 [routerLink]="['/shop/' + dataItem.CompanyID]" (click)="closeModal()">
+                                 {{ 'Visit Shop' | translate }}
+                              </a>
+                              </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="row" *ngIf="!ProductInCompany">
+                  <div class="noproducts text-center">{{ 'Currently No Shop is Selling this Product' | translate }}</div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   
+   <!-- <div class="modal fade" id="companyModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-xl modal-dialog-centered">
+         <div *ngIf="!isMobile" class="modal-content">
+            <div class="modal-body p-8">
+               <div class="position-absolute top-0 end-0 me-3 mt-3">
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                     (click)="closeModal()"></button>
+               </div>
+               <h5 class="Availability">{{ 'Shops' | translate }}</h5>
+               <br>
+               <div class="row" *ngIf="ProductInCompany">
+                  <div class="scrollbar-theme overflow-auto" style="max-height: 450px;">
+                     <div class="card card-product mb-3  mobview">
+                        <div class="card-body">
+                           <div class="d-flex justify-content-between align-items-center">
+                              <h2 class="fs-6 flex-grow-2 text-center shopinfo1">{{ 'Icon' | translate }} </h2>
+                              <h2 class="fs-6 flex-grow-1 text-center shopinfo">{{ 'Shop' | translate }}</h2>
+                              <h2 class="fs-6 flex-grow-1 text-center shopinfo">{{ 'Base Price' | translate }}</h2>
+                              <h2 class="fs-6 flex-grow-1 text-center shopinfo">{{ 'Discount' | translate }}</h2>
+                              <h2 class="fs-6 flex-grow-1 text-center shopinfo">{{ 'Final Price' | translate }}</h2>
+                              <h2 class="fs-6 flex-grow-2 text-center shopinfo1">{{ 'Action' | translate }}</h2>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="card card-product mb-3  mobview" *ngFor="let dataItem of companyList">
+                        <div class="card-body">
+                           <div class="d-flex justify-content-between align-items-center ">
+                              <div class="shopinfo1 d-flex justify-content-center align-items-center">
+                                 <img src="{{
+                                 CompanyImagePath +
+                                    dataItem.CompanyLogoPath
+                                }}" class="rounded-circle icon-shape icon-xxl flex-grow-2 " />
+                              </div>
+
+
+                              <h2 class="fs-6 flex-grow-1 text-center shopinfo">{{ dataItem.CompanyName}}</h2>
+                              <h2 class="fs-6 flex-grow-1 text-center shopinfo">{{currency}} {{ dataItem.ProductPrice}}
+                              </h2>
+                              <h2 class="fs-6 flex-grow-1 text-center shopinfo"
+                                 *ngIf="dataItem.DiscountType==='P' && dataItem.DiscountPrice>0">{{
+                                 dataItem.DiscountPrice}}%</h2>
+                              <h2 class="fs-6 flex-grow-1 text-center shopinfo"
+                                 *ngIf="dataItem.DiscountType==='V' && dataItem.DiscountPrice>0">{{currency}} {{
+                                 dataItem.DiscountPrice}}</h2>
+                              <h2 class="fs-6 flex-grow-1 text-center shopinfo" *ngIf="dataItem.DiscountPrice===0">-
+                              </h2>
+                              <h2 class="fs-6 flex-grow-1 text-center shopinfo">{{currency}}
+                                 {{calculateFinalPrice(dataItem)}}
+                              </h2>
+                              <a class="btn btn-primary btn-sm flex-grow-2 shopinfo1"
+                                 [routerLink]="['/shop/' + dataItem.CompanyID]" (click)="closeModal()">
+                                 {{ 'Visit Shop' | translate }}
+                              </a>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="row" *ngIf="!ProductInCompany">
+                  <div class="noproducts">{{ 'Currently No Shop is Selling this Product' | translate }}</div>
+               </div>
+            </div>
+         </div>
+
+         -Mobile View --
+         
+         <div *ngIf="isMobile" class="modal-content">
+            <div class="modal-body p-3">
+               <div class="position-absolute top-0 end-0 me-3 mt-3">
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal()"></button>
+               </div>
+               <h5 class="Availability text-left">Shops' | translate }}</h5>
+               <br>
+               <div *ngIf="ProductInCompany">
+                  <div class="card card-product mb-3">
+                     <div class="card-body text-center">
+                        <div class="row w-auto">
+                           <div class="col-4 fw-bold">{{ 'Icon' | translate }}</div>
+                           <div class="col-4 fw-bold">{{ 'Shop' | translate }}</div>
+                           <div class="col-4 fw-bold">{{ 'Price' | translate }}</div>
+                        </div>
+                     </div>
+                  </div>
+                  <div>
+                     <a *ngFor="let dataItem of companyList" 
+                        [routerLink]="['/shop/' + dataItem.CompanyID]" 
+                        (click)="closeModal()" 
+                        class="text-decoration-none">
+                        <div class="card card-product mb-3">
+                           <div class="card-body">
+                              <div class="row align-items-center text-center w-auto">
+                                 <div class="col-4">
+                                    <img src="{{ CompanyImagePath + dataItem.CompanyLogoPath }}" 
+                                       class="rounded-circle img-fluid icon-shape" style="max-width: 50px;" />
+                                 </div>
+                                 <div class="col-4">{{ dataItem.CompanyName }}</div>
+                                 <div class="col-4">{{currency}} {{calculateFinalPrice(dataItem)}}</div>
+                              </div>
+                           </div>
+                        </div>
+                     </a>
+                  </div>
+               </div>
+               <div class="row" *ngIf="!ProductInCompany">
+                  <div class="noproducts text-center">{{ 'Currently No Shop is Selling this Product' | translate }}</div>
+               </div>
+            </div>
+         </div>
+
+      </div>
+   </div> -->
+   
+   <!-- section Best Selling Products closed -->
+   <!-- section -->
+   <section class="my-lg-10 my-8"  *ngIf="PaidPopularAroundYou?.length > 0">
+      <div class="container">
+         <!-- row -->
+         <div class="row align-items-center mb-6">
+            <div class="col-lg-10 col-10">
+               <!-- heading -->
+               <h3 class="align-items-center d-flex mb-0 h4">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                     class="feather feather-star text-primary">
+                     <polygon
+                        points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                     </polygon>
+                  </svg>
+                  <span class="ms-3">{{'Premium Shops' | translate }}</span>
+               </h3>
+            </div>
+            <div class="col-lg-2 col-2">
+               <div class="slider-arrow" id="slider-second-arrows"></div>
+            </div>
+         </div>
+         <!-- slider -->
+         <!-- <div class="product-slider-second" id="slider-second"> -->
+         <!-- item -->
+         <div class="row row-cols-1 row-cols-lg-3 row-cols-md-2 g-4 g-lg-4">
+            <!-- col -->
+            <div class="col" *ngFor="let dataItem of PaidPopularAroundYou;">
+               <!-- card -->
+               <div class="card flex-row p-6 card-product cursor-pointer"
+                  [routerLink]="['/shop/' + dataItem.CompanyID]">
+                  <div>
+                     <!-- img -->
+                     <img class="img" src="{{
+                       this.photoPath + 'listing/' + dataItem.CompanyLogoPath
+                     }}" width="56px" height="56px" (error)="loadDefaultImage($event)" />
+                  </div>
+                  <div class=" ms-6">
+                     <!-- content -->
+                     <h2 class="mb-1 h5"><a class="text-inherit">{{ dataItem.CompanyName }}</a></h2>
+                     <div class="small text-muted">
+                        <span class="me-2">{{ dataItem.BusinessTypeName }}</span>
+                     </div>
+                     <div class="d-flex align-items-center">
+                        <small class="text-warning">
+                          <ng-container *ngIf="companyRatings[dataItem.CompanyID]">
+                            <i *ngFor="let starClass of companyRatings[dataItem.CompanyID].stars" [ngClass]="starClass"></i>
+                          </ng-container>
+                        </small>
+                        <span class="ms-2" *ngIf="companyRatings[dataItem.CompanyID]?.avgRating !== 0.0">
+                           {{ (companyRatings[dataItem.CompanyID]?.avgRating ?? 0).toFixed(1) }}
+                        </span>
+                      </div>
+                      
+                     <div class="py-2">
+                        <!-- <ul class="list-unstyled mb-0 small text-primary">
+                          <li [ngClass]="checkAvailability(dataItem[currentDayField]) ? 'text-primary' : 'text-danger'">
+                           {{ checkAvailability(dataItem[currentDayField]) ? 'Available' : 'Closed' }}</li>               
+                       </ul> -->
+                       <ul class="list-unstyled mb-0 small text-dark">
+                        <li>
+                           {{ checkAvailability(dataItem[currentDayField]) ? ('Available' | translate) : ('Closed'| translate) }}   
+                        </li>
+                      </ul>
+                     </div>
+                     <div>
+                        <!-- badge -->
+                        <div class="badge text-bg-light border">
+                           {{ dataItem[currentDayField] }}
+                        </div>
+                        <!-- badge -->
+                        <!-- <div class="badge text-bg-light border">In-store prices</div> -->
+                     </div>
+
+                  </div>
+               </div>
+            </div>
+
+
+         </div>
+
+      </div>
+      <!-- </div> -->
+   </section>
+   <!-- <div class="my-lg-14 my-8">
+     <div class="container">
+        <div class="table-responsive-xxl pb-6 pb-xl-0">
+           <div class="row flex-nowrap">
+              <div class="col">
+                 <div class="card border-0 card-hover">
+                    <a href="#" class="img-zoom"><img src="assets/images/banner/ad-banner-4.jpg" alt="" class="rounded" /></a>
+                    <div class="position-absolute bg-dark-info w-100 bottom-0 py-3 px-4 rounded-bottom">
+                       <a href="#" class="text-white d-flex align-items-center btn-transition">
+                          Offer
+                          <i class="feather-icon icon-chevron-right fs-5"></i>
+                       </a>
+                    </div>
+                 </div>
+              </div>
+              <div class="col">
+                 <div class="card border-0">
+                    <a href="#" class="img-zoom"><img src="assets/images/banner/ad-banner-5.jpg" alt="" class="rounded" /></a>
+                    <div class="position-absolute bg-dark-warning w-100 bottom-0 py-3 px-4 rounded-bottom">
+                       <a href="#" class="text-white d-flex align-items-center btn-transition">
+                          Fresh Food & Bakery
+                          <i class="feather-icon icon-chevron-right fs-5"></i>
+                       </a>
+                    </div>
+                 </div>
+              </div>
+              <div class="col">
+                 <div class="card border-0">
+                    <a href="#" class="img-zoom"><img src="assets/images/banner/ad-banner-6.jpg" alt="" class="rounded" /></a>
+                    <div class="position-absolute bg-dark-danger w-100 bottom-0 py-3 px-4 rounded-bottom">
+                       <a href="#" class="text-white d-flex align-items-center btn-transition">
+                          Mixed and Assorted fruits
+                          <i class="feather-icon icon-chevron-right fs-5"></i>
+                       </a>
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </div>
+  </div> -->
+   <!-- section -->
+   <!-- <section class="mb-lg-14 my-8">
+     <div class="container">
+        
+        <div class="row align-items-center mb-6">
+           <div class="col-lg-10 col-9">
+              <div class="d-xl-flex justify-content-between align-items-center">
+                
+                 <div class="d-flex">
+                    <div class="mt-1">
+                       <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          class="feather feather-shopping-bag text-primary">
+                          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                          <line x1="3" y1="6" x2="21" y2="6"></line>
+                          <path d="M16 10a4 4 0 0 1-8 0"></path>
+                       </svg>
+                    </div>
+                    <div class="ms-3">
+                       <h3 class="mb-0">Best Selling Products</h3>
+                       <p class="mb-0">Find the bestseller products in your area with discount.</p>
+                    </div>
+                 </div>
+              </div>
+           </div>
+           <div class="col-lg-2 col-3">
+              <div class="slider-arrow" id="slider-third-arrows"></div>
+           </div>
+        </div>
+        
+        <div class="row">
+           <div class="col-12">
+              <div class="product-slider-second" id="slider-third"> -->
+
+   <!-- <div class="item">
+                    
+                    <div class="card card-product h-100 mb-4">
+                       <div class="card-body position-relative">
+                  
+                          <div class="text-center position-relative">
+                             <div class="position-absolute top-0 start-0">
+                                <span class="badge bg-danger">Sale</span>
+                             </div>
+                         
+                             <a href="#!"><img src="assets/images/products/product-img-1.jpg" alt="Grocery Ecommerce Template" class="mb-3 img-fluid" /></a>
+                 
+                             <div class="product-action-btn">
+                                <a href="#!" class="btn-action mb-1" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="bi bi-eye"></i></a>
+                                <a href="shop-wishlist.html" class="btn-action mb-1" data-bs-toggle="tooltip" data-bs-html="true" title="Wishlist"><i class="bi bi-heart"></i></a>
+                                <a href="#!" class="btn-action" data-bs-toggle="tooltip" data-bs-html="true" title="Compare"><i class="bi bi-arrow-left-right"></i></a>
+                             </div>
+                          </div>
+                    
+                          <h2 class="fs-6"><a href="#!" class="text-inherit text-decoration-none">Haldiram's Sev Bhujia</a></h2>
+                          <div>
+                             
+                             <small class="text-warning">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-half"></i>
+                             </small>
+                             <span class="text-muted small">4.5(149)</span>
+                          </div>
+                          
+                          <div class="d-flex justify-content-between align-items-center mt-3">
+                             <div>
+                                <span class="text-danger">$18</span>
+                                <span class="text-decoration-line-through text-muted">$24</span>
+                             </div>
+                             <div><span class="text-uppercase small text-primary">In Stock</span></div>
+                          </div>
+                          <div class="d-grid mt-4">
+                             <a href="#" class="btn btn-primary rounded-pill">Add to Cart</a>
+                          </div>
+                       </div>
+                    </div>
+                 </div>
+              -->
+
+   <!-- </div>
+           </div>
+        </div>
+     </div>
+  </section> -->
+   <!-- button -->
+   <!-- <div class="container mb-10">
+     <div class="row">
+        <div class="col-12 d-grid">
+           <a href="#!" class="btn btn-soft-warning btn-lg ls-xl text-uppercase rounded-pill">Save an extra 15% on Authorship order</a>
+        </div>
+     </div>
+  </div> -->
+   <!-- section -->
+   <section class="my-lg-10 my-8">
+      <div class="container">
+         <div class="row align-items-center mb-8">
+            <!-- store -->
+            <div class="col-md-8 col-12">
+               <h3 class="align-items-center d-flex mb-0 h4">
+                  <!-- <div class="d-flex">
+                 <div class="mt-1"> -->
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                     class="bi bi-shop text-primary" viewBox="0 0 16 16">
+                     <path
+                        d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.371 2.371 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976l2.61-3.045zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0zM1.5 8.5A.5.5 0 0 1 2 9v6h1v-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v5h6V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5zM4 15h3v-5H4v5zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3zm3 0h-2v3h2v-3z" />
+                  </svg>
+                  <!-- </div> -->
+                  <!-- <div class="ms-3"> -->
+                  <span class="ms-3">{{'Popular Around You' | translate}}
+                  </span>
+               </h3>
+               <!-- </div> -->
+               <div></div>
+               <!-- </div>
+           </div> -->
+            </div>
+            <!--  <div class="row"> -->
+            <!-- all store -->
+            <div class="col-md-4 text-end col-12 d-none d-md-block">
+               <a [routerLink]="['/Shops']">
+                  {{ 'All Shops' | translate }}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                     class="feather feather-chevron-right">
+                     <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+               </a>
+            </div>
+         </div>
+         <!-- row -->
+         <div class="row row-cols-1 row-cols-lg-3 row-cols-md-2 g-4 g-lg-4">
+            <!-- col -->
+            <div class="col" *ngFor="let dataItem of PopularAroundYou;">
+               <!-- card -->
+               <div class="card flex-row p-6 card-product cursor-pointer"
+                  [routerLink]="['/shop/' + dataItem.CompanyID]">
+                  <div >
+                     <!-- img -->
+                     <img src="{{
+                     this.photoPath + 'listing/' + dataItem.CompanyLogoPath
+                   }}" width="56px" height="56px" (error)="loadDefaultImage($event)" alt=""
+                        class="rounded-circle icon-shape icon-xl" />
+                  </div>
+                  <div class="ms-6">
+                     <!-- content -->
+                     <h2 class="mb-1 h5"><a class="text-inherit">{{ dataItem.CompanyName }}</a></h2>
+                     
+                     <div class="small text-muted">
+                        <span class="me-2">{{ dataItem.BusinessTypeName }}</span>
+                        <!-- <span class="me-2">Groceries</span>
+                       <span>Butcher Shop</span> -->
+                     </div>
+                     <!-- <div class="d-flex align-items-center">
+                        <ng-container *ngIf="companyRatings[dataItem.CompanyID] && companyRatings[dataItem.CompanyID].avgRating > 0">
+                           <small class="text-warning">
+                             <i *ngFor="let starClass of companyRatings[dataItem.CompanyID].stars" [ngClass]="starClass"></i>
+                           </small>
+                           <span class="ms-2">
+                              {{ (companyRatings[dataItem.CompanyID]?.avgRating ?? 0).toFixed(1) }}
+                           </span>
+                         </ng-container>
+                         
+                      </div> -->
+                      <div class="d-flex align-items-center">
+                        <small class="text-warning">
+                          <ng-container *ngIf="companyRatings[dataItem.CompanyID]">
+                            <i *ngFor="let starClass of companyRatings[dataItem.CompanyID].stars" [ngClass]="starClass"></i>
+                          </ng-container>
+                        </small>
+                        <span class="ms-2" *ngIf="companyRatings[dataItem.CompanyID]?.avgRating !== 0.0">
+                           {{ (companyRatings[dataItem.CompanyID]?.avgRating ?? 0).toFixed(1) }}
+                        </span>
+                      </div>
+                     <div class="py-2">
+                           <!-- <ul class="list-unstyled mb-0 small text-primary">
+                          <li [ngClass]="checkAvailability(dataItem[currentDayField]) ? 'text-primary' : 'text-danger'">
+                           {{ checkAvailability(dataItem[currentDayField]) ? 'Available' : 'Closed' }}</li>               
+                       </ul> -->
+                       <ul class="list-unstyled mb-0 small text-dark">
+                        <li>{{ checkAvailability(dataItem[currentDayField]) ? ('Available' | translate) : ('Closed'| translate) }}
+                              
+                        </li>
+                      </ul>
+                     </div>
+                     <div>
+                        <!-- badge -->
+                        <div class="badge text-bg-light border">
+                           {{ dataItem[currentDayField] }}
+                        </div>
+                        <!-- badge -->
+                        <!-- <div class="badge text-bg-light border">In-store prices</div> -->
+                     </div>
+                  </div>                 
+               </div>
+            </div>
+            <!-- <div class="col">
+              <div class="card p-6 card-product">
+                 <div>
+              
+                    <img src="assets/images/stores-logo/stores-logo-2.svg" alt="" class="rounded-circle icon-shape icon-xl" />
+                 </div>
+                 <div class="mt-4">
+                   
+                    <h2 class="mb-1 h5"><a href="#!" class="text-inherit">DealShare Mart</a></h2>
+                    <div class="small text-muted">
+                       <span class="me-2">Alcohol</span>
+                       <span class="me-2">Groceries</span>
+                    </div>
+                    <div class="py-3">
+                       <ul class="list-unstyled mb-0 small">
+                          <li>Delivery</li>
+                          <li>Pickup available</li>
+                       </ul>
+                    </div>
+                    <div>
+                    
+                       <div class="badge text-bg-light border">7.2 mi away</div>
+                    </div>
+                 </div>
+              </div>
+           </div> -->
+
+         </div>
+      </div>
+   </section>
+   <!-- section -->
+
+   <!-- section -->
+   <section class="my-lg-10 my-8">
+      <div class="container">
+         <div class="row align-items-center mb-8">
+            <div class="col-md-8 col-12">
+               <h3 class="align-items-center d-flex mb-0 h4">
+                  <!-- <div class="d-flex">
+               <div class="mt-1"> -->
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                     class="bi bi-journal text-primary" viewBox="0 0 16 16">
+                     <path
+                        d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z" />
+                     <path
+                        d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z" />
+                  </svg>
+                  <span class="ms-3">{{'Why Us?' | translate }}</span>
+               </h3>
+               <!-- </div>
+               <div class="ms-3">
+                  <h3 class="mb-0">{{ 'Why Us?' | translate }}</h3>
+               </div> -->
+               <div></div>
+               <!-- </div> -->
+            </div>
+         </div>
+         <div class="row">
+            <!-- col -->
+            <div class="col-lg-4 col-md-6 col-12">
+               <div class="mb-6 border-end-lg p-md-4 px-xl-12 text-center">
+                  <div>
+                     <!-- text -->
+                     <div class="mb-8">
+                        <!-- svg -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="currentColor"
+                           class="bi bi-clock text-primary" viewBox="0 0 16 16">
+                           <path
+                              d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
+                           <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z" />
+                        </svg>
+                     </div>
+                     <!-- text -->
+                     <h3 class="fs-5 mb-3">{{'Cheapest basket 25 years running' | translate}}</h3>
+                     <p class="mb-0">
+                        {{'Get your order delivered to your doorstep at the earliest from Jude pickup stores near you.' | translate}}
+                     </p>
+                  </div>
+               </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-12">
+               <div class="mb-6 border-end-lg p-md-4 px-xl-12 text-center">
+                  <div>
+                     <div class="mb-8">
+                        <!-- svg -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="currentColor"
+                           class="bi bi-gift text-primary" viewBox="0 0 16 16">
+                           <path
+                              d="M3 2.5a2.5 2.5 0 0 1 5 0 2.5 2.5 0 0 1 5 0v.006c0 .07 0 .27-.038.494H15a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 1 14.5V7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h2.038A2.968 2.968 0 0 1 3 2.506V2.5zm1.068.5H7v-.5a1.5 1.5 0 1 0-3 0c0 .085.002.274.045.43a.522.522 0 0 0 .023.07zM9 3h2.932a.56.56 0 0 0 .023-.07c.043-.156.045-.345.045-.43a1.5 1.5 0 0 0-3 0V3zM1 4v2h6V4H1zm8 0v2h6V4H9zm5 3H9v8h4.5a.5.5 0 0 0 .5-.5V7zm-7 8V7H2v7.5a.5.5 0 0 0 .5.5H7z" />
+                        </svg>
+                     </div>
+                     <!-- text -->
+                     <h3 class="fs-5 mb-3">{{'Best Prices & Offers' | translate}}</h3>
+                     <p class="mb-0">{{'Cheaper prices than your local supermarket, great cashback offers to top it
+                        off.' | translate}}</p>
+                  </div>
+               </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-12">
+               <div class="mb-6 p-md-4 px-xl-12 text-center">
+                  <div>
+                     <div class="mb-8">
+                        <!-- svg -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="currentColor"
+                           class="bi bi-box-seam text-primary" viewBox="0 0 16 16">
+                           <path
+                              d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5l2.404.961L10.404 2l-2.218-.887zm3.564 1.426L5.596 5 8 5.961 14.154 3.5l-2.404-.961zm3.25 1.7-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z" />
+                        </svg>
+                     </div>
+                     <!-- text -->
+                     <h3 class="fs-5 mb-3">{{'Wide Assortment' | translate}}</h3>
+                     <p class="mb-0">{{'Choose from 5000+ products across food, personal care, household & other
+                        categories' | translate}}</p>
+                  </div>
+               </div>
+            </div>
+            <div class="col-12 d-md-none d-lg-block">
+               <!-- hr -->
+               <hr class="mt-8 mb-10" />
+            </div>
+            <div class="col-lg-4 col-md-6 col-12">
+               <!-- text -->
+               <div class="mb-6 border-end-lg p-md-4 px-xl-12 text-center">
+                  <div>
+                     <div class="mb-8">
+                        <!-- svg -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="currentColor"
+                           class="bi bi-tablet text-primary" viewBox="0 0 16 16">
+                           <path
+                              d="M12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h8zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4z" />
+                           <path d="M8 14a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+                        </svg>
+                     </div>
+                     <!-- text -->
+                     <h3 class="fs-5 mb-3">{{'Shop with our app' | translate}}</h3>
+                     <p class="mb-0">
+                        {{'Shop on the go with our app for' | translate}}
+                        <a style="color: #0aad0a;">{{'tablet and mobile' | translate}}</a>
+                        {{'. Get live order tracking. Get latest feature updates' | translate}}
+                     </p>
+                  </div>
+               </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-12">
+               <div class="mb-6 border-end-lg p-md-4 px-xl-12 text-center">
+                  <div>
+                     <div class="mb-8">
+                        <!-- svg -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="currentColor"
+                           class="bi bi-truck text-primary" viewBox="0 0 16 16">
+                           <path
+                              d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5v-7zm1.294 7.456A1.999 1.999 0 0 1 4.732 11h5.536a2.01 2.01 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456zM12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12v4zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
+                        </svg>
+                     </div>
+                     <!-- text -->
+                     <h3 class="fs-5 mb-3">{{'Want your shopping today?' | translate}}</h3>
+                     <p class="mb-0">
+                        {{'Choose from our award winning' | translate}}
+                        <a style="color: #0aad0a;">{{'Express delivery' | translate}}</a>
+                        {{'or collection options.' | translate}}
+                     </p>
+                  </div>
+               </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-12">
+               <div class="mb-6 p-md-4 px-xl-12 text-center">
+                  <div>
+                     <div class="mb-8">
+                        <!-- svg -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="currentColor"
+                           class="bi bi-arrow-repeat text-primary" viewBox="0 0 16 16">
+                           <path
+                              d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z" />
+                           <path fill-rule="evenodd"
+                              d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z" />
+                        </svg>
+                     </div>
+                     <!-- text -->
+                     <h3 class="fs-5 mb-3">{{'Easy Returns/Refund' | translate}}</h3>
+                     <p class="mb-0">
+                        {{'Not satisfied with a product? Return it at the doorstep & get a refund within hours. No
+                        questions asked' | translate}}
+                        <a style="color: #0aad0a;">{{'policy' | translate}}</a>
+                        .
+                     </p>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+</main>
+
+<app-view-cart></app-view-cart>

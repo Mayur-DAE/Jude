@@ -1,0 +1,857 @@
+<!-- Modal -->
+<!-- <div class="modal fade" id="exampleModalCenter121" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div>
+          {{ ProductDescName }}
+          {{ ProductDescCompanyName }}
+          {{ ProductDescCancelAmt }}
+          {{ ProductDescamt }}
+          {{ ProductDescamt }}
+          <div class="button1">
+            <button type="button" class="btn btn-dark button_addcart">
+              Add to Cart
+            </button>
+          </div>
+          {{ ProductDesDescription }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<!-- Clear Cart Modal -->
+<div class="modal fade" id="ClearCartModal" tabindex="-1" aria-labelledby="ClearCartModalLabel"
+   aria-hidden="true" data-bs-backdrop="static" style="z-index: 999999;">
+   <div class="modal-dialog modal-sm modal-dialog-centered ">
+      <div class="modal-content shadow-lg">
+         <div class="modal-body">
+            <!-- <div class="mb-2 d-flex align-items-center"> -->
+               <!-- <h1 class="modal-title fs-5" id="PaymentModalLabel">{{ 'Add Your Location' | translate}}</h1> -->
+               <!-- <button type="button" class="btn-close ms-auto"(click)="closePaymentModal()" aria-label="Close"></button>
+            </div> -->
+              <div> 
+              <!-- <div class="text-align text-center m-3">Are you sure you want to cancel the payment?</div> -->
+              <div class="text-center m-3">
+                <h5 class="fw-bold" style="color: #ff2424;">{{ 'Clear Cart to Continue?' | translate }}</h5>
+                <p class="m-3">
+                 {{ 'Your cart contains products from another shop. Adding this item will clear your current cart. Would you like to continue?' | translate }}
+                </p>
+             </div>
+                <div class="d-flex">
+                  <button (click)="clearcart()" type="modal" class="btn btn-primary  w-100 m-3">{{ 'Yes' | translate }}</button>
+                  <button type="button" class="btn btn-primary  w-100 m-3" data-bs-dismiss="modal" >{{ 'No' | translate }}</button>
+                </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+<!--Product Modal -->
+<div class="modal fade" id="quickViewModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body p-8">
+        <div class="position-absolute top-0 end-0 me-3 mt-3">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"  (click)="selectedImage = null"></button>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <!-- img slide -->
+      <div class="product productModal" id="productModal">
+
+  <!-- Zoom Image -->
+  <div class="zoom-container"
+     (mousemove)="zoom($event)"
+     (mouseleave)="resetZoom()"
+     [style.background-image]="'url(' + getImageUrl(selectedImage || getFilteredImages()[0]) + ')'"
+     [style.background-repeat]="'no-repeat'"
+     [style.background-size]="'200%'"
+     [style.background-position]="zoomPosition">
+
+  <img *ngIf="!zooming"
+       [src]="getImageUrl(selectedImage || getFilteredImages()[0])"
+       alt="Main Product Image"
+       class="main-image" />   
+</div>
+
+
+  <!-- Thumbnails -->
+  <div class="thumbnails" *ngIf="getFilteredImages().length > 0">
+    <img *ngFor="let img of getFilteredImages()"
+         [src]="getImageUrl(img)"
+         class="thumbnail"
+         (click)="selectedImage = img"
+         />
+  </div>
+
+</div>
+
+
+          </div>
+          <div class="col-lg-6">
+            <div class="ps-lg-8 mt-6 mt-lg-0">
+              <a class="mb-4 d-block">{{ selectedDataItem?.ProductSubCategoryShortName
+                }}</a>
+              <h2 class="mb-1 h1">{{ selectedDataItem?.MasterProductName }}</h2>
+              <!-- <div class="mb-4">
+                <small class="text-warning">
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-half"></i>
+                </small>
+                <a href="#" class="ms-2">(30 reviews) TEMP</a>
+              </div> -->
+              <div class="fs-4">
+                <span class="fw-bold text-dark">{{currency}} {{ selectedDataItem?.FinalValue | number:'1.2-2' }} </span>
+                <span class="text-decoration-line-through text-muted" *ngIf="selectedDataItem?.DiscountPrice>0">{{currency}} {{ selectedDataItem?.ProductPrice | number:'1.2-2' 
+                  }}</span>
+                <span *ngIf="selectedDataItem?.DiscountType==='P' && selectedDataItem?.DiscountPrice>0"><small
+                    class="fs-6 ms-2 text-danger">{{selectedDataItem?.DiscountPrice}}% Off</small></span>
+                <span *ngIf="selectedDataItem?.DiscountType==='V' && selectedDataItem?.DiscountPrice>0"><small
+                    class="fs-6 ms-2 text-danger">{{currency}} {{selectedDataItem?.DiscountPrice | number:'1.2-2' }} Off</small></span>
+              </div>
+              <hr class="my-6" />
+              <div class="mb-4">
+                <span class="fw-bold text-dark"> {{ 'Description' | translate }} : </span> <br>
+                <span class="fw-bold ">{{ selectedDataItem?.MasterProductDescription}} </span>
+              </div>
+
+              <div class="mb-4">
+                <span class="fw-bold text-dark"> {{ 'Unit' | translate }} : </span>
+                <button type="button" class="btn btn-outline-secondary">{{selectedDataItem?.MasterProductUnit}}</button>
+              </div>
+              <div>
+                <!-- input -->
+                <!-- input -->
+
+              </div>
+              <div class="mt-3 row justify-content-start g-2 align-items-center">
+                <div class="col-lg-4 col-md-5 col-6 d-grid">
+                  <div class="input-group input-spinner flex-nowrap flex-md-wrapms-5"
+                    *ngIf="this.getQuantity(selectedDataItem?.CompanyProductID)!==0">
+                    <input type="button" value="-" class="button-minus btn btn-sm" data-field="quantity"
+                      (click)="subcart(selectedDataItem)" />
+                    <input type="number" step="1" max="10"
+                      [value]="this.getQuantity(selectedDataItem?.CompanyProductID)" name="quantity"
+                      class="quantity-field form-control-sm form-input" disabled />
+                    <input type="button" value="+" class="button-plus btn btn-sm" data-field="quantity"
+                      (click)="addcart(selectedDataItem)" />
+                  </div>
+                  <!-- button -->
+                  <!-- btn -->
+                  <button type="button" class="btn btn-primary" (click)="addcart(selectedDataItem)"
+                    *ngIf="this.getQuantity(selectedDataItem?.CompanyProductID)===0">
+                    <i class="feather-icon icon-shopping-bag me-2"></i>
+                    {{ 'Add to cart' | translate }}
+                  </button>
+
+
+                </div>
+                <!-- <div class="col-md-4 col-5">
+                  
+                  <a class="btn btn-light" href="#" data-bs-toggle="tooltip" data-bs-html="true" aria-label="Compare"><i
+                      class="bi bi-arrow-left-right"></i></a>
+                  <a class="btn btn-light" href="#!" data-bs-toggle="tooltip" data-bs-html="true"
+                    aria-label="Wishlist"><i class="feather-icon icon-heart"></i></a>
+                </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Review Modal -->
+<div class="modal fade" id="reviewModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body p-8">
+        <div class="position-absolute top-0 end-0 me-3 mt-3">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="row">
+          <!-- LEFT: Add Review -->
+          <div class="col-lg-6 pe-lg-4">
+            <!-- If not reviewed -->
+            <div *ngIf="reviewPresent === false">
+              <h5 class="top_Reviews_title">{{ 'Add a Review' | translate }}</h5>
+              <div class="mb-3">
+                <img *ngIf="companydata?.length > 0" [src]="CompanyImageNamePath+companydata[0].CompanyLogoPath"
+                  class="rounded-circle icon-shape icon-xxl" (error)="loadDefaultImage($event)" />
+                <div class="col-sm-6">
+                  <b *ngIf="companydata?.length > 0" class="reviewstyle">{{ companydata[0].CompanyName }}</b>
+                </div>
+              </div>
+              <hr />
+              <div class="main">
+                <div class="rating-wrapper">
+                  <p class="top_Reviews_title">{{ 'Submit Ratings' | translate }}</p>
+                  <div>
+                    <ng-container *ngFor="let star of [5,4,3,2,1]">
+                      <input type="radio" name="rating" [id]="'star-'+star" (click)="setRating(star)" />
+                      <label [for]="'star-'+star">
+                        <i class="bi bi-star-fill fs-6" [ngClass]="{ 'star-icon': starError }"></i>
+                      </label>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+              <hr />
+              <div class="col-md-12 mb-3">
+                <label class="form-label top_Reviews_title2">{{ 'Add a written review' | translate }}</label>
+                <textarea rows="3" class="form-control" required maxlength="240" [(ngModel)]="CustomerRatingDescription"
+                  placeholder="{{ 'What did you like or dislike? Let us know your thoughts.' | translate }}"
+                  [ngClass]="{ 'text-area': textError }"></textarea>
+                <p class="text-end">{{ CustomerRatingDescription.length }} / 240</p>
+              </div>
+              <div class="col-md-12 mb-4 md:mb-0">
+                <button type="submit" class="btn btn-primary w-100" (click)="addReview()">
+                  {{ 'Submit Review' | translate }}
+                </button>
+              </div>
+            </div>
+
+            <!-- If already reviewed -->
+            <div *ngIf="reviewPresent === true">
+              <h5 class="top_Reviews_title">{{ 'You Have Already Given Your Review' | translate }}</h5>
+              <div class="mb-3">
+                <img [src]="CompanyImageNamePath+companydata[0].CompanyLogoPath"
+                  class="rounded-circle icon-shape icon-xxl" (error)="loadDefaultImage($event)" />
+                <div class="col-sm-6">
+                  <b class="reviewstyle">{{ productListWithoutFilter[0].CompanyName }}</b>
+                </div>
+              </div>
+              <hr />
+              <div class="main">
+                <div class="show-rating">
+                  <p class="top_Reviews_title">{{ 'Rating' | translate }}</p>
+                  <div>
+                    <label *ngFor="let i of reviewloop"><i class="bi bi-star-fill fs-6"></i></label>
+                    <label *ngFor="let i of reviewloop1"><i class="bi bi-star fs-6"></i></label>
+                  </div>
+                </div>
+              </div>
+              <hr />
+              <div class="col-md-12 mb-3">{{ reviewInfo.CreatedDate }}</div>
+              <div class="col-md-12 mb-3">{{ reviewInfo.CustomerRatingDescription }}</div>
+            </div>
+          </div>
+
+          <!-- CENTER: Vertical Divider -->
+          <div class="col-lg-1 d-none d-lg-flex justify-content-center">
+            <div style="width: 1px; background-color: #ddd; height: 100%;"></div>
+          </div>
+
+          <!-- RIGHT: Top Reviews -->
+          <div class="col-lg-5 ps-lg-4">
+            <div *ngIf="ratingandreviewsList?.length > 0">
+              <h5 class="top_Reviews_title">{{ 'Top Reviews' | translate }}</h5>
+              <div class="scrollbar-theme " style="max-height: 450px;">
+                <div class="review" *ngFor="let dataItem of ratingandreviewsList">
+                  <div class="col-md-6 d-flex align-items-center justify-content-between mb-2 w-100">
+                    <div class="d-flex align-items-center">
+                      <img class="letterimage" src="assets/images/icons/review_default.png" width="25px" />
+                      <span class="Name ms-2">{{ dataItem.CustomerName }}</span>
+                    </div>
+                    <span class="review_date">{{ dataItem.CreatedDate }}</span>
+                  </div>
+
+                  <div class="">
+                    <div class="row">
+                      <div class="MainStar" style="padding-left: 16px;">
+                        <ng-container *ngIf="dataItem.CustomerCompanyRating === 0">
+                          <small class="text-warning">
+                            <i class="bi bi-star fs-6" *ngFor="let i of [].constructor(5)"></i>
+                          </small>
+                        </ng-container>
+                        <ng-container *ngIf="dataItem.CustomerCompanyRating > 0">
+                          <small class="text-warning">
+                            <i class="bi bi-star-fill fs-6" *ngFor="let i of [].constructor(dataItem.CustomerCompanyRating)"></i>
+                            <i class="bi bi-star fs-6" *ngFor="let i of [].constructor(5 - dataItem.CustomerCompanyRating)"></i>
+                          </small>
+                        </ng-container>
+                      </div>
+                    </div>
+                    <div class="customer-review">
+                      <div class="content">{{ dataItem.CustomerRatingDescription }}</div>
+                      <hr />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-center align-items-center" style="min-height: 300px;" *ngIf="!ratingandreviewsList || ratingandreviewsList.length === 0">
+              <div class="text-center">
+                <h5 class="top_Reviews_title mt-3 mb-4">{{ 'No Reviews Yet' | translate }}</h5>
+              </div>
+            </div>
+          </div>
+        </div> <!-- end row -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--AboutUs Modal -->
+<div class="modal fade" id="aboutusModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body p-8">
+        <div class="position-absolute top-0 end-0 me-3 mt-3">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="row" *ngFor="let dataItem of companydata">
+          <div class="col-lg-6">
+            <h5 class="Availability">{{ 'Availability' | translate }}</h5>
+            <!-- <div class="row">
+                        <div class="col-sm-6 Days">
+                           Saturday
+                        </div>
+                        <div class="col-sm-6 Time">
+                            {{dataItem.CompanyTimeSaturday}}
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-6 Days">
+                            Sunday
+                        </div>
+                        <div class="col-sm-6 Time">
+                            {{dataItem.CompanyTimeSunday}}
+                        </div>
+                    </div>
+                    <hr> -->
+            <div class="row date_responsive">
+              <div class="col-sm-6 Days">{{ 'Monday' | translate }}</div>
+              <div class="col-sm-6 Time">
+                {{ dataItem.CompanyTimeMonday }}
+              </div>
+            </div>
+            <hr />
+            <div class="row date_responsive">
+              <div class="col-sm-6 Days">{{ 'Tuesday' | translate }}</div>
+              <div class="col-sm-6 Time">
+                {{ dataItem.CompanyTimeTuesday }}
+              </div>
+            </div>
+            <hr />
+            <div class="row date_responsive">
+              <div class="col-sm-6 Days">{{ 'Wednesday' | translate }}</div>
+              <div class="col-sm-6 Time">
+                {{ dataItem.CompanyTimeWednesday }}
+              </div>
+            </div>
+            <hr />
+            <div class="row date_responsive">
+              <div class="col-sm-6 Days">{{ 'Thursday' | translate }}</div>
+              <div class="col-sm-6 Time">
+                {{ dataItem.CompanyTimeThursday }}
+              </div>
+            </div>
+            <hr />
+            <div class="row date_responsive">
+              <div class="col-sm-6 Days">{{ 'Friday' | translate }}</div>
+              <div class="col-sm-6 Time">
+                {{ dataItem.CompanyTimeFriday }}
+              </div>
+            </div>
+            <hr />
+            <div class="row date_responsive">
+              <div class="col-sm-6 Days">{{ 'Saturday' | translate }}</div>
+              <div class="col-sm-6 Time">
+                {{ dataItem.CompanyTimeSaturday }}
+              </div>
+            </div>
+            <hr />
+            <div class="row date_responsive">
+              <div class="col-sm-6 Days">{{ 'Sunday' | translate }}</div>
+              <div class="col-sm-6 Time">
+                {{ dataItem.CompanyTimeSunday }}
+              </div>
+            </div>
+            <br>
+          </div>
+
+          <div class=" col-lg-6 scrollbar-theme overflow-auto" style="max-height: 382.6px;">
+
+            <!-- Righside -->
+            <div class="row">
+              <h5 class="About_Us">{{ 'About Us'| translate}}</h5>
+            </div>
+            <div class="row">
+              <div class="About_Us1">
+                <p>{{ dataItem.CompanyAddress }}</p>
+
+                <p>{{ dataItem.CompanyDescription }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="mt-4">
+  <div class="container">
+    <!-- row -->
+    <div class="row">
+      <!-- col -->
+      <div class="col-12">
+        <!-- breadcrumb -->
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a href="#">{{ 'Home' | translate }}</a></li>
+            <li class="breadcrumb-item"><a href="#/Shops">{{ 'Shop List' | translate }}</a></li>
+            <li *ngIf="companydata?.length > 0" class="breadcrumb-item active" aria-current="page">
+              {{companydata[0].CompanyName}}</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="mb-lg-14 mb-8 mt-8">
+  <div class="container">
+    <!-- row -->
+    <div class="row">
+      <div class="col-12 col-lg-3 col-md-4 mb-1 mb-sm-4 mb-md-0">
+        <div class="d-flex  flex-row flex-sm-column">
+          <div>
+            <!-- img -->
+            <!-- img -->
+            <img *ngIf="companydata?.length > 0" src={{CompanyImageNamePath+companydata[0].CompanyLogoPath}} alt=""
+              class="rounded-circle icon-shape icon-xxl" (error)="loadDefaultImage($event)" />
+          </div>
+          <!-- heading -->
+          <div class="mt-0 mt-sm-4 px-4 px-sm-0">
+            <h1 *ngIf="companydata?.length > 0" class="mb-1 h4">{{companydata[0].CompanyName}}</h1>
+            <div *ngIf="companydata?.length > 0" class="small text-muted">
+              <span>{{companydata[0].CompanyAddress}}</span>
+              <br>
+              <span>{{companydata[0].Address1}}</span>
+            </div>
+
+            <!-- rating -->
+            <div class="mt-2 mb-2">
+              <!-- rating -->
+              <small class="text-warning">
+                <i *ngFor="let star of stars" [class]="iconClass[star]"></i>
+              </small>
+              <ng-container *ngIf="companyreviewPresent">
+                <span class="ms-2">{{ avgofcompanyrating | number: "1.1-1" }}</span>
+                <span class="text-muted ms-1" *ngIf="lengthofrating ==1">({{lengthofrating|number}} review)</span>
+                <span class="text-muted ms-1" *ngIf="lengthofrating >1">({{lengthofrating|number}} reviews)</span>
+              </ng-container>
+              <ng-container *ngIf="!companyreviewPresent">
+                <span class="ms-2">{{ 'No Reviews Yet' | translate }}</span>
+
+              </ng-container>
+            </div>
+          </div>
+        </div>
+
+        <div class="contacts grid grid-cols-5 gap-4">
+
+          <a *ngIf="CompanyMobileNo2" 
+          href="https://api.whatsapp.com/send?phone=91{{
+              CompanyMobileNo2
+            }}&text=Hello! {{
+              companyname
+            }} , I found you on JUDE" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon">
+              <path
+                d="M20.6607 6.83829C17.7807 2.39829 11.9007 1.07829 7.34071 3.83829C2.90071 6.59829 1.46071 12.5983 4.34071 17.0383L4.58071 17.3983L3.62071 20.9983L7.22071 20.0383L7.58071 20.2783C9.14071 21.1183 10.8207 21.5983 12.5007 21.5983C14.3007 21.5983 16.1007 21.1183 17.6607 20.1583C22.1007 17.2783 23.4207 11.3983 20.6607 6.83829ZM18.1407 16.0783C17.6607 16.7983 17.0607 17.2783 16.2207 17.3983C15.7407 17.3983 15.1407 17.6383 12.7407 16.6783C10.7007 15.7183 9.02071 14.1583 7.82071 12.3583C7.10071 11.5183 6.74071 10.4383 6.62071 9.35829C6.62071 8.39829 6.98071 7.55829 7.58071 6.95829C7.82071 6.71829 8.06071 6.59829 8.30071 6.59829H8.90071C9.14071 6.59829 9.38071 6.59829 9.50071 7.07829C9.74071 7.67829 10.3407 9.11829 10.3407 9.23829C10.4607 9.35829 10.4607 9.59829 10.3407 9.71829C10.4607 9.95829 10.3407 10.1983 10.2207 10.3183C10.1007 10.4383 9.98071 10.6783 9.86071 10.7983C9.62071 10.9183 9.50071 11.1583 9.62071 11.3983C10.1007 12.1183 10.7007 12.8383 11.3007 13.4383C12.0207 14.0383 12.7407 14.5183 13.5807 14.8783C13.8207 14.9983 14.0607 14.9983 14.1807 14.7583C14.3007 14.5183 14.9007 13.9183 15.1407 13.6783C15.3807 13.4383 15.5007 13.4383 15.7407 13.5583L17.6607 14.5183C17.9007 14.6383 18.1407 14.7583 18.2607 14.8783C18.3807 15.2383 18.3807 15.7183 18.1407 16.0783Z"
+                fill="#000014" />
+            </svg>
+          </a>
+          <a *ngIf="CompanyMobileNo1" 
+          href="tel:{{ CompanyMobileNo1 }}">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon">
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M12.0317 12.4724C16.0208 16.4604 16.9258 11.8467 19.4656 14.3848C21.9143 16.8328 23.3216 17.3232 20.2192 20.4247C19.8306 20.737 17.3616 24.4943 8.6846 15.8197C0.0065217 7.144 3.76158 4.67244 4.07397 4.28395C7.18387 1.17385 7.66586 2.58938 10.1145 5.03733C12.6544 7.5765 8.04266 8.48441 12.0317 12.4724Z"
+                fill="#000014" />
+            </svg>
+          </a>
+          <a *ngIf="CompanyEmailid"
+          href="mailto:{{ CompanyEmailid }}">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon">
+              <path
+                d="M17.439 3C18.78 3 20.07 3.53 21.019 4.481C21.969 5.43 22.5 6.71 22.5 8.05V15.95C22.5 18.74 20.23 21 17.439 21H7.56C4.769 21 2.5 18.74 2.5 15.95V8.05C2.5 5.26 4.759 3 7.56 3H17.439ZM18.57 8.2C18.36 8.189 18.16 8.26 18.009 8.4L13.5 12C12.92 12.481 12.089 12.481 11.5 12L7 8.4C6.689 8.17 6.259 8.2 6 8.47C5.73 8.74 5.7 9.17 5.929 9.47L6.06 9.6L10.61 13.15C11.17 13.59 11.849 13.83 12.56 13.83C13.269 13.83 13.96 13.59 14.519 13.15L19.03 9.54L19.11 9.46C19.349 9.17 19.349 8.75 19.099 8.46C18.96 8.311 18.769 8.22 18.57 8.2Z"
+                fill="#000014" />
+            </svg>
+          </a>
+          <a *ngIf="companydata?.length > 0 && companydata[0]?.WebsiteURL" 
+            [href]="companydata[0].WebsiteURL ? companydata[0].WebsiteURL : '/#/shop/' + CompanyID" 
+            target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon">
+              <g filter="url(#filter0_d_1124_32052)">
+                <path
+                  d="M0.5 12C0.5 8.8174 1.76428 5.76516 4.01472 3.51472C6.26516 1.26428 9.3174 0 12.5 0C15.6826 0 18.7348 1.26428 20.9853 3.51472C23.2357 5.76516 24.5 8.8174 24.5 12C24.5 15.1826 23.2357 18.2348 20.9853 20.4853C18.7348 22.7357 15.6826 24 12.5 24C9.3174 24 6.26516 22.7357 4.01472 20.4853C1.76428 18.2348 0.5 15.1826 0.5 12V12ZM11.75 1.6155C10.745 1.9215 9.7475 2.8455 8.9195 4.398C8.6467 4.91414 8.41207 5.44958 8.2175 6H11.75V1.6155ZM6.635 6C6.88501 5.20323 7.20631 4.4306 7.595 3.6915C7.85436 3.20108 8.15388 2.73298 8.4905 2.292C6.63201 3.06274 5.03301 4.34943 3.8825 6H6.635ZM5.762 11.25C5.807 9.9345 5.969 8.673 6.23 7.5H3.011C2.45168 8.67758 2.11792 9.94952 2.027 11.25H5.762ZM7.7705 7.5C7.47547 8.7297 7.30561 9.9861 7.2635 11.25H11.75V7.5H7.7705ZM13.25 7.5V11.25H17.735C17.6934 9.98615 17.5241 8.72975 17.2295 7.5H13.25ZM7.265 12.75C7.30662 14.0138 7.47598 15.2702 7.7705 16.5H11.75V12.75H7.265ZM13.25 12.75V16.5H17.2295C17.51 15.3525 17.6885 14.088 17.7365 12.75H13.25ZM8.2175 18C8.4245 18.579 8.66 19.116 8.9195 19.602C9.7475 21.1545 10.7465 22.077 11.75 22.3845V18H8.2175ZM8.4905 21.708C8.15386 21.267 7.85434 20.7989 7.595 20.3085C7.20632 19.5694 6.88502 18.7968 6.635 18H3.8825C5.03295 19.6506 6.63196 20.9373 8.4905 21.708V21.708ZM6.23 16.5C5.95875 15.2671 5.80208 14.0118 5.762 12.75H2.027C2.12 14.085 2.4635 15.3495 3.011 16.5H6.23ZM16.5095 21.708C18.368 20.9373 19.9671 19.6506 21.1175 18H18.365C18.115 18.7968 17.7937 19.5694 17.405 20.3085C17.1457 20.799 16.8462 21.2671 16.5095 21.708V21.708ZM13.25 18V22.3845C14.255 22.0785 15.2525 21.1545 16.0805 19.602C16.34 19.116 16.5755 18.579 16.7825 18H13.25ZM18.77 16.5H21.989C22.5365 15.3495 22.88 14.085 22.973 12.75H19.238C19.1979 14.0118 19.0413 15.2671 18.77 16.5ZM22.973 11.25C22.882 9.94952 22.5483 8.67759 21.989 7.5H18.77C19.031 8.673 19.193 9.9345 19.238 11.25H22.973ZM17.405 3.6915C17.7755 4.3875 18.098 5.1615 18.365 6H21.1175C19.9671 4.34937 18.368 3.06267 16.5095 2.292C16.8365 2.718 17.1365 3.189 17.405 3.6915V3.6915ZM16.7825 6C16.5879 5.44957 16.3533 4.91413 16.0805 4.398C15.2525 2.8455 14.255 1.923 13.25 1.6155V6H16.7825Z"
+                  fill="#000014" />
+              </g>
+              <defs>
+                <filter id="filter0_d_1124_32052" x="-3.5" y="0" width="32" height="32" filterUnits="userSpaceOnUse"
+                  color-interpolation-filters="sRGB">
+                  <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                  <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                    result="hardAlpha" />
+                  <feOffset dy="4" />
+                  <feGaussianBlur stdDeviation="2" />
+                  <feComposite in2="hardAlpha" operator="out" />
+                  <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+                  <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1124_32052" />
+                  <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1124_32052" result="shape" />
+                </filter>
+              </defs>
+            </svg>
+          </a>
+          <a href="https://www.google.com/maps/search/?api=1&query={{
+              companyname
+            }} " target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon">
+              <g clip-path="url(#clip0_424_31956)">
+                <path
+                  d="M9.23047 17.2959C9.86674 18.1068 10.4458 18.9609 10.9636 19.8521C11.4056 20.6903 11.5899 21.2586 11.9129 22.2685C12.111 22.8265 12.2901 22.993 12.6751 22.993C13.0946 22.993 13.2849 22.7097 13.4319 22.2716C13.7373 21.3178 13.9769 20.59 14.3549 19.9022C15.0967 18.5744 16.0184 17.3945 16.9241 16.2605C17.1692 15.9396 18.7544 14.0698 19.4681 12.5945C19.4681 12.5945 20.3452 10.9739 20.3452 8.71052C20.3452 6.59337 19.4802 5.125 19.4802 5.125L16.9898 5.79195L15.4773 9.77539L15.1031 10.3247L15.0283 10.4242L14.9288 10.5487L14.7541 10.7477L14.5045 10.9973L13.1577 12.0945L9.7906 14.0387L9.23047 17.2959Z"
+                  fill="#000014" />
+                <path
+                  d="M5.75586 12.3218C6.57765 14.1989 8.16237 15.8489 9.23456 17.297L14.9294 10.5511C14.9294 10.5511 14.1271 11.6003 12.6718 11.6003C11.0507 11.6003 9.74104 10.3058 9.74104 8.6735C9.74104 7.55414 10.4145 6.78516 10.4145 6.78516L6.54864 7.82101L5.75586 12.3217V12.3218Z"
+                  fill="#000014" />
+                <path
+                  d="M14.9924 1.34772C16.8838 1.95754 18.5027 3.2378 19.4819 5.12566L14.9306 10.5494C14.9306 10.5494 15.604 9.76652 15.604 8.65411C15.604 6.98379 14.1975 5.73597 12.6781 5.73597C11.2412 5.73597 10.416 6.78351 10.416 6.78351V3.36662L14.9924 1.34766V1.34772Z"
+                  fill="#000014" />
+                <path
+                  d="M6.79883 3.74341C7.9285 2.39181 9.91629 1 12.6568 1C13.9864 1 14.988 1.34906 14.988 1.34906L10.412 6.7857H7.16989L6.79883 3.74347V3.74341Z"
+                  fill="#000014" />
+                <path
+                  d="M5.75603 12.322C5.75603 12.322 5 10.8415 5 8.69662C5 6.66945 5.78804 4.89746 6.79926 3.74219L10.4151 6.78496L5.75603 12.322Z"
+                  fill="#000014" />
+              </g>
+              <defs>
+                <clipPath id="clip0_424_31956">
+                  <rect width="15.346" height="22" fill="white" transform="translate(5 1)" />
+                </clipPath>
+              </defs>
+            </svg>
+          </a>
+          <a *ngIf="FacbookID"
+           href="{{ FacbookID }}" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon">
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M1.5 12.0614C1.5 17.5303 5.47192 22.0778 10.6667 23V15.0553H7.91667V12H10.6667V9.55525C10.6667 6.80525 12.4386 5.27808 14.9447 5.27808C15.7386 5.27808 16.5948 5.4 17.3886 5.52192V8.33333H15.9833C14.6386 8.33333 14.3333 9.00525 14.3333 9.86142V12H17.2667L16.7781 15.0553H14.3333V23C19.5281 22.0778 23.5 17.5312 23.5 12.0614C23.5 5.9775 18.55 1 12.5 1C6.45 1 1.5 5.9775 1.5 12.0614Z"
+                fill="#000014" />
+            </svg>
+          </a>
+
+           <!-- YouTube Icon -->
+           <a *ngIf="YouTube"
+           href="{{ YouTube }}" target="_blank">
+           <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 24 24" class="icon">
+            <path d="M21.582,6.186c-0.23-0.86-0.908-1.538-1.768-1.768C18.254,4,12,4,12,4S5.746,4,4.186,4.418 c-0.86,0.23-1.538,0.908-1.768,1.768C2,7.746,2,12,2,12s0,4.254,0.418,5.814c0.23,0.86,0.908,1.538,1.768,1.768 C5.746,20,12,20,12,20s6.254,0,7.814-0.418c0.861-0.23,1.538-0.908,1.768-1.768C22,16.254,22,12,22,12S22,7.746,21.582,6.186z M10,15.464V8.536L16,12L10,15.464z"></path>
+          </svg>
+          </a>
+
+          <!-- LinkedIn Icon -->
+          <a *ngIf="Linkedin"
+          href="{{ Linkedin }}" target="_blank">
+          <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 24 24" class="icon">
+          <path d="M19,3H5C3.895,3,3,3.895,3,5v14c0,1.105,0.895,2,2,2h14c1.105,0,2-0.895,2-2V5C21,3.895,20.105,3,19,3z M9,17H6.477v-7H9 V17z M7.694,8.717c-0.771,0-1.286-0.514-1.286-1.2s0.514-1.2,1.371-1.2c0.771,0,1.286,0.514,1.286,1.2S8.551,8.717,7.694,8.717z M18,17h-2.442v-3.826c0-1.058-0.651-1.302-0.895-1.302s-1.058,0.163-1.058,1.302c0,0.163,0,3.826,0,3.826h-2.523v-7h2.523v0.977 C13.93,10.407,14.581,10,15.802,10C17.023,10,18,10.977,18,13.174V17z"></path>
+          </svg>
+          </a>
+
+          <!-- X (Formerly Twitter) Icon -->
+          <a *ngIf="Twitter"
+          href="{{ Twitter }}" target="_blank">
+          <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 24 24" class="icon">
+          <path d="M10.053,7.988l5.631,8.024h-1.497L8.566,7.988H10.053z M21,6v12	c0,1.657-1.343,3-3,3H6c-1.657,0-3-1.343-3-3V6c0-1.657,1.343-3,3-3h12C19.657,3,21,4.343,21,6z M17.538,17l-4.186-5.99L16.774,7	h-1.311l-2.704,3.16L10.552,7H6.702l3.941,5.633L6.906,17h1.333l3.001-3.516L13.698,17H17.538z"></path>
+          </svg>
+          </a>
+          <!-- Pinterest Icon -->
+          <a *ngIf="Pintrest"
+          href="{{ Pintrest }}" target="_blank">
+          <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 24 24" class="icon">
+          <path d="M12,2C6.477,2,2,6.477,2,12c0,4.237,2.636,7.855,6.356,9.312c-0.087-0.791-0.167-2.005,0.035-2.868 c0.182-0.78,1.172-4.971,1.172-4.971s-0.299-0.599-0.299-1.484c0-1.391,0.806-2.428,1.809-2.428c0.853,0,1.265,0.641,1.265,1.408 c0,0.858-0.546,2.141-0.828,3.329c-0.236,0.996,0.499,1.807,1.481,1.807c1.777,0,3.143-1.874,3.143-4.579 c0-2.394-1.72-4.068-4.177-4.068c-2.845,0-4.515,2.134-4.515,4.34c0,0.859,0.331,1.781,0.744,2.282 c0.082,0.099,0.093,0.186,0.069,0.287c-0.076,0.316-0.244,0.995-0.277,1.134c-0.043,0.183-0.145,0.222-0.334,0.133 c-1.249-0.582-2.03-2.408-2.03-3.874c0-3.154,2.292-6.052,6.608-6.052c3.469,0,6.165,2.472,6.165,5.776 c0,3.447-2.173,6.22-5.189,6.22c-1.013,0-1.966-0.527-2.292-1.148c0,0-0.502,1.909-0.623,2.378 c-0.226,0.868-0.835,1.958-1.243,2.622C9.975,21.843,10.969,22,12,22c5.522,0,10-4.478,10-10S17.523,2,12,2z"></path>
+          </svg>
+          </a>
+          <!-- WordPress Icon -->
+          <a *ngIf="WordPress"
+          href="{{ WordPress }}" target="_blank">
+          <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 24 24" class="icon">
+          <path d="M 12 2 C 6.484375 2 2 6.484375 2 12 C 2 17.515625 6.484375 22 12 22 C 17.515625 22 22 17.511719 22 12 C 22 6.484375 17.515625 2 12 2 Z M 12 3 C 16.960938 3 21 7.035156 21 12 C 21 16.964844 16.960938 21 12 21 C 7.039063 21 3 16.960938 3 12 C 3 7.035156 7.039063 3 12 3 Z M 12 4 C 9.203125 4 6.742188 5.421875 5.3125 7.59375 C 5.5 7.601563 5.695313 7.625 5.84375 7.625 C 6.679688 7.625 7.96875 7.5 7.96875 7.5 C 8.398438 7.476563 8.429688 8.136719 8 8.1875 C 8 8.1875 7.574219 8.222656 7.09375 8.25 L 9.75 16.1875 L 11.5 10.9375 L 10.53125 8.25 C 10.101563 8.226563 9.6875 8.1875 9.6875 8.1875 C 9.253906 8.160156 9.289063 7.472656 9.71875 7.5 C 9.71875 7.5 11.058594 7.625 11.84375 7.625 C 12.679688 7.625 13.96875 7.5 13.96875 7.5 C 14.402344 7.476563 14.460938 8.136719 14.03125 8.1875 C 14.03125 8.1875 13.574219 8.222656 13.09375 8.25 L 16 16.25 L 16.8125 13.59375 C 17.074219 12.527344 17.40625 11.6875 17.40625 11 C 17.40625 10.25 17.0625 9.902344 16.75 9.375 C 16.355469 8.710938 15.96875 8.160156 15.96875 7.5 C 15.96875 6.765625 16.527344 6.09375 17.3125 6.09375 C 17.347656 6.09375 17.371094 6.089844 17.40625 6.09375 C 15.980469 4.789063 14.082031 4 12 4 Z M 19.03125 8.15625 C 19.066406 8.410156 19.046875 8.671875 19.0625 8.96875 C 19.101563 9.78125 18.941406 11.03125 18.75 11.625 C 18.140625 13.511719 16.34375 18.6875 16.34375 18.6875 C 16.375 18.675781 16.433594 18.652344 16.5625 18.5625 C 18.652344 17.132813 20 14.722656 20 12 C 20 10.609375 19.65625 9.296875 19.03125 8.15625 Z M 4.6875 8.75 C 4.246094 9.742188 4 10.839844 4 12 C 4 15.164063 5.832031 17.890625 8.5 19.1875 Z M 12.15625 12.6875 L 9.75 19.6875 C 10.46875 19.898438 11.214844 20 12 20 C 12.929688 20 13.824219 19.855469 14.65625 19.5625 C 14.636719 19.527344 14.609375 19.476563 14.59375 19.4375 Z"></path>
+          </svg>
+          </a>     
+      </div>
+
+        <hr />
+        <!-- nav -->
+        <ul class="nav flex-row flex-sm-column nav-pills nav-pills-dark">
+          <!-- nav item -->
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" [ngClass]="{'active': selectedTab === 'shop'}" (click)="selectedTab = 'shop'">
+              <i class="feather-icon icon-shopping-bag me-2"></i>
+              {{ 'Shop' | translate}}
+            </a>
+          </li>
+          <!-- nav item -->
+          <!-- <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i class="feather-icon icon-gift me-2"></i>
+              Deals
+            </a>
+          </li>
+         
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i class="feather-icon icon-map-pin me-2"></i>
+              Buy It Again
+            </a>
+          </li> -->
+          <!-- nav item -->
+          <li class="nav-item">
+            <a class="nav-link" (click)="refreshratingandreviewsList()" data-bs-toggle="modal"
+              data-bs-target="#reviewModal" [ngClass]="{'active': selectedTab === 'reviews'}" (click)="selectedTab = 'reviews'">
+              <i class="feather-icon icon-star me-2"></i>
+              {{ 'Reviews' | translate}}
+            </a>
+          </li>
+          <!-- nav item -->
+          <!-- <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i class="feather-icon icon-book me-2"></i>
+              Recipes
+            </a>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i class="feather-icon icon-phone-call me-2"></i>
+              Contact
+            </a>
+          </li> -->
+          <!-- nav item -->
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="modal" data-bs-target="#aboutusModal" (click)="refreshaboutusList()" [ngClass]="{'active': selectedTab === 'about'}" (click)="selectedTab = 'about'">
+              <i class="feather-icon icon-clipboard me-2"></i>
+              {{ 'About Us' | translate}}
+            </a>
+          </li>
+        </ul>
+        <hr />
+        <!-- <div class="scrollbar-theme overflow-auto" style="max-height:600px;"> -->
+        <div class="d-none d-sm-block">
+          <ul class="nav flex-column nav-links">
+            <!-- nav item -->
+            <li class="nav-item">
+              <a class="nav-link ms-2" [ngClass]="{ 'selected-category': selectedCategory === '' }" (click)="selectCategory('')">{{ 'All' | translate }}</a>
+            </li>
+            <!-- nav item -->
+            <li class="nav-item" *ngFor="let dataItem of uniqueCategories">
+              <a class="nav-link ms-2" [ngClass]="{ 'selected-category': selectedCategory === dataItem }"
+                (click)="selectCategory(dataItem)">{{dataItem}}</a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+      <div class="col-12 col-lg-9 col-md-8">
+        <div class="mb-2 mb-md-8 bg-light d-lg-flex justify-content-lg-between rounded">
+          <div class="align-self-center p-4 p-md-8">
+            <div class="mb-3">
+              <h5 *ngIf="companydata?.length > 0" class="mb-0 fw-bold">{{companydata[0].CompanyName}}</h5>
+              <!-- <p class="mb-0 text-muted">{{productList[0].CompanyDescription}}</p> -->
+            </div>
+            <div class="position-relative">
+              <input *ngIf="companydata?.length > 0" type="text" class="form-control" id="exampleFormControlInput1"
+                [(ngModel)]="CompanyProductNameSearch"
+                placeholder="{{ 'Search' | translate}} " (keyup)="filterName()" />
+              <span class="position-absolute end-0 top-0 mt-2 me-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  class="feather feather-search">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+              </span>
+            </div>
+          </div>
+
+        </div>
+        <ng-container *ngIf="paginatedProducts && paginatedProducts.length > 0">
+          <div class="d-md-flex justify-content-between mb-3 align-items-center">
+            <div>
+              <p class="mb-3 mb-md-0">{{productList.length}} {{ (productList.length === 1 ? 'Product found' : 'Products found') | translate }}</p>
+            </div>
+            <div class="d-flex justify-content-md-between align-items-center">
+              <div class="me-2">
+                <!-- select option -->
+                <select class="form-select" [(ngModel)]="itemsPerPage" (change)="setPage(1)">
+                  <option selected value="50">{{ 'Show' | translate}}: 50</option>
+                  <option value="10">10</option>
+                  <option value="20">20</option>
+                  <option value="30">30</option>
+                </select>
+              </div>
+              <div>
+                <!-- select option -->
+                <select class="form-select" [(ngModel)]="SortBy" (change)="sortProd()">
+                  <option selected value="Featured">{{ 'Sort by: Featured' | translate}}</option>
+                  <option value="Low to High">{{ 'Price: Low to High' | translate}}</option>
+                  <option value="High to Low">{{ 'Price: High to Low' | translate}}</option>
+                  <!-- <option value="Release Date">Release Date</option> -->
+                  <!-- <option value="Avg. Rating">Avg. Rating</option> -->
+                </select>
+              </div>
+            </div>
+          </div>
+          <!-- row -->
+          <div class="row g-4 row-cols-xl-4 row-cols-lg-3 row-cols-3 row-cols-md-2 mt-2 ">
+            <div class="col mobile-padding" *ngFor="let dataItem of paginatedProducts">
+              <!-- card -->
+              <div class="card card-product mt-0 h-100">
+                <div class="card-body p-1 p-sm-4">
+                  <div class="text-center position-relative">
+                    <!-- badge -->
+                    <div class="position-absolute top-0 start-0">
+                      <span class="badge bg-success"
+                        *ngIf="dataItem.DiscountType==='P' && dataItem.DiscountPrice>0">{{dataItem.DiscountPrice}}%</span>
+                      <span class="badge bg-success"
+                        *ngIf="dataItem.DiscountType==='V' && dataItem.DiscountPrice>0">{{currency}}
+                        {{dataItem.DiscountPrice | number:'1.2-2' }}</span>
+                    </div>
+                    <!-- img -->
+                    <img src="{{ProductImageNamePath +dataItem.MasterProductImageThumbnailImagePath}}"
+                      class=" img-fluid"  />
+                    <!-- btn action -->
+                    <div class="card-product-action">
+                      <a class="btn-action" data-bs-toggle="modal" data-bs-target="#quickViewModal"
+                        (click)="openQuickViewModal(dataItem)">
+                        <i class="bi bi-eye" data-bs-toggle="tooltip" data-bs-html="true" title="Quick View"></i>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="text-small mb-1 px-2  py-sm-0 lh-1-1">
+                    <a
+                      class="text-decoration-none text-muted"><small>{{dataItem.ProductSubCategoryShortName}}</small></a>
+                  </div>
+                  <h2 class="fs-6 px-2  py-sm-0">
+                    <a class="text-inherit text-decoration-none">{{ dataItem.MasterProductName}}</a>
+                  </h2>
+                  <!-- <div>
+                  
+                  <small class="text-warning">
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-half"></i>
+                  </small>
+                  <span class="text-muted small">4.5(149)</span>
+                </div> -->
+                  <!-- price -->
+                  <!-- d-flex justify-content-between align-items-center  px-2  py-sm-0 -->
+                  <div class="d-flex flex-column  flex-md-row  justify-content-between align-items-md-center px-2 py-1 py-sm-0">
+                    <div class="mb-1 mb-sm-0">
+                      <span class="text-dark">{{currency}} {{calculateFinalPrice(dataItem) | number:'1.2-2' }}</span>
+                      <br class="d-none d-sm-block">
+                      <span class="text-decoration-line-through text-muted"
+                        *ngIf="dataItem.DiscountPrice>0">{{currency}}
+                        {{dataItem.ProductPrice | number:'1.2-2' }}</span>
+                      <span class=" text-muted" *ngIf="dataItem.DiscountPrice<=0">&nbsp;</span>
+                    </div>
+                    <div *ngIf="this.getQuantity(dataItem.CompanyProductID)===0">
+                      <a class="btn btn-primary btn-sm" (click)="addcart(dataItem)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                          class="feather feather-plus">
+                          <line x1="12" y1="5" x2="12" y2="19"></line>
+                          <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        {{ 'Add' | translate}}
+                      </a>
+                    </div>
+                    <div *ngIf="this.getQuantity(dataItem.CompanyProductID)!==0">
+                      <div class="input-group input-spinner flex-nowrap flex-md-wrap">
+                        <input type="button" value="-" class="button-minus btn btn-sm" data-field="quantity"
+                          (click)="subcart(dataItem)" />
+                        <input type="number" step="1" max="10" [value]="this.getQuantity(dataItem.CompanyProductID)"
+                          name="quantity" class="quantity-field form-control-sm form-input" disabled/>
+                        <input type="button" value="+" class="button-plus btn btn-sm" data-field="quantity"
+                         [ngClass]="{'opacity-50 cursor-not-allowed': getQuantity(dataItem.CompanyProductID) >= 10}"
+                          (click)="addcart(dataItem)" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+
+          </div>
+          <!-- row -->
+          <div class="row mt-8">
+            <div class="col">
+              <!-- nav -->
+              <nav>
+                <ul class="pagination">
+                  <li class="page-item " [class.disabled]="currentPage === 1">
+                    <button class="page-link mx-1" (click)="setPage(currentPage-1)">
+                      <i class="feather-icon icon-chevron-left"></i>
+                    </button>
+                  </li>
+                  <li class="page-item" *ngFor="let page of pages">
+                    <button class="page-link mx-1" [class.active]="page === currentPage" (click)="setPage(page)">
+                      {{ page }}
+                    </button>
+                  </li>
+                  <li class="page-item" [class.disabled]="currentPage === pages[pages.length - 1] ">
+                    <button class="page-link mx-1" (click)="setPage(currentPage+1)">
+                      <i class="feather-icon icon-chevron-right"></i>
+                    </button>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="paginatedProducts && paginatedProducts.length === 0">
+          <div class="noproducts">No Products</div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- SHOP CLOSED MODAL -->
+<div class="modal fade" id="ShopClosedModal" tabindex="-1" aria-labelledby="ShopClosedModalLabel"
+  aria-hidden="true" data-bs-backdrop="static" style="z-index: 999999;">
+  <div class="modal-dialog modal-sm modal-dialog-centered">
+    <div class="modal-content shadow-lg">
+      <div class="modal-body">
+        <div class="text-center m-3">
+          <h5 class="fw-bold" style="color: #ff2424;">Shop is Closed</h5>
+          <p class="m-3">
+            The shop is currently closed. Please try again during business hours.
+          </p>
+        </div>
+        <div class="d-flex justify-content-center">
+          <button type="button" class="btn btn-primary w-75 m-3" data-bs-dismiss="modal">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-view-cart></app-view-cart>

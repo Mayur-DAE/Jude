@@ -1,0 +1,9 @@
+.amout{
+    text-align: right;
+    padding-right: 50px;
+}
+
+.error{
+    position: absolute;
+    color:red;
+}

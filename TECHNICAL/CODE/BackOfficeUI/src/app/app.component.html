@@ -1,0 +1,8 @@
+<div *ngIf="sharedService.isAuthenticated">
+  <app-layout></app-layout>
+</div>
+
+<div *ngIf="sharedService.isAuthenticated == false">
+  <!-- <app-login (newItemEvent)="bindMenu($event)"></app-login> -->
+  <app-login></app-login>
+</div>

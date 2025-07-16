@@ -1,0 +1,93 @@
+<!-- Modal for Verification Component -->
+<div class="modal fade modalscrollbar" id="verificationModal" tabindex="-1" role="dialog" aria-labelledby="verificationModalLabel"
+  aria-hidden="true" data-bs-backdrop="static" (show.bs.modal)="resetVerificationInput()">
+  <div class="modal-dialog modal-md modal-dialog-centered w-full max-w-sm modtop" role="document">
+    <div class="modal-content rounded-lg shadow-lg">
+      <div class="modal-header modalpadding">
+        <h5 class="modal-title" id="verificationModalLabel">{{ ModalTitle }}</h5>
+        <button type="button" class="btn btn-primary btn-rounded btn-icon" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal()">
+          <i class="ti-close"></i>
+        </button>
+      </div>
+        <app-verification></app-verification>
+    </div>
+  </div>
+</div>
+<!---Modal End--->
+<div class="container-scroller">
+  <div class="container-fluid page-body-wrapper full-page-wrapper">
+    <div class="content-wrapper d-flex align-items-stretch auth auth-img-bg">
+      <div class="row flex-grow">
+        <div class="col-lg-6 d-flex align-items-center justify-content-center">
+          <div class="auth-form-transparent text-left p-3">
+            <div class="brand-logo">
+              <img src="assets/images/backoffice/jude-logo.png" alt="logo" />
+            </div>
+            <h4>Welcome back!</h4>
+
+            <h6 class="font-weight-light">Happy to see you again!</h6>
+            <form name="form">
+              <div class="form-group">
+                <label for="exampleInputEmail">Username</label>
+                <div class="input-group">
+                  <div class="input-group-prepend bg-transparent">
+                    <span class="input-group-text bg-transparent border-right-0">
+                      <i class="ti-user text-primary"></i>
+                    </span>
+                  </div>
+                  <input type="text" class="form-control form-control-lg border-left-0" id="exampleInputEmail"
+                    name="UserName" [(ngModel)]="userID" placeholder="Username"/>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword">Password</label>
+                <div class="input-group">
+                  <div class="input-group-prepend bg-transparent">
+                    <span class="input-group-text bg-transparent border-right-0">
+                      <i class="ti-lock text-primary"></i>
+                    </span>
+                  </div>
+                  <!-- <input
+                    type="password"
+                    class="form-control form-control-lg border-left-0"
+                    id="exampleInputPassword"
+                    placeholder="Password"
+                    name="Passward"
+                    [(ngModel)]="userPass"
+                  /> -->
+                  <input [type]="changetype ? 'password' : 'text'" type="password" (keyup.enter)="login()"
+                    class="form-control form-control-lg border-left-0" id="exampleInputPassword" placeholder="Password"
+                    name="Passward" [(ngModel)]="userPass" />
+                  <span class="eyeiconchannel" (click)="viewpassword()"><i style="font-size: 20px"
+                      [ngClass]="visible ? 'fa fa-eye-slash' : 'fa fa-eye'"></i></span>
+                </div>
+              </div>
+              <div class="my-2 d-flex justify-content-between align-items-center">
+                <div class="form-check">
+                  <label class="form-check-label text-muted">
+                    <input type="checkbox" (keyup.enter)="login()" class="form-check-input" />
+                    Keep me signed in
+                  </label>
+                </div>
+                <a style="cursor: pointer;" class="auth-link text-black " data-bs-toggle="modal" data-bs-target="#verificationModal">Forgot password?</a>
+              </div>
+              <div class="my-3">
+                <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"
+                  (click)="login()">
+                  Login
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="col-lg-6 login-half-bg d-flex flex-row">
+          <p class="text-black font-weight-medium text-center flex-grow align-self-end">
+            Copyright &copy; 2025 All rights reserved.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- content-wrapper ends -->
+  </div>
+  <!-- page-body-wrapper ends -->
+</div>

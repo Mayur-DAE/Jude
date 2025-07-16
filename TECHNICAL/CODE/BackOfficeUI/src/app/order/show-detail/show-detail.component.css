@@ -1,0 +1,84 @@
+.order-invoice-fixing{
+    margin-bottom: 2%;
+}
+.Address_invoice{
+    margin-bottom: 0;
+}
+.invoice234{
+    height:130px;
+    width:130px;
+}
+.invoice-to {
+     font-size: 15px;
+}
+.order-invoice-fixing1{
+    margin-right: 40%;
+    margin-left: 22px;
+}
+.uv{
+    text-align: center;
+    margin-bottom: 10px;
+}
+.log_img{
+    width: auto;
+    height: 55px;
+    margin: 15px;
+}
+
+.spaced-row td {
+    padding: 7px 0;
+}
+
+@media screen and (min-device-width: 300px) and (max-device-width: 480px) {  
+    .order-invoice-fixing1 {
+        margin-right: 0%;
+       margin-left: 1%;
+        margin-top: 5%;
+    }
+    
+    .abc{
+        font-size: 14px !important;
+    }
+
+    .invoice234{
+        height:70px;
+        width: 70px;
+    }
+    
+    .uv{
+        text-align: center;
+        font-size: 13px;
+    }
+    
+    .h4{
+        font-size: 15px;
+    
+    }
+    
+    .my-5{
+        margin-bottom: 0 !important;
+    }
+    
+    .invoice-container{
+        flex-direction: column !important;
+        align-items: flex-start !important;
+    }
+        
+    .invoice-to {
+        margin-left: 0 !important;
+         margin-top: 10px;
+         font-size: 14px;
+    }
+}
+    
+@media screen and (min-device-width: 500px) and (max-device-width: 800px){
+    .order-invoice-fixing1{
+        margin-right: 20%;
+        margin-left: 2%;
+    }
+        
+    .invoice234{
+        height:70px;
+        width: 70px;
+    }
+}

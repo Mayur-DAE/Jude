@@ -1,0 +1,146 @@
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">Enquiry</h4>
+    <div class="mb-3">
+      <label for="itemsPerPage" class="mr-2">Items per page:&nbsp; </label>
+      <select id="itemsPerPage" class="border rounded px-2 py-1" (change)="onItemsPerPageChange($event)">
+        <option value="5" [selected]="itemsPerPage === 5">5</option>
+        <option value="10" [selected]="itemsPerPage === 10">10</option>
+        <option value="20" [selected]="itemsPerPage === 20">20</option>
+        <option value="30" [selected]="itemsPerPage === 30">30</option>
+      </select>
+    </div>   
+
+    <div class="row">
+      <div class="col-12">
+        <div class="table-responsive">
+          <table id="show-faq" class="table" style="width: 100%">
+            <thead>
+              <tr class="bg-primary text-white">
+                <th>Sr no</th>
+                <th>User Name</th>
+                <th>Email</th>
+                <th>Contact</th>
+                <th>Message</th>
+                <th style="text-align: center;">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let dataItem of paginatedEnquiry; let i = index">
+                <td style="width: 70px;">{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+                <td style="width: 180px;">{{ dataItem.FirstName + ' ' + dataItem.LastName}}</td>
+                <td style="width: 250px;"><a href="mailto:{{ dataItem.EmailID  }}">{{ dataItem.EmailID }}</a></td>
+                <td style="width: 120px;">{{ dataItem.MobileNumber }}</td>
+                <td class="truncate-text">{{ dataItem.Message }}</td>
+                <td style="width: 70px;">  
+                    <button type="button" class="btn btn-light"  data-bs-toggle="modal"
+                    data-bs-target="#exampleModal" data-backdrop="static" data-keyboard="false"
+                    (click)="openModal(dataItem)">
+                    <i class="bi bi-eye text-primary"></i>
+                    View
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mt-3  px-md-4"><!-- px-3 -->
+          <span class="text-muted mb-2 mb-md-0">
+            Showing 
+            {{ (currentPage - 1) * itemsPerPage + 1 }} 
+            to 
+            {{ min(currentPage * itemsPerPage, EnquiryList.length) }} 
+            of 
+            {{ EnquiryList.length }} entries
+          </span>
+        
+          <nav>
+            <ul class="pagination mb-0">
+              <!-- Previous Button -->
+              <li class="page-item" [class.disabled]="currentPage === 1">
+                <a class="page-link" (click)="changePage(currentPage - 1)"><<</a>
+              </li>
+          
+              <!-- Page 1 -->
+              <li class="page-item" [class.active]="currentPage === 1">
+                <a class="page-link" (click)="changePage(1)">1</a>
+              </li>
+          
+              <!-- Ellipsis before middle pages -->
+              <li class="page-item disabled" *ngIf="getMiddlePages()[0] > 2">
+                <span class="page-link">...</span>
+              </li>
+          
+              <!-- Middle Pages -->
+              <ng-container *ngFor="let page of getMiddlePages()">
+                <li class="page-item" [class.active]="currentPage === page">
+                  <a class="page-link" (click)="changePage(page)">{{ page }}</a>
+                </li>
+              </ng-container>
+          
+              <!-- Ellipsis after middle pages -->
+              <li class="page-item disabled" *ngIf="getMiddlePages().includes(totalPages - 1) === false && totalPages > 5">
+                <span class="page-link">...</span>
+              </li>
+          
+              <!-- Last Page -->
+              <li class="page-item" *ngIf="totalPages > 1" [class.active]="currentPage === totalPages">
+                <a class="page-link" (click)="changePage(totalPages)">{{ totalPages }}</a>
+              </li>
+          
+              <!-- Next Button -->
+              <li class="page-item" [class.disabled]="currentPage === totalPages">
+                <a class="page-link" (click)="changePage(currentPage + 1)">>></a>
+              </li>
+            </ul>
+          </nav>
+          
+        </div>        
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Enquiry Details</h5>
+          <button type="button" class="btn btn-primary btn-rounded btn-icon" data-bs-dismiss="modal" aria-label="Close">
+          <i class="ti-close"></i>
+          </button>
+        </div>
+        <div class="modal-body" *ngIf="selectedEnquiry">
+          <!-- <p><strong>Name: </strong> {{ selectedEnquiry.FirstName }} {{ selectedEnquiry.LastName }}</p>
+          <p><strong>Email: </strong> <a href="mailto:{{ selectedEnquiry.EmailID }}">{{ selectedEnquiry.EmailID }}</a></p>
+          <p><strong>Mobile: </strong> {{ selectedEnquiry.MobileNumber }}</p>
+          <p><strong>Message: </strong> {{ selectedEnquiry.Message }}</p> -->
+          <div class="enquiry-details">
+            <div class="row">
+              <div class="col-3"><strong>Name</strong></div>
+              <div class="col-1"><strong>:</strong></div>
+              <div class="col-lg-8 col-md-8 col-sm-12">{{ selectedEnquiry.FirstName }} {{ selectedEnquiry.LastName }}</div>
+            </div>
+            <div class="row">
+              <div class="col-3"><strong>Email</strong></div>
+              <div class="col-1"><strong>:</strong></div>
+              <div class="col-lg-8 col-md-8 col-sm-12"><a href="mailto:{{ selectedEnquiry.EmailID }}">{{ selectedEnquiry.EmailID }}</a></div>
+            </div>
+            <div class="row">
+              <div class="col-3 "><strong>Contact </strong></div>
+              <div class="col-1"><strong>:</strong></div>
+              <div class="col-lg-8 col-md-8 col-sm-12">{{ selectedEnquiry.MobileNumber }}</div>
+            </div>
+            <div class="row">
+              <div class="col-3"><strong>Message</strong></div>
+              <div class="col-1"><strong>:</strong></div>
+              <div class="col-lg-8 col-md-8 col-sm-12">{{ selectedEnquiry.Message }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

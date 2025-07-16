@@ -1,0 +1,31 @@
+.showproductlayout1{
+    position: absolute;
+    z-index: 100;
+  }
+.error{
+    position: absolute;
+    color:red;
+}
+
+.error-input{
+  border: 1px red solid;
+}
+.productdividepart{
+  width: 60%;
+}
+.productdividepart1{
+width: 40%;
+}
+
+
+
+@media (max-width: 480px){
+  
+.productdividepart{
+  width:100%;
+  max-height: 100%;
+}
+.form-control {
+  width: 100%;
+}
+}

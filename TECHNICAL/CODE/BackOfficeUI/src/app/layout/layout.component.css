@@ -1,0 +1,55 @@
+.sidebar-height{
+    height: calc(100vh - 60px);
+    overflow-y: auto !important;
+    width:100%
+}
+
+.mainPanel-height{
+    height: calc(100vh - 60px);
+    overflow-y: auto !important;
+    overflow-x:hidden;
+}
+@media screen and (max-width: 425px) {
+.sidebar {
+    width:100%
+}
+}
+
+
+/* Add this in your styles.css or component CSS */
+
+.sidebar {
+    max-height: 100vh;
+    overflow-y: auto;
+    scrollbar-width: thin; /* For Firefox */
+  }
+  
+  .sidebar::-webkit-scrollbar {
+    width: 6px; /* Width of scrollbar */
+  }
+  
+  .sidebar::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3); /* Scrollbar color */
+    border-radius: 4px;
+  }
+  
+  .sidebar::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+.nav-item, .nav-item i {
+  position: relative; /* or unset */
+}
+
+
+
+  @media (min-width: 992px) {
+    .sidebar {
+      max-height: 100vh;
+      overflow-y: auto;
+    }
+  }
+  .dropdown-item:hover {
+    color: #000 !important;
+    background-color: #f8f9fa !important;
+  }
+  

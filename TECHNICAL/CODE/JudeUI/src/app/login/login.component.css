@@ -1,0 +1,443 @@
+.error {
+  color: red;
+  font-size: 1.0em;
+  margin-top: 5px;
+  min-height: 3px; 
+  } 
+
+  .password-toggle {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+
+.login-container {
+    height: 88vh;
+    overflow: hidden;
+    width: 100%;
+}
+
+
+.section{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 40px;
+
+    width: 400px;
+    height: 457px;  
+    margin: 50px auto 0 auto;             
+}
+.frame4491-frame4326 {
+    display: flex;
+    position: relative;
+    align-self: stretch;
+    box-sizing: border-box;
+    align-items: flex-start;
+    border-color: transparent;
+    margin-right: 0;
+    border-radius: 0px 0px 0px 0px;
+    margin-bottom: 0;
+    flex-direction: column;
+  }
+  .frame4491-text {
+    color: rgba(30, 30, 30, 1);
+    width: 400px;
+    height: auto;
+    font-size: 24px;
+    align-self: stretch;
+    font-style: Bold;
+    text-align: left;
+    font-family:"Satoshi-bold";
+    font-weight: 700;
+    line-height: normal;
+    font-stretch: normal;
+    margin-right: 0;
+    margin-bottom: 40px;
+    text-decoration: none;
+  }
+  .frame4491-frame4345 {
+    display: flex;
+    position: relative;
+    align-self: stretch;
+    box-sizing: border-box;
+    align-items: flex-start;
+    border-color: transparent;
+    margin-right: 0;
+    border-radius: 0px 0px 0px 0px;
+    margin-bottom: 40px;
+    flex-direction: column;
+  }
+  .frame4491-frame506 {
+    display: flex;
+    padding: 14px 16px;
+    position: relative;
+    align-self: stretch;
+    box-sizing: border-box;
+    align-items: flex-start;
+    border-color: rgba(217, 217, 217, 1);
+    border-style: solid;
+    border-width: 1.5px;
+    margin-right: 0;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    flex-direction: column;
+  }
+  .frame4491-text02 {
+    color: rgba(0, 0, 0, 1);
+    width: 368px;
+    height: auto;
+    opacity: 0.50;
+    font-size: 16px;
+    align-self: stretch;
+    font-style: Medium;
+    text-align: left;
+    font-family:"Satoshi-bold";
+    font-weight: 500;
+    line-height: 24px;
+    font-stretch: normal;
+    margin-right: 0;
+    margin-bottom: 0;
+    text-decoration: none;
+  }
+  .frame4491-frame267 {
+    display: flex;
+    padding: 14px 16px;
+    position: relative;
+    align-self: stretch;
+    box-sizing: border-box;
+    align-items: flex-start;
+    flex-shrink: 0;
+    border-color: rgba(217, 217, 217, 1);
+    border-style: solid;
+    border-width: 1.5px;
+    margin-right: 0;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  .frame4491-text04 {
+    color: rgba(0, 0, 0, 1);
+    width: 344px;
+    height: auto;
+    opacity: 0.50;
+    flex-grow: 1;
+    font-size: 16px;
+    align-self: auto;
+    font-style: Medium;
+    text-align: left;
+    font-family:"Satoshi-bold";
+    font-weight: 500;
+    line-height: 24px;
+    font-stretch: normal;
+    margin-right: 0px;
+    margin-bottom: 0;
+    text-decoration: none;
+  }
+  .frame4491-password-visibility {
+    width: 24px;
+    height: 24px;
+    opacity: 0.40;
+    position: relative;
+    box-sizing: border-box;
+    margin-right: 0;
+    margin-bottom: 0;
+  }
+  .frame4491-frame540 {
+    display: flex;
+    position: relative;
+    align-self: stretch;
+    box-sizing: border-box;
+    align-items: flex-start;
+    border-color: transparent;
+    margin-right: 0;
+    border-radius: 0px 0px 0px 0px;
+    margin-bottom: 0;
+    flex-direction: column;
+  }
+  .frame4491-frame264 {
+    display: flex;
+    position: relative;
+    align-self: stretch;
+    box-sizing: border-box;
+    align-items: center;
+    flex-shrink: 0;
+    border-color: transparent;
+    margin-right: 0;
+    border-radius: 0px 0px 0px 0px;
+    margin-bottom: 0;
+    justify-content: center;
+  }
+  .frame4491-text06 {
+    color: rgba(47, 100, 236, 1);
+    width: 400px;
+    height: auto;
+    flex-grow: 1;
+    font-size: 14px;
+    align-self: auto;
+    font-style: Bold;
+    text-align: left;
+    font-family:"Satoshi-bold";
+    font-weight: 700;
+    line-height: normal;
+    font-stretch: normal;
+    margin-right: 0;
+    margin-bottom: 0;
+    text-decoration: none;  
+  }
+  .frame4491-frame4347 {
+    display: flex;
+    position: relative;
+    align-self: stretch;
+    box-sizing: border-box;
+    align-items: flex-start;
+    border-color: transparent;
+    margin-right: 0;
+    border-radius: 0px 0px 0px 0px;
+    margin-bottom: 0;
+    flex-direction: column;
+  }
+  .frame4491-frame316 {
+    display: flex;
+    padding: 13px 44px;
+    position: relative;
+    align-self: stretch;
+    box-sizing: border-box;
+    align-items: center;
+    flex-shrink: 0;
+    border-color: transparent;
+    margin-right: 0;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.10000000149011612);
+  }
+  .frame4491-text08 {
+    color: rgba(0, 0, 0, 0.3499999940395355);
+    height: auto;
+    font-size: 16px;
+    align-self: auto;
+    font-style: Medium;
+    text-align: center;
+    font-family:"Satoshi-bold";
+    font-weight: 500;
+    line-height: normal;
+    font-stretch: normal;
+    margin-right: 0;
+    margin-bottom: 0;
+    text-decoration: none;
+  }
+  .frame4491-text10 {
+    color: rgba(0, 0, 0, 1);
+    width: 400px;
+    height: auto;
+    font-size: 14px;
+    align-self: stretch;
+    font-style: Medium;
+    text-align: center;
+    font-family:"Satoshi-bold";
+    font-weight: 500;
+    line-height: normal;
+    font-stretch: normal;
+    margin-right: 0;
+    margin-bottom: 16px;
+    text-decoration: none;
+  }
+  .frame4491-frame317 {
+    display: flex;
+    padding: 13px 44px;
+    position: relative;
+    align-self: stretch;
+    box-sizing: border-box;
+    align-items: center;
+    flex-shrink: 0;
+    border-color: rgba(0, 0, 0, 1);
+    border-style: solid;
+    border-width: 1px;
+    margin-right: 0;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    justify-content: center;
+  }
+  .frame4491-text12 {
+    color: rgba(0, 0, 0, 1);
+    height: auto;
+    font-size: 16px;
+    align-self: auto;
+    font-style: Medium;
+    text-align: center;
+    font-family:"Satoshi-bold";
+    font-weight: 500;
+    line-height: normal;
+    font-stretch: normal;
+    margin-right: 0;
+    margin-bottom: 0;
+    text-decoration: none;
+  }
+  .frame4491-text14 {
+    color: rgba(0, 0, 0, 1);
+    width: 400px;
+    height: auto;
+    font-size: 14px;
+    align-self: stretch;
+    font-style: Medium;
+    text-align: center;
+    font-family:"Satoshi-bold";
+    font-weight: 500;
+    line-height: normal;
+    font-stretch: normal;
+    margin-right: 0;
+    margin-bottom: 0;
+    text-decoration: none;
+  }
+  .frame4491-text15 {
+    color: rgba(0, 0, 0, 1);
+    font-weight: 500;
+  }
+  .frame4491-section {
+    width: 720px;
+    height: 915px;
+    display: flex;
+    position: relative;
+    box-sizing: border-box;
+    align-items: center;
+    flex-shrink: 0;
+    border-color: transparent;
+    margin-right: 0;
+    border-radius: 0px 0px 0px 0px;
+    margin-bottom: 0;
+    background-size: cover;
+    justify-content: center;
+    background-image: url("/assets/playground_assets/d5fc42dc-4aee-4998-ace6-0b1668588423-h18k-800w.undefined");
+  }
+  
+
+  .ChannelSignupfixing1{
+    width: 388.5px;
+    height: 58px;
+    
+}
+
+.eyeiconchannel{
+    position: absolute;
+    right: 10px;
+    top: 18px;
+    opacity: 0.4;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+}
+
+
+.form-label{
+    width: 368px;
+    height: 24px;
+    font-family: "Satoshi-bold";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: #000000;
+    opacity: 0.5;
+}
+
+
+.blue-text{
+    color: #2F64EC;
+    text-decoration: none;
+}
+
+
+.bttnpadding{
+    border: 0;
+    width: 390px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 13px 44px;
+    gap: 4px;
+    height: 48px;
+    background-color: black;
+    border-radius: 8px;
+    font-family: "Satoshi-bold";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+    text-align: center;
+    color: white;    
+    margin-bottom: 20px;
+}
+
+.NewChannelPartnerimage_1{
+    max-height: 82vh; 
+    width: 100%;   
+    /* background-color: red; */
+    
+}
+
+.background-img{
+    width: 100%;
+    height: 88vh;
+  }
+.right-side{
+    overflow: hidden;
+}
+/* .bttnpadding:hover{
+    background: rgba(0, 0, 0, 0.1);
+    color: rgba(0, 0, 0, 0.35);
+    
+    
+} */
+
+@media (max-width: 480px)
+{
+  .right-side{
+    display: none;
+  }
+
+  .login-container{
+    height: 100%;
+    padding: 10px;
+  }
+  .ChannelSignupfixing1{
+    width: 100%;
+  }
+
+  .frame4491-frame4345{
+    width: 90%;
+  }
+  .btn-container{
+    width: 100%;
+  }
+
+  .bttnpadding{
+    width: 90%;
+  }
+
+  .error{
+    color: red;
+    font-size: 13px !important;
+    margin: 2px 0 0 0;
+    display: block;
+    /* position: absolute;
+    color: red;
+    margin: 0px !important;
+    font-size: 12px !important; */
+}
+
+.passwordToggler {
+  color:  #3d4f58;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  position: absolute;
+  right: 20px;
+  top: 50%;
+ bottom: 50%; 
+  transform: translateY(-50%);
+}
+}

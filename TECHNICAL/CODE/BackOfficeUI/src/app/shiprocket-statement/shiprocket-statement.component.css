@@ -1,0 +1,12 @@
+.error{
+    position: absolute;
+    color:red;
+}
+
+.card-text{
+    font-size: 22px;
+}
+
+.text-red{
+    color: red;
+}

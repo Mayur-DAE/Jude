@@ -1,0 +1,190 @@
+<!-- Modal starts -->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{ ModalTitle }}</h5>
+        <button type="button" class="btn btn-primary btn-rounded btn-icon" data-bs-dismiss="modal" aria-label="Close"
+          (click)="closeClick()">
+          <i class="ti-close"></i>
+        </button>
+      </div>
+      <app-add-edit-products [products]="products" (emitData)="emittedDataByChild($event)"
+        *ngIf="ActivateAddEditproducts">
+      </app-add-edit-products>
+    </div>
+  </div>
+</div>
+<!-- Modal Ends -->
+
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">Products</h4>
+    <div class="row">
+      <div class="col-12">
+        <div class="text-left">
+          <button type="button" class="btn btn-primary btn-sm" (click)="addClick()" data-bs-toggle="modal"
+            data-bs-target="#exampleModal">
+            Add<i class="ti-plus ms-1"></i>
+          </button>
+        </div>
+        <br />
+        <br />
+        <div class="col-sm-12 row">
+          <!-- <div class="col-sm-3 hey" *ngIf="UserRoleID!=2">
+            <p>Company Name</p>
+            <div class="untitled-page-block2 layout">
+              <input class="form-select" [(ngModel)]="CompanyNameSearch" type="text" placeholder="Company Name"
+                (keyup)="onCompanyNameType()">
+            </div>
+            <div class="form-group showproductlayout1">
+              <a class="list-group-item list-group-item-ation" *ngFor="let dataItem of CompanyList?.slice(0,7)"
+                (click)="onSelectName(dataItem)">{{dataItem.CompanyName}}</a>
+            </div>
+          </div> -->
+          <div class="col-sm-3" *ngIf="UserRoleID != 2">
+            <div class="form-group">
+              <label for="exampleInputUsername1">Shop Name</label>
+              <input type="text" class="form-control" id="exampleInputUsername1" placeholder="Shop Name"
+                name="firstName" [(ngModel)]="CompanyNameSearch" />
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <p>Category</p>
+            <select class="form-select" aria-label="Default select example" [(ngModel)]="ProductCategoryID"
+              style="height: 48px">
+              <option></option>
+              <option *ngFor="let x of ProductCategoryList" [value]="x.ProductCategoryID">
+                {{ x.ProductCategoryShortName }}
+              </option>
+            </select>
+          </div>
+          <div class="col-sm-3">
+            <p>Subcategory</p>
+            <select class="form-select" aria-label="Default select example" [(ngModel)]="ProductSubCategoryID"
+              style="height: 48px" (click)="loadProductSubCategoryList()">
+              <option></option>
+              <option *ngFor="let x of ProductSubCategoryList" [value]="x.ProductSubCategoryID">
+                {{ x.ProductSubCategoryShortName }}
+              </option>
+            </select>
+          </div>
+          <div class="col-3">
+            <div class="col-sm-3">
+              <p>&nbsp;</p>
+              <button type="button" class="btn btn-primary me-2" (click)="refreshProductsList()">
+                Search
+              </button>
+            </div>
+          </div>
+          <div class="col-sm-12 row">
+            <div class="col-sm-3">
+              <div class="col-6">
+                <p>&nbsp;</p>
+                <label class="form-check-label">
+                  <input type="checkbox" checked [(ngModel)]="IsApproved" />
+                  UnApproved
+                </label>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="col-6">
+                <p>&nbsp;</p>
+                <label class="form-check-label">
+                  <input type="checkbox" checked [(ngModel)]="IsPublished" />
+                  UnPublish
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="justify-content-end d-flex">
+            <button type="button" class="export-btn btn fa fa-file-excel-o mt-4 ms-2 excelbutton"
+              (click)="exportToExcel()">
+              <i class="ti-file me-1"></i>Export to Excel
+            </button>
+          </div>
+          <br />
+          <br />
+          <br />
+          <div class="table-responsive">
+            <table id="show-product" class="table">
+              <thead>
+                <tr class="bg-primary text-white">
+                  <td></td>
+                  <th class="w-21">Name</th>
+                  <th class="w-21">Description</th>
+                  <th class="w-21">Shop</th>
+                  <th>Price</th>
+                  <th>Approved</th>
+                  <th>Publish</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let dataItem of ProductsList; let i = index">
+                  <td>
+                    <img src="{{
+                        ProductImageThumbnailPath +
+                          dataItem.ProductImageThumbnailImagePath
+                      }}" />
+                  </td>
+                  <td class="productdescription">{{ dataItem.ProductName }}</td>
+                  <td class="productdescription">
+                    {{ dataItem.ProductDescription }}
+                  </td>
+                  <td class="productdescription1">
+                    {{ dataItem.CompanyName }}
+                  </td>
+                  <td class="action23">
+                    {{currency}} {{ dataItem.ProductPrice }}
+                  </td>
+                  <td>
+                    <button (click)="Unapproved(dataItem)" type="button" class="btn btn-sm btn-outline-info btn-fw p-2"
+                      *ngIf="dataItem.IsApproved" [disabled]="UserRoleID == 2">
+                      Approved
+                    </button>
+                    <button (click)="approved(dataItem)" type="button" class="btn btn-sm btn-outline-danger btn-fw p-2"
+                      *ngIf="!dataItem.IsApproved" [disabled]="UserRoleID == 2">
+                      Pending
+                    </button>
+                  </td>
+                  <td>
+                    <button (click)="Unpublish(dataItem)" type="button" class="btn btn-sm btn-outline-info btn-fw p-2"
+                      *ngIf="dataItem.IsApproved && dataItem.IsPublished" [disabled]="UserRoleID == 2">
+                      Published
+                    </button>
+                    <button (click)="Publish(dataItem)" type="button" class="btn btn-sm btn-outline-danger btn-fw p-2"
+                      *ngIf="dataItem.IsApproved && !dataItem.IsPublished" [disabled]="UserRoleID == 2">
+                      UnPublished
+                    </button>
+                  </td>
+                  <td class="button22">
+                    <button type="button" class="btn btn-light" (click)="editClick(dataItem)" data-bs-toggle="modal"
+                      data-bs-target="#exampleModal" data-backdrop="static" data-keyboard="false">
+                      <i class="ti-pencil"></i>Edit
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- <div class="row" *ngIf="UserRoleID!=2">
+            <div class="col">
+              <nav>
+                <ul class="pagination d-flex flex-wrap justify-content-center pagination-danger">
+                  <li class="page-item"><a class="page-link" (click)="PrePage()"><i class="ti-angle-left"></i></a></li>
+                  <li class="page-item"><a class="page-link" (click)="nextPage()"><i class="ti-angle-right"></i></a>
+                  </li>
+                </ul>
+              </nav>
+               <button (click)="PrePage()"> pre</button>
+                <button (click)="nextPage()">Next</button>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

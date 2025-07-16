@@ -1,0 +1,207 @@
+<!-- Modal starts -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{ModalTitle}}</h5>
+        <button type="button" class="btn btn-primary btn-rounded btn-icon" data-bs-dismiss="modal" aria-label="Close"
+          (click)="closeeClick()">
+          <i class="ti-close"></i>
+        </button>
+      </div>
+      <app-generateinvoice [Invoicedata]="Invoicedata" (emitData)="emittedDataChil($event)"
+        *ngIf="Activategenerateinvoice">
+
+      </app-generateinvoice>
+    </div>
+  </div>
+</div>
+<!-- Modal Ends -->
+<!-- Modal starts -->
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel1">{{ModalTitle1}}</h5>
+        <button type="button" class="btn btn-primary btn-rounded btn-icon" data-bs-dismiss="modal" aria-label="Close"
+          (click)="closeClick()">
+          <i class="ti-close"></i>
+        </button>
+      </div>
+      <app-addcompanyinvoice [Invoicedata]="Invoicedata" (emitData)="emittedDataByChild($event)"
+        *ngIf="ActivateAddEditinvoice">
+      </app-addcompanyinvoice>
+      <!-- <app-generateinvoice  [pdf]="pdf" *ngIf ="ActivateAddEditinvoice">
+
+      </app-generateinvoice> -->
+    </div>
+  </div>
+</div>
+<!-- Modal Ends -->
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">Membership Invoices</h4>
+    <div class="row">
+      <div class="col-12">
+        <!-- <div class="text-left">
+          <button type="button" class=" btn btn-primary btn-icon-text" *ngIf="UserRoleID!=2" (click)="addClick()" data-bs-toggle="modal"
+            data-bs-target="#exampleModal"><i class="ti-plus"></i> Add</button>
+        </div> -->
+        
+        <div class="col-sm-12 row">
+          <div class="col-sm-4 col-6" *ngIf="UserRoleID!=2">
+            <p>Shop Name</p>
+            <div class="untitled-page-block2 layout">
+              <input class="form-control" [(ngModel)]="CompanyNameSearch" type="text" placeholder="Shop Name"
+              (keyup)="onCompanyNameType()" (blur)="hideDropdown()">
+            
+            </div>
+            <div class="form-group showproductlayout1">
+              <a class="list-group-item list-group-item-ation" *ngFor="let dataItem of CompanyList?.slice(0,7)"
+                (click)="onSelectName(dataItem)">{{dataItem.CompanyName}}</a>
+            </div>
+
+
+          </div>
+          <!-- 
+          
+          <div class="col-3" *ngIf="UserRoleID!=2" >
+            <div class="form-group">
+              <label for="exampleInputUsername1">Company MemberShip Type:</label>
+              <select class="form-select" [(ngModel)]="CompanyMemberShipTypeID">
+                <option></option>
+                <option *ngFor="let x of CompanymembershipnameList" [value]="x.CompanyMemberShipTypeID">
+                  {{x.CompanyMemberShipName}}</option>
+              </select>
+            </div>
+          </div> -->
+
+          <div class="col-6">
+            <p>&nbsp;</p>
+
+            <button *ngIf="UserRoleID!=2" type="submit" class="btn btn-primary me-2" (click)="refreshInvoicesList()">
+              Search
+            </button>
+            <button type="button" class="btn btn-secondary text-white" (click)="clearFilters()">
+              Clear
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <br>
+      
+      <div class="mb-3">
+          <label for="itemsPerPage" class="mr-2">Items per page:&nbsp; </label>
+          <select id="itemsPerPage" class="border rounded px-2 py-1" (change)="onItemsPerPageChange($event)">
+            <option value="5" [selected]="itemsPerPage === 5">5</option>
+            <option value="10" [selected]="itemsPerPage === 10">10</option>
+            <option value="20" [selected]="itemsPerPage === 20">20</option>
+            <option value="30" [selected]="itemsPerPage === 30">30</option>
+          </select>
+        </div> 
+
+      <div class="table-responsive">
+        <table id="order-listing" class="table">
+          <thead>
+            <tr class="bg-primary text-white">
+              <th>Sr no</th>
+              <th>Name</th>
+              <th>Membership Type</th>
+              <th>Amount</th>
+              <th style="text-align: center;">Status</th>
+              <th style="text-align: center;">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+             <tr *ngIf="companyInvoicesList.length == 0">
+                <td colspan="6" class="text-center">No records found</td>
+              </tr>
+            <tr *ngFor="let dataItem of paginatedcompanyInvoices; let i = index; let last = last ">
+              <td style="width: 70px;">{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+              <td class="Companyname">{{dataItem.CompanyName}}</td>
+              <td>{{dataItem.CompanyMemberShipName}}</td>
+              <td><label
+                  *ngIf="dataItem.InvoiceNumber==null">{{currency}}&nbsp;{{dataItem.CompanyMembershipFees | number:'1.2-2'}}</label>
+                <label *ngIf="dataItem.InvoiceNumber!=null">{{currency}}&nbsp;{{dataItem.InvoiceTotal | number:'1.2-2'}}</label>
+              </td>
+              <td style="width: 70px;">
+                <button (click)="generateinvoice(dataItem)" type="button" class="btn btn-outline-info btn-fw p-2"
+                  [disabled]="UserRoleID==2" data-bs-toggle="modal" data-bs-target="#exampleModal1"
+                  data-backdrop="static" data-keyboard="false">
+                  Create New
+                </button>
+                <!-- <label class="btn btn-outline-danger btn-fw p-2" *ngIf=dataItem.InvoiceNumber>Generated</label> -->
+
+              </td>
+              <td style="width: 70px;">
+                <button type="button" class="btn btn-light" (click)="viewClick(dataItem)"
+                  *ngIf="dataItem.InvoiceNumber!=null" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                  data-backdrop="static" data-keyboard="false">
+                  <i class="bi bi-eye text-primary"></i>
+                  View</button>
+              </td>
+              <!-- {{last ? bindDatatableTS() : ''}} -->
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mt-3  px-md-4"><!-- px-3 -->
+        <span class="text-muted mb-2 mb-md-0">
+          Showing 
+          {{ (currentPage - 1) * itemsPerPage + 1 }} 
+          to 
+          {{ min(currentPage * itemsPerPage, companyInvoicesList.length) }} 
+          of 
+          {{ companyInvoicesList.length }} entries
+        </span>
+      
+        <nav>
+          <ul class="pagination mb-0">
+            <!-- Previous Button -->
+            <li class="page-item" [class.disabled]="currentPage === 1">
+              <a class="page-link" (click)="changePage(currentPage - 1)"><<</a>
+            </li>
+        
+            <!-- Page 1 -->
+            <li class="page-item" [class.active]="currentPage === 1">
+              <a class="page-link" (click)="changePage(1)">1</a>
+            </li>
+        
+            <!-- Ellipsis before middle pages -->
+            <li class="page-item disabled" *ngIf="getMiddlePages()[0] > 2">
+              <span class="page-link">...</span>
+            </li>
+        
+            <!-- Middle Pages -->
+            <ng-container *ngFor="let page of getMiddlePages()">
+              <li class="page-item" [class.active]="currentPage === page">
+                <a class="page-link" (click)="changePage(page)">{{ page }}</a>
+              </li>
+            </ng-container>
+        
+            <!-- Ellipsis after middle pages -->
+            <li class="page-item disabled" *ngIf="getMiddlePages().includes(totalPages - 1) === false && totalPages > 5">
+              <span class="page-link">...</span>
+            </li>
+        
+            <!-- Last Page -->
+            <li class="page-item" *ngIf="totalPages > 1" [class.active]="currentPage === totalPages">
+              <a class="page-link" (click)="changePage(totalPages)">{{ totalPages }}</a>
+            </li>
+        
+            <!-- Next Button -->
+            <li class="page-item" [class.disabled]="currentPage === totalPages">
+              <a class="page-link" (click)="changePage(currentPage + 1)">>></a>
+            </li>
+          </ul>
+        </nav>
+        
+      </div> 
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,179 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script
+      src="https://kit.fontawesome.com/a076d05399.js"
+      crossorigin="anonymous"
+    ></script>-->
+    <!--Font Awsome style sheet-->
+  <!--  <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
+    />
+  </head>
+
+  <body> -->
+
+    <main>
+      <!-- section -->
+
+      <section class="my-lg-12 my-8">
+         <!-- container -->
+         <div class="container">
+            <div class="row">
+               <!-- col -->
+               <div class="offset-lg-2 col-lg-8 col-12">
+                  <div class="mb-5">
+                     <!-- heading -->
+                     <h1 class="h3">{{ 'Reach Out' | translate }}</h1>
+                     <p class=" mb-0">{{ 'Got questions? Need support? We are here for you! Whether you are a shopkeeper ready to sell or a customer looking for help, reach out anytime.' | translate }}</p>
+                  </div>
+                  <!-- form -->
+                  <!-- <form class="row needs-validation" novalidate> -->
+                     <!-- input -->
+                     <div class="row g-3">
+                     <div class="col-md-6">
+                        <label class="form-label" for="fname">
+                           {{ 'First Name' | translate }}
+                           <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" id="fname" class="form-control" name="FirstName" placeholder="{{ 'Enter your first name' | translate }}" [(ngModel)]="FirstName" required/>
+                        <div class="error">{{ FirstName_errormessage | translate }}</div>
+                     </div>
+                     <div class="col-md-6">
+                        <!-- input -->
+                        <label class="form-label" for="lname">
+                          {{ 'Last Name' | translate }}
+                           <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" id="lname" class="form-control" name="LastName" placeholder="{{ 'Enter your last name' | translate }}"  [(ngModel)]="LastName" required/>
+                        <div class="error">{{ LastName_errormessage | translate }}</div>
+                     </div>
+                     <div class="col-md-6">
+                        <label class="form-label" for="Email">
+                          {{ 'Email Address' | translate }}
+                           <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" id="Email" name="Email" class="form-control" placeholder="{{ 'Enter your email address' | translate }}" [(ngModel)]="EmailID" required/>
+                        <div class="error">{{ emailaddress_errormessage | translate }}</div>
+                     </div>
+                     <div class="col-md-6">
+                        <!-- input -->
+                        <label class="form-label" for="MobileNo">
+                          {{ 'Mobile Number' | translate }}
+                          <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" id="MobileNo" name="MobileNo" class="form-control" placeholder="{{ 'Enter your mobile number' | translate }}"  [(ngModel)]="MobileNumber"
+                        maxlength="10" required/>
+                        <div class="error">{{ mobilenumber_errormessage | translate }}</div>
+                     </div>
+                     <div class="col-md-12">
+                        <!-- input -->
+                        <label class="form-label" for="Messsage">
+                          {{ 'Message' | translate }}
+                          <span class="text-danger">*</span>
+                        </label>
+                        <textarea rows="3" id="Message" class="form-control" placeholder="{{ 'Additional Comments' | translate }}"  [(ngModel)]="Message" required></textarea>
+                        <div class="error">{{ message_errormessage | translate }}</div>
+                     </div>
+                     <div class="col-md-12">
+                      <!-- <input type="submit" value="Submit" class="sub_button" /> -->
+                        <!-- btn -->
+                        <button type="submit" class="bttnpadding" (click)="Submit()">{{ 'Submit' | translate }}</button>
+                     </div>
+                     </div>
+                  <!-- </form> -->
+               </div>
+            </div>
+         </div>
+      </section>
+   </main>
+    <!-- <div class="container-fluid">
+      <div class="row">
+      <div class="col-sm-6">
+        <form class="abcd" action="post">
+          <div class="Contact">Contact Us</div>
+          <div class="contact_support1">
+            <h4>Contact Support</h4>
+            <div class="B">Our support team availabe for your all query</div>
+            <br />
+            <a class="aa" href="tel:9867138845">Get Support</a>
+          </div> -->
+          <!-- <div class="contact_support2">
+            <h4>Contact Sale</h4>
+            <p>
+              Get in touch ith our sales support team for better<br />
+              suggestion and support
+            </p>
+            <button type="button">Talk To Sale Team</button>
+          </div> -->
+          <!-- <div class="contact_summary">
+            <h4>We're Here</h4>
+
+            <span class="icon fa fa-phone fa-lg myicon">
+              <a href="tel:9867138845"> 9867138845</a></span
+            ><br />
+            <span class="icon fa fa-phone fa-lg myicon">
+              Toll Free: <a href="tel:18002662881"> 18002662881 </a></span
+            ><br /> -->
+            <!-- <span class="icon fa fa-envelope fa-lg myicon">
+              info@areaonline.in</span
+            >
+            <span class="icon fa fa-map-marker fa-lg myicon">
+              C-Wing, Madhuban Building, Opp. Dev Nagar, New Sai baba Nagar,
+              Kandivali (West), Mumbai-400067.</span
+            > -->
+          <!-- </div>
+        </form>
+      </div>
+      <div
+        class="col-sm-6 get_touch"
+        style="background-image: url('assets/images/about/Contactusimage.png')"
+        
+      >
+        <div class="efghi">
+          <form action="post">
+            <h3>Get In Touch</h3>
+            <input type="text" id="fname"
+             name="firstname" placeholder="Name" />
+            <input
+              type="text"
+              id="lname"
+              name="lastname"
+              placeholder="Email Address"
+            />
+            <input
+              type="text"
+              id="lname"
+              name="lastname"
+              placeholder="Mobile Number"
+            />
+            <input
+              type="text"
+              id="lname"
+              name="lastname"
+              placeholder="Subject"
+            />
+            <textarea
+              id="subject"
+              name="subject"
+              placeholder="Message"
+              style="height: 200px"
+            ></textarea>
+            <input type="submit" value="Submit" class="sub_button" />
+          </form>
+        </div>
+      </div>
+      </div>
+    </div> -->
+  <!-- </body>
+</html> -->

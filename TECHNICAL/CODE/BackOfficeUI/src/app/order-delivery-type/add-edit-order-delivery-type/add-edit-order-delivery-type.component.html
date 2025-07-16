@@ -1,0 +1,32 @@
+<div class="modal-body">
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label">Order Dilivery Type</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" [(ngModel)]="OrderDeliveryTypeName" 
+          placeholder="Enter OrderDiliveryType Name"/>
+        </div>
+      </div>
+
+  <div class="row">
+      <div class="col-md-6">
+        <div class="form-group row">
+          <label class="form-check-label">
+            <input type="checkbox" class="form-check-input" name="IsActive"  checked [(ngModel)]="IsActive"/>
+            Active                    
+          </label>
+        </div> 
+      </div>                
+    </div>
+</div>
+<div class="modal-footer">
+
+<button (click)="AddOrderDelivery()" *ngIf="orderdelivery.OrderDeliveryTypeID==0" class="btn btn-success">
+  Add
+</button>
+
+<button (click)="UpdateOrderDelivery()" *ngIf="orderdelivery.OrderDeliveryTypeID!=0" class="btn btn-primary">
+  Update
+</button>
+</div>
+
+

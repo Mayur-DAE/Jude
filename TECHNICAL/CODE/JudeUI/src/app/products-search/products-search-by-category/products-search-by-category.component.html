@@ -1,0 +1,384 @@
+<!--Company Modal -->
+<!-- <div class="modal fade" id="companyModal" tabindex="-1" aria-hidden="true">
+   <div class="modal-dialog modal-xl modal-dialog-centered">
+      <div *ngIf="!isMobile" class="modal-content">
+         <div class="modal-body p-8">
+            <div class="position-absolute top-0 end-0 me-3 mt-3">
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                  (click)="closeModal()"></button>
+            </div>
+            <h5 class="Availability">{{ 'Shops' | translate }}</h5>
+            <br>
+            <div class="row" *ngIf="ProductInCompany">
+               <div class="scrollbar-theme overflow-auto" style="max-height: 450px;">
+                  <div class="card card-product mb-3  mobview">
+                     <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                           <h2 class="fs-6 flex-grow-2 text-center shopinfo1">{{ 'Icon' | translate }}</h2>
+                           <h2 class="fs-6 flex-grow-1 text-center shopinfo">{{ 'Shop' | translate }}</h2>
+                           <h2 class="fs-6 flex-grow-1 text-center shopinfo">{{ 'Base Price' | translate }}</h2>
+                           <h2 class="fs-6 flex-grow-1 text-center shopinfo">{{ 'Discount' | translate }}</h2>
+                           <h2 class="fs-6 flex-grow-1 text-center shopinfo">{{ 'Final Price' | translate }}</h2>
+                           <h2 class="fs-6 flex-grow-2 text-center shopinfo1">{{ 'Action' | translate }}</h2>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="card card-product mb-3  mobview" *ngFor="let dataItem of companyList">
+                     <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center ">
+                           <div class="shopinfo1 d-flex justify-content-center align-items-center">
+                              <img src="{{
+                                 CompanyImagePath +
+                                    dataItem.CompanyLogoPath
+                                }}" class="rounded-circle icon-shape icon-xxl flex-grow-2 " />
+                           </div>
+
+
+                           <h2 class="fs-6 flex-grow-1 text-center shopinfo">{{ dataItem.CompanyName}}</h2>
+                           <h2 class="fs-6 flex-grow-1 text-center shopinfo">{{currency}} {{ dataItem.ProductPrice}}
+                           </h2>
+                           <h2 class="fs-6 flex-grow-1 text-center shopinfo"
+                              *ngIf="dataItem.DiscountType==='P' && dataItem.DiscountPrice>0">{{
+                              dataItem.DiscountPrice}}%</h2>
+                           <h2 class="fs-6 flex-grow-1 text-center shopinfo"
+                              *ngIf="dataItem.DiscountType==='V' && dataItem.DiscountPrice>0">{{currency}} {{
+                              dataItem.DiscountPrice}}</h2>
+                           <h2 class="fs-6 flex-grow-1 text-center shopinfo" *ngIf="dataItem.DiscountPrice===0">-</h2>
+                           <h2 class="fs-6 flex-grow-1 text-center shopinfo">{{currency}}
+                              {{calculateFinalPrice(dataItem) }}
+                           </h2>
+                           <a class="btn btn-primary btn-sm flex-grow-2 shopinfo1"
+                              [routerLink]="['/shop/' + dataItem.CompanyID]" (click)="closeModal()">
+                              {{ 'Visit Shop' | translate }}
+                           </a>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="row" *ngIf="!ProductInCompany">
+               <div class="noproducts">{{ 'Currently No Shop is Selling this Product' | translate }}</div>
+            </div>
+         </div>
+      </div>
+      Mobile View
+      <div *ngIf="isMobile" class="modal-content">
+         <div class="modal-body p-3">
+            <div class="position-absolute top-0 end-0 me-3 mt-3">
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal()"></button>
+            </div>
+            <h5 class="Availability text-left">{{ 'Shops' | translate }}</h5>
+            <br>
+            <div *ngIf="ProductInCompany">
+               <div class="card card-product mb-3">
+                  <div class="card-body text-center">
+                     <div class="row w-auto">
+                        <div class="col-4 fw-bold">{{ 'Icon' | translate }}</div>
+                        <div class="col-4 fw-bold">{{ 'Shop' | translate }}</div>
+                        <div class="col-4 fw-bold">{{ 'Price' | translate }}</div>
+                     </div>
+                  </div>
+               </div>
+               <div>
+                  <a *ngFor="let dataItem of companyList" 
+                     [routerLink]="['/shop/' + dataItem.CompanyID]" 
+                     (click)="closeModal()" 
+                     class="text-decoration-none">
+                     <div class="card card-product mb-3">
+                        <div class="card-body">
+                           <div class="row align-items-center text-center w-auto">
+                              <div class="col-4">
+                                 <img src="{{ CompanyImagePath + dataItem.CompanyLogoPath }}" 
+                                    class="rounded-circle img-fluid icon-shape" style="max-width: 50px;" />
+                              </div>
+                              <div class="col-4">{{ dataItem.CompanyName }}</div>
+                              <div class="col-4">{{currency}} {{calculateFinalPrice(dataItem)}}</div>
+                           </div>
+                        </div>
+                     </div>
+                  </a>
+               </div>
+            </div>
+            <div class="row" *ngIf="!ProductInCompany">
+               <div class="noproducts text-center">{{ 'Currently No Shop is Selling this Product' | translate }}</div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div> -->
+<div class="modal fade" id="companyModal" tabindex="-1" aria-hidden="true">
+   <div class="modal-dialog modal-xl modal-dialog-centered">
+      <div class="modal-content">
+         <div class="modal-body p-8">
+            <div class="position-absolute top-0 end-0 me-3 mt-3">
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal()"></button>
+            </div>
+             <h5 class="Availability">{{ 'Available in these Shops' | translate }}</h5>
+ <br>
+            <div class="row" *ngIf="ProductInCompany">
+               <div class="scrollbar-theme overflow-auto" style="max-height: 450px;">
+                  <div class="row row-cols-1 row-cols-lg-3 row-cols-md-2 g-4 g-lg-4">
+                     <div class="col" *ngFor="let dataItem of companyList">
+                        <div class="card flex-row p-6 card-product cursor-pointer"  (click)="closeModal()">
+                           <div>
+                              <img class="img" src="{{
+                                 CompanyImagePath +
+                                    dataItem.CompanyLogoPath
+                                }}" width="66px" height="66px" class="rounded-circle icon-shape" (error)="loadDefaultImage($event)" />
+                           </div>
+                           <!-- <img src="{{
+                             CompanyLogoImageNamePath +
+                                          dataItem.CompanyLogoPath
+                                      }}" class="rounded-circle icon-shape icon-xxl flex-grow-2 " />
+                          -->
+                           <div class="ms-6">
+                              <h2 class="mb-1 h5 text-inherit">{{ dataItem.CompanyName }}</h2>
+
+                              <div class="d-flex align-items-center">
+                                 <small class="text-warning">
+                                    <ng-container *ngIf="companyRatings[dataItem.CompanyID]">
+                                      <i *ngFor="let starClass of companyRatings[dataItem.CompanyID]?.stars" [ngClass]="starClass"></i>
+                                    </ng-container>
+                                  </small>
+                                  <span class="ms-2" *ngIf="companyRatings[dataItem.CompanyID]?.avgRating !== 0.0">
+                                    {{ companyRatings[dataItem.CompanyID?.toString()]?.avgRating?.toFixed(1) ?? "0.0" }}
+                                  </span>
+                              </div>                     
+                              <div class=" mt-2  text-dark">
+                                 <span class="me-2"> {{ selectedMasterProductName }}</span>
+                              </div>
+                              <div class=" mt-1  text-dark">
+                                 <span class="me-2"> {{currency}} {{ calculateFinalPrice(dataItem)  | number:'1.2-2'}}</span>
+                              </div>
+                              <div class=" mt-2 ">
+                              <a class="btn btn-primary btn-sm flex-grow-2 shopinfo1"
+                              [routerLink]="['/shop/' + dataItem.CompanyID]" (click)="closeModal()">
+                              {{ 'Visit Shop' | translate }}
+                           </a>
+                           </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="row" *ngIf="!ProductInCompany">
+               <div class="noproducts text-center">{{ 'Currently No Shop is Selling this Product' | translate }}</div>
+            </div>
+         </div>
+      </div>
+   </div>
+ </div>
+
+<main *ngIf="!isEmpty">
+   <div class="mt-4">
+      <div class="container">
+         <!-- row -->
+         <div class="row">
+            <!-- col -->
+            <div class="col-12">
+               <!-- breadcrumb -->
+               <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb mb-0">
+                     <li class="breadcrumb-item"><a [routerLink]="['/']">{{'Home' | translate}}</a></li>
+                     <li class="breadcrumb-item"><a [routerLink]="['/Shops']">{{'Shop List' | translate}}</a></li>
+                     <li class="breadcrumb-item active" aria-current="page">
+                        {{productList[0]['ProductCategoryShortName']}}</li>
+                  </ol>
+               </nav>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- section -->
+   <section class="mt-8 mb-lg-14 mb-8">
+      <div class="container">
+         <!-- row -->
+         <div class="row">
+            <!-- col -->
+            <div class="col-lg-12">
+               <!-- page header -->
+               <div class="card mb-4 bg-light border-0">
+                  <!-- card body -->
+                  <div class="card-body p-9">
+                     <!-- title -->
+                     <h2 class="mb-0 fs-1">{{productList[0]['ProductCategoryShortName']}}</h2>
+                  </div>
+               </div>
+               <!-- list icon -->
+               <div class="d-lg-flex justify-content-between align-items-center">
+                  <div>
+                     <p class="mb-3 mb-md-0">
+                        <span class="text-dark">{{productList.length}}</span>
+                        <!-- {{ 'Products found' | translate}} -->
+                        {{ (productList.length === 1 ? 'Product found' : 'Products found') | translate }}
+                     </p>
+                  </div>
+                  <!-- icon -->
+                  <div class="d-md-flex justify-content-between align-items-center">
+                     <!-- <div>
+                        <a href="shop-list.html" class="text-muted me-3"><i class="bi bi-list-ul"></i></a>
+                        <a href="shop-grid.html" class="me-3 active"><i class="bi bi-grid"></i></a>
+                        <a href="shop-grid-3-column.html" class="me-3 text-muted"><i class="bi bi-grid-3x3-gap"></i></a>
+                     </div> -->
+                     <div class="d-flex mt-2 mt-lg-0">
+                        <div class="me-2 flex-grow-1">
+                           <select class="form-select" [(ngModel)]="itemsPerPage" (change)="setPage(1)">
+                              <option selected value="50">{{ 'Show' | translate}}: 50</option>
+                              <option value="10">10</option>
+                              <option value="20">20</option>
+                              <option value="30">30</option>
+                           </select>
+                        </div>
+                        <div>
+
+                           <!-- <select class="form-select">
+                              <option selected>{{ 'Sort by: Featured' | translate}}</option>
+                              <option value="Low to High">{{ 'Price: Low to High' | translate}}</option>
+                              <option value="High to Low">{{ 'Price: High to Low' | translate}}</option>
+                              <option value="Release Date">{{ 'Release Date' | translate}}</option>
+                              <option value="Avg. Rating">{{ 'Avg. Rating' | translate}}</option>
+                           </select> -->
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="row g-4 row-cols-lg-5 row-cols-3 row-cols-md-3 mt-2">
+                  <!-- col -->
+                  <div class="col" *ngFor="let dataItem of paginatedProducts ">
+                     <!-- card product -->
+                     <div class="card card-product h-100">
+                        <div class="card-body  p-1 p-sm-4">
+                           <!-- badge -->
+                           <div class="text-center position-relative">
+                              <!-- <div class="position-absolute top-0 start-0">
+                                 <span class="badge bg-danger">{{ 'Sale' | translate}}</span>
+                              </div> -->
+
+                              <!-- img -->
+                              <img src="{{
+                                  productImageNamePath + dataItem.MasterProductImageThumbnailImagePath
+                                }}" (error)="loadDefaultImage($event)" alt="Grocery Ecommerce Template"
+                                 class=" mb-0 mb-sm-3 img-fluid" />
+
+                              <!-- action btn -->
+                              <div class="card-product-action">
+                                 <a href="#!" class="btn-action" data-bs-toggle="modal" data-bs-target="#companyModal"
+                                    (click)="openCompanyModal(dataItem)">
+                                    <i class="bi bi-shop" data-bs-toggle="tooltip" data-bs-html="true"
+                                       title="Shops"></i>
+                                 </a>
+                                 <!-- <a href="shop-wishlist.html" class="btn-action" data-bs-toggle="tooltip"
+                                    data-bs-html="true" title="Wishlist"><i class="bi bi-heart"></i></a>
+                                 <a href="#!" class="btn-action" data-bs-toggle="tooltip" data-bs-html="true"
+                                    title="Compare"><i class="bi bi-arrow-left-right"></i></a> -->
+                              </div>
+                           </div>
+                           <!-- heading -->
+                           <div class="text-small mb-2 px-2  py-sm-0 lh-1-1">
+                              <a class="text-decoration-none text-muted ">
+                                 <small class="">{{dataItem.ProductSubCategoryShortName}}</small>
+                              </a>
+                           </div>
+                           <h2 class="fs-6 px-2  py-sm-0">
+                              <a class="text-inherit text-decoration-none">
+                                 {{dataItem.MasterProductName }}
+                              </a>
+                              </h2>
+                           <!-- <div>
+                              
+                              <small class="text-warning">
+                                 <i class="bi bi-star-fill"></i>
+                                 <i class="bi bi-star-fill"></i>
+                                 <i class="bi bi-star-fill"></i>
+                                 <i class="bi bi-star-fill"></i>
+                                 <i class="bi bi-star-half"></i>
+                              </small>
+                              <span class="text-muted small">4.5(149)</span>
+                           </div> -->
+
+                        </div>
+                     </div>
+                  </div>
+
+
+               </div>
+               <!-- row -->
+               <!-- <div class="row mt-8">
+                 <div class="col">                  
+                    <nav>
+                       <ul class="pagination">
+                          <li class="page-item disabled">
+                             <a class="page-link mx-1" href="#" aria-label="Previous">
+                                <i class="feather-icon icon-chevron-left"></i>
+                             </a>
+                          </li>
+                          <li class="page-item"><a class="page-link mx-1 active" href="#">1</a></li>
+                          <li class="page-item"><a class="page-link mx-1" href="#">2</a></li>
+
+                          <li class="page-item"><a class="page-link mx-1" href="#">...</a></li>
+                          <li class="page-item"><a class="page-link mx-1" href="#">12</a></li>
+                          <li class="page-item">
+                             <a class="page-link mx-1" href="#" aria-label="Next">
+                                <i class="feather-icon icon-chevron-right"></i>
+                             </a>
+                          </li>
+                       </ul>
+                    </nav>
+                 </div>
+              </div> -->
+            </div>
+         </div>
+         <div class="row mt-8 ">
+            <div class="col">
+               <!-- nav -->
+               <nav>
+                  <ul class="pagination">
+                     <li class="page-item " [class.disabled]="currentPage === 1">
+                        <button class="page-link mx-1" (click)="setPage(currentPage-1)">
+                           <i class="feather-icon icon-chevron-left"></i>
+                        </button>
+                     </li>
+                     <li class="page-item" *ngFor="let page of pages">
+                        <button class="page-link mx-1" [class.active]="page === currentPage" (click)="setPage(page)">
+                           {{ page }}
+                        </button>
+                     </li>
+                     <li class="page-item" [class.disabled]="currentPage === pages[pages.length - 1] ">
+                        <button class="page-link mx-1" (click)="setPage(currentPage+1)">
+                           <i class="feather-icon icon-chevron-right"></i>
+                        </button>
+                     </li>
+                  </ul>
+               </nav>
+            </div>
+         </div>
+      </div>
+   </section>
+</main>
+
+<div *ngIf="isEmpty">
+   <div class="mt-4">
+      <div class="container">
+         <!-- row -->
+         <div class="row">
+            <!-- col -->
+            <div class="col-12">
+               <!-- breadcrumb -->
+               <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb mb-0">
+                     <li class="breadcrumb-item"><a [routerLink]="['/']">{{'Home' | translate}}</a></li>
+                     <li class="breadcrumb-item"><a [routerLink]="['/Shops']">{{'Shop List' | translate}}</a></li>
+                  </ol>
+               </nav>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="empty-product mb-10">
+      <img src="assets/svg/empty.svg" />
+      <h4>{{'Please try another search' | translate}}</h4>
+   </div>
+</div>
+
+<app-view-cart></app-view-cart>

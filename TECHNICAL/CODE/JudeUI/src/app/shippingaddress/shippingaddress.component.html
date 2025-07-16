@@ -1,0 +1,755 @@
+<!-- Payment Close Modal -->
+<div class="modal fade" id="ClosePaymentModal" tabindex="-1" aria-labelledby="ClosePaymentModalLabel" aria-hidden="true"
+  data-bs-backdrop="static" style="z-index: 999999;">
+  <div class="modal-dialog modal-sm modal-dialog-centered ">
+    <div class="modal-content shadow-lg">
+      <div class="modal-body">
+        <!-- <div class="mb-2 d-flex align-items-center"> -->
+        <!-- <h1 class="modal-title fs-5" id="PaymentModalLabel">{{ 'Add Your Location' | translate}}</h1> -->
+        <!-- <button type="button" class="btn-close ms-auto"(click)="closePaymentModal()" aria-label="Close"></button>
+            </div> -->
+        <div>
+          <!-- <div class="text-align text-center m-3">Are you sure you want to cancel the payment?</div> -->
+          <div class="text-center m-3">
+            <h5 class="fw-bold" style="color: #ff2424;">Cancel Payment</h5>
+            <p class="m-3">
+              Are you sure you want to cancel the payment? This action cannot be undone.
+            </p>
+          </div>
+          <div class="d-flex">
+            <button (click)="PaymentExit()" type="modal" class="btn btn-primary  w-100 m-3">Yes</button>
+            <button type="button" class="btn btn-primary  w-100 m-3" data-bs-dismiss="modal">No</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Payment Modal -->
+<div class="modal fade" id="PaymentModal" tabindex="-1" aria-labelledby="PaymentModalLabel" aria-hidden="true"
+  data-bs-backdrop="static">
+  <div class="modal-dialog modal-xl modal-dialog-centered modal-size">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="mb-2 d-flex align-items-center">
+          <!-- <h1 class="modal-title fs-5" id="PaymentModalLabel">{{ 'Add Your Location' | translate}}</h1> -->
+          <button type="button" class="btn-close ms-auto" (click)="closePaymentModal()" aria-label="Close"></button>
+        </div>
+
+        <div *ngIf="paymentload" class="loading-overlay">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+
+        <div *ngIf="paymentopen" class="iframe-wrapper" [hidden]="paymentload">
+          <iframe [src]="safeUrl" style="width: 100%; height: 600px; border: none;"
+            (load)="onPaymentFrameLoad()"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main>
+  <div class="mt-4">
+    <div class="container">
+      <!-- row -->
+      <div class="row">
+        <!-- col -->
+        <div class="col-12">
+          <!-- breadcrumb -->
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0">
+              <li class="breadcrumb-item"><a [routerLink]="['/Home']">{{ 'Home' | translate }}</a></li>
+              <li class="breadcrumb-item"><a [routerLink]="['/Shops']">{{ 'Shop' | translate }}</a></li>
+              <li class="breadcrumb-item"><a class="a1" (click)="yourCart()">{{ 'Shop Cart' | translate }}</a></li>
+              <li class="breadcrumb-item active" aria-current="page">{{ 'Checkout' | translate }}</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+  <section class="mb-lg-14 mb-8 mt-8">
+    <div class="container">
+      <!-- <div class="row"> -->
+      <!-- <div class="col-md-12 col-lg-8 col-11 mx-auto"> -->
+      <!-- <div class="shippinglayout"> -->
+      <!-- <div class="shippingaddress">
+            <div class="alignShippingAdd">{{ this.title }}</div>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" [ngStyle]="{ width: progresswidth + '%' }" aria-valuenow="50"
+                aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+          </div> -->
+      <div class="row">
+        <div class="col-12">
+          <!-- card -->
+          <div class="card py-1 border-0 ">
+            <div>
+              <h1 class="fw-bold">{{ 'Shop Cart' | translate }}</h1>
+            </div>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" [ngStyle]="{ width: progresswidth + '%' }" aria-valuenow="50"
+                aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row" *ngIf="showAddressDetails">
+        <div class="col-lg-8 col-md-7">
+          <!-- <div class="py-3"> -->
+          <!-- *ngFor="let dataItem of ShippingAddressList" -->
+          <!-- <div class="col-md-6 shippingaddressfixing">
+              <div>
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="fname" placeholder="{{ 'Full Name' | translate }}" [(ngModel)]="fullname" />
+                  
+                  <label for="fname" class="form-label">{{ 'Full Name' | translate }}</label>
+                </div>
+              </div>
+              <div class="error">{{ errorMsg }}</div>
+            </div>
+
+            <div class="col-md-6 shippingaddressfixingsecond">
+              <div>
+                <div class="form-floating">
+                  <input type="email" class="form-control" id="emailadd" placeholder="{{ 'Email Address' | translate }}"
+                    [(ngModel)]="emailaddress" />
+                
+                  <label for="emailadd" class="form-label">{{ 'Email Address' | translate }}</label>
+                </div>
+              </div>
+              <div class="error">{{ errorMsg1 }}</div>
+            </div> -->
+          <div class="row1">
+            <div class="col-md-6 shippingaddressfixing">
+              <div>
+                <div class="input-group">
+                  <input type="text" aria-label="Last name" class="form-control w-45"
+                    placeholder="Search for area, location more.." id="areaaa" name="auto" spellcheck="false"
+                    [(ngModel)]="searchAddress.formattedAddress" (input)="onSearch()" />
+
+                  <button class="input-group-text bg-transparent" type="submit" (click)="onDetectCurrent()">
+                    <i _ngcontent-ren-c73="" class="feather-icon icon-map-pin"></i>
+                  </button>
+                </div>
+
+                <div class="input-group">
+                  <div *ngIf="searchResults.length > 0"
+                    class="position-absolute bg-white shadow rounded scrollbar-theme form-control w-100"
+                    style="max-height: 200px;overflow-y: auto; z-index: 99999;">
+                    <div *ngFor="let place of searchResults" (click)="selectAddress(place)" class="p-2 rounded ">
+                      <div class="d-flex flex-column">
+                        <div class="fw-bold fs-7 text-dark"><i
+                            class="bi bi-geo-alt text-primary me-2"></i>{{place.structured_formatting.main_text}} </div>
+                        <div class="text-secondary fs-7">
+                          {{place.structured_formatting.secondary_text}}
+                        </div>
+                        <hr class="my-1">
+                      </div>
+
+                    </div>
+                  </div>
+                  <div class="mapimage" *ngIf="!ShowMap">
+                    <img src="assets\images\png\searchmap.png" alt="" class="img-fluid "
+                      style="height: 400px;width: 100vh;" />
+                  </div>
+                </div>
+                <br>
+
+                <div #mapContainer class="map-container"></div>
+                <div *ngIf="ShowMap" class="center-marker">
+                  <i class="bi bi-geo-fill"></i>
+                </div>
+
+
+
+                <!-- <app-location [shippingaddress]="true"></app-location> -->
+                <!-- <div class="form-floating">
+                    <input type="text" class="form-control" id="fname" placeholder="{{ 'Full Name' | translate }}"
+                      [(ngModel)]="fullname" />
+                    <label for="fname" class="form-label">{{ 'Full Name' | translate }} <span class="text-danger">*</span></label>
+                  </div> -->
+              </div>
+              <!-- <div class="error">{{ errorMsg }}</div> -->
+            </div>
+
+            <div class="col-md-6 shippingaddressfixing">
+              <div>
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="fname" placeholder="{{ 'Full Name' | translate }}"
+                    [(ngModel)]="fullname" #fullnameRef="ngModel" required />
+                  <label for="fname" class="form-label">{{ 'Full Name' | translate }} <span
+                      class="text-danger">*</span></label>
+                </div>
+                <!-- <div *ngIf="fullnameRef.invalid && fullnameRef.touched" class="text-danger">
+                    Full Name is required
+                  </div> -->
+              </div>
+              <div class="error">{{ errorMsg }}</div>
+              <!-- <div class="shippingaddresselement">
+                  <div class="form-floating">
+                    <input type="email" class="form-control" id="emailadd" placeholder="{{ 'Email Addresse' | translate }}"
+                      [(ngModel)]="emailaddress"  #emailRef="ngModel" required email/>
+                    <label for="emailadd" class="form-label">{{ 'Email Addresse' | translate }} <span class="text-danger">*</span></label>
+                  </div>
+                   <div *ngIf="emailRef.invalid && emailRef.touched" class="text-danger">
+                    Enter a valid Email Address
+                  </div> 
+                </div> -->
+              <!-- <div class="error">{{ errorMsg1 }}</div> -->
+              <div class="shippingaddresselement">
+                <div class="form-floating">
+                  <input type="tel" class="form-control" id="mnumber" placeholder="{{ 'Mobile Number' | translate }}"
+                    [(ngModel)]="mobilenumber" #mobileRef="ngModel" required pattern="^[0-9]{10}$" />
+                  <!-- {{ dataItem.MobileNumber }} -->
+                  <label for="mnumber" class="form-label">{{ 'Mobile Number' | translate }} <span
+                      class="text-danger">*</span></label>
+                </div>
+                <!-- <div *ngIf="mobileRef.invalid && mobileRef.touched" class="text-danger">
+                    Enter a valid 10-digit Mobile Number
+                  </div> -->
+              </div>
+              <div class="error">{{ errorMsg2 }}</div>
+              <div class="shippingaddresselement">
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="addrss"
+                    placeholder="{{ 'Flat, House no, Building' | translate }}" [(ngModel)]="flathousebld"
+                    #addressRef="ngModel" required />
+                  <!-- {{ dataItem.Address1 }} -->
+                  <label for="addrss" class="form-label">{{ 'Flat, House no, Building' | translate }} <span
+                      class="text-danger">*</span></label>
+                </div>
+                <!-- <div *ngIf="addressRef.invalid && addressRef.touched" class="text-danger">
+                    Flat, House no, Building is required
+                  </div> -->
+              </div>
+              <div class="error">{{ errorMsg4 }}</div>
+              <div class="shippingaddresselement">
+                <div class="form-floating">
+                  <input disabled type="text" class="form-control" id="areaa" name="auto" spellcheck="false"
+                    placeholder="{{ 'Area, Street, Sector, Village' | translate }}"
+                    [(ngModel)]="selectedAddress.formattedAddress" #areaRef="ngModel" required />
+                  <!-- {{ dataItem.Address1 }} -->
+                  <label for="areaa" class="form-label">{{ 'Area, Street, Sector, Village' | translate }} <span
+                      class="text-danger">*</span></label>
+                  <!-- <div class="list-group">
+                      <a class="list-group-item list-group-item-ation" *ngFor="let dataItem of addresses"
+                        (click)="onSelectAddress(dataItem)">{{ dataItem.formattedAddress }}</a>
+                    </div> -->
+                </div>
+                <!-- <div *ngIf="areaRef.invalid && areaRef.touched" class="text-danger">
+                    Area, Street, Sector, Village is required
+                  </div> -->
+              </div>
+              <div class="error">{{ errorMsg5 }}</div>
+              <!-- <div class="error">{{ errorMsg5 }}</div>
+                <div class="shippingaddresselement">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="pcode" placeholder="{{ 'Pincode' | translate }}"
+                      [(ngModel)]="pincode" />
+                    
+                    <label for="pcode" class="form-label">{{ 'Pincode' | translate }} <span class="text-danger">*</span></label>
+                  </div>
+                </div>
+                <div class="error">{{ errorMsg3 }}</div> -->
+              <div class="shippingaddresselement">
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="lmark" placeholder="{{ 'Landmark' | translate }}"
+                    [(ngModel)]="Landmark" #landRef="ngModel" required />
+                  <!-- {{ dataItem.Zip }} -->
+                  <label for="lmark" class="form-label">{{ 'Landmark' | translate }}</label>
+                </div>
+                <!-- <div *ngIf="landRef.invalid && landRef.touched" class="text-danger">
+                   Landmark is required
+                  </div> -->
+              </div>
+              <!-- <div class="error">{{ errorMsg3 }}</div> -->
+              <!-- <div class="shippingaddresselement">
+                  <div class="form-floating dropdown-container">
+                    <input type="text" class="form-control" id="tcity" placeholder="{{ 'Town/City' | translate }}"
+                      [(ngModel)]="towncity" (keyup)="onCityType()"
+                      (focus)="showCityDropdown = true" (blur)="hideCityDropdownWithDelay()"  />
+                    
+                    <label for="tcity" class="form-label">{{ 'Town/City' | translate }} <span class="text-danger">*</span></label>
+                  
+                  <div class="dropdown-content" [class.show]="showCityDropdown">
+                    <a class="list-group-item list-group-item-ation" *ngFor="let dataItem of CityList?.slice(0, 5)"
+                      (click)="onSelectcity(dataItem); showCityDropdown = false">{{ dataItem.CityName }}</a>
+                  </div>
+                  </div>
+                </div>
+                <div class="error">{{ errorMsg6 }}</div>
+                <div class="form-floating dropdown-container shippingaddresselement">
+                  <input type="text" class="form-control" id="state" placeholder="{{ 'State' | translate }}"
+                    [(ngModel)]="state" (keyup)="onStatesType()" 
+                    (focus)="showStateDropdown = true" 
+                    (blur)="hideStateDropdownWithDelay()"/>
+                  
+                  <label for="state" class="form-label">{{ 'State' | translate }} <span class="text-danger">*</span></label>
+                
+                <div class="dropdown-content" [class.show]="showStateDropdown">
+                  <a class="list-group-item list-group-item-ation" *ngFor="let dataItem of StatesList?.slice(0, 5)"
+                    (click)="onSelectstate(dataItem); showStateDropdown = false">{{ dataItem.StateName }}</a>
+                </div>
+                </div>
+                <div class="error">{{ errorMsg7 }}</div> -->
+            </div>
+          </div>
+
+          <!-- <div class="row1">
+            <div class="col-md-6 shippingaddressfixing">
+              <div>
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="fname" placeholder="{{ 'Full Name' | translate }}"
+                    [(ngModel)]="fullname" />
+                  <label for="fname" class="form-label">{{ 'Full Name' | translate }} <span class="text-danger">*</span></label>
+                </div>
+              </div>
+              <div class="error">{{ errorMsg | translate }}</div>
+            </div>
+
+            <div class="col-md-6 shippingaddressfixing">
+              <div>
+                <div class="form-floating">
+                  <input type="email" class="form-control" id="emailadd" placeholder="{{ 'Email Address' | translate }}"
+                    [(ngModel)]="emailaddress" />
+                  <label for="emailadd" class="form-label">{{ 'Email Address' | translate }} <span class="text-danger">*</span></label>
+                </div>
+              </div>
+              <div class="error">{{ errorMsg1 | translate }}</div>
+            </div>
+          </div>
+
+          <div class="row1">
+            <div class="col-md-6 shippingaddressfixing">
+              <div>
+                <div class="form-floating">
+                  <input type="tel" class="form-control" id="mnumber" placeholder="{{ 'Mobile Number' | translate }}"
+                    [(ngModel)]="mobilenumber" />
+                  
+                  <label for="mnumber" class="form-label">{{ 'Mobile Number' | translate }} <span class="text-danger">*</span></label>
+                </div>
+              </div>
+              <div class="error">{{ errorMsg2 | translate }}</div>
+            </div>
+            <div class="col-md-6 shippingaddressfixing">
+              <div>
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="addrss"
+                    placeholder="{{ 'Flat, House no, Building' | translate }}" [(ngModel)]="flathousebld" />
+                  
+                  <label for="addrss" class="form-label">{{ 'Flat, House no, Building' | translate }} <span class="text-danger">*</span></label>
+                </div>
+              </div>
+              <div class="error">{{ errorMsg4 | translate }}</div>
+            </div>
+          </div>
+          <div class="row1">
+            <div class="col-md-6 shippingaddressfixing">
+              <div>
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="areaa" name="auto" spellcheck="false"
+                    placeholder="{{ 'Area, Street, Sector, Village' | translate }}"
+                    [(ngModel)]="selectedAddress.formattedAddress" (keyup)="onAreaKeyup()" />
+                  
+                  <label for="areaa" class="form-label">{{ 'Area, Street, Sector, Village' | translate }} <span class="text-danger">*</span></label>
+                  <div class="list-group">
+                    <a class="list-group-item list-group-item-ation" *ngFor="let dataItem of addresses"
+                      (click)="onSelectAddress(dataItem)">{{ dataItem.formattedAddress }}</a>
+                  </div>
+                </div>
+              </div>
+              <div class="error">{{ errorMsg5 | translate }}</div>
+            </div>
+            <div class="col-md-6 shippingaddressfixing">
+              <div>
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="pcode" placeholder="{{ 'Pincode' | translate }}"
+                    [(ngModel)]="pincode" />
+                  
+                  <label for="pcode" class="form-label">{{ 'Pincode' | translate }} <span class="text-danger">*</span></label>
+                </div>
+              </div>
+              <div class="error">{{ errorMsg3 | translate }}</div>
+            </div>
+          </div>
+          <div class="row1">
+            <div class="col-md-6 shippingaddressfixing">
+              <div>
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="lmark" placeholder="{{ 'Landmark' | translate }}"
+                    [(ngModel)]="Landmark" />
+                  
+                  <label for="lmark" class="form-label">{{ 'Landmark' | translate }}</label>
+                </div>
+              </div>
+              <div class="error">{{ errorMsg3 | translate }}</div>
+            </div>
+            <div class="col-md-6 shippingaddressfixing">
+              <div>
+                <div class="form-floating dropdown-container">
+                  <input type="text" class="form-control" id="tcity" placeholder="{{ 'Town/City' | translate }}"
+                    [(ngModel)]="towncity" (keyup)="onCityType()"
+                    (focus)="showCityDropdown = true" (blur)="hideCityDropdownWithDelay()"  />
+                  
+                  <label for="tcity" class="form-label">{{ 'Town/City' | translate }} <span class="text-danger">*</span></label>
+                
+                <div class="dropdown-content" [class.show]="showCityDropdown">
+                  <a class="list-group-item list-group-item-ation" *ngFor="let dataItem of CityList?.slice(0, 5)"
+                    (click)="onSelectcity(dataItem); showCityDropdown = false">{{ dataItem.CityName }}</a>
+                </div>
+                </div>
+              </div>
+              <div class="error">{{ errorMsg6 | translate }}</div>
+            </div>
+          </div>
+          <div class="row1">
+            <div class="col-md-6 shippingaddressfixing">
+              
+              <div class="form-floating dropdown-container">
+                <input type="text" class="form-control" id="state" placeholder="{{ 'State' | translate }}"
+                  [(ngModel)]="state" (keyup)="onStatesType()" 
+                  (focus)="showStateDropdown = true" 
+                  (blur)="hideStateDropdownWithDelay()"/>
+                
+                <label for="state" class="form-label">{{ 'State' | translate }} <span class="text-danger">*</span></label>
+              
+              <div class="dropdown-content" [class.show]="showStateDropdown">
+                <a class="list-group-item list-group-item-ation" *ngFor="let dataItem of StatesList?.slice(0, 5)"
+                  (click)="onSelectstate(dataItem); showStateDropdown = false">{{ dataItem.StateName }}</a>
+              </div>
+              </div>
+              <div class="error">{{ errorMsg7 | translate }}</div>
+            </div>
+          </div> -->
+          <!-- </div> -->
+        </div>
+        <!--  -->
+        <div class="col-12 col-lg col-md-5 mt-5">
+          <!-- card -->
+          <div class="mb-5 card mt-2">
+            <div class="card-body p-6">
+              <!-- heading -->
+              <h2 class="h5 mb-4">{{ 'Summary' | translate}}</h2>
+              <div class="card mb-2">
+                <!-- <div class="OrderMain">
+                        <div class="amount">
+                          <div class="price_indiv d-flex justify-content-between">
+                            <p>Cart Total</p>
+                            <p>
+                              <span>{{ carttotalamt | currency: "INR" }}</span>
+                            </p>
+                          </div>
+                          <div class="price_indiv d-flex justify-content-between">
+                            <p>Cart Savings</p>
+                            <p>
+                              <span id="product_total_amt">{{
+                                cartsavingamt | currency: "INR"
+                              }}</span>
+                            </p>
+                          </div>
+                          <div class="price_indiv d-flex justify-content-between">
+                            <p>Delivery Charges</p>
+                            <p>
+                              <span id="product_total_amt">{{
+                                0 | currency: "INR"
+                              }}</span>
+                            </p>
+                          </div>
+                          <hr />
+                          <div class="total-amt d-flex justify-content-between"></div>
+                          <div class="total-amt d-flex justify-content-between">
+                            <p>Total Amount</p>
+                            <p>
+                              <span id="product_total_amt">{{
+                                finalamt | currency: "INR"
+                              }}</span>
+                            </p>
+                          </div>
+                        </div>
+                      </div> -->
+                <!-- list group -->
+                <ul class="list-group  list-group-flush">
+                  <!-- list group item -->
+                  <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="me-auto">
+                      <div>{{ 'Cart Total' | translate }}</div>
+                    </div>
+                    <span>{{currency}} {{ this.Cartamt | number:'1.2-2'}}</span>
+                  </li>
+
+                  <!-- list group item -->
+                  <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="me-auto">
+                      <div>{{ 'Cart Savings' | translate }}</div>
+                    </div>
+                    <span>{{currency}} {{ cartsavingamt | number:'1.2-2'}}</span>
+                  </li>
+
+                  <!-- list group item -->
+                  <!-- <li class="list-group-item d-flex justify-content-between align-items-start">
+              <div class="me-auto">
+                <div>Delivery Charges</div>
+              </div>
+              <span>{{ 0 | currency: "INR" }}</span>
+            </li> -->
+
+                  <!-- list group item -->
+                  <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="me-auto">
+                      <div class="fw-bold">{{ 'Subtotal' | translate }}</div>
+                    </div>
+                    <span class="fw-bold">{{currency}} {{
+                      calculateTotal(this.CartTotalamt, this.DeliveryCharges) | number:'1.2-2'
+                      }}</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="d-flex justify-content-between mt-4 mb-8" *ngIf="showAddressDetails">
+                <b>{{ 'Select Payment Method' | translate }} </b>
+                <br />
+                <div class="form-check mb-4">
+                  <input class="form-check-input" type="radio" name="paymentMethod" id="prepaidRadio" value="Prepaid"
+                    checked (click)="changePaymentMethod('Prepaid')" />
+                  <label class="form-check-label text-dark fw-semibold" for="prepaidRadio">{{ 'Prepaid' | translate
+                    }}</label>
+                </div>
+                <div class="form-check mb-4">
+                  <input class="form-check-input" type="radio" name="paymentMethod" id="codRadio" value="COD"
+                    (click)="changePaymentMethod('COD')" />
+                  <label class="form-check-label text-dark fw-semibold" for="codRadio">{{ 'COD' | translate }}</label>
+                </div>
+
+                <!-- <input type="radio" name="paymentMethod" value="Prepaid" checked
+          (click)="changePaymentMethod('Prepaid')" />
+        Prepaid
+        <input type="radio" name="paymentMethod" value="COD" (click)="changePaymentMethod('COD')" />
+        COD -->
+
+              </div>
+
+              <div>
+                <!-- <div class="shipping_checkbox_mainpadding">
+                      <div class="align_billing_checkbox">
+                          <input type="checkbox" id="billingadd" name="billingadd" checked>
+                          <label for="billingadd">Same as Billing Address</label>
+                      </div>
+                      <div class="align_save_checkbox">
+                          <input type="checkbox" id="saveadd" name="saveadd" checked>
+                          <label for="saveadd">Save this Address for the next time</label>
+                      </div>
+                  </div> -->
+
+                <input type="hidden" class="form-control" id="latitude" [(ngModel)]="lat" />
+
+                <input type="hidden" class="form-control" id="longitude" [(ngModel)]="long" />
+
+                <input type="hidden" class="form-control" id="isMapMyIndiaSelected"
+                  [(ngModel)]="isMapMyIndiaSelected" />
+
+                <div *ngIf="showAddressDetails">
+                  <button (click)="SaveAndNext()" *ngIf="ShippingAddress[0]?.UserAddressID == null" type="saveandnext"
+                    class="btn btn-primary  w-100 m-1">
+                    {{ 'Save & Next' | translate }}
+                  </button>
+
+                  <button (click)="UpdateAndNext()" *ngIf="ShippingAddress[0]?.UserAddressID != null" type="saveandnext"
+                    class="btn btn-primary w-100 m-1">
+                    {{ 'Update & Next' | translate }}
+                  </button>
+                </div>
+                <button *ngIf="!showAddressDetails" type="saveandnext" class="btn btn-primary  w-100 m-1"
+                  (click)="placeOrderClick()">
+                  {{ 'Pay & Place Order' | translate }}
+                </button>
+                <!-- <div class="btn-container">
+                      <button type="saveandnext" value="SaveAndNext" class="bttnpaddingShippingAdd"
+                          (click)="SaveAndNext()">Save & Next</button>
+                  </div> -->
+              </div>
+
+
+              <!-- heading -->
+              <!-- <div class="mt-8">
+                        <h2 class="h5 mb-3">Add Promo or Gift Card</h2>
+                        <form>
+                           <div class="mb-2">
+                        
+                              <label for="giftcard" class="form-label sr-only">Email address</label>
+                              <input type="text" class="form-control" id="giftcard" placeholder="Promo or Gift Card" />
+                           </div>
+                           
+                           <div class="d-grid"><button type="submit" class="btn btn-outline-dark mb-1">Redeem</button></div>
+                           <p class="text-muted mb-0"><small>Terms & Conditions apply</small></p>
+                        </form>
+                     </div> -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="row" *ngIf="!showAddressDetails">
+        <div class="col-lg-8 col-md-7">
+          <!-- <div class="py-3"> -->
+          <br />
+          <br />
+          <div class="table-responsive w-100">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col" class="text-center">{{ 'Select' | translate }}</th>
+                  <th scope="col">{{ 'Shipping Option' | translate }}</th>
+                  <th scope="col">{{ 'Estimated Delivery' | translate }}</th>
+                  <th scope="col">{{ 'Delivery Charge' | translate }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- TEMPORARY COMMENT -->
+                <!-- <tr *ngFor="
+                      let dataitem of availableCourierCompanies?.slice(0, 4)
+                    ">
+                    <td class="text-center">
+                      <input type="radio" id="radio" name="radio" value="" (click)="getDeliveryCharges(dataitem)" />
+                    </td>
+                    <td>{{ dataitem.courier_name }}</td>
+                    <td>{{ dataitem.etd }}</td>
+                    <td>
+                      {{ dataitem.freight_charge | currency: "INR" }}
+                    </td>
+                  </tr> -->
+
+                <!-- TEMPORARILY HARDCODED -->
+                <tr>
+                  <td class="text-center">
+                    <input class="form-check-input" type="radio" id="radio" name="radio" value=""
+                      (click)="getDeliveryCharges()" />
+                  </td>
+                  <td>Jude Shipping</td>
+                  <td>In 4 hours.</td>
+                  <td>
+                    Br 0.00
+                  </td>
+                </tr>
+                <tr></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col" class="text-center">Select</th>
+                  <th scope="col">Shipping Option</th>
+                  <th scope="col">Estimated Delivery</th>
+                </tr>
+              </thead> 
+              <tbody>
+                <tr>
+                  <td colspan="3" class="text-danger text-center align-middle">
+                    <label for="">{Payment failed please retry.}</label> 
+                  </td>
+                  <td class="text-end"></td>
+                </tr>
+              </tbody>
+            </table> -->
+
+          <!-- </div> -->
+        </div>
+        <div class="col-12 col-lg col-md-5 mt-5">
+
+          <div class="mb-5 card mt-2">
+            <div class="card-body p-6">
+
+              <h2 class="h5 mb-4">{{ 'Summary' | translate}}</h2>
+              <div class="card mb-2">
+
+                <ul class="list-group  list-group-flush">
+
+                  <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="me-auto">
+                      <div>{{ 'Cart Total' | translate }}</div>
+                    </div>
+                    <span>{{currency}} {{ this.Cartamt | number:'1.2-2'}}</span>
+                  </li>
+
+
+                  <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="me-auto">
+                      <div>{{ 'Cart Savings' | translate }}</div>
+                    </div>
+                    <span>{{currency}} {{ cartsavingamt | number:'1.2-2'}}</span>
+                  </li>
+
+                  <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="me-auto">
+                      <div class="fw-bold">{{ 'Subtotal' | translate }}</div>
+                    </div>
+                    <span class="fw-bold">{{currency}} {{
+                      calculateTotal(this.CartTotalamt, this.DeliveryCharges) | number:'1.2-2'
+                      }}</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="d-flex justify-content-between mt-4 mb-8" *ngIf="showAddressDetails">
+                <b>{{ 'Select Payment Method' | translate }} </b>
+                <br />
+                <div class="form-check mb-4">
+                  <input class="form-check-input" type="radio" name="paymentMethod" id="prepaidRadio" value="Prepaid"
+                    checked (click)="changePaymentMethod('Prepaid')" />
+                  <label class="form-check-label text-dark fw-semibold" for="prepaidRadio">{{ 'Prepaid' | translate
+                    }}</label>
+                </div>
+                <div class="form-check mb-4">
+                  <input class="form-check-input" type="radio" name="paymentMethod" id="codRadio" value="COD"
+                    (click)="changePaymentMethod('COD')" />
+                  <label class="form-check-label text-dark fw-semibold" for="codRadio">{{ 'COD' | translate }}</label>
+                </div>
+              </div>
+
+              <div>
+
+
+                <input type="hidden" class="form-control" id="latitude" [(ngModel)]="lat" />
+
+                <input type="hidden" class="form-control" id="longitude" [(ngModel)]="long" />
+
+                <input type="hidden" class="form-control" id="isMapMyIndiaSelected"
+                  [(ngModel)]="isMapMyIndiaSelected" />
+
+                <div *ngIf="showAddressDetails">
+                  <button (click)="SaveAndNext()" *ngIf="ShippingAddress[0]?.UserAddressID == null" type="saveandnext"
+                    class="btn btn-primary  w-100 m-1">
+                    {{ 'Save & Next' | translate }}
+                  </button>
+
+                  <button (click)="UpdateAndNext()" *ngIf="ShippingAddress[0]?.UserAddressID != null" type="saveandnext"
+                    class="btn btn-primary w-100 m-1">
+                    {{ 'Update & Next' | translate }}
+                  </button>
+                </div>
+                <button *ngIf="!showAddressDetails" type="saveandnext" class="btn btn-primary  w-100 m-1"
+                  (click)="placeOrderClick()">
+                  {{ 'Pay & Place Order' | translate }}
+                </button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- </div> -->
+      <!-- </div> -->
+
+
+      <!-- </div> -->
+
+    </div>
+  </section>
+</main>
+<!-- <div id="loader" *ngIf="showLoader"></div> -->

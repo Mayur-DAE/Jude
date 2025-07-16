@@ -1,0 +1,14 @@
+.card-product {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  min-height: 200px; /* Adjust based on your design */
+  max-height: 300px; /* Optional, to prevent excessive height */
+}
+
+.card-product .ms-6 {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

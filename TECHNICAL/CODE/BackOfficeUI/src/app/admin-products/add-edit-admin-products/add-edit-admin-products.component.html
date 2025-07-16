@@ -1,0 +1,646 @@
+<div class="modal-body">
+  <div class="d-flex flex-row bd-highlight mb-3 row" *ngIf="UserRoleID != 2">
+    <div class="from-group" class="productdividepart">
+      <div class="row">
+        <!-- input -->
+        <div class="mb-3 col-lg-6">
+          <label class="form-label">Product Name<span class="text-danger">*</span></label>
+          <input type="text" class="form-control" [(ngModel)]="MasterProductName" placeholder="Enter Product Name" />
+          <div class="error">{{ ProductName_errormsg }}</div>
+        </div>
+        <!-- input -->
+        <div class="mb-3 col-lg-12 mt-2 d-none">
+          <h4 class="mb-3 h5">Description<span class="text-danger">*</span></h4>
+          <textarea row="3" class="form-control" [(ngModel)]="MasterProductDescription"
+            placeholder="Enter Product Description"></textarea>
+          <!-- <input type="text" class="form-control" [(ngModel)]="MasterProductDescription"
+            placeholder="Enter Product Description" /> -->
+          <div class="error">{{ ProductDescription_errormsg }}</div>
+        </div>
+        <!-- input -->
+        <div class="mb-3 col-lg-6">
+          <label class="form-label">Category<span class="text-danger">*</span></label>
+          <select class="form-select" aria-label="Default select example" [(ngModel)]="ProductCategoryID">
+            <option value="" disabled selected>--Select--</option>
+            <option *ngFor="let x of ProductCategoryList" [value]="x.ProductCategoryID">
+              {{ x.ProductCategoryShortName }}
+            </option>
+          </select>
+          <div class="error">{{ ProductCategory_errormsg }}</div>
+        </div>
+        <!-- input -->
+        <div class="mb-3 col-lg-6">
+          <label class="form-label">Sub-Category<span class="text-danger">*</span></label>
+          <select class="form-select" aria-label="Default select example" [(ngModel)]="ProductSubCategoryID"
+            (click)="loadProductSubCategoryList()">
+            <option value="" disabled selected>--Select--</option>
+            <option *ngFor="let x of ProductSubCategoryList" [value]="x.ProductSubCategoryID">
+              {{ x.ProductSubCategoryShortName }}
+            </option>
+          </select>
+          <div class="error">{{ ProductSubCategory_errormsg }}</div>
+        </div>
+
+
+      </div>
+      <!-- <div class="row"> -->
+      <!-- <label class="col-sm-2 col-form-label">Category<span _ngcontent-fjo-c33="" class="text-danger">*</span></label>
+        <div class="col-sm-10">
+          <select class="form-select" aria-label="Default select example" [(ngModel)]="ProductCategoryID">
+            <option>--Select--</option>
+            <option *ngFor="let x of ProductCategoryList" [value]="x.ProductCategoryID">
+              {{ x.ProductCategoryShortName }}
+            </option>
+          </select>
+          <div class="error">{{ ProductCategory_errormsg }}</div>
+          <br />
+        </div> -->
+
+      <!-- <label class="col-sm-2 col-form-label">SubCategory<span _ngcontent-fjo-c33="" class="text-danger">*</span></label>
+        <div class="col-sm-10">
+          <select class="form-select" aria-label="Default select example" [(ngModel)]="ProductSubCategoryID"
+            (click)="loadProductSubCategoryList()">
+            <option>--Select--</option>
+            <option *ngFor="let x of ProductSubCategoryList" [value]="x.ProductSubCategoryID">
+              {{ x.ProductSubCategoryShortName }}
+            </option>
+          </select>
+          <div class="error">{{ ProductSubCategory_errormsg }}</div>
+          <br />
+        </div> -->
+
+      <!-- <label
+          class="col-sm-2 col-form-label"
+          *ngIf="CompanyID == 0 && UserRoleID != 2"
+          >Company</label
+        >
+        <div class="col-sm-10" *ngIf="CompanyID == 0 && UserRoleID != 2">
+          <div class="untitled-page-block2 layout">
+            <input
+              class="form-select"
+              name="CompanyNameSearch"
+              [(ngModel)]="CompanyNameSearch"
+              type="text"
+              placeholder="Type Company Name"
+              (keyup)="onCompanyNameType()"
+            />
+          </div>
+          <div class="form-group showproductlayout1">
+            <a
+              class="list-group-item list-group-item-ation"
+              *ngFor="let dataItem of CompanyList?.slice(0, 7)"
+              (click)="onSelectName(dataItem)"
+              >{{ dataItem.CompanyName }}</a
+            >
+          </div>
+          <div class="error">{{ ProductCompanyName_errormsg }}</div>
+          <br />
+        </div> -->
+
+      <!-- <label class="col-sm-2 col-form-label">Tax</label>
+        <div class="col-sm-10">
+          <select class="form-select" aria-label="Default select example" [(ngModel)]="TaxSlabID">
+            <option>--Select--</option>
+            <option *ngFor="let x of TaxslabList" [value]="x.TaxSlabID">
+              {{ x.TaxSlabName }}
+            </option>
+          </select>
+          <div class="error">{{ ProductGST_errormsg }}</div>
+          <br />
+        </div> -->
+
+      <!-- <label class="col-sm-2 col-form-label"> Name<span _ngcontent-fjo-c33="" class="text-danger">*</span></label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" [(ngModel)]="MasterProductName" placeholder="Enter Product Name" />
+          <div class="error">{{ ProductName_errormsg }}</div>
+          <br />
+        </div> -->
+
+      <!-- <label class="col-sm-2 col-form-label"> Description<span _ngcontent-fjo-c33="" class="text-danger">*</span></label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" [(ngModel)]="MasterProductDescription"
+            placeholder="Enter Product Description" />
+          <div class="error">{{ ProductDescription_errormsg }}</div>
+          <br />
+        </div> -->
+
+      <!-- <label class="col-sm-2 col-form-label"> Price<span _ngcontent-fjo-c33="" class="text-danger">*</span></label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" [(ngModel)]="MasterProductPrice" placeholder="Enter Product Price " />
+          <div class="error">{{ ProductPrice_errormsg }}</div>
+          <br />
+        </div> -->
+
+      <!-- <label class="col-sm-2 col-form-label"> Discount</label>
+        <div class="col-sm-10">
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="ProductDiscount"
+            (keyup)="pricecal()"
+            placeholder="Enter Product Discount in %"
+          />
+          <div class="error">{{ ProductDiscount_errormsg }}</div>
+          <br /> 
+        </div>-->
+
+      <!-- <label class="col-sm-2 col-form-label"> Discount Price</label>
+        <div class="col-sm-10"> -->
+      <!-- <label class="form-control">{{(ProductPrice)-(ProductDiscount*(ProductPrice/100))}}</label> -->
+      <!-- <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="ProductDiscountPrice"
+            (keyup)="pricecal()"
+            placeholder="Enter Product Discount Price"
+          />
+          <div class="error">{{ ProductDiscountPrice_errormsg }}</div>
+          <br />
+        </div> -->
+
+
+      <!-- <label class="col-sm-2 col-form-label"> Product Unit<span _ngcontent-fjo-c33="" class="text-danger">*</span></label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" [(ngModel)]="MasterProductUnit"
+            placeholder="Enter Units of Product " />
+          <div class="error">{{ ProductUnit_errormsg }}</div>
+          <br />
+        </div> -->
+      <!-- <label class="col-sm-2 col-form-label"> Weight in grams</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" [(ngModel)]="ProductGrams" (keyup)="cal()" />
+          <br />
+        </div> -->
+      <!-- </div> -->
+
+      <!-- Caption Details Table -->
+      <div class="form-group mt-3">
+        <h5>Caption Details<span class="text-danger">*</span></h5>
+        <div class="table-responsive">
+          <table class="table table-striped ">
+            <thead>
+              <tr>
+                <th class="border-0">Language</th>
+                <th class="border-0">Name<span _ngcontent-fjo-c33="" class="text-danger">*</span></th>
+                <th class="border-0">Description<span _ngcontent-fjo-c33="" class="text-danger">*</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let lang of activeLanguages; let i = index">
+                <td>{{ lang.LanguageCaption }}</td>
+
+                <!-- Name Input -->
+                <td>
+                  <input type="text" class="form-control input-name" placeholder="Enter Name" [(ngModel)]="lang.Name"
+                    name="name{{i}}" [ngClass]="{'is-invalid': isFieldInvalid(lang.Name)}" />
+
+                  <!-- Validation Error for Name -->
+                  <div class="error" *ngIf="isFieldInvalid(lang.Name)">
+                    Name is required
+                  </div>
+                </td>
+
+                <!-- Description Input -->
+                <td>
+                  <input type="text" class="form-control input-description" placeholder="Enter Description"
+                    [(ngModel)]="lang.Description" name="description{{i}}"
+                    [ngClass]="{'is-invalid': isFieldInvalid(lang.Description)}" />
+
+                  <!-- Validation Error for Description -->
+                  <div class="error" *ngIf="isFieldInvalid(lang.Description)">
+                    Description is required
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group row">
+            <label class="form-check-label">
+              <input type="checkbox" class="form-check-input" name="IsActive" checked [(ngModel)]="IsActive" />
+              Active
+            </label>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="row" *ngIf="UserRoleID != 2">
+        <div class="col-md-6">
+          <div class="form-group row">
+            <label class="form-check-label">
+              <input type="checkbox" class="form-check-input" name="IsPublished" checked [(ngModel)]="IsPublished" />
+              Publish
+            </label>
+          </div>
+        </div>
+      </div> -->
+    </div>
+
+    <div class="ml-3 bd-highlight" class="productdividepart1" *ngIf="UserRoleID != 2">
+      <div class=" mb-6 ">
+        <!-- card body -->
+        <!-- <div class=""> -->
+        <!-- <h4 class="mb-4 h5">Product Price</h4> -->
+        <div class="mb-4">
+          <div class="col-sm-6">
+            <label>Thumbnail Image :<span _ngcontent-fjo-c33="" class="text-danger">*</span></label>
+
+            <br />
+            <img  [src]="MasterProductImageThumbnailImageNamePath" style="height: 100px; width: 100px" />
+<label class="custom-file-label mt-1">
+              Upload Image
+            <input type="file" (change)="uploadthumbnailimage($any($event.target).files)" class="mt-2" hidden />
+               </label>
+            <p class="error">{{ thumbnailErrormsg }}</p>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <div class="col-sm-6">
+            <label>Large Images:</label><br />        
+     <div class="image-grid">
+        <ng-container *ngFor="let imgPath of MasterProductImageLargeImageNamePaths; let i = index">
+        <div class="image-wrapper" *ngIf="imgPath">
+      <img
+        [src]="photoUrl + 'MasterProductImage/' + imgPath"
+        alt="Product Image"
+        class="image-preview"
+      />
+      <i
+        class="fa fa-trash trash-icon"
+        (click)="deleteLargeImage(i)"
+        title="Delete Image"
+      ></i>
+    </div>
+       </ng-container>
+          </div>
+
+            <!-- Custom file input -->
+            <label class="custom-file-label mt-1">
+              Upload Images
+              <input
+                type="file"
+                (change)="uploadlargeimage($any($event.target).files)"
+                multiple
+                hidden
+              />
+            </label>
+            <p class="error">{{ largeErrormsg }}</p>
+          </div>
+        </div>
+        
+        
+        
+        
+        
+        
+        <!-- input -->
+        <div class="mb-4">
+          <label class="form-label">Price<span class="text-danger">*</span></label>
+          <input type="text" class="form-control" [(ngModel)]="MasterProductPrice" placeholder="Enter Product Price "
+            (blur)="MasterProductPrice = MasterProductPrice ? (+MasterProductPrice).toFixed(2) : ''" />
+          <div class="error">{{ ProductPrice_errormsg }}</div>
+        </div>
+
+        <!-- input -->
+        <div class="mb-4">
+          <label class="form-label">Unit<span class="text-danger">*</span></label>
+          <input type="text" class="form-control" [(ngModel)]="MasterProductUnit"
+            placeholder="Enter Units of Product " />
+          <div class="error">{{ ProductUnit_errormsg }}</div>
+        </div>
+
+        <div class="mb-4">
+          <label class="form-label">VAT</label>
+          <select class="form-select" aria-label="Default select example" [(ngModel)]="TaxSlabID">
+            <option value="0" disabled selected>--Select--</option>
+            <option *ngFor="let x of TaxslabList" [value]="x.TaxSlabID">
+              {{ x.TaxSlabName }}
+            </option>
+          </select>
+          <div class="error">{{ ProductGST_errormsg }}</div>
+          <br />
+        </div>
+
+        <!-- </div> -->
+      </div>
+      <!-- <div class="from-group row"> -->
+
+      <!-- </div> -->
+      <br />
+       <br />
+
+    </div>
+  </div>
+<!-- Step 1 Card -->
+<div class="w-full shadow-sm mb-4 fade-in" *ngIf="UserRoleID != 1">
+  <div class="card-header bg-success text-white"  *ngIf="CompanyProductID==0">
+    <h5 class="mb-0"><i class="fas fa-list-ul me-2"></i>Step 1: Search the Product</h5>
+  </div>
+  <div class="card-body">
+    <!-- Your full form starts here -->
+    <div class="d-flex flex-row bd-highlight mb-3 row">
+
+      <!-- Product Category -->
+      <div class="from-group productdividepart2">
+        <div class="row">
+          <!-- Category Dropdown -->
+          <div class="mb-3 col-lg-4" *ngIf="CompanyProductID==0">
+            <label class="form-label">Category</label>
+            <select class="form-select" [(ngModel)]="ProductCategoryID">
+              <option [ngValue]="0" disabled>--Select--</option>
+              <option *ngFor="let x of ProductCategoryList" [ngValue]="x.ProductCategoryID">
+                {{ x.ProductCategoryShortName }}
+              </option>
+            </select>
+            <div class="error mt-2">{{ Shop_ProductCategory_errormsg }}</div>
+          </div>
+
+          <!-- Sub-Category -->
+          <div class="mb-3 col-lg-4" *ngIf="CompanyProductID === 0">
+            <label class="form-label">Sub-Category</label>
+            <select class="form-select" [(ngModel)]="ProductSubCategoryID"
+              (click)="loadProductSubCategoryList()">
+              <option value="0" disabled selected>--Select--</option>
+              <option *ngFor="let x of ProductSubCategoryList" [value]="x.ProductSubCategoryID">
+                {{ x.ProductSubCategoryShortName }}
+              </option>
+            </select>
+            <div class="error mt-2">{{ Shop_ProductSubCategory_errormsg }}</div>
+          </div>
+
+          <!-- Product Name with Suggestions -->
+          <div class="mb-3 col-lg-4">
+            <label class="form-label">Product Name</label>
+            <div class="position-relative" *ngIf="CompanyProductID === 0">
+              <input type="text" class="form-control" [(ngModel)]="searchTexts" (keyup)="filterMasterProducts()"
+                placeholder="Search Master Product..." (focus)="onMasterProductFocus();showSuggestions = true"
+                (blur)="hideSuggestions()">
+
+              <ul class="list-group position-absolute w-100 shadow-sm bg-white" *ngIf="showSuggestions">
+                <li class="list-group-item" *ngFor="let x of filteredMasterProducts" (mousedown)="selectMasterProduct(x)">
+                  {{ x.MasterProductName }}
+                </li>
+              </ul>
+            </div>
+
+            <div class="position-relative" *ngIf="CompanyProductID !== 0">
+              <input type="text" class="form-control" [(ngModel)]="searchText" disabled>
+            </div>
+
+            <div class="error mt-2">{{ ProductName_errormsg }}</div>
+          </div>
+
+          <!-- Base Price (Edit Mode Only) -->
+          <div class="mb-3 col-lg-4" *ngIf="CompanyProductID !== 0">
+            <label class="form-label">Base Price</label>
+            <input
+              type="number"
+              class="form-control"
+              [(ngModel)]="ProductPrice"
+              placeholder="Enter Base Price"
+              disabled
+            />
+          </div>
+
+          <!-- Discount Type -->
+          <div class="mb-3 col-lg-4" *ngIf="CompanyProductID !== 0">
+            <label class="form-label">Discount Type</label>
+            <select class="form-select" [(ngModel)]="DiscountType" (change)="onDiscountTypeChange()">
+              <option value="" disabled selected>--Select--</option>
+              <option *ngFor="let x of DiscountTypeList" [value]="x.value">{{ x.type }}</option>
+            </select>
+            <div class="error mt-2">{{ DiscountType_errormsg }}</div>
+          </div>
+
+          <!-- Discount Value (only if Discount Type is selected) -->
+          <div class="mb-3 col-lg-4" *ngIf="DiscountType && CompanyProductID !== 0">
+            <label class="form-label">Discount</label>
+            <input
+              type="number"
+              class="form-control"
+              [(ngModel)]="DiscountPrice"
+              placeholder="Enter Discount"
+            />
+          </div>
+
+          <!-- Buttons -->
+<!-- Button Row: Align Right -->
+<div class="mb-3 col-lg-12" *ngIf="CompanyProductID === 0">
+  <div class="d-flex justify-content-end gap-2 mt-3">
+        <button class="btn btn-primary" (click)="searchProduct()">Search</button>
+
+        <button class="btn btn-secondary" (click)="clearproductfields()">Clear</button>
+
+  </div>
+</div>
+
+
+        </div> <!-- End of row -->
+      </div> <!-- End of productdividepart2 -->
+
+    </div> <!-- End of main flex container -->
+  </div> <!-- End of card-body -->
+</div> <!-- End of card -->
+
+<div *ngIf="showprice && CompanyProductID===0" #step2Section class="w-full shadow-sm mb-4 fade-in">
+  <!-- Optional Header -->
+  <div class="card-header bg-success text-white">
+    <i class="fas fa-list-ul me-2"></i>Step 2: Select a Product
+  </div>
+
+  <div class="card-body">
+    <!-- Info (optional) -->
+    <p class="text-muted mb-3">Click on a select button to choose a product.</p>
+
+    <div class="table-responsive">
+      <table class="table table-hover align-middle">
+        <thead class="table-light">
+          <tr>
+            <th scope="col">Image</th>
+            <th scope="col">Product Name</th>
+            <th scope="col">Category</th>
+            <th scope="col">Master Price</th>
+            <th scope="col">Select</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let x of MasterProductsList" (click)="selectMasterProduct(x)"
+            [ngClass]="{ 'table-secondary': x.MasterProductID === selectedProductId }">
+          <td>  
+          <img 
+          [src]="x.MasterProductImageThumbnailImagePath 
+                  ? (x.MasterProductImageThumbnailImagePath.includes('MasterProductImage/') 
+                      ? photoUrl + x.MasterProductImageThumbnailImagePath 
+                      : photoUrl + 'MasterProductImage/' + x.MasterProductImageThumbnailImagePath) 
+                  : 'assets/img/default.png'"
+            alt="Product Image" 
+            width="60" 
+            class="rounded shadow-sm"
+          /></td>
+
+
+
+            <!-- Product Name -->
+            <td>{{ x.MasterProductName }}</td>
+
+            <!-- Category -->
+            <td>{{ x.ProductCategoryShortName }}</td>
+
+            <!-- Price -->
+            <td>
+           {{currency}} {{ CompanyProductID === 0 ? x.MasterProductPrice : x.ProductPrice }}
+            </td>
+
+            <!-- Select Button -->
+            <td>
+              <button
+                [ngClass]="x.MasterProductID === selectedProductId ? 'btn-primary' : 'btn-outline-primary'"
+
+                class="btn btn-outline-primary btn-sm"
+                (click)="selectproduct(x); "
+              >
+                  {{ x.MasterProductID === selectedProductId ? 'Selected' : 'Select' }}
+
+              </button>
+            </td>
+          </tr>
+            <!-- Show if no data -->
+  <tr *ngIf="MasterProductsList.length === 0">
+    <td colspan="5" class="text-center text-muted">
+      No Product found.
+    </td>
+  </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div  *ngIf="showpricediscount && CompanyProductID===0" #step3Section id="add-product-section" class=" w-full shadow-sm mb-4 fade-in">
+  <!-- Header -->
+  <div class="card-header bg-success text-white">
+    <i class="fas fa-check-circle me-2"></i>Step 3: Confirm and Add to Shop
+  </div>
+
+  <!-- Body -->
+  <div class="card-body">
+    <h5 class="card-title">Selected Product</h5>
+    <!-- Product Image -->
+     
+<div class="d-flex align-items-center">
+  <img 
+    [src]="selectedProduct.MasterProductImageThumbnailImagePath 
+              ? photoUrl + 'MasterProductImage/' + selectedProduct.MasterProductImageThumbnailImagePath 
+              : 'assets/img/default.png'" 
+    alt="Product Image" 
+    class="rounded shadow-sm me-3 img-fluid"
+    style="width: 50px; height: auto;"
+  />
+
+  <!-- Product Name -->
+  <p class="fs-5 fw-bold text-primary mb-0">{{ selectedProduct.MasterProductName }}</p>
+</div>
+
+
+      
+
+
+    <!-- Master Price -->
+    <p>
+      <strong>Master Price:</strong>
+      <span class="fs-5">
+     {{currency}}   {{ CompanyProductID === 0 ? selectedProduct.MasterProductPrice : selectedProduct.MasterProductPrice }}
+      </span>
+    </p>
+
+    <hr />
+<div class="row g-3 align-items-end" *ngIf="isCardClicked">
+  <!-- Discount Type -->
+  <!-- <div class="col-md-6">
+    <label class="form-label">Discount Type</label>
+    <select class="form-select" aria-label="Default select example" [(ngModel)]="DiscountType">
+      <option value="" disabled selected>--Select--</option>
+      <option *ngFor="let x of DiscountTypeList" [value]="x.value">
+        {{ x.type }}
+      </option>
+    </select>
+    <div class="error mt-2">{{ DiscountType_errormsg }}</div>
+  </div> -->
+<div class="col-md-6">
+  <label class="form-label">Discount Type</label>
+  <select 
+    class="form-select" 
+    aria-label="Default select example" 
+    [(ngModel)]="DiscountType" 
+    (change)="onDiscountTypeChange()"
+  >
+    <option value="" disabled selected>--Select--</option>
+    <option *ngFor="let x of DiscountTypeList" [value]="x.value">
+      {{ x.type }}
+    </option>
+  </select>
+  <div class="error mt-2">{{ DiscountType_errormsg }}</div>
+</div>
+
+  <!-- Discount Input -->
+  <div  class="col-md-6" *ngIf="showDiscountField">
+    <label for="discount" class="form-label">Discount</label>
+    <input *ngIf="this.DiscountType ==='V'"
+      type="number"
+      class="form-control"
+      id="discount"
+      [(ngModel)]="discount"
+      placeholder="Please enter discount amount "
+    />
+       <input
+       *ngIf="this.DiscountType ==='P'"
+  type="text"
+  class="form-control"
+  id="discount"
+  [(ngModel)]="discount"
+  [attr.max]="isPercentageSelected ? 100 : null"
+  [attr.maxlength]="isPercentageSelected ? 3 : null"
+    (input)="onDiscountInput()"
+  placeholder="Please enter discount percentage"
+
+/>
+ <!-- Error Message -->
+  <div class="error mt-2" *ngIf="ProductDiscount_errormsg">
+    {{ ProductDiscount_errormsg }}
+  </div>
+  </div>
+</div>
+
+  </div>
+</div>
+
+
+
+
+  <div class="modal-footer">
+    <button (click)="addMasterproduct()" *ngIf="products.MasterProductID == 0 && UserRoleID != 2"
+      class="btn btn-primary"
+      >
+      Add Master Product
+    </button>
+
+    <button (click)="updateMasterproduct()" *ngIf="products.MasterProductID != 0 && UserRoleID != 2"
+      class="btn btn-primary">
+      Update Master Product
+    </button>
+
+    <button (click)="updateCompanyproduct()" *ngIf="products.CompanyProductID != 0 && UserRoleID != 1"
+      class="btn btn-primary">
+      Update Shop Product
+    </button>
+
+    <button  (click)="addCompanyProduct()" class="btn btn-primary"
+      *ngIf=" showpricediscount && products.CompanyProductID == 0 &&UserRoleID !=1 ">
+      Add Shop Product
+    </button>
+  </div>
+</div>

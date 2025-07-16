@@ -1,0 +1,88 @@
+<div class="container about_responsive">
+  <div class="row" *ngFor="let dataItem of companydata">
+    <!-- leftside -->
+    <div class="col-sm-4">
+      <h5 class="Availability">{{'Availability' | translate }}</h5>
+      <!-- <div class="row">
+                <div class="col-sm-6 Days">
+                   Saturday
+                </div>
+                <div class="col-sm-6 Time">
+                    {{dataItem.CompanyTimeSaturday}}
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-sm-6 Days">
+                    Sunday
+                </div>
+                <div class="col-sm-6 Time">
+                    {{dataItem.CompanyTimeSunday}}
+                </div>
+            </div>
+            <hr> -->
+      <div class="row date_responsive">
+        <div class="col-sm-6 Days">{{'Monday' | translate }}</div>
+        <div class="col-sm-6 Time">
+          {{ dataItem.CompanyTimeMonday }}
+        </div>
+      </div>
+      <hr />
+      <div class="row date_responsive">
+        <div class="col-sm-6 Days">{{'Tuesday' | translate }}</div>
+        <div class="col-sm-6 Time">
+          {{ dataItem.CompanyTimeTuesday }}
+        </div>
+      </div>
+      <hr />
+      <div class="row date_responsive">
+        <div class="col-sm-6 Days">{{'Wednesday' | translate }}</div>
+        <div class="col-sm-6 Time">
+          {{ dataItem.CompanyTimeWednesday }}
+        </div>
+      </div>
+      <hr />
+      <div class="row date_responsive">
+        <div class="col-sm-6 Days">{{'Thursday' | translate }}</div>
+        <div class="col-sm-6 Time">
+          {{ dataItem.CompanyTimeThursday }}
+        </div>
+      </div>
+      <hr />
+      <div class="row date_responsive">
+        <div class="col-sm-6 Days">{{'Friday' | translate }}</div>
+        <div class="col-sm-6 Time">
+          {{ dataItem.CompanyTimeFriday }}
+        </div>
+      </div>
+      <hr />
+      <div class="row date_responsive">
+        <div class="col-sm-6 Days">{{'Saturday' | translate }}</div>
+        <div class="col-sm-6 Time">
+          {{ dataItem.CompanyTimeSaturday }}
+        </div>
+      </div>
+      <hr />
+      <div class="row date_responsive">
+        <div class="col-sm-6 Days">{{'Sunday' | translate }}</div>
+        <div class="col-sm-6 Time">
+          {{ dataItem.CompanyTimeSunday }}
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-1 line_section"></div>
+    <!-- Righside -->
+    <div class="col-sm-7 left_sideAboutUs_Main">
+      <div class="row">
+        <h5 class="About_Us">{{'About Us' | translate }}</h5>
+      </div>
+      <div class="row">
+        <div class="About_Us1">
+          <p>{{ dataItem.CompanyAddress }}</p>
+
+          <p>{{ dataItem.CompanyDescription }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

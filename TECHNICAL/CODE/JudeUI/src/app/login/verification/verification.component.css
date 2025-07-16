@@ -1,0 +1,134 @@
+.otp-section{
+  position: relative;
+  margin-top: 50px; /* Adjust as needed */
+  width: 420px;
+ }
+
+ .passwordToggler {
+  color: #3d4f58;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+  .bgWhite{
+    background:white;
+    box-shadow:0px 3px 6px 0px #cacaca;
+    border: 2px solid #0aad0a;
+  }
+  .bttnpadding{
+    border: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 13px 44px;
+    gap: 4px;
+    height: 48px;
+    background: #0aad0a;
+    border-radius: 8px;
+    /* font-family: 'Satoshi-bold'; */
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+    text-align: center;
+    color:#fff;
+}
+.bttnpadding:hover{
+    background-color: #0aad0a;
+    color: white;
+}
+  .title{
+    font-weight:600;
+    margin-top:20px;
+    font-size:19px;
+    margin-bottom: 10px;
+  }
+  .title-2{
+    font-weight:600;
+    font-size:16px;
+    margin-bottom: 20px;
+  }
+  
+  
+  .otp-form input{
+    display:inline-block;
+    width:50px;
+    height:50px;
+    text-align:center;
+  }
+
+
+  .btn{
+    border: 0;
+    width: 80%;
+    
+    gap: 4px;
+    height: 48px;
+    background-color: black;
+    border-radius: 8px;
+    font-family: 'Satoshi-bold';
+    font-style: normal;
+    /* font-weight: 500; */
+    font-size: 16px;
+    line-height: 22px;
+    text-align: center;
+    color: white;
+}
+.btn:hover{
+    background-color: black;
+    color: white;
+}
+
+.verification_otp{
+margin-right:22px;
+}
+
+.text22{
+  height: 40px;
+  width: 260px;
+  text-align: center ;
+}
+.eyeiconchannel{
+  position: absolute;
+  right: 10px;
+  top: 18px;
+  opacity: 0.4;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+}
+.form-control{
+  margin-top:12px
+}
+.ChannelSignUperror{
+  color: red;
+  text-align: left;
+}
+
+.error {
+  color: red;
+  font-size: 1rem;
+  margin-top: 5px;
+  min-height: 3px; 
+  }
+
+  @media (max-width: 480px){
+  .otp-form input {   
+    width:42px !important;  
+    }
+
+  .otp-section{
+      height: 100% !important;
+  }
+    .bttnpadding{
+      width: 95% !important;
+  }
+
+  }

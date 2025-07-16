@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <style>
+    #dailogue_box {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      padding: 16px;
+      gap: 10px;
+      width: 360px;
+      height: 184px;
+      border: 1.5px solid #d9d9d9;
+      border-radius: 8px;
+    }
+
+    #my-textarea-remaining-chars {
+      color: #333333;
+      font-size: 14px;
+      font-weight: bold;
+      margin-top: 5px;
+      text-align: right;
+    }
+  </style>
+
+  <body>
+    <div class="row-main">
+      <div class="col-sm-6">
+        <div class="ReviewMainLayoutstyle">
+          <div class="ReviewMainLayout">
+            <div class="reviewgroup-1">
+              <!-- <img src="\assets\images\fd73270e6350c864c65f8c9ffd20f551.png" class="photo" /> -->
+              <img
+                src="{{ CompanyLogoImageNamePath + CompanyLogoPath }}"
+                class="photo"
+              />
+              <div class="col-sm-6">
+                <b class="reviewstyle">{{ CompanyName }}</b>
+              </div>
+            </div>
+            <div>
+              <span class="divider"></span>
+            </div>
+            <div class="main">
+              <div class="rating-wrapper">
+                <p class="rating">{{ 'Submit Ratings' | translate}}</p>
+                <div>
+                  <input
+                    type="radio"
+                    name="rating"
+                    id="star-1"
+                    (click)="starOneClick()"
+                  /><label for="star-1"></label>
+                  <input
+                    type="radio"
+                    name="rating"
+                    id="star-2"
+                    (click)="starTwoClick()"
+                  /><label for="star-2"></label>
+                  <input
+                    type="radio"
+                    name="rating"
+                    id="star-3"
+                    (click)="starThreeClick()"
+                  /><label for="star-3"></label>
+                  <input
+                    type="radio"
+                    name="rating"
+                    id="star-4"
+                    (click)="starFourClick()"
+                  /><label for="star-4"></label>
+                  <input
+                    type="radio"
+                    name="rating"
+                    id="star-5"
+                    (click)="starFiveClick()"
+                  /><label for="star-5"></label>
+                </div>
+              </div>
+            </div>
+            <div>
+              <span class="divider"></span>
+            </div>
+            <div>
+              <div class="addwrittenreview">
+                <p for="addwrittenreview">{{ 'Add a written review' | translate}}</p>
+                <textarea
+                  id="dailogue_box"
+                  maxlength="240"
+                  [(ngModel)]="CustomerRatingDescription"
+                  placeholder="{{ 'What did you like or dislike Let us know your thoughts.' | translate}}"
+                ></textarea>
+                <p class="aaaa">{{ CustomerRatingDescription.length }} / 240</p>
+                <div id="my-textarea-remaining-chars"></div>
+                <div class="bttn-padding">
+                  <button
+                    (click)="addReview()"
+                    type="button"
+                    class="bttnpadding"
+                  >
+                    {{ 'Submit Review'  | translate}}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="image-2">
+          <img
+            src="assets\images\rating.png"
+            style="width: 100%; height: 117%"
+          />
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

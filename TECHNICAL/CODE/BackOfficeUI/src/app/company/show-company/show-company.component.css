@@ -1,0 +1,118 @@
+.Companyname{
+    white-space: normal !important;
+}
+.BusinessType{
+    white-space: normal !important;
+}
+.date{
+    white-space: normal !important;
+}
+.companyname{
+    white-space: normal !important;
+}
+.customername{
+    white-space: normal !important;
+}
+.amount{
+    white-space: normal !important;
+}
+.status{
+    white-space: normal !important;
+}
+.uniform-input {
+    height: 38px;
+  }
+  .btn-secondary{
+    color: white!important;
+  }
+  
+@media (max-width: 480px){
+    .col-3 {
+        flex: 0 0 auto;
+        width: 100%;
+    }
+}
+
+/* .ti-plus{
+  margin-right: 8px;
+} */
+.page-item {
+  margin-right: 4px;
+}
+
+.page-item .page-link {
+  background-color: #fff;
+  color: #6c757d;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 6px 12px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.page-item.disabled .page-link {
+  background-color: #f2f4f5;
+  color: #adb5bd;
+  cursor: not-allowed;
+  border-color: #f2f4f5;
+}
+
+.page-item.active .page-link {
+  background-color: #28a745 !important;
+  color: white !important;
+  border: 1px solid #28a745 !important;
+  border-radius: 8px;
+}
+
+@media (max-width: 374px) {
+  .page-item .page-link {
+    padding: 0px 5px;
+  }
+}
+
+@media (min-width: 375px) and (max-width: 425px) {
+  .page-item .page-link {
+    padding: 2px 9px;
+  }
+}
+
+
+.page-item {
+  margin-right: 4px;
+}
+
+.page-item .page-link {
+  background-color: #fff;
+  color: #6c757d;
+  border: 1px solid #dee2e6;
+  border-radius: 18px;
+  padding: 6px 12px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.page-item.disabled .page-link {
+  background-color: #f2f4f5;
+  color: #adb5bd;
+  cursor: not-allowed;
+  border-color: #f2f4f5;
+}
+
+.page-item.active .page-link {
+  background-color: #28a745 !important;
+  color: white !important;
+  border: 1px solid #28a745 !important;
+  border-radius: 18px;
+}
+
+@media (max-width: 374px) {
+  .page-item .page-link {
+    padding: 0px 6px;
+  }
+}
+
+@media (min-width: 375px) and (max-width: 425px) {
+  .page-item .page-link {
+    padding: 2px 9px;
+  }
+}

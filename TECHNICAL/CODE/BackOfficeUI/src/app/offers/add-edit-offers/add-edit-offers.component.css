@@ -1,0 +1,25 @@
+.margin{
+    margin-top: 12px;
+    margin-bottom: 8px;
+    padding-top: 0px;
+    padding-bottom: 35px;
+}
+.margin_offer{
+    margin-top: 12px;
+    margin-bottom: 8px;
+  
+}
+.error{
+    color: red;
+    position: absolute;
+  }
+  
+  input.invalid {
+    border: 1px solid red;
+  }
+  .disabled-dropdown {
+    background-color: lightgray !important;
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+  

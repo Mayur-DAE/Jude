@@ -1,0 +1,19 @@
+
+
+.form-group.has-danger .form-control{
+    border-color: #FF4747;
+}
+.error{
+    position: absolute;
+    color:red;
+}
+
+.error-input{
+  border: 1px red solid;
+}
+.m-left{
+  margin-left: -60px;
+}
+.isActive{
+  width:18%;
+}

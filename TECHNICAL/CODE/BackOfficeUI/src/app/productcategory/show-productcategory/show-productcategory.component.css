@@ -1,0 +1,91 @@
+.btn-secondary{
+  color: white!important;
+}
+
+.truncate-text {
+  max-width: 300px; 
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.truncate-text2 {
+  max-width: 235px;; 
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.page-item {
+  margin-right: 4px;
+}
+
+.page-item .page-link {
+  background-color: #fff;
+  color: #6c757d;
+  border: 1px solid #dee2e6;
+  border-radius: 18px;
+  padding: 6px 12px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.page-item.disabled .page-link {
+  background-color: #f2f4f5;
+  color: #adb5bd;
+  cursor: not-allowed;
+  border-color: #f2f4f5;
+}
+
+.page-item.active .page-link {
+  background-color: #28a745 !important;
+  color: white !important;
+  border: 1px solid #28a745 !important;
+  border-radius: 18px;
+}
+
+@media (max-width: 374px) {
+  .page-item .page-link {
+    padding: 0px 6px;
+  }
+}
+
+@media (min-width: 375px) and (max-width: 425px) {
+  .page-item .page-link {
+    padding: 2px 9px;
+  }
+}
+
+  @media (max-width: 768px) {
+    .search-box {
+    width: 50%;
+    }
+
+  }
+  @media (max-width: 430px) {
+  .button-group {
+    display: flex;
+    flex-direction: column; /* Stack buttons vertically on smaller screens */
+    gap: 10px; /* Adds spacing between the buttons */
+  }
+
+  .button-group button {
+    width: 100%; /* Make buttons full width for mobile view */
+  }
+
+  .search-box {
+    flex: 0 0 auto;
+    width: 100%;
+}
+.buttons{
+    width: 100%;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    display: flex;
+    /* justify-content: center; */
+}
+
+.sub-search-box  {
+    margin-bottom: 0px;
+}
+}

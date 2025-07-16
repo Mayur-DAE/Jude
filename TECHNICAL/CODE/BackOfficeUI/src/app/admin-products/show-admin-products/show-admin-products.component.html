@@ -1,0 +1,294 @@
+<!-- Modal starts -->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true"  data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{ ModalTitle }}</h5>
+        <button type="button" class="btn btn-primary btn-rounded btn-icon" data-bs-dismiss="modal" aria-label="Close"
+          (click)="closeClick()">
+          <i class="ti-close"></i>
+        </button>
+      </div>
+
+      <app-add-edit-admin-products [products]="products" (emitData)="emittedDataByChild($event)"
+        *ngIf="ActivateAddEditproducts">
+      </app-add-edit-admin-products>
+      
+    </div>
+  </div>
+</div>
+<!-- Modal Ends -->
+
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">Products</h4>
+    <div class="row">
+      <div class="col-12">
+        <div class="text-left">
+          <button type="button" class="btn btn-primary btn-icon-text" (click)="addClick()" data-bs-toggle="modal"
+            data-bs-target="#exampleModal">
+            <i class="ti-plus"></i> Add
+          </button>
+        </div>
+        <br />
+        <div class="col-sm-12 row">
+          <div class="col-sm-4 search-product">
+            <p>Search Product</p>
+            <div class="input-group">
+              <input class="form-control" [(ngModel)]="ProductNameSearch" type="text" placeholder="Enter Product Name"
+                (keyup)="filterName()" (blur)="resetInput()">
+              <!-- <span class="input-group-text" (mousedown)="$event.preventDefault()">
+                <i class="bi bi-search"></i> 
+              </span> -->
+            </div>
+            
+          <br>
+          </div>
+
+          <div class="col-sm-6 col-md-2 col-lg-2 d-flex align-items-center clear">
+            <!-- <p>&nbsp;</p>
+            <button type="button" class="btn btn-primary me-2" (mousedown)="$event.preventDefault()">
+              Search
+            </button> -->
+            <p>&nbsp;</p>
+            <button type="button" class="btn btn-secondary me-2" (click)="refreshMasterProductsList()"
+              *ngIf="UserRoleID!=2">
+              <span >  Clear </span>
+            </button>
+            <button type="button" class="btn btn-secondary" (click)="refreshCompanyProductsList()"
+              *ngIf="UserRoleID!=1">
+         <span >  Clear </span>
+            </button>
+          </div>
+          <br />
+          <br />
+          <br />
+          
+          <div class="mb-4" *ngIf="UserRoleID!=2">
+            <label for="masterItemsPerPage" class="mr-2">Items per page:</label>
+            <select id="masterItemsPerPage" class="border rounded px-2 py-1" (change)="onItemsPerPageChange($event, 'master')">
+              <option value="5" [selected]="itemsPerPage === 5">5</option>
+              <option value="10" [selected]="itemsPerPage === 10">10</option>
+              <option value="20" [selected]="itemsPerPage === 20">20</option>
+              <option value="30" [selected]="itemsPerPage === 30">30</option>
+            </select>
+          </div>    
+
+          <div class="table-responsive" *ngIf="UserRoleID!=2">
+            <table id="show-masterproduct" class="table">
+              <thead>
+                <tr class="bg-primary text-white">
+                  <th class="w-21">Image</th>
+                  <th class="w-21">Product Name</th>
+                  <th class="w-21">Category</th>
+                  <th>MRP</th>
+                  <th style="text-align: center;">Status</th>
+                  <th style="text-align: center;">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngIf="MasterProductsList.length == 0">
+                  <td colspan="6" class="text-center">No records found</td>
+                </tr>
+                <tr *ngFor="let dataItem of paginatedProducts; let i = index">
+                  <td  style="width: 120px;">
+                    <img
+                    [src]="MasterProductImageThumbnailPath + 'MasterProductImage/' + dataItem.MasterProductImageThumbnailImagePath"
+                    class="icon-shape icon-md"
+                  />
+                  
+                  </td> 
+                  <td class="productdescription">{{ dataItem.MasterProductName }}</td>
+                  <td class="productdescription">
+                    {{ dataItem.ProductCategoryShortName }}
+                  </td>
+                  <td class="action23">
+                    {{currency}} {{ dataItem.MasterProductPrice | number:'1.2-2'}}
+                  </td>
+                  <td style="width: 70px;">
+                    <button (click)="Inactive(dataItem)" type="button" class="btn btn-outline-info btn-fw p-2"
+                      *ngIf="dataItem.IsActive">
+                      Active
+                    </button>
+                    <button (click)="Active(dataItem)" type="button" class="btn btn-outline-danger btn-fw p-2"
+                      *ngIf="!dataItem.IsActive">
+                      Inactive
+                    </button>
+                  </td>
+
+                  <td class="button22" style="width: 70px;">
+                    <button (click)="editClick(dataItem)" type="button" class="btn btn-light" data-bs-toggle="modal"
+                      data-bs-target="#exampleModal" data-backdrop="static" data-keyboard="false">
+                      <i class="ti-pencil"></i> Edit
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+          <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mt-3  px-md-4"
+          *ngIf="UserRoleID!=2"><!-- px-3 -->
+          <span class="text-muted mb-2 mb-md-0">
+            Showing 
+            {{ (currentPage - 1) * itemsPerPage + 1 }} 
+            to 
+            {{ min(currentPage * itemsPerPage, MasterProductsList.length) }} 
+            of 
+            {{ MasterProductsList.length }} entries
+          </span>
+          
+            <nav>
+              <ul class="pagination mb-0">
+                <li class="page-item" [class.disabled]="currentPage === 1">
+                  <a class="page-link" (click)="changePage(currentPage - 1, 'master')"><<</a>
+                </li>
+                <li class="page-item" [class.active]="currentPage === 1">
+                  <a class="page-link" (click)="changePage(1, 'master')">1</a>
+                </li>
+                <li class="page-item disabled" *ngIf="getMiddlePages('master')[0] > 2">
+                  <span class="page-link">...</span>
+                </li>
+                <ng-container *ngFor="let page of getMiddlePages('master')">
+                  <li class="page-item" [class.active]="currentPage === page">
+                    <a class="page-link" (click)="changePage(page, 'master')">{{ page }}</a>
+                  </li>
+                </ng-container>
+                <li class="page-item disabled" *ngIf="getMiddlePages('master').includes(getTotalPages('master') - 1) === false && getTotalPages('master') > 5">
+                  <span class="page-link">...</span>
+                </li>
+                <li class="page-item" *ngIf="getTotalPages('master') > 1" [class.active]="currentPage === getTotalPages('master')">
+                  <a class="page-link" (click)="changePage(getTotalPages('master'), 'master')">{{ getTotalPages('master') }}</a>
+                </li>
+                <li class="page-item" [class.disabled]="currentPage === getTotalPages('master')">
+                  <a class="page-link" (click)="changePage(currentPage + 1, 'master')">>></a>
+                </li>
+              </ul>
+            </nav>
+            
+          </div>
+     
+          <div class="mb-4" *ngIf="UserRoleID!=1">
+            <label for="companyItemsPerPage" class="mr-2">Items per page:</label>
+            <select id="companyItemsPerPage" class="border rounded px-2 py-1" (change)="onItemsPerPageChange($event, 'company')">
+              <option value="5" [selected]="companyItemsPerPage === 5">5</option>
+              <option value="10" [selected]="companyItemsPerPage === 10">10</option>
+              <option value="20" [selected]="companyItemsPerPage === 20">20</option>
+              <option value="30" [selected]="companyItemsPerPage === 30">30</option>
+            </select>
+          </div>
+          <div class="table-responsive" *ngIf="UserRoleID!=1">
+            <table id="show-masterproduct" class="table">
+              <thead>
+                <tr class="bg-primary text-white">
+                  <!-- <td></td> -->
+                  <th class="w-21">Image</th>
+                  <th class="w-21">Product Name</th>
+                  <th class="w-21">Category</th>
+                  <th>Base Price</th>
+                  <th>Discount</th>
+                  <th style="text-align: center;">Status</th>
+                  <th style="text-align: center;">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngIf="CompanyProductsList.length == 0">
+                  <td colspan="7" class="text-center">No records found</td>
+                </tr>
+                <tr *ngFor="let dataItem of paginatedCompanyProducts">
+                  <td style="width: 120px;">
+                    <!-- <img src="{{
+                      MasterProductImageThumbnailPath  +
+                        dataItem . MasterProductImageThumbnailImagePath 
+                    }}"  class="icon-shape icon-md"/> -->
+                    <img
+  [src]="MasterProductImageThumbnailPath + 'MasterProductImage/' + dataItem.MasterProductImageThumbnailImagePath"
+  class="icon-shape icon-md"
+/>
+
+                  </td>
+
+                  <td class="productdescription">{{ dataItem.MasterProductName}}</td>
+                  <td class="productdescription">
+                    {{ dataItem.ProductCategoryShortName}}
+                    <!-- {{ dataItem.MasterProductDescription }} -->
+                  </td>
+                  <td class="action23">
+                    {{currency}} {{ dataItem.ProductPrice | number:'1.2-2'}}
+                  </td>
+                  <td class="action23" *ngIf="dataItem.DiscountType=='V'">
+                    {{currency}} {{ dataItem.DiscountPrice | number:'1.2-2'}}
+                  </td>
+                  <td class="action23" *ngIf="dataItem.DiscountType=='P'">
+                    {{ dataItem.DiscountPrice | number:'1.2-2'}} %
+                  </td>
+                  <td class="action23" *ngIf="dataItem.DiscountType != 'P' && dataItem.DiscountType != 'V'">
+                    {{currency}} {{ dataItem.DiscountPrice | number:'1.2-2'}}
+                  </td>
+                  <td style="width: 70px;">
+
+                    <button (click)="InactiveCompany(dataItem)" type="button"
+                      class="btn btn-outline-info btn-fw p-2" *ngIf="dataItem.IsActive">
+                      Active
+                    </button>
+                    <button (click)="ActiveCompany(dataItem)" type="button"
+                      class="btn btn-outline-danger btn-fw p-2" *ngIf="!dataItem.IsActive">
+                      Inactive
+                    </button>
+                  </td>
+                  <td class="button22" style="width: 70px;">
+                    <button (click)="editClick(dataItem)" type="button" class="btn btn-light" data-bs-toggle="modal"
+                      data-bs-target="#exampleModal" data-backdrop="static" data-keyboard="false">
+                      <i class="ti-pencil"></i> Edit
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mt-3 px-md-4"
+          *ngIf="UserRoleID!=1"> 
+            <span class="text-muted mb-2 mb-md-0">
+              Showing 
+              {{ (companyCurrentPage - 1) * companyItemsPerPage + 1 }} 
+              to 
+              {{ min(companyCurrentPage * companyItemsPerPage, CompanyProductsList.length) }} 
+              of 
+              {{ CompanyProductsList.length }} entries
+            </span>
+          
+            <nav>
+              <ul class="pagination mb-0">
+                <li class="page-item" [class.disabled]="companyCurrentPage === 1">
+                  <a class="page-link" (click)="changePage(companyCurrentPage - 1, 'company')"><<</a>
+                </li>
+                <li class="page-item" [class.active]="companyCurrentPage === 1">
+                  <a class="page-link" (click)="changePage(1, 'company')">1</a>
+                </li>
+                <li class="page-item disabled" *ngIf="getMiddlePages('company')[0] > 2">
+                  <span class="page-link">...</span>
+                </li>
+                <ng-container *ngFor="let page of getMiddlePages('company')">
+                  <li class="page-item" [class.active]="companyCurrentPage === page">
+                    <a class="page-link" (click)="changePage(page, 'company')">{{ page }}</a>
+                  </li>
+                </ng-container>
+                <li class="page-item disabled" *ngIf="getMiddlePages('company').includes(getTotalPages('company') - 1) === false && getTotalPages('company') > 5">
+                  <span class="page-link">...</span>
+                </li>
+                <li class="page-item" *ngIf="getTotalPages('company') > 1" [class.active]="companyCurrentPage === getTotalPages('company')">
+                  <a class="page-link" (click)="changePage(getTotalPages('company'), 'company')">{{ getTotalPages('company') }}</a>
+                </li>
+                <li class="page-item" [class.disabled]="companyCurrentPage === getTotalPages('company')">
+                  <a class="page-link" (click)="changePage(companyCurrentPage + 1, 'company')">>></a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

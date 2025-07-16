@@ -1,0 +1,405 @@
+.error {
+    color: red;
+    font-size: 1.0em;
+    margin-top: 5px;
+    min-height: 3px; 
+    }
+    .password-field {
+        position: relative; /* Ensures error message stays within this container */
+        padding-bottom: 16px; /* Creates space for error message inside field */
+    }
+
+    
+
+    .password-toggle {
+        position: absolute;
+        right: 20px;
+        top: 40%;
+        transform: translateY(-50%);
+        cursor: pointer;
+      }
+    
+
+.ChannelSignupLayout{
+    justify-content: center;
+    align-items: flex-start;
+    padding: 44px 180px;
+    gap: 120px;
+    background: #FFFFFF;
+}
+.HeadingChannelSignup{
+    width: 360px;
+    height: 32px;
+    /* font-family: 'Satoshi-bold'; */
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 32px;
+    color: #000000;
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+.ChannelSignupDataEntry{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 22px;
+    width: 389px;
+    /* height: 412px; */
+    
+}
+.DataEntry1{
+    width: 360px;
+    height: 52px;
+}
+.font{
+    font-family: 'Satoshi-Medium';
+}
+
+.form-label{
+    width: 368px;
+    height: 24px;
+    /* font-family: 'Satoshi-bold'; */
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: #000000;
+    opacity: 0.5;
+}
+
+.agreeButton{
+    gap: 16px;
+    width: 357px;
+    height: 20px;
+}
+.checkBox1{
+    width: 20px;
+    padding: 0px;
+    height: 20px;
+    margin-right: auto;
+}
+.terms{
+    width: 323px;
+    height: 19px;
+    /* font-family: 'Satoshi-bold'; */
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 19px;
+    color: #000000;
+}
+.agreeButtonMain{
+    --bs-gutter-x: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.SubmitButton{
+    margin-top: 55px;
+}
+.bttnpadding{
+    border: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 13px 44px;
+    gap: 4px;
+    height: 48px;
+    background: #0aad0a;
+    border-radius: 8px;
+    /* font-family: 'Satoshi-bold'; */
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+    text-align: center;
+    color:#fff;
+}
+.bttnpadding:hover{
+    background-color: #0aad0a;
+    color: white;
+}
+
+
+.Alreadyaccount{
+    margin-top: 16px;
+    width: 355px;
+    height: 19px;
+    /* font-family: 'Satoshi-bold'; */
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 19px;
+    /* text-align: center; */
+    color: #1E1E1E;
+}
+.NewChannelPartnerimage_1{
+    width: 100%;
+    height: 100%;
+}
+@media (min-width: 576px){
+    .col-sm-6{
+        flex: 0 0 auto;
+        width: 50%;
+    }
+}
+@media(max-width:767px){
+    .NewChannelPartnerimage_1{
+        width: 100%;
+        height: 100vh;
+        display: none;
+    }
+}
+@media(max-width:1366px){
+    .NewChannelPartnerimage_1{
+        width: 100%;
+        height: 100vh;
+        display: none;
+    }
+}
+@media(max-width:500px){
+    .ChannelSignupLayout{
+        padding: 96px 60px;
+        gap: 120px;
+        
+        background: #FFFFFF;
+        }
+}
+
+.row-main-Channelpartnersignup{ 
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    
+}
+
+.ChannelSignupfixing
+{
+    width: 388.5px;
+    height: 58px;
+    margin-top: 20px;
+}
+.ChannelSignupfixing1{
+    width: 388.5px;
+    height: 58px;
+    
+}
+
+.ChannelSignUperror{
+    /* position: absolute; */
+    color: red;
+}
+
+.eyeiconchannel{
+    position: absolute;
+    right: 10px;
+    top: 18px;
+    opacity: 0.4;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+}
+.blue-text{
+    color: #2F64EC;
+    text-decoration: none;
+}
+.eyeicon1{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    opacity: 0.4;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+}
+.pw-strength{
+    position:relative;
+    width: 100%;
+    height: 20px;
+    margin-top: 10px;
+    text-align: center;
+    background: #f2f2f2;
+    display: none ;
+}
+.pw-strength span:nth-child(1){
+    position: relative;
+    font-size: 13px;
+    color: #111;
+    z-index: 2;
+    font-weight: 500;
+}
+.pw-strength span:nth-child(2){
+    position: absolute;
+    top:0px;
+    left:0px;
+    width: 0%;
+    height: 100%;
+    border-radius:5px;
+    z-index:1;
+    transition:all 300ms ease-in-out ;
+}
+.Signupfixing1{
+    width: 388.5px;
+    height: 58px;
+    
+}
+
+.GeneratedText{
+    text-align: center;
+    color: #3d4f58;;
+  /* font-family:'Satoshi-bold'; */
+  font-weight: Medium;
+  font-size: 15px;
+  opacity: 1;
+}
+
+.form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #8bbafe;
+    outline: 0;
+    box-shadow: none;
+}
+
+.btn-dashboard{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 13px 44px;
+    gap: 8px;
+    width: 360px;
+    height: 48px;
+    background: #0aad0a;
+    border-radius: 8px;
+    color: white;
+    margin: 20px 5px 0px 25px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.des{
+    width: 427.52px;
+    height: 66px;
+
+    /* font-family: 'Satoshi-bold'; */
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+    text-align: center;
+
+    color: #000000;
+
+}
+
+
+@media (max-width: 480px){
+    .otp-form input{
+      
+        width:42px !important;
+        
+      }
+    .otp-section{
+        height: 100% !important;
+    }
+    .ChannelSignupLayout {
+        padding: 25px 18px;
+        gap: 120px;
+        height:100%;
+        background: #FFFFFF;
+    }
+
+    .ChannelSignupDataEntry, .ChannelSignupfixing1{
+        width: 100% !important;
+    }
+
+    .bttnpadding{
+        width: 95% !important;
+    }
+
+    .svgAccountCreated{
+        width: 100%;
+    }
+
+    .btn-dashboard{
+        width: 85%;
+    }
+
+    
+}
+/* .input:not(:placeholder-shown){
+    border-color:green;
+}
+.input:placeholder-shown{
+    border-color: red;
+} */
+
+
+/* body{
+    background:#eee;
+  }
+   */
+   .otp-section{
+    position: relative;
+    margin-top: 50px; /* Adjust as needed */
+   }
+
+  .bgWhite{
+    background:white;
+    box-shadow:0px 3px 6px 0px #cacaca;
+    
+  }
+
+.container {
+    padding-bottom: 50px; /* Adjust as needed */
+}
+
+  .title{
+    font-weight:600;
+    margin-top:20px;
+    font-size:19px;
+    margin-bottom: 10px;
+  }
+  .title-2{
+    font-weight:600;
+    font-size:16px;
+    margin-bottom: 20px;
+  }
+  
+  
+  .otp-form input{
+    display:inline-block;
+    width:50px;
+    height:50px;
+    text-align:center;
+  }
+
+
+  .btn{
+    border: 0;
+    width: 80%;
+    
+    gap: 4px;
+    height: 48px;
+    background-color: black;
+    border-radius: 8px;
+    /* font-family: 'Satoshi-bold'; */
+    font-style: normal;
+    /* font-weight: 500; */
+    font-size: 16px;
+    line-height: 22px;
+    text-align: center;
+    color: white;
+}
+.btn:hover{
+    background-color: black;
+    color: white;
+}

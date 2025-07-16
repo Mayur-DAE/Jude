@@ -1,0 +1,48 @@
+/* You can add global styles to this file, and also import other style files */
+.breadcrumb-item+.breadcrumb-item:before {
+  content: '/' !important;
+}
+
+.cursor-pointer {
+  cursor: pointer !important;
+}
+
+.lh-1-1 {
+  line-height: 1.1;
+}
+
+
+@media (max-width: 768px) {
+
+  /* Medium (md) and larger screens */
+  .mobile-padding {
+    padding: 0.25rem;
+    /* Reset to default theme */
+    margin-top: 0.25rem;
+  }
+}
+
+
+.custom-toast-size {
+  padding: 10px !important;
+  margin: 1px !important;
+}
+
+.swal2-title {
+  margin-bottom: 4px !important;
+  margin-top: 4px !important;
+}
+
+.swal2-html-container {
+  margin-bottom: 4px !important;
+  margin-top: 10px !important;
+}
+
+.swal2-close{
+  margin-bottom: 8px !important;
+  margin-top: 3px !important;
+}
+
+.swal2-close:hover {
+  color: #21313c !important; 
+}

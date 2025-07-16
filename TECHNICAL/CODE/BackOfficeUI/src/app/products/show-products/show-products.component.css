@@ -1,0 +1,33 @@
+.productdescription{
+  max-width: 100%;
+  white-space: normal !important;
+}
+.productdescription1{
+  max-width: 150%;
+  white-space: normal !important;
+}
+
+.w-21{
+  width: -1%;
+}
+.showproductlayout1{
+  position: absolute;
+  z-index: 100;
+
+}
+.button22{
+  float:left !important;
+  padding: 2.125rem 0.375rem;
+}
+.btn-sm{
+  font-size: 12px !important;
+}
+.action23{
+  text-align: left;
+}
+
+.table td img {
+  width: 58px !important;
+  height: 48px !important;
+  
+}

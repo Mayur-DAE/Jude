@@ -1,0 +1,1744 @@
+<div class="modal-body">
+  <div class="col-12 grid-margin">
+    <div class="card">
+      <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home"
+            type="button" role="tab" aria-controls="pills-home" aria-selected="true">
+            Details
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile"
+            type="button" role="tab" aria-controls="pills-profile" aria-selected="false"
+            [ngClass]="{ error_two: CompanyAddressID == undefined }">
+            Shop Address
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact"
+            type="button" role="tab" aria-controls="pills-contact" aria-selected="false"
+            [ngClass]="{ error_two: CompanyBankDetailsID == undefined }">
+            Bank Details
+          </button>
+        </li>
+        <!-- <li class="nav-item" role="presentation">
+          <button class="nav-link" id="pills-product-tab" data-bs-toggle="pill" data-bs-target="#pills-product"
+            type="button" role="tab" aria-controls="pills-product" aria-selected="false"
+            [ngClass]="{ error_two: ProductsList == '' }">
+            Products
+          </button>
+        </li> -->
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="pills-product-tab" data-bs-toggle="pill" data-bs-target="#pills-settlement"
+            type="button" role="tab" aria-controls="pills-settlement" aria-selected="false"
+            (click)="refreshSettlementList()"
+            [disabled]="!settlementList || settlementList.length === 0"
+            [class.disabled]="!settlementList || settlementList.length === 0">
+            Settlement
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="pills-product-tab" data-bs-toggle="pill"
+            data-bs-target="#pills-membershipinvoice" type="button" role="tab" aria-controls="pills-membershipinvoice"
+            aria-selected="false" (click)="refreshMembershipInvoiceList()"
+            [disabled]="!membershipinvoiceList || membershipinvoiceList.length === 0"
+            [class.disabled]="!membershipinvoiceList || membershipinvoiceList.length === 0">
+            Membership Invoice
+          </button>
+        </li>
+      </ul>
+      <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label padddingtop">Business Type
+                    <span _ngcontent-fjo-c33="" class="text-danger">*</span>
+                  </label>
+                  <div class="col-sm-9">
+                    <select class="form-select" aria-label="Default select example" name="BusinessTypeID"
+                      [(ngModel)]="BusinessTypeID">
+                      <option disabled selected>--Select--</option>
+                      <option *ngFor="let x of BusinessTypeList" [value]="x.BusinessTypeID">
+                        {{ x.BusinessTypeName }}
+                      </option>
+                    </select>
+                    <div class="error">{{ BusinessType_errormsg }}</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label padddingtop">Source Name
+                    <span _ngcontent-fjo-c33="" class="text-danger">*</span>
+                  </label>
+                  <div class="col-sm-9">
+                    <select class="form-select" aria-label="Default select example" name="CompanySourceID"
+                      [(ngModel)]="CompanySourceID" [disabled]="UserRoleID == 2">
+                      <option disabled selected>--Select--</option>
+                      <option *ngFor="let x of CompanySourceList" [value]="x.CompanySourceID">
+                        {{ x.CompanySource }}
+                      </option>
+                    </select>
+                    <div class="error">{{ SourceName_errormsg }}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label padddingtop">Membership Type
+                    <span _ngcontent-fjo-c33="" class="text-danger">*</span>
+                  </label>
+                  <div class="col-sm-9">
+                    <select class="form-select" aria-label="Default select example" name="CompanyMemberShipTypeID"
+                      [(ngModel)]="CompanyMemberShipTypeID" [disabled]="UserRoleID == 2">
+                      <option disabled selected>--Select--</option>
+                      <option *ngFor="let x of CompanymembershipnameList" [value]="x.CompanyMemberShipTypeID">
+                        {{ x.CompanyMemberShipName }}
+                      </option>
+                    </select>
+                    <div class="error">{{ MembershipType_errormsg }}</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label padddingtop " >
+                    Membership Expiry Date<span _ngcontent-fjo-c33="" class="text-danger">*</span>
+                  </label>
+                  <div class="col-sm-9">
+                    <input autofocus type="date" class="form-control" [(ngModel)]="CompanyMemberShipExpiryDate"
+                      FormControlName="MembershipExpiryDate" placeholder="dd/mm/yyyy" maxlength="10"
+                      [disabled]="UserRoleID == 2" [min]="minDate"/>
+                    <div class="error">
+                      {{ CompanyMemberShipExpiryDate_errormsg }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p class="card-description">
+              <font size="+2">Shop Information</font>
+            </p>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label padddingtop">Shop Name
+                    <span _ngcontent-fjo-c33="" class="text-danger">*</span>
+                  </label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" [(ngModel)]="CompanyName" FormControlName="Companyname"
+                      placeholder="Enter Shop Name" maxlength="50" />
+                    <div class="error">{{ Company_errormsg }}</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label padddingtop">Contact Name
+                    <span _ngcontent-fjo-c33="" class="text-danger">*</span>
+                  </label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" [(ngModel)]="CompanyContactName"
+                      FormControlName="CompanycontactName" placeholder="Enter Shop Contact Name" maxlength="50" />
+                    <div class="error">{{ Companycontactname_errormsg }}</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6 d-none">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label padddingtop">Description
+                    <span _ngcontent-fjo-c33="" class="text-danger">*</span>
+                  </label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" [(ngModel)]="CompanyDescription"
+                      FormControlName="Companydescription" placeholder="Enter Shop Description" maxlength="500" />
+                    <div class="error">{{ Companydescription_errormsg }}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+             
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label padddingtop">Shop Email id
+                    <span _ngcontent-fjo-c33="" class="text-danger">*</span>
+                  </label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" [(ngModel)]="CompanyEmailid" placeholder="Enter Email id"
+                      maxlength="50" />
+                    <div class="error">{{ CompanyEmail_errormsg }}</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label padddingtop">Mobile Number
+                    <span _ngcontent-fjo-c33="" class="text-danger">*</span>
+                  </label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" [(ngModel)]="CompanyMobileNo1" 
+          placeholder="Enter Mobile No" maxlength="10" 
+          (keypress)="validateNumberInput($event, 'CompanyMobileNo1_errormsg')" />
+        <div class="error" *ngIf="CompanyMobileNo1_errormsg">{{ CompanyMobileNo1_errormsg }}</div>
+    
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+             
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label padddingtop">Whatsapp Number
+                   
+                  </label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" [(ngModel)]="CompanyMobileNo2" 
+                    placeholder="Enter Whatsapp Number" maxlength="10" 
+                  (keypress)="validateNumberInput($event, 'CompanyMobileNo2_errormsg')" />
+                <div class="error" *ngIf="CompanyMobileNo2_errormsg">{{ CompanyMobileNo2_errormsg }}</div>
+        
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">GST Number</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" [(ngModel)]="CompanyGSTNumber"
+                      placeholder="Enter GST Number" maxlength="15" />
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">PAN Number</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" [(ngModel)]="CompanyPANNumber"
+                      placeholder="Enter PAN Number" maxlength="10" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">MSME Number</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" [(ngModel)]="CompanyMSMENumber"
+                      placeholder="Enter MSME Number" maxlength="15" />
+                  </div>
+                </div>
+              </div>
+            </div> -->
+
+            <!-- Caption Details Table -->
+            <div class="form-group mt-3">
+              <p class="card-description">
+                <font size="+2">Caption Details</font>
+              </p>
+            
+              <!-- Scrollable container -->
+              <div class="table-responsive" style="max-height: 300px; overflow-y: auto;">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th class="border-0" style="width: 150px;">
+                        Language <span class="text-danger">*</span>
+                      </th>
+                      <th class="border-0" style="min-width: 200px;">
+                        Name <span class="text-danger">*</span>
+                      </th>
+                      <th class="border-0" style="min-width: 300px;">
+                        Description <span class="text-danger">*</span>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let lang of activeLanguages; let i = index">
+                      <td>{{ lang.LanguageCaption }}</td>
+            
+                      <!-- Name Input -->
+                      <td>
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Enter Name"
+                          [(ngModel)]="lang.Name"
+                          name="name{{i}}"
+                          [ngClass]="{ 'is-invalid': isFieldInvalid(lang.Name) }"
+                        />
+                        <div class="error text-danger" *ngIf="isFieldInvalid(lang.Name)">
+                          Name is required
+                        </div>
+                      </td>
+            
+                      <!-- Description Input -->
+                      <td>
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Enter Description"
+                          [(ngModel)]="lang.Description"
+                          name="description{{i}}"
+                          [ngClass]="{ 'is-invalid': isFieldInvalid(lang.Description) }"
+                        />
+                        <div class="error text-danger" *ngIf="isFieldInvalid(lang.Description)">
+                          Description is required
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            
+
+            <p class="card-description">
+              <font size="+2">Upload Documents</font>
+            </p>
+            <!-- image -->
+            <!-- <div class="row">
+              <div class="col-md-12">
+                <div class="form-group row">
+                  <div class="col-sm-4">
+                    <label class="companyTextCascade">Pan Card Image:</label>
+                    <br />
+                    <br />
+
+                    <img [src]="CompanyPanCardImageNamePath" class="companyImagesCascade"
+                      (error)="loadDefaultImage($event)" />
+                    <br />
+                    <input type="file" (change)="uploadpancardimage($any($event.target).files)" class="mt-2"
+                      class="companyTextCascade" />
+                  </div>
+
+                  <div class="col-sm-4">
+                    <label class="companyTextCascade">GST Image :</label>
+                    <br />
+                    <br />
+
+                    <img [src]="CompanyGSTImageNamePath" class="companyImagesCascade"
+                      (error)="loadDefaultImage($event)" />
+                    <br />
+                    <input type="file" (change)="uploadGSTcardimage($any($event.target).files)" class="mt-2"
+                      class="companyTextCascade" />
+                  </div>
+
+                  <div class="col-sm-4">
+                    <label class="companyTextCascade">MSME Image :</label>
+                    <br />
+                    <br />
+
+                    <img [src]="CompanyMSMEImageNamePath" class="companyImagesCascade"
+                      (error)="loadDefaultImage($event)" />
+                    <br />
+                    <input type="file" (change)="uploadMSMEcardimage($any($event.target).files)" class="mt-2"
+                      class="companyTextCascade" />
+                  </div>
+                </div>
+              </div>
+            </div> -->
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group row">
+                  <div class="col-sm-4">
+                    <label class="companyTextCascade">Logo Image:</label>
+                    <br />
+                    <br />
+                    <div class="image-container">
+                      <img [src]="CompanyLogoImageNamePath" class="companyImagesCascade" 
+                           (error)="loadDefaultImage($event)" />
+                          <button *ngIf="CompanyLogoImageNamePath && !CompanyLogoImageNamePath.includes('anonymous.png')"
+                            class="delete-button" (click)="deleteImage()">
+                            <i class="fa fa-trash"></i>
+                          </button>
+                    </div>
+                    <br />
+                    <input id="logoFileInput"  type="file"
+                     (change)="uploadLogoimage($any($event.target).files)"
+                      class="mt-2 companyTextCascade"/>
+                  </div>
+
+                  <!-- <div class="col-sm-4">
+                    <label class="companyTextCascade">Banner Image :</label>
+                    <br />
+                    <br />
+
+                    <img [src]="CompanyBannerImageNamePath" class="companyImagesCascade"
+                      (error)="loadDefaultImage($event)" />
+                    <br />
+                    <input type="file" (change)="uploadBannerimage($any($event.target).files)" class="mt-2"
+                      class="companyTextCascade" />
+                  </div> -->
+                  <div class="col-sm-4">
+                    <label class="companyTextCascade">Cancelled Cheque Image :</label>
+                    <br />
+                    <br />
+                    <div class="image-container">
+                    <img [src]="CompanyCancelledChequeNamePath" class="companyImagesCascade"
+                      (error)="loadDefaultImage($event)" />
+                      <button  *ngIf="CompanyCancelledChequePath && CompanyCancelledChequeNamePath !== (service.PhotoUrl + 'anonymous.png')"
+                        class="delete-button" (click)="deleteChequeImage()">
+                        <i class="fa fa-trash"></i>
+                      </button>
+                    </div>
+                    <br />
+                    <input id="chequeFileInput" type="file" 
+                    (change)="uploadCompanyCancelledChequeimage($any($event.target).files)"
+                     class="mt-2 companyTextCascade" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <p class="card-description" *ngIf="CompanyID != 0">
+              <font size="+2">Date</font>
+            </p>
+            <div class="row" *ngIf="CompanyID != 0">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Joining Date</label>
+                  <div class="col-sm-9">
+                    <label class="col-form-label">{{
+                      CompanyJoiningDate
+                      }}</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p class="card-description">
+              <font size="+2">Links</font>
+            </p>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label padddingtop">Website</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" [(ngModel)]="WebsiteURL" placeholder="Enter Website" />
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label padddingtop">Facbook</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" [(ngModel)]="FacbookID" placeholder="Enter Facbook" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label padddingtop">Twitter</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" [(ngModel)]="Twitter" placeholder="Enter Twitter ID" />
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label padddingtop">Linkedin</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" [(ngModel)]="Linkedin" placeholder="Enter Linkedin " />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label padddingtop">Instagram</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" [(ngModel)]="Instagram" placeholder="Enter Instagram" />
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label padddingtop">WordPress</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" [(ngModel)]="WordPress" placeholder="Enter WordPress" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label padddingtop">Pintrest</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" [(ngModel)]="Pintrest" placeholder="Enter Pintrest" />
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label padddingtop">YouTube</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" [(ngModel)]="YouTube" placeholder="Enter YouTube" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <p class="card-description">
+              <font size="+2">Timing Information</font>
+            </p>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row" style="align-items: center;">
+                  <label class="col-sm-3 col-form-label padddingtop">Monday Time</label>
+                  
+                  <div class="col-sm-3">
+                    <!-- <input type="text" class="form-control" [(ngModel)]="CompanyTimeMonday"
+                      placeholder="Enter Monday Time" /> -->
+                    <select class="form-select" placeholder="Start Time" name="Start Time" [(ngModel)]="Monday1" >
+                      <ng-container>
+                        <option value="" selected  disabled style="color: #aaa; ">From</option>
+
+                        <!-- <option>Closed</option> -->
+                        <option>1 AM</option>
+                        <option>2 AM</option>
+                        <option>3 AM</option>
+                        <option>4 AM</option>
+                        <option>5 AM</option>
+                        <option>6 AM</option>
+                        <option>7 AM</option>
+                        <option>8 AM</option>
+                        <option>9 AM</option>
+                        <option>10 AM</option>
+                        <option>11 AM</option>
+                        <option>12 AM</option>
+                        <option>1 PM</option>
+                        <option>2 PM</option>
+                        <option>3 PM</option>
+                        <option>4 PM</option>
+                        <option>5 PM</option>
+                        <option>6 PM</option>
+                        <option>7 PM</option>
+                        <option>8 PM</option>
+                        <option>9 PM</option>
+                        <option>10 PM</option>
+                        <option>11 PM</option>
+                        <option>12 PM</option>
+                      </ng-container>
+                    </select>
+                  </div>
+                  <div style="width:0px; align-items: center;" class="minssign" > 
+                    <span style="width:0px">-</span>
+                  </div>    
+
+                  <div class="col-sm-3">
+                    <select class="form-select" class="form-select" name="End Time" [(ngModel)]="Monday2">
+                      <ng-container>
+                        <option value="" selected  disabled>To</option>
+
+                        <!-- <option>Closed</option> -->
+                        <option>1 AM</option>
+                        <option>2 AM</option>
+                        <option>3 AM</option>
+                        <option>4 AM</option>
+                        <option>5 AM</option>
+                        <option>6 AM</option>
+                        <option>7 AM</option>
+                        <option>8 AM</option>
+                        <option>9 AM</option>
+                        <option>10 AM</option>
+                        <option>11 AM</option>
+                        <option>12 AM</option>
+                        <option>1 PM</option>
+                        <option>2 PM</option>
+                        <option>3 PM</option>
+                        <option>4 PM</option>
+                        <option>5 PM</option>
+                        <option>6 PM</option>
+                        <option>7 PM</option>
+                        <option>8 PM</option>
+                        <option>9 PM</option>
+                        <option>10 PM</option>
+                        <option>11 PM</option>
+                        <option>12 PM</option>
+                      </ng-container>
+                    </select>
+                  </div>
+               
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row" style="align-items: center;">
+                  <label class="col-sm-3 col-form-label padddingtop">Tuesday Time</label>
+                  <div class="col-sm-3">
+                    <!-- <input type="text" class="form-control" [(ngModel)]="CompanyTimeTuesday"
+                      placeholder="Enter Tuesday Time" /> -->
+                    <select class="form-select" placeholder="Start Time" name="Start Time" [(ngModel)]="Tuesday1">
+                      <ng-container>
+                        <option value="" selected  disabled style="color: #aaa; ">From</option>
+                        <!-- <option>Closed</option> -->
+                        <option>1 AM</option>
+                        <option>2 AM</option>
+                        <option>3 AM</option>
+                        <option>4 AM</option>
+                        <option>5 AM</option>
+                        <option>6 AM</option>
+                        <option>7 AM</option>
+                        <option>8 AM</option>
+                        <option>9 AM</option>
+                        <option>10 AM</option>
+                        <option>11 AM</option>
+                        <option>12 AM</option>
+                        <option>1 PM</option>
+                        <option>2 PM</option>
+                        <option>3 PM</option>
+                        <option>4 PM</option>
+                        <option>5 PM</option>
+                        <option>6 PM</option>
+                        <option>7 PM</option>
+                        <option>8 PM</option>
+                        <option>9 PM</option>
+                        <option>10 PM</option>
+                        <option>11 PM</option>
+                        <option>12 PM</option>
+                      </ng-container>
+                    </select>
+                  </div>
+
+                  <div style="width:0px; align-items: center;" class="minssign" > 
+                    <span style="width:0px">-</span>
+                  </div>
+        
+                  
+                  <div class="col-sm-3">
+                    <select class="form-select" class="form-select" name="End Time" [(ngModel)]="Tuesday2">
+                      <ng-container>
+                        <option value="" selected  disabled style="color: #aaa; ">To</option>
+                        <!-- <option>Closed</option> -->
+                        <option>1 AM</option>
+                        <option>2 AM</option>
+                        <option>3 AM</option>
+                        <option>4 AM</option>
+                        <option>5 AM</option>
+                        <option>6 AM</option>
+                        <option>7 AM</option>
+                        <option>8 AM</option>
+                        <option>9 AM</option>
+                        <option>10 AM</option>
+                        <option>11 AM</option>
+                        <option>12 AM</option>
+                        <option>1 PM</option>
+                        <option>2 PM</option>
+                        <option>3 PM</option>
+                        <option>4 PM</option>
+                        <option>5 PM</option>
+                        <option>6 PM</option>
+                        <option>7 PM</option>
+                        <option>8 PM</option>
+                        <option>9 PM</option>
+                        <option>10 PM</option>
+                        <option>11 PM</option>
+                        <option>12 PM</option>
+                      </ng-container>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row" style="align-items: center;">
+                  <label class="col-sm-3 col-form-label padddingtop">Wednesday Time</label>
+                  <div class="col-sm-3">
+                    <!-- <input type="text" class="form-control" [(ngModel)]="CompanyTimeWednesday"
+                      placeholder="Enter Wednesday Time" /> -->
+                    <select class="form-select" placeholder="Start Time" name="Start Time" [(ngModel)]="Wednesday1">
+                      <ng-container>
+                        <option value="" selected  disabled style="color: #aaa; ">From</option>
+                        <!-- <option>Closed</option> -->
+                        <option>1 AM</option>
+                        <option>2 AM</option>
+                        <option>3 AM</option>
+                        <option>4 AM</option>
+                        <option>5 AM</option>
+                        <option>6 AM</option>
+                        <option>7 AM</option>
+                        <option>8 AM</option>
+                        <option>9 AM</option>
+                        <option>10 AM</option>
+                        <option>11 AM</option>
+                        <option>12 AM</option>
+                        <option>1 PM</option>
+                        <option>2 PM</option>
+                        <option>3 PM</option>
+                        <option>4 PM</option>
+                        <option>5 PM</option>
+                        <option>6 PM</option>
+                        <option>7 PM</option>
+                        <option>8 PM</option>
+                        <option>9 PM</option>
+                        <option>10 PM</option>
+                        <option>11 PM</option>
+                        <option>12 PM</option>
+                      </ng-container>
+                    </select>
+                  </div>
+                  <div style="width:0px; align-items: center;" class="minssign" > 
+                    <span style="width:0px">-</span>
+                  </div>
+                  
+                  <div class="col-sm-3">
+                    <select class="form-select" class="form-select" name="End Time" [(ngModel)]="Wednesday2">
+                      <ng-container>
+                        <option value="" selected  disabled style="color: #aaa; ">To</option>
+                        <!-- <option>Closed</option> -->
+                        <option>1 AM</option>
+                        <option>2 AM</option>
+                        <option>3 AM</option>
+                        <option>4 AM</option>
+                        <option>5 AM</option>
+                        <option>6 AM</option>
+                        <option>7 AM</option>
+                        <option>8 AM</option>
+                        <option>9 AM</option>
+                        <option>10 AM</option>
+                        <option>11 AM</option>
+                        <option>12 AM</option>
+                        <option>1 PM</option>
+                        <option>2 PM</option>
+                        <option>3 PM</option>
+                        <option>4 PM</option>
+                        <option>5 PM</option>
+                        <option>6 PM</option>
+                        <option>7 PM</option>
+                        <option>8 PM</option>
+                        <option>9 PM</option>
+                        <option>10 PM</option>
+                        <option>11 PM</option>
+                        <option>12 PM</option>
+                      </ng-container>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row" style="align-items: center;">
+                  <label class="col-sm-3 col-form-label padddingtop">Thursday Time</label>
+                  <div class="col-sm-3">
+                    <!-- <input type="text" class="form-control" [(ngModel)]="CompanyTimeThursday"
+                      placeholder="Enter Thursday Time" /> -->
+                    <select class="form-select" placeholder="Start Time" name="Start Time" [(ngModel)]="Thursday1">
+                      <ng-container>
+                        <option value="" selected  disabled style="color: #aaa; ">From</option>
+                        <!-- <option>Closed</option> -->
+                        <option>1 AM</option>
+                        <option>2 AM</option>
+                        <option>3 AM</option>
+                        <option>4 AM</option>
+                        <option>5 AM</option>
+                        <option>6 AM</option>
+                        <option>7 AM</option>
+                        <option>8 AM</option>
+                        <option>9 AM</option>
+                        <option>10 AM</option>
+                        <option>11 AM</option>
+                        <option>12 AM</option>
+                        <option>1 PM</option>
+                        <option>2 PM</option>
+                        <option>3 PM</option>
+                        <option>4 PM</option>
+                        <option>5 PM</option>
+                        <option>6 PM</option>
+                        <option>7 PM</option>
+                        <option>8 PM</option>
+                        <option>9 PM</option>
+                        <option>10 PM</option>
+                        <option>11 PM</option>
+                        <option>12 PM</option>
+                      </ng-container>
+                    </select>
+                  </div>
+                  <div style="width:0px; align-items: center;" class="minssign" > 
+                    <span style="width:0px">-</span>
+                  </div>
+                  <div class="col-sm-3">
+                    <select class="form-select" class="form-select" name="End Time" [(ngModel)]="Thursday2">
+                      <ng-container>
+                        <option value="" selected  disabled style="color: #aaa; ">To</option>
+                        <!-- <option>Closed</option> -->
+                        <option>1 AM</option>
+                        <option>2 AM</option>
+                        <option>3 AM</option>
+                        <option>4 AM</option>
+                        <option>5 AM</option>
+                        <option>6 AM</option>
+                        <option>7 AM</option>
+                        <option>8 AM</option>
+                        <option>9 AM</option>
+                        <option>10 AM</option>
+                        <option>11 AM</option>
+                        <option>12 AM</option>
+                        <option>1 PM</option>
+                        <option>2 PM</option>
+                        <option>3 PM</option>
+                        <option>4 PM</option>
+                        <option>5 PM</option>
+                        <option>6 PM</option>
+                        <option>7 PM</option>
+                        <option>8 PM</option>
+                        <option>9 PM</option>
+                        <option>10 PM</option>
+                        <option>11 PM</option>
+                        <option>12 PM</option>
+                      </ng-container>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row" style="align-items: center;">
+                  <label class="col-sm-3 col-form-label padddingtop">Friday Time</label>
+                  <div class="col-sm-3">
+                    <!-- <input type="text" class="form-control" [(ngModel)]="CompanyTimeFriday"
+                      placeholder="Enter Friday Time" /> -->
+                    <select class="form-select" placeholder="Start Time" name="Start Time" [(ngModel)]="Friday1">
+                      <ng-container>
+                        <option value="" selected  disabled style="color: #aaa; ">From</option>
+                        <!-- <option>Closed</option> -->
+                        <option>1 AM</option>
+                        <option>2 AM</option>
+                        <option>3 AM</option>
+                        <option>4 AM</option>
+                        <option>5 AM</option>
+                        <option>6 AM</option>
+                        <option>7 AM</option>
+                        <option>8 AM</option>
+                        <option>9 AM</option>
+                        <option>10 AM</option>
+                        <option>11 AM</option>
+                        <option>12 AM</option>
+                        <option>1 PM</option>
+                        <option>2 PM</option>
+                        <option>3 PM</option>
+                        <option>4 PM</option>
+                        <option>5 PM</option>
+                        <option>6 PM</option>
+                        <option>7 PM</option>
+                        <option>8 PM</option>
+                        <option>9 PM</option>
+                        <option>10 PM</option>
+                        <option>11 PM</option>
+                        <option>12 PM</option>
+                      </ng-container>
+                    </select>
+                  </div>
+                  <div style="width:0px; align-items: center;" class="minssign" > 
+                    <span style="width:0px">-</span>
+                  </div>
+                  <div class="col-sm-3">
+                    <select class="form-select" class="form-select" name="End Time" [(ngModel)]="Friday2">
+                      <ng-container>
+                        <option value="" selected  disabled style="color: #aaa; ">To</option>
+                        <!-- <option>Closed</option> -->
+                        <option>1 AM</option>
+                        <option>2 AM</option>
+                        <option>3 AM</option>
+                        <option>4 AM</option>
+                        <option>5 AM</option>
+                        <option>6 AM</option>
+                        <option>7 AM</option>
+                        <option>8 AM</option>
+                        <option>9 AM</option>
+                        <option>10 AM</option>
+                        <option>11 AM</option>
+                        <option>12 AM</option>
+                        <option>1 PM</option>
+                        <option>2 PM</option>
+                        <option>3 PM</option>
+                        <option>4 PM</option>
+                        <option>5 PM</option>
+                        <option>6 PM</option>
+                        <option>7 PM</option>
+                        <option>8 PM</option>
+                        <option>9 PM</option>
+                        <option>10 PM</option>
+                        <option>11 PM</option>
+                        <option>12 PM</option>
+                      </ng-container>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row" style="align-items: center;">
+                  <label class="col-sm-3 col-form-label padddingtop">Saturday Time</label>
+                  <div class="col-sm-3">
+                    <!-- <input type="text" class="form-control" [(ngModel)]="CompanyTimeSaturday"
+                      placeholder="Enter Saturday Time" /> -->
+                    <select class="form-select" placeholder="Start Time" name="Start Time" [(ngModel)]="Saturday1">
+                      <ng-container>
+                        <option value="" selected  disabled style="color: #aaa; ">From</option>
+                        <!-- <option>Closed</option> -->
+                        <option>1 AM</option>
+                        <option>2 AM</option>
+                        <option>3 AM</option>
+                        <option>4 AM</option>
+                        <option>5 AM</option>
+                        <option>6 AM</option>
+                        <option>7 AM</option>
+                        <option>8 AM</option>
+                        <option>9 AM</option>
+                        <option>10 AM</option>
+                        <option>11 AM</option>
+                        <option>12 AM</option>
+                        <option>1 PM</option>
+                        <option>2 PM</option>
+                        <option>3 PM</option>
+                        <option>4 PM</option>
+                        <option>5 PM</option>
+                        <option>6 PM</option>
+                        <option>7 PM</option>
+                        <option>8 PM</option>
+                        <option>9 PM</option>
+                        <option>10 PM</option>
+                        <option>11 PM</option>
+                        <option>12 PM</option>
+                      </ng-container>
+                    </select>
+                  </div>
+                  <div style="width:0px; align-items: center;" class="minssign" > 
+                    <span style="width:0px">-</span>
+                  </div>
+                  <div class="col-sm-3">
+                    <select class="form-select" class="form-select" name="End Time" [(ngModel)]="Saturday2">
+                      <ng-container>
+                        <option value="" selected  disabled style="color: #aaa; ">To</option>
+                        <!-- <option>Closed</option> -->
+                        <option>1 AM</option>
+                        <option>2 AM</option>
+                        <option>3 AM</option>
+                        <option>4 AM</option>
+                        <option>5 AM</option>
+                        <option>6 AM</option>
+                        <option>7 AM</option>
+                        <option>8 AM</option>
+                        <option>9 AM</option>
+                        <option>10 AM</option>
+                        <option>11 AM</option>
+                        <option>12 AM</option>
+                        <option>1 PM</option>
+                        <option>2 PM</option>
+                        <option>3 PM</option>
+                        <option>4 PM</option>
+                        <option>5 PM</option>
+                        <option>6 PM</option>
+                        <option>7 PM</option>
+                        <option>8 PM</option>
+                        <option>9 PM</option>
+                        <option>10 PM</option>
+                        <option>11 PM</option>
+                        <option>12 PM</option>
+                      </ng-container>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row" style="align-items: center;">
+                  <label class="col-sm-3 col-form-label padddingtop">Sunday Time</label>
+                  <div class="col-sm-3">
+                    <!-- <input type="text" class="form-control" [(ngModel)]="CompanyTimeSunday"
+                      placeholder="Enter Sunday Time" /> -->
+                    <select class="form-select" placeholder="Start Time" name="Start Time" [(ngModel)]="Sunday1">
+                      <ng-container>
+                        <option value="" selected  disabled style="color: #aaa; ">From</option>
+                        <!-- <option>Closed</option> -->
+                        <option>1 AM</option>
+                        <option>2 AM</option>
+                        <option>3 AM</option>
+                        <option>4 AM</option>
+                        <option>5 AM</option>
+                        <option>6 AM</option>
+                        <option>7 AM</option>
+                        <option>8 AM</option>
+                        <option>9 AM</option>
+                        <option>10 AM</option>
+                        <option>11 AM</option>
+                        <option>12 AM</option>
+                        <option>1 PM</option>
+                        <option>2 PM</option>
+                        <option>3 PM</option>
+                        <option>4 PM</option>
+                        <option>5 PM</option>
+                        <option>6 PM</option>
+                        <option>7 PM</option>
+                        <option>8 PM</option>
+                        <option>9 PM</option>
+                        <option>10 PM</option>
+                        <option>11 PM</option>
+                        <option>12 PM</option>
+                      </ng-container>
+                    </select>
+                  </div>
+                  <div style="width:0px; align-items: center;" class="minssign" > 
+                    <span style="width:0px">-</span>
+                  </div>
+                  <div class="col-sm-3">
+                    <select class="form-select" class="form-select" name="End Time" [(ngModel)]="Sunday2">
+                      <ng-container>
+                        <option value="" selected  disabled style="color: #aaa; ">To</option>
+                        <!-- <option>Closed</option> -->
+                        <option>1 AM</option>
+                        <option>2 AM</option>
+                        <option>3 AM</option>
+                        <option>4 AM</option>
+                        <option>5 AM</option>
+                        <option>6 AM</option>
+                        <option>7 AM</option>
+                        <option>8 AM</option>
+                        <option>9 AM</option>
+                        <option>10 AM</option>
+                        <option>11 AM</option>
+                        <option>12 AM</option>
+                        <option>1 PM</option>
+                        <option>2 PM</option>
+                        <option>3 PM</option>
+                        <option>4 PM</option>
+                        <option>5 PM</option>
+                        <option>6 PM</option>
+                        <option>7 PM</option>
+                        <option>8 PM</option>
+                        <option>9 PM</option>
+                        <option>10 PM</option>
+                        <option>11 PM</option>
+                        <option>12 PM</option>
+                      </ng-container>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row" *ngIf="UserRoleID != 2">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class=" isActive  form-check-label">
+                    <input type="checkbox" class=" form-check-input" name="IsActive" checked [(ngModel)]="IsActive" />
+                    Active
+                  </label>
+                </div>
+              </div>
+            </div>
+            <!-- </form>   -->
+          </div>
+          <div class="modal-footer">
+            <button *ngIf="currentTab === 'profile' && CompanyID == 0" (click)="addCompany(false)" class="btn btn-primary">
+              Add
+            </button>
+
+            <button *ngIf="currentTab === 'home' && CompanyID == 0" (click)="addCompany(true)" class="btn btn-primary">
+              Save & Next
+            </button>
+            
+            <button (click)="updateCompany()" *ngIf="CompanyID != 0" class="btn btn-primary">
+              Update
+            </button>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+          <!-- Address -->
+          <div class="modal-body2">
+            <div class="col-12 grid-margin">
+              <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <div class="input-group searchbox">
+                          <input type="text" aria-label="Last name" class="form-control w-45" placeholder="Search for area, location more.."
+                            id="areaaa" name="auto" spellcheck="false" [(ngModel)]="searchAddress.formattedAddress" (input)="onSearch()"/>
+                      
+                          <button class="input-group-text bg-transparent" type="submit"  (click)="onDetectCurrent()">
+                            <i class="bi bi-geo-alt"></i>
+                          </button>
+                        </div>
+                        <div class="input-group">
+                          <div *ngIf="searchResults.length > 0" class="position-absolute bg-white shadow rounded scrollbar-theme form-control dropdown"
+                            style="max-height: 200px;overflow-y: auto; z-index: 99999;">
+                            <div *ngFor="let place of searchResults" (click)="selectAddress(place)" class="p-2 rounded ">
+                              <div class="d-flex flex-column">
+                                <div class="fw-bold fs-7 text-dark"><i
+                                    class="bi bi-geo-alt text-primary me-2"></i>{{place.structured_formatting.main_text}} </div>
+                                <div class="text-secondary fs-7">
+                                  {{place.structured_formatting.secondary_text}}
+                                </div>
+                                <hr class="my-1">
+                              </div>
+                        
+                            </div>
+                          </div>
+                          <div class="mapimage" *ngIf="!ShowMap">
+                            <img src="assets/images/backoffice/searchmap.png" alt="" class="img-fluid " style="height: 400px;width: 400px;"/>
+                         </div>
+                        </div>
+                        <br>
+                        <div  #mapContainer class="map-containerr" ></div>
+                        <div *ngIf="ShowMap" class="center-marker">
+                          <i class="bi bi-geo-fill"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-sm-3 col-form-label padddingtop">Address1</label>
+                        <div class="col-sm-9">
+                          <input id="addrss" type="text" class="form-control" [(ngModel)]="Address1"
+                            placeholder="Enter Shop no / Flat no and shop name." />
+                        </div>
+                      </div>
+                      <input type="hidden" class="form-control" id="latitude" [(ngModel)]="lat" />
+
+                      <input type="hidden" class="form-control" id="longitude" [(ngModel)]="long" />
+
+                      <input type="hidden" class="form-control" id="isMapMyIndiaSelected"
+                        [(ngModel)]="isMapMyIndiaSelected" />
+                      <div class="form-group row">
+                        <label class="col-sm-3 col-form-label padddingtop">Address 2</label>
+                        <div class="col-sm-9">
+                          <input disabled id="areaa" type="text" class="form-control"
+                            [(ngModel)]="selectedAddress.formattedAddress"
+                            placeholder="Enter Area, Street, Sector, Village" (keyup)="onAreaKeyup()" />
+                          <!-- <div class="list-group">
+                            <a
+                              class="list-group-item list-group-item-ation"
+                              *ngFor="let dataItem of addresses"
+                              (click)="onSelectAddress(dataItem)"
+                              >{{ dataItem.formattedAddress }}</a
+                            >
+                          </div> -->
+                        </div>
+                      </div>
+                      <!-- <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">City</label>
+                        <div class="col-sm-9">
+                          <select class="form-select" aria-label="Default select example" id="tcity" name="CityID"
+                            [(ngModel)]="CityID" (change)="onCityChange($event)">
+                            <option></option>
+                            <option *ngFor="let x of CityList" [value]="x.CityID">
+                              {{ x.CityName }}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">State</label>
+                        <div class="col-sm-9">
+                          
+                          <select class="form-select" aria-label="Default select example" name="StateID" id="state"
+                            [(ngModel)]="StateID" (change)="onStateChange($event)">
+                            <option></option>
+                            <option *ngFor="let x of StateList" [value]="x.StateID">
+                              {{ x.StateName }}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Pincode</label>
+                        <div class="col-sm-9">
+                          <input type="text" id="pcode" class="form-control" [(ngModel)]="Zip"
+                            placeholder="Enter pincode" />
+                        </div>
+                      </div> -->
+
+                      <!-- <div class="form-group row">
+                        <label class="col-sm-3 col-form-label padddingtop">State</label>
+                        <div class="col-sm-9"> -->
+                          <!-- <input type="text" class="form-control" [(ngModel)]="StateID" placeholder="Enter StateID" /> -->
+                          <!-- <select class="form-select" aria-label="Default select example" name="StateID" id="state"
+                            [(ngModel)]="StateID" (change)="onStateChange($event)">
+                            <option disabled selected>--Select--</option>
+                            <option *ngFor="let x of StateList" [value]="x.StateID">
+                              {{ x.StateName }}
+                            </option>
+                          </select>
+                        </div>
+                      </div> -->
+                      
+                      <!-- <div class="form-group row">
+                        <label class="col-sm-3 col-form-label padddingtop">City</label>
+                        <div class="col-sm-9">
+                          <select class="form-select" aria-label="Default select example" id="tcity" name="CityID"
+                            [(ngModel)]="CityID" (change)="onCityChange($event)">
+                            <option disabled selected>--Select--</option>
+                            <option *ngFor="let x of CityList" [value]="x.CityID">
+                              {{ x.CityName }}
+                            </option>
+                          </select>
+                        </div>
+                      </div> -->
+    
+                     
+
+                      <div class="form-group row">
+                        <label class="col-sm-3 col-form-label padddingtop">Landmark</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" [(ngModel)]="Landmark" id="lmark"
+                            placeholder="Enter Landmark" />
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  
+
+                  
+
+                  <!-- <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Latitude</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" [(ngModel)]="Latitude" placeholder="Enter Latitude" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Longitude</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" [(ngModel)]="Longitude"
+                            placeholder="Enter Longitude" />
+                        </div>
+                      </div>
+                    </div>
+                  </div> -->
+                </div>
+              </div>
+
+              <div class="modal-footer">
+                <button (click)="addCompanyaddress()" type="submit" *ngIf="CompanyAddressID == null"
+                  class="btn btn-primary">
+                  Add
+                </button>
+                <button (click)="updateCompanyaddress()" *ngIf="CompanyAddressID != null" class="btn btn-primary">
+                  Update
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+          <!--bank details -->
+          <div class="modal-body3">
+            <div class="col-12 grid-margin">
+              <div class="card">
+                <form [formGroup]="bankDetailsForm">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label padddingtop">UPI ID
+                            <span _ngcontent-fjo-c33="" class="text-danger">*</span>
+                          </label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" [(ngModel)]="UPIID" formControlName="UPIID" placeholder="Enter UPI ID" />
+                            <div *ngIf="bankDetailsForm.get('UPIID')?.invalid && (bankDetailsForm.get('UPIID')?.touched || bankDetailsForm.get('UPIID')?.dirty)" class="text-danger text-sm mt-1">
+                              UPI ID is required
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <!-- Bank Name -->
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label padddingtop">Bank Name
+                            <span _ngcontent-fjo-c33="" class="text-danger">*</span>
+                          </label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" formControlName="BankName" [(ngModel)]="BankName" placeholder="Enter Bank Name" />
+                            <div *ngIf="bankDetailsForm.get('BankName')?.invalid && (bankDetailsForm.get('BankName')?.touched || bankDetailsForm.get('BankName')?.dirty)" class="text-danger text-sm mt-1">
+                              <span *ngIf="bankDetailsForm.get('BankName')?.errors?.['required']">Bank Name is required</span>
+                              <span *ngIf="bankDetailsForm.get('BankName')?.errors?.['pattern']">Only alphabets are allowed</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="row">
+                      <!-- Branch Name -->
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label padddingtop">Branch Name
+                            <span _ngcontent-fjo-c33="" class="text-danger">*</span>
+                          </label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" formControlName="BankBranchName" [(ngModel)]="BankBranchName" placeholder="Enter Branch Name" />
+                            <div *ngIf="bankDetailsForm.get('BankBranchName')?.invalid && (bankDetailsForm.get('BankBranchName')?.touched || bankDetailsForm.get('BankBranchName')?.dirty)" class="text-danger text-sm mt-1">
+                              <span *ngIf="bankDetailsForm.get('BankBranchName')?.errors?.['required']">Bank Branch Name is required</span>
+                              <span *ngIf="bankDetailsForm.get('BankBranchName')?.errors?.['pattern']">Only alphabets are allowed</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <!-- Account Holder Name -->
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label padddingtop">Account&nbsp;Holder&nbsp;Name
+                            <span _ngcontent-fjo-c33="" class="text-danger">*</span>
+                          </label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" [(ngModel)]="AccountHolderName" formControlName="AccountHolderName" placeholder="Enter Account Holder Name" />
+                            <div *ngIf="bankDetailsForm.get('AccountHolderName')?.invalid && (bankDetailsForm.get('AccountHolderName')?.touched || bankDetailsForm.get('AccountHolderName')?.dirty)" class="text-danger text-sm mt-1">
+                              <span *ngIf="bankDetailsForm.get('AccountHolderName')?.errors?.['required']">Account holder name is required</span>
+                              <span *ngIf="bankDetailsForm.get('AccountHolderName')?.errors?.['pattern']">Only alphabets are allowed</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="row">
+                      <!-- Account Number -->
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label padddingtop">Account Number
+                            <span _ngcontent-fjo-c33="" class="text-danger">*</span>
+                          </label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" [(ngModel)]="AccountNumber" formControlName="AccountNumber" placeholder="Enter Account Number" />
+                            <div *ngIf="bankDetailsForm.get('AccountNumber')?.invalid && (bankDetailsForm.get('AccountNumber')?.touched || bankDetailsForm.get('AccountNumber')?.dirty)" class="text-danger text-sm mt-1">
+                              <span *ngIf="bankDetailsForm.get('AccountNumber')?.errors?.['required']">Account Number is required</span>
+                              <span *ngIf="bankDetailsForm.get('AccountNumber')?.errors?.['pattern']">Only numbers are allowed</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <!-- IFSC -->
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label padddingtop">IFSC
+                            <span _ngcontent-fjo-c33="" class="text-danger">*</span>
+                          </label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" [(ngModel)]="IFSC" placeholder="Enter IFSC" formControlName="IFSC" />
+                            <div *ngIf="bankDetailsForm.get('IFSC')?.invalid && (bankDetailsForm.get('IFSC')?.touched || bankDetailsForm.get('IFSC')?.dirty)" class="text-danger text-sm mt-1">
+                              <span *ngIf="bankDetailsForm.get('IFSC')?.errors?.['required']">IFSC Code is required</span>
+                              <span *ngIf="bankDetailsForm.get('IFSC')?.errors?.['pattern']">Only alphabets and numbers are allowed</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+                
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                  <button (click)="addbankdeatils()" *ngIf="CompanyBankDetailsID == null" class="btn btn-primary">Add</button>
+                  <button (click)="updatebankdeatils()" *ngIf="CompanyBankDetailsID != null" class="btn btn-primary">Update</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="pills-product" role="tabpanel" aria-labelledby="pills-product-tab">
+          <!-- Product -->
+          <div class="card">
+            <div class="card-body">
+              <div class="card-title">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="col-sm-12 row">
+                      <div class="table-responsive">
+                        <table id="order-listing" class="table">
+                          <thead>
+                            <tr class="bg-primary text-white">
+                              <td>#</td>
+                              <td></td>
+                              <th>Name</th>
+                              <th>Description</th>
+                              <th>Shop</th>
+                              <th>Price</th>
+                              <th>Approved</th>
+                              <th>Publish</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="
+                                let dataItem of ProductsList;
+                                let i = index
+                              ">
+                              <td>{{ i + 1 }}</td>
+                              <td>
+                                <img src="{{
+                                    ProductImageThumbnailPath +
+                                      dataItem.ProductImageThumbnailImagePath
+                                  }}" />
+                              </td>
+                              <td class="productdescription">
+                                {{ dataItem.ProductName }}
+                              </td>
+                              <td class="productdescription">
+                                {{ dataItem.ProductDescription }}
+                              </td>
+                              <td class="productdescription">
+                                {{ dataItem.CompanyName }}
+                              </td>
+                              <td>{{ dataItem.ProductPrice }}.00 Rs.</td>
+                              <td>
+                                <button (click)="Unapproved(dataItem)" type="button" [disabled]="UserRoleID == 2"
+                                  class="btn btn-outline-info btn-fw p-2" *ngIf="dataItem.IsApproved">
+                                  Approved
+                                </button>
+                                <button (click)="approved(dataItem)" type="button" [disabled]="UserRoleID == 2"
+                                  class="btn btn-outline-danger btn-fw p-2" *ngIf="!dataItem.IsApproved">
+                                  Pending
+                                </button>
+                              </td>
+                              <td>
+                                <button (click)="Unpublish(dataItem)" type="button"
+                                  class="btn btn-outline-info btn-fw p-2" [disabled]="UserRoleID == 2" *ngIf="
+                                    dataItem.IsApproved && dataItem.IsPublished
+                                  ">
+                                  Published
+                                </button>
+                                <button (click)="Publish(dataItem)" type="button"
+                                  class="btn btn-outline-danger btn-fw p-2" [disabled]="UserRoleID == 2" *ngIf="
+                                    dataItem.IsApproved && !dataItem.IsPublished
+                                  ">
+                                  UnPublished
+                                </button>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="pills-settlement" role="tabpanel" aria-labelledby="pills-settlement-tab">
+          <!-- settlement -->
+          <div class="card" *ngIf="CompanyID != 0">
+            <div class="card-body">
+              <label>Total Amount Recieved : &nbsp;
+                {{currency}} {{ TotalSettlementprice }}</label>
+              <div class="row">
+                <div class="col-12">
+                  <div class="col-sm-">
+                    <button type="button" class="export-btn btn fa fa-file-excel-o mt-4 ms-2 excelbutton"
+                      (click)="exportToExcel()">
+                      <i class="ti-file me-1"></i>Export to Excel
+                    </button>
+                  </div>
+                  <div class="section">
+                    <div class="table-responsive">
+                      <table id="show-settlement" class="table">
+                        <thead>
+                          <tr class="bg-primary text-white">
+                            <th>#</th>
+                            <th>Order Date</th>
+                            <th>Customer Name</th>
+
+                            <th>Amount</th>
+                            <th>Order ID</th>
+                            <th>Order Status</th>
+
+                            <th>Payment Ref</th>
+                            <th>Settlement Date</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="
+                              let dataItem of settlementList;
+                              let i = index
+                            ">
+                            <td>{{ i + 1 }}</td>
+                            <td>{{ dataItem.OrderDate }}</td>
+
+                            <td class="Settlement">
+                              {{ dataItem.CustomerName }}
+                            </td>
+
+                            <td class="Settlement">
+                              {{currency}} {{ dataItem.OrderPrice }}
+                            </td>
+                            <td class="Settlement">{{ dataItem.OrderID }}</td>
+                            <td class="Settlement">
+                              {{ dataItem.OrderStatusDescription }}
+                            </td>
+                            <td>
+                              <label type="text">
+                                {{ dataItem.ShopPaymentReference }}
+                              </label>
+                            </td>
+                            <td class="Settlement">
+                              {{
+                              dataItem.ShopPaymentSettlementDate
+                              | date: "YYYY-MM-dd"
+                              }}
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="pills-membershipinvoice" role="tabpanel"
+          aria-labelledby="pills-membershipinvoice-tab">
+          <!-- membershipinvoice -->
+          <div class="card" *ngIf="CompanyID != 0">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-12">
+                  <!-- <div class="col-sm-">
+                    <button type="button" class="export-btn btn fa fa-file-excel-o mt-4 ms-2 excelbutton"
+                      (click)="exportToExcel()">
+                      <i class="ti-file me-1"></i>Export to Excel
+                    </button>
+                  </div> -->
+                  <div class="section">
+                    <div class="table-responsive">
+                      <!-- <div *ngIf="!AB">  -->
+                      <table id="show-settlement" class="table">
+                        <thead>
+                          <tr class="bg-primary text-white">
+                            <th>Invoice Number</th>
+                            <th>Invoice Date</th>
+                            <th>MemberShip</th>
+                            <th>Start Date</th>
+                            <th>Expiry Date</th>
+                            <th>Total</th>
+                            <th>Payment Ref.</th>
+                            <th>Invoice</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="
+                              let dataItem of membershipinvoiceList;
+                              let i = index
+                            ">
+                            <td>{{ dataItem.InvoiceNumber }}</td>
+                            <td>{{ dataItem.InvoiceDate }}</td>
+                            <td>{{ dataItem.CompanyMemberShipName }}</td>
+                            <td class="">
+                              {{ dataItem.CompanyMemberShipStartDate }}
+                            </td>
+                            <td class="">
+                              {{ dataItem.CompanyMemberShipExpiryDate }}
+                            </td>
+                            <td class="Settlement">
+                              {{currency}} {{ dataItem.InvoiceTotal }}
+                            </td>
+                            <td>
+                              <label type="text">
+                                {{ dataItem.ReferenceNumber }}
+                              </label>
+                            </td>
+                            <td>
+                              <button type="button" class="btn btn-primary" 
+                              (click)="viewClick(dataItem.CompanyMembershipInvoiceID)" 
+                              *ngIf="dataItem.InvoiceNumber != null">
+                                <!-- <i class="ti-eye text-primary" ></i>Download PDF</button> -->
+                                <i class="fa fa-download me-2"></i>Download
+                              </button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <!-- </div> -->
+                      <!-- <div *ngIf="CD"> -->
+                      <div id="htmlData">
+                        <div class="col-12 grid-margin" *ngIf="View">
+                          <div class="card maindiv">
+                            <div class="">
+                              <label class="tax mar">Tax Invoice</label>
+                              <div class="row">
+                                <div class="col-sm-6">
+                                  <!-- <img src="assets/images/backoffice/logo_big.png" class="log_img"> -->
+                                </div>
+                                <div class="col-sm-6 TopclassLeft">
+                                  <div class="col-sm-12 column">
+                                    Invoice No. : {{ InvoiceNumber }}
+                                  </div>
+                                  <div class="col-sm-12 column">
+                                    Invoice Date :
+                                    {{ InvoiceDate | date }}
+                                  </div>
+                                  <div class="col-sm-12 column">
+                                    Reverse Charge: No
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row cd">
+                              <div class="" style="width: 50%">
+                                <div class="col-sm-12 column">
+                                  <div class="textall">Jude</div>
+                                  <b>Address</b> Abebe Kebede,
+                                </div>
+                                <div class="col-sm-12 column">
+                                  Churchill Avenue No. 123, 
+                                </div>
+                                <div class="col-sm-12 column">
+                                  1000 Addis Ababa,
+                                </div>
+                                <div class="col-sm-12 column">
+                                  ETHIOPIA.
+                                </div>
+                                <div class="col-sm-12 column">
+                                  Email ID - info&#64;jude.in
+                                </div>
+                                <div class="col-sm-12 column">
+                                  Website - www.jude.in
+                                </div>
+                                <!-- <div class="col-sm-12 column">
+                                  Pan No. - AAACY4447L
+                                </div> -->
+                                <!-- <div class="col-sm-12 column">
+                                  GSTIN - 27AAACY4447L1ZW
+                                </div> -->
+                              </div>
+                              <div class="invoice" style="width: 50%">
+                                <div class="col-sm-12 column">
+                                  <div class="textall">{{ CompanyName1 }}</div>
+                                  <!-- <div class="textall">{{ CompanyName1 }}</div> -->
+                                </div>
+                                <div class="col-sm-12 column">
+                                  <b>Address</b> - {{ Address3 }}
+                                </div>
+                                <div class="col-sm-12 column">
+                                  {{ Address4 }},
+                                </div>
+                                <!-- <div class="col-sm-12 column">
+                                  {{ CityName1 }},
+                                </div>
+                                <div class="col-sm-12 column">
+                                  {{ StateName1 }},{{ CountryName }},
+                                </div> -->
+                                <div class="col-sm-12 column">{{ Zip1 }}.</div>
+                                <div class="col-sm-12 column">
+                                  <b>Mobile No.</b> - {{ CompanyMobileNo12 }}
+                                </div>
+                                <!-- <div class="col-sm-12 column">
+                                  <b>GSTIN</b> - {{ CompanyGSTNumber1 }}
+                                </div> -->
+                              </div>
+                            </div>
+                            <div class="cdf">
+                              <hr />
+                              <div class="row">
+                                <div class="col-sm-4">
+                                  <div class="textall">Package Name</div>
+                                </div>
+                                <div class="col-sm-4 text">
+                                  <div class="textall">Package Duration</div>
+                                </div>
+                                <div class="col-sm-4 text">
+                                  <div class="textall">Amount</div>
+                                </div>
+                              </div>
+                              <hr />
+                              <div class="row">
+                                <div class="col-sm-4">
+                                  Jude - {{ CompanyMemberShipName1 }} Fees
+                                </div>
+                                <div class="col-sm-4 text">
+                                  ({{
+                                  CompanyMemberShipStartDate | date
+                                  }}&nbsp;-&nbsp;{{
+                                  CompanyMemberShipExpiryDate1 | date
+                                  }})
+                                </div>
+                                <div class="col-sm-4 text">
+                                  {{currency}} {{ InvoiceAmount }}
+                                </div>
+                              </div>
+                              <hr />
+                              <div class="row">
+                                <div class="col-sm-4"></div>
+                                <div class="col-sm-4 text">
+                                  <!-- HSN/SAC Code: 9997 -->
+                                </div>
+
+                                <div class="col-sm-3 text">
+                                  <b>Sub Total</b>
+                                </div>
+                                <div class="col-sm-1 text">
+                                  {{currency}} {{ InvoiceAmount }}
+                                </div>
+                              </div>
+                              <hr />
+                              <div class="row">
+                                <div class="col-sm-4"></div>
+                                <div class="col-sm-7 text">
+                                  <b>Tax ({{ TaxSlabPercentage }}%)</b>
+                                </div>
+                                <div class="col-sm-1 text">{{ currency }} {{ CGST + SGST }}</div>
+                              </div>
+                            
+                              <hr />
+                              <div class="row">
+                                <div class="col-sm-11 text">
+                                  <b>Total Amount</b>
+                                </div>
+                                <div class="col-sm-1 text">
+                                  {{currency}} {{ InvoiceTotal }}
+                                </div>
+                              </div>
+                              <hr />
+                              <div>
+                                <!-- <div class="textall"> Amount In Words: Four Thousand Seven Hundred And Twenty Rupees Only</div> -->
+                              </div>
+                              <div class="col-sm-4">
+                                <img src="assets/images/backoffice/jude-logo.png" style="width: 25%;height: 30%;"class="log_img" />
+                              </div>
+                              <div class="uv">
+                                This is computer generated invoice and does not
+                                require sign and stamp
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- </div> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

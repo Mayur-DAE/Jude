@@ -1,0 +1,109 @@
+<div class="modal-body">
+    <div class="form-froup row">
+        <label class="col-sm-2 col-form-label margin">Name
+            <span _ngcontent-fjo-c33="" class="text-danger">*</span>
+        </label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" [(ngModel)]="OfferName" placeholder="Enter Offer Name" 
+                (input)="validateInputs()"
+                (blur)="touchedFields.OfferName = true; validateInputs()"
+                [class.invalid]="touchedFields.OfferName && Offer_name_errormsg"/>
+        
+                <div class="error">{{ Offer_name_errormsg }}</div>
+
+        </div>
+        
+        <label class="col-sm-2 col-form-label margin">Shop Name
+            <span _ngcontent-fjo-c33="" class="text-danger">*</span>
+        </label>
+        <div class="col-sm-4">
+            <select 
+                class="form-select" 
+                style="height: 46px;" 
+                [ngClass]="{'disabled-dropdown': isEditMode}" 
+                aria-label="Default select example" 
+                name="CompanyID" 
+                [(ngModel)]="CompanyID" 
+                [disabled]="isEditMode || (CompanyList.length === 1)">
+                <option *ngIf="CompanyList.length > 1" disabled selected>--Select--</option>
+                <option *ngFor="let x of CompanyList" [value]="x.CompanyID">{{ x.CompanyName }}</option>
+
+            </select>
+            <div class="error">{{ Offer_CompanyName_errormsg }}</div>
+
+            
+        </div>
+        
+        
+          
+        <label class="col-sm-2 col-form-label margin">Description
+            <span _ngcontent-fjo-c33="" class="text-danger">*</span>
+        </label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" [(ngModel)]="OfferDescription" placeholder="Enter Offer Description" />
+            <div class="error">{{ OfferDescription_errormsg }}</div>
+
+        </div>
+        <label class="col-sm-2 col-form-label margin">Start Date
+            <span _ngcontent-fjo-c33="" class="text-danger">*</span>
+        </label>
+        <div class="col-sm-4">
+            <input type="date" class="form-control" [(ngModel)]="OfferStartDate" placeholder="dd/mm/yyyy"  [min]="currentDate" (change)="updateEndDateMin()" />
+            <div class="error">{{ OfferStartDate_errormsg }}</div>
+
+        </div>
+        <label class="col-sm-2 col-form-label margin">End Date
+            <span _ngcontent-fjo-c33="" class="text-danger">*</span>
+        </label>
+        <div class="col-sm-4">
+            <input type="date" class="form-control" [(ngModel)]="OfferEndDate" placeholder="dd/mm/yyyy" [min]="minDate" (focus)="updateEndDateMin()" [disabled]="!OfferStartDate"/>
+            <!-- <span class="text-danger" *ngIf="dateErrorMessage">{{ dateErrorMessage }}</span> -->
+            <div class="error">{{ OfferEndDate_errormsg }}</div>
+
+        </div>
+        <label class="col-sm-2 col-form-label margin">Discount Type
+            <span _ngcontent-fjo-c33="" class="text-danger">*</span>
+        </label>
+        <div class="col-sm-4">
+            <select class="form-select" [(ngModel)]="OfferDiscountType" (change)="validateDiscount()" style="height: 46px;">
+                <option value="" disabled selected >--Select--</option>
+                <option value="percentage">Percentage</option>
+                <option value="value">Value</option>
+            </select>
+            <div class="error">{{ OfferDiscountType_errormsg }}</div>
+
+        </div>
+        
+        <label class="col-sm-2 col-form-label margin">Discount
+            <span _ngcontent-fjo-c33="" class="text-danger">*</span>
+        </label>
+        <div class="col-sm-4">
+            <input 
+                type="number" 
+                class="form-control" 
+                [(ngModel)]="OfferDiscount" 
+                (input)="validateInputs()" 
+                placeholder="Enter Offer Discount"
+                min="0"
+            />
+            <div class="error">{{ OfferDiscount_errormsg }}</div>
+        </div>
+        
+        
+        <!-- <label class="col-sm-1 col-form-label margin">CreatedBy </label>
+        <div class="col-sm-5">
+            <input type="text" class="form-control" [(ngModel)]="CreatedBy" placeholder="Enter Offer CreatedBy" />
+        </div> -->
+
+        <div class="modal-footer">
+
+            <!-- <button (click)="AddOffers()" *ngIf="offer.OfferID==0" class="btn btn-primary">
+    Add
+</button> -->
+            <button (click)="addOffers()" *ngIf="offer.OfferID==0" class="btn btn-primary">
+                Add
+            </button>
+
+            <button (click)="updateOffers()" *ngIf="offer.OfferID!=0" class="btn btn-primary">
+                Update
+            </button>

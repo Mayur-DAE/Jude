@@ -1,0 +1,316 @@
+<div class="modal-body">
+  <div class="col-12 grid-margin">
+    <div class="card">
+      <div class="card-body">
+        <form class="form-sample">
+          <p class="card-description">Personal info</p>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">First Name<span _ngcontent-fjo-c33="" class="text-danger">*</span>
+                </label>
+                <div class="col-sm-9">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="firstName"
+                    [(ngModel)]="FirstName"
+                    maxlength="50"
+                    (input)="validateInputs()"
+                    (blur)="touchedFields.FirstName = true; validateInputs()"
+                    [class.invalid]="touchedFields.FirstName && User_firstname_errormsg"
+                  />
+                  <div class="error" *ngIf="touchedFields.FirstName && User_firstname_errormsg">{{ User_firstname_errormsg }}</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Middle Name</label>
+                <div class="col-sm-9">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="middleName"
+                    [(ngModel)]="MiddleName"
+                    maxlength="50"
+                    (input)="validateInputs()"
+                    (blur)="touchedFields.MiddleName = true"
+                    [class.invalid]="touchedFields.MiddleName && User_middlename_errormsg"
+                  />
+                  <div class="error" *ngIf="touchedFields.MiddleName && User_middlename_errormsg">{{ User_middlename_errormsg }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Last Name<span _ngcontent-fjo-c33="" class="text-danger">*</span></label>
+                <div class="col-sm-9">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="lastName"
+                    [(ngModel)]="LastName"
+                    maxlength="50"
+                    (input)="validateInputs()"
+                    (blur)="touchedFields.LastName = true; validateInputs()"
+                    [class.invalid]="touchedFields.LastName && User_lastname_errormsg"
+                  />
+                  <div class="error" *ngIf="touchedFields.LastName && User_lastname_errormsg">{{ User_lastname_errormsg }}</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Date of Birth<span _ngcontent-fjo-c33="" class="text-danger">*</span></label>
+                <div class="col-sm-9">
+                  <input
+                    class="form-control"
+                    type="date"
+                    name="dateOfBirth"
+                    [(ngModel)]="DateOfBirth"
+                    placeholder="dd/mm/yyyy"
+                    maxlength="10"
+                    [max]="minDate"
+                    (input)="validateInputs()"
+                    (blur)="touchedFields.DateOfBirth = true;"
+                    [class.invalid]="touchedFields.DateOfBirth && User_DOB_errormsg"
+                  />
+                  <div class="error" *ngIf="touchedFields.DateOfBirth && User_DOB_errormsg">{{ User_DOB_errormsg }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Email<span _ngcontent-fjo-c33="" class="text-danger">*</span></label>
+                <div class="col-sm-9">
+                  <input
+                    class="form-control"
+                    type="email"
+                    name="emaiID"
+                    [(ngModel)]="EmaiID"
+                    maxlength="50"
+                    (input)="validateInputs()"
+                    (blur)="touchedFields.EmaiID = true; validateInputs()"
+                    [class.invalid]="touchedFields.EmaiID && User_Email_errormsg"
+                  />
+                  <div class="error" *ngIf="touchedFields.EmaiID && User_Email_errormsg">{{ User_Email_errormsg }}</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Mobile Number<span _ngcontent-fjo-c33="" class="text-danger">*</span></label>
+                <div class="col-sm-9">
+                  <input
+                    class="form-control"
+                    type="tel"
+                    name="mobileNumber"
+                    [(ngModel)]="MobileNumber"
+                    maxlength="10"
+                    (input)="validateInputs()"
+                    (blur)="touchedFields.MobileNumber = true; validateInputs()"
+                    [class.invalid]="touchedFields.MobileNumber && User_Mobilenumber_errormsg"
+                  />
+                  <div class="error" *ngIf="touchedFields.MobileNumber && User_Mobilenumber_errormsg">{{ User_Mobilenumber_errormsg }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="card-description">Professional info</p>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">User Name<span _ngcontent-fjo-c33="" class="text-danger">*</span></label>
+                <div class="col-sm-9">
+                  <input
+                    type="text"
+                    class="form-control"
+                    type="text"
+                    name="username"
+                    [(ngModel)]="Username"
+                    [disabled]="!Passfield"
+                    maxlength="50"
+                    (input)="validateInputs()"
+                    (blur)="touchedFields.Username = true; validateInputs()"
+                    [class.invalid]="touchedFields.Username && User_username_errormsg"
+                  />
+                  <div class="error" *ngIf="touchedFields.Username && User_username_errormsg">{{ User_username_errormsg }}</div>
+                  <!-- <label class="col-form-label">{{Username}}</label> -->
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Password<span _ngcontent-fjo-c33="" class="text-danger">*</span></label>
+                <div class="col-sm-9">
+                  <div class="password-wrapper">
+                    <input
+                    [type]="currentPasswordVisible ? 'text' : 'password'" 
+                    class="form-control"
+                    name="password"
+                    [(ngModel)]="Password"
+                    [disabled]="!Passfield"
+                    maxlength="50"
+                    (input)="validateInputs()"
+                    (blur)="touchedFields.Password = true; validateInputs()"
+                    [class.invalid]="touchedFields.Password && User_password_errormsg"
+                  />
+                  <span class="password-toggle-icon" (click)="toggleCurrentPasswordVisibility()">
+                    <i class="fas" [ngClass]="currentPasswordVisible ? 'fa-eye-slash' : 'fa-eye'"></i>
+                  </span>
+                  </div>
+                  <div class="error" *ngIf="touchedFields.Password && User_password_errormsg">{{ User_password_errormsg }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">User Type</label>
+                <div class="col-sm-9">
+                  <select
+                    class="form-select"
+                    aria-label="Default select example"
+                    name="UserTypeID"
+                    [(ngModel)]="UserTypeID"
+                  >
+                    <option disabled selected >--Select--</option>
+                    <option
+                      *ngFor="let x of UserTypeList"
+                      [value]="x.UserTypeID"
+                    >
+                      {{ x.UserType }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6" *ngIf="UserTypeID != 5">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">User Role</label>
+                <div class="col-sm-9">
+                  <select
+                    class="form-select"
+                    aria-label="Default select example"
+                    name="UserRoleID"
+                    [(ngModel)]="UserRoleID"
+                    [disabled]="UserTypeID == 5"
+                    (change)="checkUserRole()"
+                  >
+                    <option value="0" disabled selected>--Select--</option>
+                    <option
+                      *ngFor="let x of UserRoleList"
+                      [value]="x.UserRoleID"
+                    >
+                      {{ x.UserRoleName }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Shop Name Section -->
+          <div class="row" *ngIf="showShopName && UserTypeID != 5 ">
+            <div class="col-sm-3 hey">
+              <p>Shop Name</p>
+              <div class="untitled-page-block2 layout">
+                <!-- <input
+                  class="form-control"
+                  name="CompanyNameSearch"
+                  [(ngModel)]="CompanyNameSearch"
+                  type="text"
+                  placeholder="Shop Name"
+                  
+                  (keyup)="onCompanyNameType()"
+                  (focus)="onFocusInput()"
+                  (blur)="onBlurInput()"
+                />
+                <span><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 24 24">
+                  <path d="M 9 2 C 5.1458514 2 2 5.1458514 2 9 C 2 12.854149 5.1458514 16 9 16 C 10.747998 16 12.345009 15.348024 13.574219 14.28125 L 14 14.707031 L 14 16 L 20 22 L 22 20 L 16 14 L 14.707031 14 L 14.28125 13.574219 C 15.348024 12.345009 16 10.747998 16 9 C 16 5.1458514 12.854149 2 9 2 z M 9 4 C 11.773268 4 14 6.2267316 14 9 C 14 11.773268 11.773268 14 9 14 C 6.2267316 14 4 11.773268 4 9 C 4 6.2267316 6.2267316 4 9 4 z"></path>
+              </svg></span> -->
+                
+
+              <div class="position-relative">
+                <input
+                  class="form-control pr-5"  
+                  name="CompanyNameSearch"
+                  [(ngModel)]="CompanyNameSearch"
+                  type="text"
+                  placeholder="Shop Name"
+                  (keyup)="onCompanyNameType()"
+                  (focus)="onFocusInput()"
+                  (blur)="onBlurInput()"
+                />
+                <span class="input-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                    <path d="M 9 2 C 5.1458514 2 2 5.1458514 2 9 C 2 12.854149 5.1458514 16 9 16 C 10.747998 16 12.345009 15.348024 13.574219 14.28125 L 14 14.707031 L 14 16 L 20 22 L 22 20 L 16 14 L 14.707031 14 L 14.28125 13.574219 C 15.348024 12.345009 16 10.747998 16 9 C 16 5.1458514 12.854149 2 9 2 z M 9 4 C 11.773268 4 14 6.2267316 14 9 C 14 11.773268 11.773268 14 9 14 C 6.2267316 14 4 11.773268 4 9 C 4 6.2267316 6.2267316 4 9 4 z"/>
+                  </svg>
+                </span>
+              </div>
+              
+                <div class="form-group showproductlayout1" *ngIf="showDropdown">
+                  <a
+                    class="list-group-item list-group-item-action"
+                    *ngFor="let dataItem of CompanyList?.slice(0, 7)"
+                    (click)="onSelectName(dataItem)"
+                  >
+                    {{ dataItem.CompanyName }}
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="form-check-label">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    name="IsActive"
+                    checked
+                    [(ngModel)]="IsActive"
+                  />
+                  Active
+                </label>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <!-- <button  
+  class="btn btn-primary"  
+  (click)="isPassValidate = true; addUser(); validateInputs()"  
+  *ngIf="user.UserID == 0">
+  Add
+</button> -->
+
+<button  
+  class="btn btn-primary"  
+  (click)="isPassValidate = true; touchedFields = setAllTouched(); validateInputs() && addUser()"
+  *ngIf="user.UserID == 0">
+  Add
+</button>
+
+
+
+  <button
+  (click)="updateUser() ; validateInputs()"
+    *ngIf="user.UserID != 0"
+    class="btn btn-primary"
+  >
+    Update
+  </button>
+</div>

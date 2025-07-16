@@ -1,0 +1,49 @@
+<form action="#">
+  <div class="input-group">
+    <input type="text" aria-label="Last name" class="form-control w-45" placeholder="{{ 'Search for area, location more' | translate }}.."
+      id="areaa" name="auto" spellcheck="false" [(ngModel)]="selectedAddress.formattedAddress" (input)="onSearch()" />
+
+    <button class="input-group-text bg-transparent" type="submit" (click)="onDetectCurrent()">
+      <i _ngcontent-ren-c73="" class="feather-icon icon-map-pin"></i>
+    </button>
+  </div>
+  <div *ngIf="searchResults.length > 0" class="position-absolute bg-white shadow rounded scrollbar-theme"
+    style="min-width: 94%;max-width: 94%;max-height: 200px;overflow-y: auto; z-index: 99999;">
+    <div *ngFor="let place of searchResults" (click)="selectAddress(place)" class="p-2 rounded ">
+      <div class="d-flex flex-column">
+        <div class="fw-bold fs-7 text-dark"><i
+            class="bi bi-geo-alt text-primary me-2"></i>{{place.structured_formatting.main_text}} </div>
+        <div class="text-secondary fs-7">
+          {{place.structured_formatting.secondary_text}}
+        </div>
+        <hr class="my-1">
+      </div>
+
+    </div>
+  </div>
+  <br>
+    <div  #mapContainer class="map-container" ></div>
+    <div *ngIf="ShowMap" class="center-marker">
+      <i class="bi bi-geo-fill"></i>
+    </div>
+      <div class="deliveryimage" *ngIf="!ShowMap">
+        <img src="assets/images/svg-graphics/delivery boy.png" alt="" class="img-fluid" />
+     </div>
+    
+     
+    
+  
+</form>
+
+<!-- <div *ngIf="searchResults.length > 0" class="position-absolute bg-white w-100 shadow rounded mt-1 p-2"
+    style="z-index: 1000; max-height: 250px; overflow-y: auto;">
+    <div *ngFor="let place of searchResults" (click)="selectAddress(place)" class="p-2 rounded hover-bg-light">
+      <div class="d-flex flex-column">
+        <div class="fw-bold fs-6 text-dark">
+          <i class="bi bi-geo-alt text-primary me-2"></i>{{ place.structured_formatting.main_text }}
+        </div>
+        <div class="text-secondary fs-7">{{ place.structured_formatting.secondary_text }}</div>
+      </div>
+      <hr class="my-1">
+    </div>
+  </div> -->

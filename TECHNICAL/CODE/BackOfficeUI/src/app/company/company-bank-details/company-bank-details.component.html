@@ -1,0 +1,94 @@
+<!-- bank details -->
+<div class="modal-body">
+    <div class="col-12 grid-margin">
+      <div class="card">
+        <form [formGroup]="bankDetailsForm">
+
+        <div class="card-body">
+          <div class="row">
+            <!-- <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Company ID</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" [(ngModel)]="CompanyID" placeholder="" />
+                </div>
+              </div>
+            </div> -->
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">UPIID</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" [(ngModel)]="UPIID"   formControlName="UPIID" placeholder="Enter UPI ID" />
+                </div>
+                <div
+                *ngIf="
+                  bankDetailsForm.get('UPIID')?.invalid &&
+                  bankDetailsForm.get('Price')?.touched
+                "
+                class="text-red-600 text-sm mt-[7px]"
+              >
+                Price is required.
+              </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Bank Name</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" [(ngModel)]="BankName" placeholder="Enter Bank Name" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Branch Name</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" [(ngModel)]="BankBranchName" placeholder="Enter Branch Name" />
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Account Holder Name</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" [(ngModel)]="AccountHolderName" placeholder="Enter Account Holder Name" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Account Number</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" [(ngModel)]="AccountNumber" placeholder="Enter Account Number" />
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">IFSC</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" [(ngModel)]="IFSC" placeholder="Enter IFSC" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </form>
+        <div class="modal-footer">
+            <button (click)="addbankdeatils()" *ngIf="CompanyBankDetailsID==null" class="btn btn-success">
+              Add
+            </button>
+            <button (click)="updatebankdeatils()" *ngIf="CompanyBankDetailsID!=null" class="btn btn-primary">
+              Update
+            </button>
+          
+          </div>
+      </div>
+    </div>
+  </div>
+  
+  

@@ -1,0 +1,148 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card px-2">
+      <div class="card-body" id="section">
+        <div class="container-fluid">
+          <h3 class="text-right my-5 order">
+            #Jude/Order ID:&nbsp;{{ OrderId }}
+          </h3>
+          <hr />
+        </div>
+        <div>
+          <br />
+          <div class="container-fluid d-flex justify-content-between address">
+            <!-- <img src="{{CompanyLogoPath+OrderInvoiceList[0].CompanyLogoPath}}" height="130px;" width="130px"> -->
+
+            <div class="col-lg-3 ps-0 order-invoice-fixing1">
+              <p>
+                <b>{{ OrderInvoiceList[0].CompanyName }}</b>
+              </p>
+              <p>
+                {{
+                OrderInvoiceList[0].CompanyAddress1 +
+                ", " +
+                OrderInvoiceList[0].CompanyAddress2
+                }}
+              </p>
+              <p>Contact-{{ OrderInvoiceList[0].CompanyMobileNo1 }}</p>
+            </div>
+
+            <div>
+              <p><b>Invoice to</b></p>
+              <p>
+                <b>{{
+                  OrderInvoiceList[0].FirstName +
+                  " " +
+                  OrderInvoiceList[0].MiddleName +
+                  " " +
+                  OrderInvoiceList[0].LastName
+                  }}</b>
+                <br />
+                {{ OrderInvoiceList[0].Address1 }}
+                <br />
+                {{ OrderInvoiceList[0].Address2 }}
+              
+                <br />
+                {{OrderInvoiceList[0].landmark}}
+                <br />>
+
+                {{ OrderInvoiceList[0].MobileNumber }}
+              </p>
+            </div>
+          </div>
+          <div class="container-fluid d-flex justify-content-between">
+            <div class="col-lg-3 ps-0">
+              <p class="mb-0 mt-4">
+                Invoice Date : {{ OrderInvoiceList[0].OrderDate | date }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="container-fluid mt-4 d-flex justify-content-center w-100">
+          <div class="table-responsive w-100">
+            <table class="table">
+              <thead>
+                <tr class="bg-dark text-white">
+                  <th></th>
+                  <th>Item</th>
+                  <th class="text-right">Qty</th>
+                  <!-- <th class="text-right">Unit Cost</th>
+                  <th class="text-right">Total</th> -->
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="text-right" *ngFor="let dataItem of OrderInvoiceList; let i = index">
+                  <td>
+                    <img src="{{
+                        ProductImageThumbnailPath +
+                          dataItem.ProductImageThumbnailImagePath
+                      }}" class="ImageAlignInvoice" />
+                  </td>
+
+                  <td class="text-left">{{ dataItem.ProductName }}</td>
+                  <td>{{ dataItem.Quantity }}</td>
+                  <!-- <td>{{ dataItem.ProductPrice | currency: "INR" }}</td> -->
+                  <!-- <td>{{ dataItem.TotalPrice | currency: "INR" }}</td> -->
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="container-fluid mt-4 w-100">
+          <p class="price">
+            <label class="mb-2 d-block">Total Price: {{currency}} {{ TotalPrice }}</label>
+            <label class="mb-2 d-block">Shipping Price : {{currency}} {{ ShippingPrice }}</label>
+            <label class="mb-2 d-block">Final Amount : {{currency}} {{ TotalOrderPrice }}</label>
+          </p>
+          <hr />
+        </div>
+        <div class="container-fluid mt-4 w-100">
+
+          Order Status :
+          <label class="badge" [ngClass]="[
+                          OrderList[0].OrderStatusDescription == 'Delivered'
+                              ? 'badge-success'
+                              : OrderList[0].OrderStatusDescription == 'Ready for Pickup'
+                              ? 'badge-warning'
+                              : OrderList[0].OrderStatusDescription == 'On the way'
+                              ? 'badge-info'
+                              : OrderList[0].OrderStatusDescription == 'Cancelled'
+                              ? 'badge-danger'
+                              : OrderList[0].OrderStatusDescription == 'Returned'
+                              ? 'badge-returned'
+                              : OrderList[0].OrderStatusDescription == 'Rejected'
+                              ? 'badge-danger'
+                              : OrderList[0].OrderStatusDescription == 'Placed'
+                              ? 'badge-info'
+                              : OrderList[0].OrderStatusDescription == 'Confirmed'
+                              ? 'badge-success'
+                              : OrderList[0].OrderStatusDescription == 'Initiated'
+                              ? 'badge-returned'
+                              
+                              : null
+                          ]">
+            {{ OrderList[0].OrderStatusDescription }}</label>
+        </div>
+      </div>
+
+
+      <div class="container-fluid w-100">
+        <button (click)="confirmOrder()" *ngIf="OrderInvoiceList[0].OrderStatusID == 2004" type="submit"
+          class="btn btn-success float-right mt-4 ms-2 confirmOrderbtn">
+          Confirm Order</button><br /><br />
+        <button (click)="cancelOrder()" *ngIf="OrderInvoiceList[0].OrderStatusID == 2004" type="submit"
+          class="btn btn-danger float-right mt-4 ms-2 confirmOrderbtn">
+          Cancel Order</button><br /><br />
+        <button class="btn btn-light float-right mt-4 ms-2 order-invoice-fixing" printSectionId="section" ngxPrint>
+          <i class="ti-printer me-1"></i>Print
+        </button>
+        <!-- <a href="#" class="btn btn-light float-right mt-4 order-invoice-fixing"
+          ><i class="ti-export me-1"></i>Send Invoice</a
+        > -->
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="loading" class="circle-loader onload"></div>

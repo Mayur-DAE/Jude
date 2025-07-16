@@ -1,0 +1,353 @@
+<!-- <div class="row-main-membersignup">
+  <div class="col-sm-6">
+    <div class="NewMemberSignupLayout">
+      <p class="HeadingMemberSignup">New Member Signup</p>
+      <div>
+        <div class="MemberSignupDataEntry">
+          <div class="Signupfixing1">
+            <div>
+              <div class="form-floating">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="fname"
+                  placeholder="First Name"
+                  [(ngModel)]="FirstName"
+                />
+                <label for="fname" class="form-label">First Name</label>
+              </div>
+            </div>
+            <div class="error">{{ fname_errorMsg }}</div>
+          </div>
+          <div class="Signupfixing1">
+            <div>
+              <div class="form-floating">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="mname"
+                  placeholder="Middle Name"
+                  [(ngModel)]="MiddleName"
+                />
+                <label for="mname" class="form-label">Middle Name</label>
+              </div>
+            </div>
+            <div class="error bt-5">{{ mname_errorMsg }}</div>
+          </div>
+          <div class="Signupfixing1">
+            <div>
+              <div class="form-floating">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="lname"
+                  placeholder="Last Name"
+                  [(ngModel)]="LastName"
+                />
+                <label for="lname" class="form-label">Last Name</label>
+              </div>
+            </div>
+            <div class="error">{{ lname_errorMsg }}</div>
+          </div>
+          <div class="Signupfixing1">
+            <div>
+              <div class="form-floating">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="Email"
+                  placeholder="Email Address*"
+                  [(ngModel)]="EmaiID"
+                />
+                <label for="Email" class="form-label">Email Address*</label>
+              </div>
+            </div>
+            <div class="error">{{ emailaddress_errorMsg }}</div>
+          </div>
+          <div class="Signupfixing1">
+            <div>
+              <div class="form-floating">
+                <input
+                  type="tel"
+                  class="form-control"
+                  id="mnumber"
+                  placeholder="Mobile Number*"
+                  [(ngModel)]="MobileNumber"
+                  maxlength="10"
+                />
+                <label for="mnumber" class="form-label">Mobile Number*</label>
+              </div>
+            </div>
+            <div class="error">{{ mobilenumber_errorMsg }}</div>
+          </div>
+          <div class="Signupfixing1">
+            <div>
+              <div class="form-floating">
+                <input
+                  type="tel"
+                  class="form-control"
+                  id="mnumber2"
+                  placeholder="Alternative Mobile Number*"
+                  [(ngModel)]="mobilenumber2"
+                  maxlength="10"
+                />
+                <label for="mnumber2" class="form-label"
+                  >Whatsapp Number*</label
+                >
+              </div>
+            </div>
+            <div class="error">{{ mobilenumber2_errorMsg }}</div>
+          </div>
+          <div class="Signupfixing1">
+            <div>
+              <div class="form-floating">
+                <input
+                  [type]="changetype ? 'password' : 'text'"
+                  class="form-control"
+                  id="pssword"
+                  placeholder="Password*"
+                  [(ngModel)]="Password"
+                />
+                <label for="pssword" class="form-label">Password*</label>
+                <span class="eyeicon" (click)="viewpassword()"
+                  ><i
+                    style="font-size: 20px"
+                    [ngClass]="visible ? 'fa fa-eye-slash' : 'fa fa-eye'"
+                  ></i
+                ></span>
+              </div>
+            </div>
+            <div class="error">{{ password_errorMsg }}</div>
+          </div>
+          <div class="Signupfixing1">
+            <div>
+              <div class="form-floating">
+                <input
+                  [type]="changetype ? 'password' : 'text'"
+                  class="form-control"
+                  id="cpssword"
+                  placeholder="Confirm Password*"
+                  [(ngModel)]="confirmpassword"
+                />
+                <label for="cpssword" class="form-label"
+                  >Confirm Password*</label
+                >
+                <span class="eyeicon" (click)="viewpassword()"
+                  ><i
+                    style="font-size: 20px"
+                    [ngClass]="visible ? 'fa fa-eye-slash' : 'fa fa-eye'"
+                  ></i
+                ></span>
+              </div>
+            </div>
+            <div class="error">{{ confirmpassword_errorMsg }}</div>
+          </div>
+          <div class="agreeButton_member_signup">
+            <div class="agreeButtonMain_member_signup">
+              <input
+                type="checkbox"
+                class="membersignupcheckBox1"
+                [(ngModel)]="agree"
+              />
+              <label for="Terms" class="terms"
+                >I agree with
+                <a
+                  class="terms_login_ref"
+                  [routerLink]="['/TermsAndConditions']"
+                  >Terms & Conditions</a
+                ></label
+              >
+            </div>
+          </div>
+          <div>
+            <div class="btn-container">
+              <button
+                type="submitbutton"
+                value="Signup"
+                class="bttnpadding"
+                (click)="Signup()"
+              >
+                Sign up
+              </button>
+            </div>
+            <div>
+              <div class="Alreadyaccount">
+                Already have an account?<a
+                  class="terms_login_ref"
+                  routerLink="/Login/Home"
+                  >Log in</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="NewChannelPartnerimage_1">
+      <img src="assets\images\Section.png" style="width: 100%; height: 100%" />
+    </div>
+  </div>
+</div>
+<script>
+  function isValid(array) {
+    for (var x = 0; x < array.length; x++) {
+      if (array[x].value.trim() == "") {
+        $(array[x]).css("border-color", "#FF0000");
+        return false;
+      }
+    }
+  }
+</script> -->
+
+<div class="container my-lg-14 my-8">
+  <div class="row justify-content-center align-items-center">
+    <div class="col-12 col-md-6 col-lg-5 order-lg-1">
+      <img src="assets/images/svg-graphics/signup-g.svg" alt="Signup Illustration" class="img-fluid d-none d-sm-block " />
+    </div>
+
+    <div class="col-12 col-md-6 offset-lg-1 col-lg-5 order-lg-2 order-1">
+      <div class="mb-lg-4 mb-5">
+        <h1 class="mb-1 h2 fw-bold">{{ 'New Member Signup' | translate}}</h1>
+        <p>{{ 'Welcome to Jude! Enter your details to get started.' | translate}}</p>
+      </div>
+
+      <div class="row g-3">
+        <div class="col-lg-4 col-sm-12">
+          <!-- <div class="form-floating"> -->
+            <label for="fname" style="color:  #3d4f58;" >{{ 'First Name' | translate}} <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="fname" placeholder="{{ 'First Name' | translate}}" [(ngModel)]="FirstName" />
+          <!-- </div> -->
+          <div class="error">{{ fname_errorMsg | translate }}</div>
+        </div>
+
+        <div class="col-lg-4 col-sm-12">
+          <!-- <div class="form-floating"> -->
+            <label for="mname" style="color:  #3d4f58;">{{ 'Middle Name' | translate}}</label>
+            <input type="text" class="form-control" id="mname" placeholder="{{ 'Middle Name' | translate}}" [(ngModel)]="MiddleName" />
+            
+          <!-- </div> -->
+          <!-- <div class="error">{{ mname_errorMsg }}</div> -->
+        </div>
+
+        <div class="col-lg-4 col-sm-12">
+          <!-- <div class="form-floating"> -->
+             <label for="lname" style="color:  #3d4f58;">{{ 'Last Name' | translate}} <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="lname" placeholder="{{ 'Last Name' | translate}}" [(ngModel)]="LastName" />
+           
+          <!-- </div> -->
+          <div class="error">{{ lname_errorMsg | translate }}</div>
+        </div>
+
+        <div class="col-12">
+          <!-- <div class="form-floating"> -->
+            <label for="mnumber" style="color:  #3d4f58;">{{ 'Mobile Number' | translate}} <span class="text-danger">*</span></label>
+            <input type="tel" class="form-control" id="mnumber" placeholder="{{ 'Mobile Number' | translate}}" [(ngModel)]="MobileNumber" maxlength="10" />
+        
+          <!-- </div> -->
+          <div class="error">{{ mobilenumber_errorMsg | translate }}</div>
+        </div>
+
+        <div class="col-12">
+          <!-- <div class="form-floating"> class="form-label" -->
+            <label for="mnumber2" style="color:  #3d4f58;">{{ 'Whatsapp Mobile Number' | translate}} <span class="text-danger">*</span></label>
+            <input type="tel" class="form-control" id="mnumber2" placeholder="{{ 'Whatsapp Mobile Number' | translate}}" [(ngModel)]="mobilenumber2" maxlength="10" />
+            
+          <!-- </div> -->
+          <div class="error">{{ mobilenumber2_errorMsg | translate }}</div>
+        </div>
+
+        <div class="col-12">
+          <!-- <div class="form-floating"> -->
+             <label for="Email" style="color: #3d4f58;">{{ 'Email Address' | translate}} <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="Email" placeholder="{{ 'Email Address' | translate}}" [(ngModel)]="EmaiID" />
+           
+          <!-- </div> -->
+          <div class="error">{{ emailaddress_errorMsg | translate }}</div>
+        </div>
+
+        <!-- <div class="col-lg-6 col-md-6 col-sm-12 position-relative">
+          
+            <label for="pssword" style="color:  #3d4f58;">{{ 'Password' | translate}} <span class="text-danger">*</span></label>
+            <div  class="password-field position-relative">
+            <input [type]="passwordVisible ? 'text' : 'password'" class="form-control" id="pssword" placeholder="{{ 'Password' | translate}}" [(ngModel)]="Password" />
+            <span class="password-toggle" (click)="viewpassword('password')">
+              <i [ngClass]="passwordVisible ? 'bi bi-eye' : 'bi bi-eye-slash'"></i>
+            </span>
+          
+          <div class="error d-block position-absolute" >{{ password_errorMsg | translate }}</div>
+        </div>
+        </div> -->
+
+        <div class="col-lg-6 col-md-6 col-sm-12">
+  <label for="pssword" style="color:  #3d4f58;">
+    {{ 'Password' | translate}} <span class="text-danger">*</span>
+  </label>
+
+  <!-- Input + Eye Icon wrapper -->
+  <div class="password-field position-relative">
+    <input
+      [type]="passwordVisible ? 'text' : 'password'"
+      class="form-control"
+      id="pssword"
+      placeholder="{{ 'Password' | translate}}"
+      [(ngModel)]="Password"
+      style="padding-right: 2.5rem;"
+    />
+    <span class="password-toggle" 
+          (click)="viewpassword('password')" 
+          style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
+      <i [ngClass]="passwordVisible ? 'bi bi-eye' : 'bi bi-eye-slash'"></i>
+    </span>
+  </div>
+
+  <!-- Error message OUTSIDE of position-relative container -->
+  <div class="error d-block mt-1" *ngIf="password_errorMsg">{{ password_errorMsg | translate }}</div>
+</div>
+
+
+        <div class="col-lg-6 col-md-6 col-sm-12 position-relative">
+          <!-- <div class=""> -->
+            <label for="cpssword" style="color:  #3d4f58;">{{ 'Confirm Password' | translate}} <span class="text-danger">*</span></label>
+            <div  class="password-field position-relative">
+            <input [type]="confirmPasswordVisible ? 'text' : 'password'"  
+            style="padding-right: 2.5rem;"
+            class="form-control fakePassword" id="cpssword" placeholder="{{ 'Confirm Password' | translate}}" [(ngModel)]="confirmpassword" />
+            <span class="password-toggle" (click)="viewpassword('confirmPassword')" style="right: 20px; top: 50%; transform: translateY(-50%); cursor: pointer;" >
+              <i [ngClass]="confirmPasswordVisible ? 'bi bi-eye' : 'bi bi-eye-slash'"></i>
+            </span>
+            <!-- <span class="position-absolute top-50 end-0 translate-middle-y me-3" (click)="viewpassword()">
+              <i [ngClass]="visible ? 'bi bi-eye-slash' : 'bi bi-eye'" style="font-size: 20px" class="passwordToggler" ></i>
+            </span> -->
+          <!-- </div> -->
+          <div class="error d-block position-absolute">{{ confirmpassword_errorMsg | translate }}</div>
+        </div>
+        </div>
+        &nbsp;
+        <div class="col-12">
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="Terms" [(ngModel)]="agree" />
+            <label for="Terms" class="form-check-label">
+              {{ 'I agree with' | translate}} <a [routerLink]="['/TermsAndConditions']">{{ 'Terms & Conditions' |
+                translate}}</a>
+            </label>
+          </div>
+        </div>
+
+        <div class="col-12 d-grid">
+          <button type="submitbutton" value="Signup" class="btn btn-primary " (click)="Signup()">{{ 'Sign up' |
+            translate}}</button>
+        </div>
+        <label class="text-center">{{ 'or' | translate }}</label>
+        <div id="google-btn">
+
+        </div>
+
+        <div class="col-12 text-center">
+          <p>{{ 'Already have an account?' | translate}} <a routerLink="/Login/Home">{{ 'Sign In' | translate}}</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

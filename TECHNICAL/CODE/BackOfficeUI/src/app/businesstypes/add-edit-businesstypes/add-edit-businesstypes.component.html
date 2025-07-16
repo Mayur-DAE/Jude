@@ -1,0 +1,70 @@
+<div class="modal-body">
+
+  <div class="form-group row">
+    <label class="col-sm-3 col-form-label">Business <span class="text-danger">*</span></label>
+    <div class="col-sm-9">
+      <input type="text" class="form-control" [ngClass]="errormsg?'error-input':'form-control'"
+        [(ngModel)]="BusinessTypeName" FormControlName="businesstypename" placeholder="Enter Business Name" />
+      <div class="error">{{ businessName_errormsg}}</div>
+
+    </div>
+  </div>
+  
+<!-- Caption Details Table -->
+<div class="form-group mt-3">
+  <h5>Caption Details <span class="text-danger">*</span></h5>
+  <table class="table table-striped " >
+    <thead>
+      <tr>
+        <th class="border-0">Language</th>
+        <th class="border-0">Name <span class="text-danger">*</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let lang of activeLanguages; let i = index">
+        <td>{{ lang.LanguageCaption }}</td>
+
+        <!-- Name Input -->
+        <td>
+          <input 
+            type="text" 
+            class="form-control" 
+            placeholder="Enter Name" 
+            [(ngModel)]="lang.Name" 
+            name="name{{i}}" 
+            [ngClass]="{'is-invalid':  isFieldInvalid(lang.Name)}" />
+
+          <!-- Validation Error for Name -->
+          <div class="error" *ngIf="isFieldInvalid(lang.Name)">
+            Name is required
+          </div>
+        </td>
+
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group row">
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input" name="IsActive" checked
+            [(ngModel)]="IsActive" />Active</label>
+      </div>
+    </div>
+  </div>
+  <!-- </form> -->
+</div>
+
+<div class="modal-footer">
+  <button (click)="AddBusinessTypeName()" type="submit" *ngIf="buinesstype.BusinessTypeID==0" class="btn btn-primary">
+    Add
+  </button>
+
+  <button (click)="UpdateBusinessTypeName()" *ngIf="buinesstype.BusinessTypeID!=0" class="btn btn-primary">
+    Update
+  </button>
+</div>

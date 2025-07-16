@@ -1,0 +1,99 @@
+.empty-product {
+    display: flex;
+    /* justify-content: center; */
+    flex-direction: column;
+    align-items: center;
+}
+
+.scrollbar-theme {
+    scrollbar-width: thin;
+    scrollbar-color: #e5e5e5 #f8f9fa;
+}
+
+.shopinfo {
+    min-width: 200px;
+    max-width: 200px;
+}
+
+.shopinfo1 {
+    min-width: 100px;
+    max-width: 100px;
+}
+
+.noproducts {
+    font-weight: bold;
+
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30vh;
+}
+
+@media screen and (min-device-width: 992px) and (max-device-width: 1199px) {
+    .shopinfo {
+        min-width: 140px;
+        max-width: 140px;
+    }
+
+    .shopinfo1 {
+        min-width: 70px;
+        max-width: 70px;
+    }
+}
+
+@media screen and (max-device-width:991px) {
+
+    .mobview {
+        width:100vw !important;
+    }
+        /* width: 100vw !important; 
+        padding-right: 2px !important;
+        padding-left: 2px !important;  
+        margin: 10px  !important;       
+    }
+
+    .card-product {
+        display: flex;
+        flex-direction: row !important;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px;
+    }
+
+    .shopinfo {
+        min-width: auto;
+        max-width: auto; 
+        text-align: center;
+        font-size: 10px;
+    }
+
+    .shopinfo1 {
+        min-width: auto ;
+        max-width: auto; 
+        text-align: center;
+        font-size: 10px!important;
+    }
+
+    .d-flex {
+        flex-wrap: nowrap; 
+        justify-content: space-between;
+    }
+
+    .icon-shape {
+        width: 40px; 
+        height: 40px;
+    }
+
+    .btn-sm {
+        padding: 6px 12px; 
+        font-size: 14px; 
+    }     */
+}
+
+
+@media screen and (max-device-width: 375px) {
+    .mob>.col {
+        flex: 0 0 100%;
+    }
+}

@@ -1,0 +1,426 @@
+.zindex{
+    z-index: 1000; position: absolute;
+    width: 28%;
+}
+.UserLayout {
+    width: 80%;
+    margin: 50px auto;
+
+    box-shadow: 0 0 8px 0 rgb(0 0 0 / 10%);
+}
+
+.dropdown-container {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+  }
+  .dropdown-container::after {
+    content: '';
+    position: absolute;
+    top: 45%;
+    right: 12px; /* Adjust spacing */
+    width: 9px;
+    height: 9px;
+    border-left: 2px solid #333;
+    border-bottom: 2px solid #333;
+    transform: translateY(-50%) rotate(-45deg);
+    pointer-events: none; /* Prevent interaction */
+  }
+  .dropdown-content {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%; /* Ensures it matches the input width */
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    max-height: 150px;
+    overflow-y: auto;
+    display: none;
+    z-index: 10;
+  }
+  
+  .dropdown-content.show {
+    display: block;
+  }
+  
+  
+  .list-group-item {
+    padding: 8px 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .list-group-item:hover {
+    background-color: #f0f0f0;
+  }
+    
+.usertab {
+    width: 25%;
+}
+
+.usercontent {
+    width: 75%;
+    border-left:1px solid #eee;
+}
+
+/* rishabh */
+
+.InvoiceOrder{
+    justify-content: center;
+    align-items: center;
+    padding: 0 15px;
+    
+    gap: 4px;
+    height: 25px;
+    border-radius: 8px;
+    font-family: 'Satoshi-medium';
+    font-style: normal;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 22px;
+    text-align: center;
+    color: #000000;
+
+}
+
+.CancelOrder{
+
+    justify-content: center;
+    align-items: center;
+    padding: 0 8px;
+    gap: 4px;
+    height: 25px;
+    border-radius: 8px;
+    font-family: 'Satoshi-medium';
+    font-style: normal;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 22px;
+    text-align: center;
+    color: #000000;
+
+}
+.nav-link:hover {
+    background-color: grey;
+
+
+}
+
+.nav-link {
+    color: black;
+    /* margin: auto; */
+    margin-top: 8px;
+    width: 180px;
+    text-align: left;
+    background-color: #f1f1f1;
+}
+
+.nav-link.active {
+    color: white;
+    /* margin: auto; */
+    margin-top: 8px;
+    width: 180px;
+    text-align: left;
+    background-color: black;
+}
+
+.Userprofile2 {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+
+@media screen and (min-device-width: 300px) and (max-device-width: 480px) {
+    .profileblock {
+        display: none;
+    }
+
+    .UserLayout {
+        width: 95%;
+        margin: auto;
+    }
+
+    .usertab {
+        width: 100%;
+        padding: 0px;
+    }
+
+    .usercontent {
+        width: 100%;
+        padding: 0px;
+    }
+
+    .nav-link {
+        color: black;
+        /* margin: auto; */
+        padding: auto;
+        margin-top: 8px;
+        width: 150px;
+        background-color: #f1f1f1;
+    }
+
+    .nav-link.active {
+        color: white;
+        /* margin: auto; */
+        padding: auto;
+        margin-top: 8px;
+        width: 200px;
+        background-color: black;
+    }
+
+    .nav {
+        display: flex;
+        flex-wrap: wrap;
+        padding-left: 0;
+        margin-bottom: 0;
+        list-style: none;
+        justify-content: space-evenly;
+    }
+
+    .updateaddress {
+
+        margin: auto;
+    }
+
+    .Order_Id{
+        margin-top: -15%;
+        margin-left: 20%;
+    }
+    .Order_date{
+        margin-left: 20%;
+        margin-top: -8%;
+    }
+    .Status{
+        margin-top: -16%;
+        margin-left: 55%;
+    }
+    .ViewOrderbutton{
+        margin-left: 70%;
+        margin-top: -16%;
+    }
+    .UserProfile22{
+        margin-left: 21%;
+    }
+    .ViewOrderbutton {
+        margin-top: -62px;
+        margin-left: 287px;
+    }
+
+    .form-group {
+        margin-top: 10px;
+    }
+
+
+}
+
+.Order_Id {
+    margin-bottom: 10px;
+}
+
+.viewsecBtn{
+    align-items: right !important;
+    text-align: right !important;
+}
+
+.ViewOrder {
+    justify-content: center;
+    align-items: center;
+
+   
+    padding: 0 15px;
+    gap: 4px;
+    height: 25px;
+    /* padding: 0 30px;
+    gap: 4px; */
+    /* width: 357px; */
+    /* height: 36px; */
+    border-radius: 8px;
+    font-family: 'Satoshi-medium';
+    font-style: normal;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 10px;
+    text-align: center;
+    color: #000000;
+    /* color: white;
+    background: linear-gradient(180deg, #3F3F3F -34.38%, #101010 100%); */
+}
+
+.ViewOrder:hover {
+    background-color: black;
+    color: white;
+}
+
+.badge-danger {
+  color: #bc0000;
+  border: 1px solid #f6bcbc;
+  background-color: #f6bcbc;
+}
+
+.badge-returned {
+  color: #023679;
+  border: 1px solid #9fcdff;
+  background-color: #9fcdff !important;
+}
+
+.badge-warning {
+  color: #d66408;
+  border: 1px solid #f5dbaa;
+  background-color:#f5dbaa ;
+}
+
+.badge-info {
+  color: #bf531a;
+  border: 1px solid #f2ef9a;
+  background-color: #f2ef9a ;
+
+}
+.badge-success {
+color:  #027402;
+border: 1px #c8ffc8;
+background-color: #c8ffc8;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.35em 0.65em;
+  /* font-size: 0.75em; */
+  /* font-weight: 700; */
+  line-height: 1;
+  /* color: #fff; */
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 1.25rem;
+  /* width: 70px; */
+}
+
+.btn-secondary{
+  color: white!important;
+}
+/* .badge-success {
+    background-color: grey; */
+    /* border-radius: 25%; */
+/* } */
+
+/* .badge-primary {
+    background-color: #007bff;
+}
+
+.badge-secondary {
+    background-color: #6c757d;
+}
+
+.badge-success {
+    background-color: #28a745;
+}
+
+.badge-danger {
+    background-color: #dc3545;
+}
+
+.badge-warning {
+    background-color: #ffc107;
+}
+
+.badge-light {
+    background-color: #f8f9fa;
+}
+
+.badge-dark {
+    background-color: #343a40;
+}
+
+.badge-info {
+    background-color: #17a2b8;
+}
+
+.badge-secondary {
+    background-color: #6c757d;
+} */
+
+/* .badge-primary {
+    color: #4B49AC;
+    border: 1px solid #4B49AC;
+} */
+.updateaddress {
+    border: 0;
+    width: 172px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 13px 44px;
+    gap: 4px;
+    height: 39px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    font-family: 'Satoshi-medium';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.35);
+    margin-bottom: 15px;
+    margin-left: 20px;
+
+}
+
+.updateaddress:hover {
+    background-color: black;
+    color: white;
+}
+
+@media (min-width:330px) and (max-width:480px){
+    .Order_Id{
+        margin-top: -15%;
+        margin-left: 16%;
+    }
+    .Order_date{
+        margin-left: 16%;
+        margin-top: -8%;
+    }
+    .Status{
+        margin-top: -16%;
+        margin-left: 55%;
+    }
+    .ViewOrder1{
+        margin-left: 68%;
+        margin-top: -18%;
+    }
+    .UserProfile22{
+        margin-left: 17%;
+    }
+}
+
+@media (min-width:300px) and (max-width:330px){
+    .letterimage{
+        width:20%;
+        height: 150%;
+    }
+    .Order_Id{
+        margin-top: -15%;
+        margin-left: 16%;
+        font-size: 13px;
+    }
+    .Order_date{
+        margin-left: 16%;
+        margin-top: -8%;
+        font-size: 13px;
+    }
+    .Status{
+        margin-top: -16%;
+        margin-left: 55%;
+    }
+    .ViewOrder1{
+        margin-left: 68%;
+        margin-top: -18%;
+    }
+    .UserProfile22{
+        margin-left: 17%;
+        font-size: 13px;
+    }
+
+}

@@ -1,0 +1,113 @@
+<div class="modal-body">
+    <div class="d-flex flex-row bd-highlight mb-3 row ">
+
+        <div class="rows">
+            <div class="col-sm-6">
+                <div class="col-sm-12 rows">
+                    <label class="col-sm-6 col-form-label"><b>Shop Name &nbsp;:</b></label>
+                    <Label class="col-sm-6 col-form-label">{{CompanyName}}</Label>
+                </div>
+
+                <div class="col-sm-12 rows">
+                    <label class="col-sm-6 col-form-label "><b>Membership Type &nbsp;:</b></label>
+                    <div class="col-sm-6">
+                        <select class="form-select m-type" aria-label="Default select example" name="CompanyMemberShipTypeID"
+                            (click)="loadInvoicedata()" [(ngModel)]="CompanyMemberShipTypeID">
+
+                            <option *ngFor="let x of CompanymembershipnameList" [value]="x.CompanyMemberShipTypeID">
+                                {{x.CompanyMemberShipName}}</option>
+                        </select>
+                    </div>
+
+
+
+
+                    <div class="col-sm-12 rows">
+                        <label class="col-sm-6 col-form-label"><b>Invoice Amount &nbsp;:</b></label>
+                        <Label class="col-sm-6 col-form-label">{{currency}} {{InvoiceAmount }}</Label>
+                    </div>
+
+                </div>
+
+                <div class="col-sm-12 rows">
+                    <label class="col-sm-6 col-form-label"><b>Tax &nbsp;:</b></label>
+                    <label class="col-sm-6 col-form-label">{{ currency }} {{ CGST + SGST }}</label>
+                </div>
+                
+
+
+
+                <div class="col-sm-12 rows">
+                    <label class="col-sm-6 col-form-label"><b>Invoice Total &nbsp;:</b></label>
+                    <Label class="col-sm-6 col-form-label">{{currency}} {{InvoiceTotal }}</Label>
+                </div>
+
+
+
+
+            </div>
+            <div class="col-sm-6">
+                <div class="col-sm-12 rows">
+                    <label class="col-sm-6 col-form-label"><b>Invoice Date &nbsp;:</b>
+                    </label>
+                    <div class="col-sm-6">
+                        <input type="date" class="form-control" [(ngModel)]="InvoiceDate"
+                            placeholder="Select Invoice Date" />
+
+                        <br />
+                    </div>
+
+                </div>
+                <div class="col-sm-12 rows">
+                    <label class="col-sm-6 col-form-label"><b>Start Date &nbsp;:</b>
+                    </label>
+                    <div class="col-sm-6">
+                        <input type="date" class="form-control" [(ngModel)]="CompanyMemberShipStartDate"
+                            placeholder="Select Start Date" />
+
+                        <br />
+                    </div>
+
+                </div>
+                <div class="col-sm-12 rows">
+                    <label class="col-sm-6 col-form-label"><b>End Date &nbsp;:</b>
+                    </label>
+                    <div class="col-sm-6">
+                        <input type="date" class="form-control" [(ngModel)]="CompanyMemberShipExpiryDate"
+                            placeholder="Select End Date" />
+
+                        <br />
+                    </div>
+
+                </div>
+                <div class="col-sm-12 rows">
+                    <label class="col-sm-6 col-form-label"><b>Payment Mode &nbsp;:</b></label>
+                    <div class="col-sm-6">
+                        <select class="form-select" aria-label="Default select example" name="PaymentMode"
+                            [(ngModel)]="PaymentMode">
+
+                            <option>Cash</option>
+                            <option>Cheque </option>
+                            <option>Online</option>
+                        </select>
+
+                    </div>
+                    <div class="col-sm-12 rows">
+                        <label class="col-sm-6 col-form-label"><b>Reference Number&nbsp;:</b></label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" [(ngModel)]="ReferenceNumber"
+                                FormControlName="ReferenceNumber" placeholder="Enter Reference Number" maxlength="50" />
+
+                            <br />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal-footer">
+        <button (click)="Addinvoice()" class="btn btn-primary">
+            Add
+        </button>
+    </div>

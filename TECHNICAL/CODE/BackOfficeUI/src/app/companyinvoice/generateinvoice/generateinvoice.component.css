@@ -1,0 +1,171 @@
+
+.maindiv{
+    font-size: medium;
+    
+}
+@media screen and (min-device-width: 300px) and (max-device-width: 380px) {
+    .orderid-container{
+        flex-direction: column !important;
+        align-items: flex-start !important;
+    }
+ }
+.Topclass{
+    margin: 20px;
+}
+.log_img{
+    width: auto;
+    height: 100px;
+    /* margin: 20px; */
+}
+.TopclassLeft{
+    text-align: left;
+    margin-top: 10px;
+    padding-right: 50px;
+    padding-left: 2.5%;
+}
+.textall{
+    font-weight: bold;
+}
+.cd{
+    margin: 20px;
+}
+.abcd{
+    margin: 20px
+}
+.text{
+    text-align: right;
+}
+.cdf{
+    margin: 20px  
+}
+.uv{
+    text-align: center;
+}
+.invoice{
+    align-items: right;
+    /* text-align: right; */
+    width: 22%;
+}
+
+.tax{
+    /* margin-left: 48%; */
+    font-size: large;
+    font-style: bold;
+}
+.al{
+    align-items: right;
+}
+.abc{
+    width: 78%;
+}
+.logoimg{
+    width:20%;
+    height:30%; 
+    margin-left:20px;
+    margin-top: 20px
+}
+/* .mar{
+    margin-top: 20px;
+} */
+@media screen and (min-device-width: 300px) and (max-device-width: 480px) {  
+    .tax{
+        /* margin-left: 35%; */
+        font-size: large;
+        font-style: bold;
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }  
+    .TopclassLeft {
+        text-align: left;
+        margin-top: 10px;
+        padding-right: 5px;
+        /* margin-left: 5%; */
+        padding-left: 30px;
+    }
+    .abc{
+        width: 100%;
+    }
+    .invoice{
+        margin-top: 10%;
+        align-items: right;
+        text-align: left;
+        width: 100%;
+    }
+    .cd{
+        margin: 5px;
+        margin-top: 13px;
+    }
+    .logoimg{
+        width: 26%;
+        height: 0%;
+        margin-left: 20px;
+        margin-top: 0px;
+    }
+}
+@media screen and (min-device-width: 475px) and (max-device-width: 990px) { 
+    .abc{
+        width: 60%;
+    }
+    .invoice{
+        align-items: right;
+        text-align: left;
+        width: 40%;
+    }
+    .TopclassLeft{
+        text-align: left;
+        margin-top: 10px;
+        padding-right: 50px;
+        padding-left: 6.5%;
+    }
+    .logoimg{
+        width: 45%;
+        height: 30%;
+        margin-left: 40px;
+        margin-top: 0px;
+    }
+ }
+ @media screen and (min-device-width: 990px) and (max-device-width: 1200px) { 
+    .abc{
+        width: 75%;
+    }
+    .invoice{
+        align-items: right;
+        text-align: left;
+        width: 25%;
+    }
+    .TopclassLeft{
+        text-align: left;
+        margin-top: 10px;
+        padding-right: 50px;
+        padding-left: 3%;
+    }
+ }
+ @media screen and (min-device-width: 1201px)  and (max-device-width: 1450px) {
+    .TopclassLeft{
+        text-align: left;
+        margin-top: 10px;
+        padding-right: 50px;
+        padding-left: 2.5%;
+        margin-left: 20px;
+    }
+    .logoimg{
+        width: 20%;
+        height: 30%;
+        margin-left: 40px;
+        margin-top: 20px;
+    }
+  }
+  @media screen and (min-device-width: 1450px)  and (max-device-width: 6000px) {
+    .TopclassLeft{
+        text-align: left;
+        margin-top: 10px;
+        padding-right: 50px;
+        padding-left: 1.5%;
+    }
+    .logoimg{
+        width: 15%;
+        height: 30%;
+        margin-left: 40px;
+        margin-top: 20px;
+    }
+  }

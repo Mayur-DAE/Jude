@@ -1,0 +1,150 @@
+<section class="mt-6 mb-lg-14 mb-8">
+  <!-- container -->
+  <div class="container text-inherit">
+    <div class="justify-content-between">
+       <button type="button" class="btn btn-primary" (click)="closeInvoice()"
+        data-bs-dismiss="modal" aria-label="Close">
+         Back
+      </button>
+      <button class="btn btn-light float-right ms-4" (click)="openPDF()">Download PDF</button>
+      </div>
+      <div class="card-body" id="orderData">
+        <div class="container-fluid" *ngIf="actionClick=='y'">
+          <h3 class="text-right my-5">Invoice No. : #{{OrderInvoiceNumber}}</h3>
+          <hr />
+        </div>
+
+        <div>         
+          <div class="container-fluid d-flex justify-content-between orderid-container">
+            <h3 class="text-right my-5">Order ID #{{OrderId}}</h3>
+            
+
+          </div>
+
+          <br />
+          <div class="container-fluid d-flex justify-content-between invoice-container">
+
+            <img class="invoice234" src="{{ CompanyLogoPath + 'listing/' + OrderInvoiceList[0].CompanyLogoPath }}" />
+
+            <div class="col-lg-3 ps-0 order-invoice-fixing1 ">
+              <p style="margin-bottom: 0;">
+                <b>{{ OrderInvoiceList[0].CompanyName }}</b>
+              </p>
+              <p class="Address_invoice">
+                {{
+                OrderInvoiceList[0].CompanyAddress1 +
+                ", " +
+                OrderInvoiceList[0].CompanyAddress2
+                }}
+              </p>
+              <p>Contact-{{ OrderInvoiceList[0].CompanyMobileNo1 }}</p>
+            </div>
+
+            <div class="sm:ml-[50px] invoice-to">
+              <!-- <p><b>Invoice to</b></p> -->
+              <div class="Aaaaa"><b>Invoice to</b></div>
+              <div class="ac">
+                <!-- <b>{{
+                  OrderInvoiceList[0].FirstName +
+                  " " +
+                  (OrderInvoiceList[0].MiddleName ? ' ' + OrderInvoiceList[0].MiddleName : '') +
+                  " " +
+                  OrderInvoiceList[0].LastName
+                  }}</b> -->
+                  <b>
+                    {{OrderInvoiceList[0].fullname}}
+                  </b>
+                <br />
+                {{ OrderInvoiceList[0].address1 }}
+                <br />
+                {{ OrderInvoiceList[0].address2 }}
+                <br />
+                {{OrderInvoiceList[0].landmark}}
+                <br />
+                {{ OrderInvoiceList[0].mobilenumber }}
+              </div>
+              <!-- <p>
+                <b>{{
+                  OrderInvoiceList[0].FirstName +
+                  " " +
+                  OrderInvoiceList[0].MiddleName +
+                  " " +
+                  OrderInvoiceList[0].LastName
+                  }}</b>
+                <br />
+                {{ OrderInvoiceList[0].Address1 }}
+                <br />
+                {{ OrderInvoiceList[0].Address2 }}
+                <br />
+                {{ OrderInvoiceList[0].MobileNumber }}
+              </p> -->
+            </div>
+          </div>
+          <div class="container-fluid d-flex justify-content-between">
+            <div class="col-lg-3 ps-0">
+              <p class="mb-0 mt-4">
+                Invoice Date : {{ OrderInvoiceList[0].OrderDate | date }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="container-fluid mt-4 d-flex justify-content-center w-100">
+          <div class="table-responsive w-100">
+            <table class="table">
+              <thead>
+                <tr class="bg-primary text-white">
+                  <th class="text-white" style="width:120px">Sr No.</th>
+                  <th class="text-white" style="width:650px">Product</th>
+                  <th class="text-right text-white" style="width:150px">Quantity</th>
+                  <th class="text-right text-white" style="width:160px">Unit Cost</th>
+                  <th class="text-right text-white" style="width:130px">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="text-right" *ngFor="let dataItem of OrderInvoiceList; let i = index">
+                  <td class="text-left textcolor">{{ i + 1 }}</td>
+                  <td class="text-left textcolor">{{ dataItem.MasterProductName }}</td>
+                  <td class="textcolor">{{ dataItem.Quantity }}</td>
+                  <td class="textcolor">{{currency}} {{ dataItem.ProductPrice  | number:'1.2-2'}}</td>
+                  <td class="textcolor">{{currency}} {{ dataItem.TotalPrice  | number:'1.2-2'}}</td>
+                </tr>
+              </tbody>
+            </table>
+            <hr class="w-100" />
+          </div>
+        </div>
+
+        <div class="container-fluid mt-4 w-100">
+          <table class=" ms-auto float-end text-end mb-2">
+            <tr class="spaced-row">
+                <td class="text-start"><b>Total Price:</b>&nbsp;&nbsp;</td>
+                <td class="text-start"> {{currency}} {{ TotalPrice | number:'1.2-2'}}</td>
+            </tr>
+            <tr class="spaced-row">
+                <td class="text-start"><b>Shipping Price:</b>&nbsp;&nbsp;</td>
+                <td class="text-start"> {{currency}} {{ ShippingPrice | number:'1.2-2'}}</td>
+            </tr>
+            <tr class="spaced-row">
+                <td class="text-start"><b>Final Amount:</b>&nbsp;&nbsp;</td>
+                <td class="text-start"> {{currency}} {{ TotalOrderPrice | number:'1.2-2'}}</td>
+            </tr>
+        </table>
+          <!-- <p class="h4">
+            <label class="mb-4 d-block">Total Price: {{currency}} {{ TotalPrice | number:'1.2-2'}}</label>
+            <label class="mb-4 d-block">Shipping Price : {{currency}} {{ ShippingPrice | number:'1.2-2'}}</label>
+            <label class="mb-4 d-block">Final Amount : {{currency}} {{ TotalOrderPrice | number:'1.2-2'}}</label>
+          </p> -->
+          <hr class="w-100" />
+        </div>
+      </div>
+      <div class="uv" *ngIf="actionClick=='y'">
+        This is computer generated invoice and does not require sign and stamp
+      </div>
+      <!-- <div class="container-fluid w-100">
+          <button class="btn btn-light float-right mt-4 ms-2 order-invoice-fixing" (click)="openPDF()">Download PDF</button>
+        </div> -->
+
+    <!-- </div> -->
+  </div>
+</section>

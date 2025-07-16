@@ -1,0 +1,6 @@
+/* You can add global styles to this file, and also import other style files */
+.auth .login-half-bg {
+    background: url(assets/images/backoffice/login_bg.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+}

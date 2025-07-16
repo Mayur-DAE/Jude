@@ -1,0 +1,154 @@
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="col-md-4 text-center otp-section">
+      <div class="row">
+        <div class="col-sm-12 mt-2 mb-12 bgWhite">
+          <div *ngIf="Verification">
+            <div class="mb-lg-6 mb-2 mt-4">
+              <!-- heading -->
+              <h4 class="mb-2 h2 font-semibold">{{ 'Forgot your password?' | translate }}</h4>
+              <p>{{ 'Please enter the mobile number associated with your account and we will send you an OTP to reset your password.' | translate }}</p>
+           </div>
+            <div class="title">
+              <label for="MobileNumber1"><h5 class="font-semibold">{{ 'Enter your mobile number' | translate }} &nbsp;</h5></label>
+              <input
+                class="text22"
+                type="text"
+                id="MobileNumber1"
+                name="MobileNumber1"
+                [(ngModel)]="MobileNumber"
+                (keydown.enter)="getuser()"
+              />
+              <div class="error">{{ mobilenumber_errorMsg | translate }}</div>
+              <!-- <br /> -->
+              <button class="bttnpadding btn-block mt-2 mb-4" (click)="getuser()">
+                {{ 'Send OTP' | translate }}
+              </button>
+            </div>
+            <hr class="mt-4" />
+          </div>
+          <div *ngIf="abc">
+            <div class="title"><h5 class="fw-bold">
+              {{ 'Please enter the one time password to verify your account' | translate }}</h5>
+            </div>
+            <div class="title-2"><h6 class="fw-bold">
+              {{ 'A code has been sent to Number' | translate }}******
+              <span>{{ MobileNumber.slice(MobileNumber.length - 4) }}</span></h6>
+            </div>
+            <form action="" class="mt-4 otp-form">
+              <input
+                class="otp"
+                type="text"
+                oninput="this.value && this.nextElementSibling.focus()"
+                onkeydown="if(event.key === 'Backspace' && !this.value) this.previousElementSibling?.focus()"
+                maxlength="1"
+                name="FirstOtp"
+                [(ngModel)]="FirstOtp"
+              />
+              <input
+                class="otp"
+                type="text"
+                oninput="this.value && this.nextElementSibling.focus()"
+                onkeydown="if(event.key === 'Backspace' && !this.value) this.previousElementSibling?.focus()"
+                maxlength="1"
+                name="SecondOtp"
+                [(ngModel)]="SecondOtp"
+              />
+              <input
+                class="otp"
+                type="text"
+                oninput="this.value && this.nextElementSibling.focus()"
+                onkeydown="if(event.key === 'Backspace' && !this.value) this.previousElementSibling?.focus()"
+                maxlength="1"
+                name="Third"
+                [(ngModel)]="Third"
+              />
+              <input
+                class="otp"
+                type="text"
+                oninput="this.value && this.nextElementSibling.focus()"
+                onkeydown="if(event.key === 'Backspace' && !this.value) this.previousElementSibling?.focus()"
+                maxlength="1"
+                name="Four"
+                [(ngModel)]="Four"
+              />
+              <input
+                class="otp"
+                type="text"
+                oninput="this.value && this.nextElementSibling.focus()"
+                onkeydown="if(event.key === 'Backspace' && !this.value) this.previousElementSibling?.focus()"
+                maxlength="1"
+                name="Five"
+                [(ngModel)]="Five"
+              />
+              <input
+                class="otp"
+                type="text"
+                onkeydown="if(event.key === 'Backspace' && !this.value) this.previousElementSibling?.focus()"
+                maxlength="1"
+                name="Six"
+                [(ngModel)]="Six"
+                (keydown.enter)="verifyOtp()"
+              />
+            </form>
+            <p *ngIf="errorMessage" class="error">{{ errorMessage | translate }}</p>
+
+            <button class="bttnpadding btn-block mt-4 mb-4" (click)="verifyOtp()">
+              {{ 'Validate' | translate }}
+            </button>
+            <hr class="mt-4" />
+          </div>
+
+          <div *ngIf="Success">
+            <div>
+              <div class="mb-lg-9 mb-2 mt-4">
+              <h5 style="color: rgb(61, 60, 60);">{{ 'Time for a fresh start!' | translate }}
+                <br> {{ 'Enter your new password and confirm it to regain access to your account.' | translate }}</h5>
+              </div>
+              <div class="form-floating">
+                <input
+                [type]="passwordType"
+                  class="form-control"
+                  id="pssword"
+                  placeholder="Password*"
+                  [(ngModel)]="Password"
+                />
+                <label for="pssword" class="form-label">{{ 'Password' | translate }} <span class="text-danger">*</span></label>
+                <span class="passwordToggler" (click)="viewpassword('password')">
+                  <i [ngClass]="passwordVisible ? 'bi bi-eye' : 'bi bi-eye-slash'"></i>
+                </span>
+              </div>
+              <div class="ChannelSignUperror">{{ password_errormessage | translate }}</div>
+            </div>
+            <div class="NewPassword">
+              <div class="form-floating">
+                <input
+                [type]="confirmPasswordType"
+                  class="form-control"
+                  id="cpssword"
+                  placeholder="Confirm Password*"
+                  [(ngModel)]="confirmpassword"
+                />
+                <label for="cpssword" class="form-label"
+                  >{{ 'Confirm Password' | translate }} <span class="text-danger">*</span></label
+                >
+                <span class="passwordToggler" (click)="viewpassword('confirmPassword')">
+                  <i [ngClass]="confirmPasswordVisible ? 'bi bi-eye' : 'bi bi-eye-slash'"></i>
+                </span>
+              </div>
+              <div class="ChannelSignUperror">
+                {{ confirmpassword_errormessage | translate }}
+              </div>
+            </div>
+            <button
+              class="bttnpadding btn-block mt-4 mb-4"
+              (click)="UpdatePassword()"
+            >
+            {{ 'Save Password' | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
