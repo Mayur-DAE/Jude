@@ -57,8 +57,18 @@ src/environments/environment*.ts
 # Windows
 Thumbs.db
 ehthumbs.db
-/TECHNICAL/CODE/AreaOnlineAPI/AreaOnlineAPI/APIError.txt
+/TECHNICAL/CODE/JudeAPI/JudeAPI/APIError.txt
 *.bin
 *.vsidx
 TECHNICAL/CODE/.vs/
 **/environment.ts
+/TECHNICAL/CODE/JudeAPI/.vs/ProjectEvaluation
+/TECHNICAL/CODE/JudeAPI/.vs/WebApp/DesignTimeBuild
+/TECHNICAL/CODE/JudeAPI/.vs/WebApp/FileContentIndex
+/TECHNICAL/CODE/JudeAPI/.vs/WebApp/v17
+/TECHNICAL/CODE/JudeAPI/JudeAPI/.vs/JudeAPI/v17
+/TECHNICAL/CODE/JudeAPI/JudeAPI/.config
+/TECHNICAL/CODE/JudeAPI/.vs/WebApp/config
+/TECHNICAL/CODE/JudeAPI/.vs/WebApp/project-colors.json
+/TECHNICAL/CODE/JudeAPI/JudeAPI/Properties/PublishProfiles
+/TECHNICAL/CODE/JudeAPI/JudeAPI/.vs/AreaOnlineAPI/v17
